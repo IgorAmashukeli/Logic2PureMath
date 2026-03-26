@@ -43,18 +43,22 @@ Ltac _intro_iff h1 h2 h :=
    assert (h : _ <-> _) by (exact (conj h1 h2)).
 
 Ltac _elim_iff h h1 h2 := destruct h as [h1 h2].
-Ltac elim_iff_ h := destruct h as [h1 h2]; assumption.
-Ltac _elim_iff_l h hp hq := pose h as h2; destruct h2 as [_hl _hr]; assert (hq : _) by (exact (_hl hp)); clear _hl; clear _hr.
-Ltac _elim_iff_r h hq hp := pose h as h2; destruct h2 as [_hl _hr]; assert (hp : _) by (exact (_hr hq)); clear _hl; clear _hr.
+Ltac elim_iff_ h := destruct h as [_h1 _h2]; assumption.
+Ltac _elim_iff_l h hp hq := pose h as _h2; destruct _h2 as [_hl _hr]; assert (hq : _) by (exact (_hl hp)); clear _hl; clear _hr.
+Ltac _elim_iff_r h hq hp := pose h as _h2; destruct _h2 as [_hl _hr]; assert (hp : _) by (exact (_hr hq)); clear _hl; clear _hr.
+Ltac elim_iff_l h hp := pose h as _h2; destruct _h2 as [_hl _hr]; assert (_hn : _) by (exact (_hl hp)); clear _hl; clear _hr; assumption.
+Ltac elim_iff_r h hq := pose h as _h2; destruct _h2 as [_hl _hr]; assert (_hm : _) by (exact (_hr hq)); clear _hl; clear _hr; assumption.
 
 Ltac intro_neg h := intro h.
 Ltac intro_neg_ := assumption.
-Ltac _intro_neg hpf := assert (hnp : ~_) by (exact hpf).
+Ltac _intro_neg hpf hnp := assert (hnp : ~_) by (exact hpf).
 
 Ltac elim_neg h := apply h.
 Ltac elim_neg_ h := apply h; assumption.
 Ltac _elim_neg_app hp hnp hf := assert (hf : False) by (exact (hnp hp)).
 Ltac _elim_neg hpf hnp := assert (hpf : _ -> False) by (exact hnp).
+Ltac elim_f_neg hnp := elim_false; elim_neg_ hnp.
+Ltac _elim_f_neg hnp v hv := assert (_hfp : False -> v) by (intro _hf; elim_false; assumption); assert (hv : v) by (apply _hfp; elim_neg_ hnp).
 
 Module classical.
 

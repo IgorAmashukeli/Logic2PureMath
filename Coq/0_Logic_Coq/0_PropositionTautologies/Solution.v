@@ -563,7 +563,7 @@ Proof.
 Qed.
 
 (*Classical contraposition*)
-Theorem contraposition (p q : Prop) : (p → q) ↔ (¬q → ¬p).
+Theorem contraposition_cl (p q : Prop) : (p → q) ↔ (¬q → ¬p).
 Proof.
     intro_iff.
     -   exact (contraposition_lr p q).
@@ -573,12 +573,281 @@ Proof.
 Qed.
 
 (*Classical Pierce law*)
-Theorem pierce (p q : Prop) : (((p → q) → p) → p).
+Theorem pierce_cl (p q : Prop) : (((p → q) → p) → p).
 Proof.
     intro hpqp.
     pose (tndp := tnd_cl p). 
     elim_or tndp hp hnp.
     -   assumption.
     -   apply hpqp. intro hp. elim_false. elim_neg_ hnp.      
+Qed.
+
+(*Associativity of Equivalence*)
+Theorem impl_assoc_cl (p q r : Prop) : ((p ↔ q) ↔ r) ↔ (p ↔ (q ↔ r)).
+Proof.
+    intro_iff.
+    -   intro hpqr.
+        intro_iff.
+        +   intro hp.
+            intro_iff.
+            *   intro hq.
+                assert (hpq : (p ↔ q)) 
+                    by (intro_iff; [intro hp₂; assumption | intro hq₂; assumption]).
+                _elim_iff_l hpqr hpq hr. assumption.
+            *   intro hr.
+                _elim_iff_r hpqr hr hpq. elim_iff_l hpq hp.
+        +   intro hqr.
+            pose (tndp := tnd_cl p). elim_or tndp hp hnp.
+            *   assumption.
+            *   pose (tndq := tnd_cl q). elim_or tndq hq hnq.
+                --  assert (hr : r) by (elim_iff_l hqr hq).
+                    assert (hpq : (p ↔ q)) by (elim_iff_r hpqr hr).
+                    elim_iff_r hpq hq.
+                --  assert (hpq : (p ↔ q)).
+                    ++  intro_iff.
+                        ** intro hp. elim_f_neg hnp.
+                        ** intro hq. elim_f_neg hnq.
+                    ++  assert (hr : r) by (elim_iff_l hpqr hpq).
+                        assert (hq : q) by (elim_iff_r hqr hr).
+                        elim_f_neg hnq.
+    -   intro hpqr.
+        intro_iff.
+        +   intro hpq.
+            pose (tndp := tnd_cl p). elim_or tndp hp hnp.
+            *   assert (hq : q) by (elim_iff_l hpq hp).
+                assert (hqr : (q ↔ r)) by (elim_iff_l hpqr hp).
+                elim_iff_l hqr hq.
+            *   pose (tndq := tnd_cl q). elim_or tndq hq hnq.
+                --  assert (hp : p) by (elim_iff_r hpq hq).
+                    elim_f_neg hnp.
+                --  pose (tndr := tnd_cl r). elim_or tndr hr hnqr.
+                    ++  assumption.
+                    ++  assert (hqr : (q ↔ r)) by 
+                            (intro_iff; [intro hq; elim_f_neg hnq| intro hr; elim_f_neg hnqr]).
+                        assert (hp : p) by (elim_iff_r hpqr hqr).
+                        elim_f_neg hnp.
+        +   intro hr.
+            intro_iff.
+            *   intro hp.
+                assert (hqr : (q ↔ r)) by (elim_iff_l hpqr hp).
+                elim_iff_r hqr hr.
+            *   intro hq.
+                assert (hqr : (q ↔ r)) by 
+                    (intro_iff; [intro hq₂ | intro hr₂]; assumption).
+                elim_iff_r hpqr hqr.
+Qed.
+
+(*Xor definition and notation*)
+Definition xor (p q : Prop) : Prop := (p ∧ ¬q) ∨ (q ∧ ¬p).
+Notation "l ⊕ r" := (xor l r) (at level 80, right associativity).
+
+(*Xor properties*)
+Theorem xor_equiv_def (p q : Prop) : (p ⊕ q) ↔ ((p ∨ q) ∧ (¬ (p ∧ q))).
+Proof.
+    intro_iff.
+    -   intro hpq.
+        elim_or hpq hpnq hqnp.
+        +   elim_and hpnq hp hnq.
+            intro_and; [left_ | intro_neg hpaq; elim_and hpaq hp₂ hq; elim_f_neg hnq].
+        +   elim_and hqnp hq hnp.
+            intro_and; [right_ | intro_neg hpaq; elim_and hpaq hp hq₂; elim_f_neg hnp].
+    -   intro hpqnpq. elim_and hpqnpq hpq hnpq.
+        elim_or hpq hp hq.
+        +   left.
+            intro_and; [assumption | intro_neg hq; elim_neg hnpq; intro_and; assumption].
+        +   right.
+            intro_and; [assumption | intro_neg hp; elim_neg hnpq; intro_and; assumption].
+Qed.
+
+Theorem xor_not_iff (p q : Prop) : (p ⊕ q) ↔ (¬ (p ↔ q)).
+Proof.
+    intro_iff.
+    -   intro hpq.
+        intro_neg hpiq.
+        elim_or hpq hnpq hpnq.
+        +   elim_and hnpq hp hnq.
+            _elim_iff hpiq hpql hqpr.
+            elim_neg hnq.
+            exact (hpql hp).
+        +   elim_and hpnq hq hnp.
+            _elim_iff hpiq hpql hpqr.
+            elim_neg hnp.
+            exact (hpqr hq).
+    -   intro hnpq.
+        pose (tndp := tnd_cl p). elim_or tndp hp hnp.
+        +   left.
+            intro_and.
+            *   assumption.
+            *   intro_neg hq.
+                elim_neg hnpq.
+                intro_iff; intro h; assumption.
+        +   right.
+            intro_and.
+            *   classical.by_contra hnq.
+                elim_neg hnpq.
+                intro_iff.
+                ++  intro h. elim_f_neg hnp.
+                ++  intro h. elim_f_neg hnq.
+            *   assumption.
+Qed.
+
+Theorem iff_not_xor (p q : Prop) : (p ↔ q) ↔ (¬ (p ⊕ q)).
+Proof.
+    intro_iff.
+    -   intro hpq.
+        intro_neg hpxq.
+        pose (xi := xor_not_iff p q).
+        _elim_iff_l xi hpxq hnpq.
+        elim_neg_ hnpq.
+    -   intro hnpq.
+        classical.by_contra hnipq.
+        pose (xi := xor_not_iff p q).
+        _elim_iff_r xi hnipq hpq.
+        elim_neg_ hnpq.
+Qed.
+
+Theorem xor_equal (p : Prop) : ¬ (p ⊕ p) .
+Proof.
+    intro_neg hpp.
+    pose (hcontr := no_contradiction p).
+    elim_or hpp hp hp; elim_neg_ hcontr.
+Qed.
+
+Theorem xor_neg (p : Prop) : (p ⊕ ¬ p) .
+Proof.
+    pose (tndp := tnd_cl p). elim_or tndp hp hp.
+    - left. intro_and; [| apply (double_negation_lr p)]; assumption.
+    - right. intro_and; assumption.
+Qed.
+
+Theorem xor_comm (p q : Prop) : (p ⊕ q) ↔ (q ⊕ p) .
+Proof.
+    exact (disj_comm (p ∧ ¬q) (q ∧ ¬ p)).
+Qed.
+
+
+Theorem xor_assoc (p q r : Prop) : ((p ⊕ q) ⊕ r) ↔ (p ⊕ (q ⊕ r)) .
+Proof.
+    intro_iff.
+    -   intro hpqr.
+        elim_or hpqr hpq hrnpq.
+        +   elim_and hpq hpxq hnr.
+            pose (tndp := tnd_cl p).
+            elim_or tndp hp hnp.
+            *   left. intro_and.
+                ++  assumption.
+                ++  intro_neg hqr.
+                    elim_or hpxq hpnq hnpq.
+                    **  elim_and hpnq hp₂ hnq.
+                        elim_or hqr hqnr hrnq.
+                        --  elim_and hqnr hq hnr₂.
+                            elim_neg_ hnq.
+                        -- elim_and hrnq hr hnq₂.
+                            elim_neg_ hnr.
+                    **  elim_and hnpq hq hnp.
+                        elim_neg_ hnp.
+            *   right.
+                intro_and.
+                ++ elim_or hpxq hpnq hqnp.
+                    **  elim_and hpnq hp hnq.
+                        elim_f_neg hnp. 
+                    **  elim_and hqnp hq hnp₂.
+                        left.
+                        intro_and; assumption.
+                ++ assumption.
+        +   elim_and hrnpq hr hnpq.
+            pose (tndp := tnd_cl p).
+            elim_or tndp hp hnp.
+            *   left. intro_and.
+                ++  assumption.
+                ++  intro_neg hqr.
+                    elim_or hqr hqnr hnqr.
+                    ** elim_and hqnr hq hnr.
+                       elim_neg_ hnr.
+                    ** elim_and hnqr hr₂ hnq.
+                       elim_neg hnpq.
+                       left.
+                       intro_and; assumption.
+            *   right. intro_and.
+                ++  right.
+                    intro_and.
+                    **  assumption.
+                    **  intro_neg hq.
+                        elim_neg hnpq.
+                        right. intro_and; assumption.
+                ++ assumption.
+    -   intro hpqr.
+        elim_or hpqr hpnqr hnpqr.
+        +   elim_and hpnqr hp hnqr.
+            pose (tndq := tnd_cl q).
+            elim_or tndq hq hnq.
+            *   right.
+                intro_and.
+                ++ classical.by_contra hnr.
+                   elim_neg hnqr.
+                   left. intro_and; assumption.
+                ++ intro_neg hpq.
+                    elim_or hpq hpnq hqnp.
+                    ** elim_and hpnq hp₂ hnq.
+                       elim_neg_ hnq.
+                    ** elim_and hqnp hq₂ hnp.
+                       elim_neg_ hnp.
+            *   left.
+                intro_and.
+                ++  left. intro_and; assumption.
+                ++  intro_neg hr.
+                    elim_neg hnqr.
+                    right.
+                    intro_and; assumption.
+        +   elim_and hnpqr hqr hnp.
+            pose (tndq := tnd_cl q).
+            elim_or tndq hq hnq.
+            *   left.
+                intro_and.
+                ++ right. intro_and; assumption.
+                ++ intro_neg hr. 
+                    pose (xoreq := xor_equiv_def q r).
+                    _elim_iff_l xoreq hqr hqrnqr.
+                    elim_and hqrnqr hqorr hnqandr.
+                    elim_neg hnqandr.
+                    intro_and; assumption.
+            *   right.
+                intro_and.
+                ++ elim_or hqr hqnr hnqr.
+                    ** elim_and hqnr hq hnr.
+                        elim_f_neg hnq.
+                    **  elim_and hnqr hr hnq₂.
+                        assumption.
+                ++ intro_neg hpq.
+                    elim_or hpq hpnq hnpq.
+                    ** elim_and hpnq hp hnq₂.
+                       elim_neg_ hnp.
+                    ** elim_and hnpq hq hnp₂.
+                       elim_neg_ hnq.        
+Qed.
+
+Theorem xor_introl (p q : Prop) : (p ∧ ¬q) → (p ⊕ q).
+Proof.
+
+Qed.
+Theorem xor_intror (p q : Prop) : (¬p ∧ q) → (p ⊕ q).
+Proof.
+
+Qed.
+Theorem xor_intro (p q : Prop) : (p ∨ q) → (¬ (p ∧ q)) → (p ⊕ q).
+Proof.
+
+Qed.
+Theorem xor_left (p q : Prop) : (p ⊕ q) → (p ∨ q).
+Proof.
+
+Qed.
+Theorem xor_right (p q : Prop) : (p ⊕ q) → (¬ (p ∧ q)).
+Proof.
+
+Qed.
+Theorem xor_elim (p q r : Prop) : (p ⊕ q) → ((p ∧ ¬q) → r) → ((¬p ∧ q) → r) → r.
+Proof.
+
 Qed.
 

@@ -225,12 +225,62 @@ Proof.
 Admitted.
 
 (*Classical contraposition*)
-Theorem contraposition (p q : Prop) : (p → q) ↔ (¬q → ¬p).
+Theorem contraposition_cl (p q : Prop) : (p → q) ↔ (¬q → ¬p).
 Proof.
 Admitted.
 
 (*Classical Pierce law*)
-Theorem pierce (p q : Prop) : (((p → q) → p) → p).
+Theorem pierce_cl (p q : Prop) : (((p → q) → p) → p).
 Proof.      
 Admitted.
 
+(*Associativity of Equivalence*)
+Theorem impl_assoc_cl (p q r : Prop) : (p ↔ (q ↔ r)) ↔ ((p ↔ q) ↔ r).
+Proof.
+Admitted.
+
+
+(*Xor definition and notation*)
+Definition xor (p q : Prop) : Prop := (p ∧ ¬q) ∨ (q ∧ ¬p).
+Notation "l ⊕ r" := (xor l r) (at level 80, right associativity).
+
+(*Xor properties*)
+Theorem xor_equiv_def (p q : Prop) : (p ⊕ q) ↔ ((p ∨ q) ∧ (¬ (p ∧ q))).
+Proof.
+Admitted.
+Theorem xor_not_iff (p q : Prop) : (p ⊕ q) ↔ (¬ (p ↔ q)).
+Proof.    
+Admitted.
+Theorem iff_not_xor (p q : Prop) : (p ↔ q) ↔ (¬ (p ⊕ q)).
+Proof.
+Admitted.
+Theorem xor_equal (p : Prop) : ¬ (p ⊕ p).
+Proof.
+Admitted.
+Theorem xor_neg (p : Prop) : (p ⊕ ¬ p).
+Proof.
+Admitted.
+Theorem xor_comm (p q : Prop) : (p ⊕ q) ↔ (q ⊕ p).
+Proof.
+Admitted.
+Theorem xor_assoc (p q r : Prop) : ((p ⊕ q) ⊕ r) ↔ (p ⊕ (q ⊕ r)).
+Proof.
+Admitted.
+Theorem xor_introl (p q : Prop) : (p ∧ ¬q) → (p ⊕ q).
+Proof.
+Admitted.
+Theorem xor_intror (p q : Prop) : (¬p ∧ q) → (p ⊕ q).
+Proof.
+Admitted.
+Theorem xor_intro (p q : Prop) : (p ∨ q) → (¬ (p ∧ q)) → (p ⊕ q).
+Proof.
+Admitted.
+Theorem xor_left (p q : Prop) : (p ⊕ q) → (p ∨ q).
+Proof.
+Admitted.
+Theorem xor_right (p q : Prop) : (p ⊕ q) → (¬ (p ∧ q)).
+Proof.
+Admitted.
+Theorem xor_elim (p q r : Prop) : (p ⊕ q) → ((p ∧ ¬q) → r) → ((¬p ∧ q) → r) → r.
+Proof.
+Admitted.

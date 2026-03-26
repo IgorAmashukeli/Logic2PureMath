@@ -298,6 +298,11 @@ Proof.
     assumption.
 Qed.
 
+Theorem iff_lrl_2 (p q : Prop) (h_pq : p ↔ q) : p → q.
+    intro hp.
+    elim_iff_l h_pq hp.
+Qed.
+
 Theorem iff_rlr (p q : Prop) (h_pq : p ↔ q) : q → p.
 Proof.
     intro hq.
@@ -306,10 +311,18 @@ Proof.
     assumption.
 Qed.
 
+Theorem iff_rlr_2 (p q : Prop) (h_qp : p ↔ q) : q → p.
+Proof.
+    intro hq.
+    elim_iff_r h_qp hq.
+Qed. 
+
 Theorem iff_rl (p q : Prop) (h_pq : p ↔ q) : q → p.
 Proof.
     elim_iff_ h_pq.
 Qed.
+
+
 
 
 
@@ -328,7 +341,7 @@ Qed.
 
 Theorem neg_intro_3 (p : Prop) (h_pF : p → False) : ¬p.
 Proof.
-    _intro_neg h_pF.
+    _intro_neg h_pF hpn.
     assumption.
 Qed.
 
@@ -354,6 +367,17 @@ Qed.
 Theorem neg_elim_4 (p : Prop) (h_p : p) (h_np : ¬p) : False.
 Proof.
     _elim_neg_app h_p h_np hf.
+    assumption.
+Qed.
+
+Theorem neg_elim_5 (p q : Prop) (h_p : p) (h_np : ¬p) : q.
+Proof.
+    elim_f_neg h_np.
+Qed.
+
+Theorem neg_elim_6 (p q : Prop) (h_p : p) (h_np : ¬ p) : q.
+Proof.
+    _elim_f_neg h_np q hq.
     assumption.
 Qed.
 

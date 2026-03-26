@@ -14,10 +14,22 @@ It consists of the following parts:
   - `Biconditional` (↔)
   - `Negation` (¬)
 
-- The tactic, addition of which turns Intuitionistic Logic into Classical Logic
+- The tactic, addition of which turns Intuitionistic Logic into Classical Logic.
+
+Before continuing, read very important requirement in P.S
 
 Your task is to prove all the propostional tautologies in `Task.v`, using these tactics.
+
+If a theorem has `_cl` suffix in its name, it means it requires classical rules.
 
 After each prove you should change each `Admitted` to `Qed`.
 
 You can find solution in `Solution.v`
+
+P.S
+
+In !!ANY!! file, which uses `Top.TacticNames` tactic library
+You CAN'T name hypothesis, starting with underscore `_`.
+
+This is requirement is assumed to be met.
+Otherwise you will have UNDEFINED BEHAVIOUR.
