@@ -455,6 +455,7 @@ Proof.
     intro_neg hpnp.
     assert (hnp : ¬p).
     -   intro_neg hp.
+        
         _elim_iff_l hpnp hp hnp.
         elim_neg_ hnp.
     -   _elim_iff_r hpnp hnp hp.

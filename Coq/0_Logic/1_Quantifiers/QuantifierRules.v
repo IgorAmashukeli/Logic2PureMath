@@ -62,7 +62,7 @@ Qed.
 
 Theorem exists_elim (T : Type) (P : T → Prop) (Q : Prop) (h : ∃ x, P x) (hq : ∀ x, (P x → Q)) : Q.
 Proof.
-    exists_elim h a ha.
+    elim_exists h a ha.
     specialize (hq a).
     apply hq.
     assumption.
@@ -70,19 +70,19 @@ Qed.
 
 Theorem exists_elim_2 (T : Type) (P : T → Prop) (Q : Prop) (h : ∃ x, P x) (hq : ∀ x, (P x → Q)) : Q.
 Proof.
-    exists_elim_ h hq.
+    elim_exists_ h hq.
 Qed.
 
 Theorem exists_elim_3 (T : Type) (P : T → Prop) (Q : Prop) (h : ∃ x, P x) (hq : ∀ x, (P x → Q)) : Q.
 Proof.
-    _exists_elim h Q hfoll.
+    _elim_exists h Q hfoll.
     apply hfoll.
     assumption.
 Qed.
 
 Theorem exists_elim_4 (T : Type) (P : T → Prop) (Q : Prop) (h : ∃ x, P x) (hq : ∀ x, (P x → Q)) : Q.
 Proof.
-    _exists_elim_app h Q hfoll hq.
+    _elim_exists_app h Q hfoll hq.
     assumption.
 Qed.
 

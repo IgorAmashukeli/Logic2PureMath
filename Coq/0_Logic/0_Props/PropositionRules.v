@@ -2,6 +2,9 @@ Require Import Top.TacticNames.
 Require Import Unicode.Utf8.
 
 
+
+
+
 (*Proof Context rules*)
 
 Theorem exact_save (p : Prop) (h : p) : p.
@@ -317,6 +320,14 @@ Proof.
     assumption.
 Qed.
 
+Theorem iff_lrl_clear (p q : Prop) (h_pq : p ↔ q) : p → q.
+Proof.
+    intro hp.
+    _elim_iff_l_ h_pq hp hq.
+    clear h_pq.
+    assumption.
+Qed.
+
 Theorem iff_lrl_2 (p q : Prop) (h_pq : p ↔ q) : p → q.
     intro hp.
     elim_iff_l h_pq hp.
@@ -335,6 +346,16 @@ Proof.
     clear hq h_pq.
     assumption.
 Qed.
+
+Theorem iff_rlr_clear (p q : Prop) (h_pq : p ↔ q) : q → p.
+Proof.
+    intro hq.
+    _elim_iff_r_ h_pq hq hp.
+    clear h_pq.
+    assumption.
+Qed.
+
+
 
 Theorem iff_rlr_2 (p q : Prop) (h_qp : p ↔ q) : q → p.
 Proof.
