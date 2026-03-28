@@ -7,7 +7,7 @@ for dealing with predicate and quantifier logic.
 
 They reflect the theoretically defined rules for quantifiers on predicates in `Natural Deduction`.
 
-Thoroughly study all examples in `Quantifier Rules.v`
+Thoroughly study all examples in `QuantifierRules.v`
 
 They show, how the tactics from `Top.TacticNames` library can be used in the most general and, on other hand, simple way.
 
@@ -19,7 +19,7 @@ Tactics consists of the following parts:
 
 I tried to include both `Forward` (enriching the `Context`) and `Backward` (simplifying the `Goal`) reasoning for convinience in different situations.
 
-Note, that all this tactic rules are defined both in `Intuitionistic` and `Classical`
+Note, that all these quantifier tactic rules can be used both in `Intuitionistic` and `Classical`
 Predicate Logic.
 
 Note, that we use default arrow type `T → Prop` as Coq primitive for Predicates.
@@ -31,14 +31,17 @@ If a theorem doesn't have this suffix, it means, that you should try to prove it
 
 After each prove you should change each `Admitted` to `Qed`.
 
-You can find solution in `Solution.v`
+You can use theorems from previous tasks.
+For more detail on that look in README in the root.
+
+You can find solution in `Solution.v`.
 
 P.S
 
 Remember very important requirements, when working with `Top.TacticNames`:
 
 In !!ANY!! file, which uses `Top.TacticNames` tactic library
-You CAN'T name hypothesis, starting with underscore `_`.
+you CAN'T name hypothesis, starting with underscore `_`.
 
 This requirement is assumed to be strictly met.
 Otherwise you will have UNDEFINED BEHAVIOUR.

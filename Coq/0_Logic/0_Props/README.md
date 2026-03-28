@@ -43,7 +43,7 @@ You can find solution in `Solution.v`
 P.S
 
 In !!ANY!! file, which uses `Top.TacticNames` tactic library
-You CAN'T name hypothesis, starting with underscore `_`.
+you CAN'T name hypothesis, starting with underscore `_`.
 
 This requirement is assumed to be strictly met.
 Otherwise you will have UNDEFINED BEHAVIOUR.

@@ -1,6 +1,7 @@
 Require Import Top.TacticNames.
 Require Import Unicode.Utf8.
 
+
 (* 1) True is true for every element*) 
 Theorem uni (T : Type) : (∀ y : T, True).
 Proof.
@@ -40,6 +41,7 @@ Admitted.
 (* 5) Quantifier commutativity*)
 Theorem uni_comm (T T₂ : Type) (P : T →  T₂ → Prop) : (∀ x : T, ∀ y : T₂, P x y) ↔ (∀ y : T₂, ∀ x : T, P x y).
 Proof.
+Admitted.
 Theorem exi_comm (T T₂ : Type) (P : T → T₂ → Prop) : (∃ x : T, ∃ y : T₂, P x y) ↔ (∃ y : T₂, ∃ x : T, P x y).
 Proof.
 Admitted.

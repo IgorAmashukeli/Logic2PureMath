@@ -10,5 +10,6 @@ echo "📦 Rebuilding only TacticNames.v..."
 
 coqc -Q . Top TacticNames.v
 coqc -Q . Top -Q 0_Logic/0_Props Props 0_Logic/0_Props/Task.v
+coqc -Q . Top -Q 0_Logic/1_Quantifiers Quantifiers 0_Logic/1_Quantifiers/Task.v
 
 echo "✅ Done!"
