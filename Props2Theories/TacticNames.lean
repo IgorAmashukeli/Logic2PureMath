@@ -305,56 +305,84 @@ elab "elim_exists_" h:term "," hq:term : tactic => do
 
 
 elab "_elim_exists" h:term "," Q:term "," newH:ident : tactic => do
-  -- 1. Elaborate 'h' and get its type
+  -- 1. Elaborate 'h' и получаем его тип
   let hExpr ← elabTerm h none
   let hType ← inferType hExpr
 
-  -- 2. Decompose the type: (Exists P) is internally an application
-  -- getAppFnArgs returns (fnName, argsArray)
+  -- 2. Разбираем тип: должен быть Exists P
   let (fn, args) := hType.getAppFnArgs
 
-  -- Check if the function is 'Exists' and extract the predicate P (the 2nd argument)
   if fn == ``Exists && args.size == 2 then
-    let pExpr := args[1]!
-    -- 3. Convert the Expr P back into Syntax so the macro can use it
-    let pSyntax ← delab pExpr
+    let pExpr := args[1]!   -- это предикат (обычно λx. P x)
+    let qExpr ← elabTerm Q none
 
-    -- 4. Run the tactic script using the extracted predicate
+    -- 3. Получаем тип переменной x (домен предиката)
+    let predType ← inferType pExpr
+    let xType := predType.bindingDomain!   -- для Exists всегда Pi-тип
+
+    -- 4. Строим тип (∀ x, P x → Q) → Q с помощью whnf,
+    --    чтобы убрать β-редекс (fun x => P x) x
+    let innerForallExpr ← Meta.withLocalDecl `x BinderInfo.default xType fun x => do
+      let pApp := mkApp pExpr x
+      let pAppRed ← whnf pApp          -- ← вот ключ: редуцируем приложение
+      let pxQ ← mkArrow pAppRed qExpr
+      mkForallFVars #[x] pxQ           -- абстрагируем fvar → ∀-квантор
+
+    let fullTypeExpr ← mkArrow innerForallExpr qExpr
+
+    -- 5. Превращаем готовый Expr обратно в красивый Syntax
+    let fullTypeSyntax ← delab fullTypeExpr
+
+    -- 6. Запускаем тактику с уже редуцированным типом
     evalTactic (← `(tactic|
-       (have $newH : (∀ x, $pSyntax x → $Q) → $Q := by
+       (have $newH : $fullTypeSyntax := by
           let ⟨_a, _Ha⟩ := $h
           intro _h_forq
           apply (_h_forq _a)
           exact _Ha
        )
-
     ))
   else
     throwError "Hypothesis {h} is not an existential (expected Exists P)."
 
 
 elab "_elim_exists_app" h:term "," Q:term "," h_Q:term "," newH:ident : tactic => do
-  -- 1. Elaborate 'h' and get its type
+    -- 1. Elaborate 'h' и получаем его тип
   let hExpr ← elabTerm h none
   let hType ← inferType hExpr
 
-  -- 2. Decompose the type: (Exists P) is internally an application
-  -- getAppFnArgs returns (fnName, argsArray)
+  -- 2. Разбираем тип: должен быть Exists P
   let (fn, args) := hType.getAppFnArgs
 
-  -- Check if the function is 'Exists' and extract the predicate P (the 2nd argument)
   if fn == ``Exists && args.size == 2 then
-    let pExpr := args[1]!
-    -- 3. Convert the Expr P back into Syntax so the macro can use it
-    let pSyntax ← delab pExpr
+    let pExpr := args[1]!   -- это предикат (обычно λx. P x)
+    let qExpr ← elabTerm Q none
 
+    -- 3. Получаем тип переменной x (домен предиката)
+    let predType ← inferType pExpr
+    let xType := predType.bindingDomain!   -- для Exists всегда Pi-тип
+
+    -- 4. Строим тип (∀ x, P x → Q) → Q с помощью whnf,
+    --    чтобы убрать β-редекс (fun x => P x) x
+    let innerForallExpr ← Meta.withLocalDecl `x BinderInfo.default xType fun x => do
+      let pApp := mkApp pExpr x
+      let pAppRed ← whnf pApp          -- ← вот ключ: редуцируем приложение
+      let pxQ ← mkArrow pAppRed qExpr
+      mkForallFVars #[x] pxQ           -- абстрагируем fvar → ∀-квантор
+
+    let fullTypeExpr ← mkArrow innerForallExpr qExpr
+
+    -- 5. Превращаем готовый Expr обратно в красивый Syntax
+    let fullTypeSyntax ← delab fullTypeExpr
+
+    -- 6. Запускаем тактику с уже редуцированным типом
     evalTactic (← `(tactic|
-      (have $newH : (∀ x, $pSyntax x → $Q) → $Q := by
-         let ⟨_a, _Ha⟩ := $h
-         intro _h_forq
-         apply (_h_forq _a)
-         exact _Ha
-       specialize ($newH $h_Q)
+       (have $newH : $fullTypeSyntax := by
+          let ⟨_a, _Ha⟩ := $h
+          intro _h_forq
+          apply (_h_forq _a)
+          exact _Ha
+        specialize ($newH $h_Q)
        )
     ))
   else
