@@ -67,6 +67,9 @@ example (p q : Prop) (h_pq : p → q) (h_p : p) : q := by
 example (p q : Prop) (h_pq : p → q) (h_p : p) : q := by
   exact (h_pq h_p)
 
+example (p q : Prop) (h_pq : p → q) (h_p : p) : q := by
+  revert h_p
+  assumption
 
 example (p q : Prop) (h_pq : p -> q) : p → q := by
   intro h_p

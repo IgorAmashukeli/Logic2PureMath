@@ -254,3 +254,108 @@ elab "_by_contra" h_npF:term "," h_p:ident : tactic => do
   evalTactic (← `(tactic|
       have $h_p := dneg_elim $h_npF
   ))
+
+
+syntax "intro_exists" term : tactic
+elab_rules : tactic
+
+  | `(tactic| intro_exists $arg) => do
+    evalTactic (← `(tactic| apply Exists.intro $arg))
+
+-- 2. BACKWARD: Provide witness 'a' and proof 'h'
+-- Usage: intro_exists_ a; h
+syntax "intro_exists_" term "," term : tactic
+elab_rules : tactic
+
+  | `(tactic| intro_exists_ $arg, $h) => do
+    evalTactic (← `(tactic| apply Exists.intro $arg))
+    evalTactic (← `(tactic| exact $h))
+
+syntax "_intro_exists" term "," term "," ident : tactic
+elab_rules : tactic
+
+  | `(tactic| _intro_exists $arg, $h, $h_new) => do
+    let hExpr ← elabTerm h none
+    let argExpr ← elabTerm arg none
+
+    -- mkAppM automatically finds the correct predicate P such that P arg = type(h)
+    let currentExpr ← mkAppM ``Exists.intro #[argExpr, hExpr]
+    let type ← inferType currentExpr
+
+    liftMetaTactic fun mvarId => do
+      -- Define the new hypothesis and bring it into the context
+      let mvarIdNew ← mvarId.define h_new.getId type currentExpr
+      let (_, mvarIdPost) ← mvarIdNew.intro1P
+      return [mvarIdPost]
+
+
+macro "elim_exists" h:term "," a:ident "," ha:ident : tactic =>
+  `(tactic| let ⟨$a, $ha⟩ := $h)
+
+
+elab "elim_exists_" h:term "," hq:term : tactic => do
+  evalTactic (← `(tactic|
+     let ⟨_a, _Ha⟩ := $h;
+      specialize ($hq _a);
+      apply $hq;
+      assumption
+  ))
+
+
+
+
+elab "_elim_exists" h:term "," Q:term "," newH:ident : tactic => do
+  -- 1. Elaborate 'h' and get its type
+  let hExpr ← elabTerm h none
+  let hType ← inferType hExpr
+
+  -- 2. Decompose the type: (Exists P) is internally an application
+  -- getAppFnArgs returns (fnName, argsArray)
+  let (fn, args) := hType.getAppFnArgs
+
+  -- Check if the function is 'Exists' and extract the predicate P (the 2nd argument)
+  if fn == ``Exists && args.size == 2 then
+    let pExpr := args[1]!
+    -- 3. Convert the Expr P back into Syntax so the macro can use it
+    let pSyntax ← delab pExpr
+
+    -- 4. Run the tactic script using the extracted predicate
+    evalTactic (← `(tactic|
+       (have $newH : (∀ x, $pSyntax x → $Q) → $Q := by
+          let ⟨_a, _Ha⟩ := $h
+          intro _h_forq
+          apply (_h_forq _a)
+          exact _Ha
+       )
+
+    ))
+  else
+    throwError "Hypothesis {h} is not an existential (expected Exists P)."
+
+
+elab "_elim_exists_app" h:term "," Q:term "," h_Q:term "," newH:ident : tactic => do
+  -- 1. Elaborate 'h' and get its type
+  let hExpr ← elabTerm h none
+  let hType ← inferType hExpr
+
+  -- 2. Decompose the type: (Exists P) is internally an application
+  -- getAppFnArgs returns (fnName, argsArray)
+  let (fn, args) := hType.getAppFnArgs
+
+  -- Check if the function is 'Exists' and extract the predicate P (the 2nd argument)
+  if fn == ``Exists && args.size == 2 then
+    let pExpr := args[1]!
+    -- 3. Convert the Expr P back into Syntax so the macro can use it
+    let pSyntax ← delab pExpr
+
+    evalTactic (← `(tactic|
+      (have $newH : (∀ x, $pSyntax x → $Q) → $Q := by
+         let ⟨_a, _Ha⟩ := $h
+         intro _h_forq
+         apply (_h_forq _a)
+         exact _Ha
+       specialize ($newH $h_Q)
+       )
+    ))
+  else
+    throwError "Hypothesis {h} is not an existential (expected Exists P)."

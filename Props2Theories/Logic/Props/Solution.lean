@@ -685,6 +685,23 @@ theorem impl_assoc_cl (p q r : Prop) : (p ↔ (q ↔ r)) ↔ ((p ↔ q) ↔ r) :
         _apply_r h_pqr, h_r, h_pq
         apply_l_ h_pq
     · intro h_qr
+      by_contra h_np
+      apply (cases_analysis_cl q)
+      · intro h_q
+        _apply_l h_qr, h_q, h_r
+        _apply_r h_pqr, h_r, h_pq
+        _apply_r h_pq, h_q, h_p
+        elim_neg_ h_np
+      · intro h_nq
+        have h_pq : p ↔ q := by
+          intro_iff
+          · intro h_p
+            elim_f_neg h_np
+          · intro h_q
+            elim_f_neg h_nq
+        _apply_l h_pqr, h_pq, h_r
+        _apply_r h_qr, h_r, h_q
+        elim_neg_ h_nq
 
 
 
@@ -696,57 +713,249 @@ theorem impl_assoc_cl (p q r : Prop) : (p ↔ (q ↔ r)) ↔ ((p ↔ q) ↔ r) :
 
 
 --Xor definition and notation
-def xor_pr (p q : Prop) : Prop := (p ∧ ¬q) ∨ (¬p ∧ q)
-macro l:term:10 " ⊕ " r:term:11 : term => `(xor_pr $l $r)
+def xor_pr (p q : Prop) : Prop := (p ∧ ¬q) ∨ (q ∧ ¬p)
+notation:10 p " ⊕ " q:11 => xor_pr p q
 
 --Xor properties
 theorem xor_equiv_def (p q : Prop) : (p ⊕ q) ↔ ((p ∨ q) ∧ (¬ (p ∧ q))) := by
-admit
+  intro_iff
+  · intro h_pq
+    elim_or h_pq, h_pnq, h_qnp
+    · elim_and h_pnq, h_p, h_nq
+      intro_and
+      · left_
+      · intro_neg h_npq; elim_and h_npq, h_pₐ, h_q
+        elim_neg_ h_nq
+    · elim_and h_qnp, h_q, h_np
+      intro_and
+      · right_
+      · intro_neg h_pq
+        elim_and h_pq, h_p, h_q₂
+        elim_neg_ h_np
+  · intro h_pq_npq
+    elim_and h_pq_npq, h_pq, h_npq
+    elim_or h_pq, h_p, h_q
+    · left
+      intro_and
+      · assumption
+      · intro_neg h_q
+        elim_neg h_npq
+        intro_and <;> assumption
+    · right
+      intro_and
+      · assumption
+      · intro_neg h_p
+        elim_neg h_npq
+        intro_and <;> assumption
 
 
-theorem xor_not_iff (p q : Prop) : (p ⊕ q) ↔ (¬ (p ↔ q)) := by
-admit
+
+theorem xor_not_iff_cl (p q : Prop) : (p ⊕ q) ↔ (¬ (p ↔ q)) := by
+  intro_iff
+  · intro h_pxq
+    intro_neg h_piq
+    elim_or h_pxq, h_pnq, h_qnp
+    · elim_and h_pnq, h_p, h_nq
+      elim_neg h_nq
+      apply_l_ h_piq
+    · elim_and h_qnp, h_q, h_np
+      elim_neg h_np
+      apply_r_ h_piq
+  · intro h_npiq
+    apply (cases_analysis_cl p)
+    · intro h_p
+      left
+      intro_and
+      · assumption
+      · intro_neg h_q
+        elim_neg h_npiq
+        intro_iff <;> (intro h; assumption)
+    · intro h_np
+      right
+      intro_and
+      · by_contra h_nq
+        elim_neg h_npiq
+        intro_iff
+        · intro h_p; elim_f_neg h_np
+        · intro h_q; elim_f_neg h_nq
+      · assumption
 
 
-theorem iff_not_xor (p q : Prop) : (p ↔ q) ↔ (¬ (p ⊕ q)) := by
-admit
+
+theorem iff_not_xor_cl (p q : Prop) : (p ↔ q) ↔ (¬ (p ⊕ q)) := by
+  have h := xor_not_iff_cl p q
+  have h_n := neg_congr _ _ h
+  intro_iff
+  · intro h_piq
+    intro_neg h_pxq
+    _apply_l h, h_pxq, h_npiq
+    elim_neg_ h_npiq
+  · intro h_npiq
+    _apply_l h_n, h_npiq, h_nn_piq
+    apply_r_ (double_negation_cl _)
 
 
 theorem xor_equal (p : Prop) : ¬ (p ⊕ p) := by
-admit
+  intro_neg h_pxp
+  elim_or h_pxp, h_pnp, h_pnp <;>
+  elim_and h_pnp, h_p, h_np <;>
+  elim_neg_ h_np
 
 
 theorem xor_neg (p : Prop) : (p ⊕ ¬ p) := by
-admit
+  apply (cases_analysis_cl p)
+  · intro h_p
+    left
+    intro_and <;>
+    try (apply double_negation_lr p)
+    all_goals assumption
+  · intro h_np
+    right
+    intro_and <;> assumption
+
 
 
 theorem xor_commut (p q : Prop) : (p ⊕ q) ↔ (q ⊕ p) := by
-admit
+  intro_iff
+  · intro h_pq
+    elim_or h_pq, h_p_nq, h_np_q
+    · right; assumption
+    · left; assumption
+  · intro h_qp
+    elim_or h_qp, h_q_np, h_nq_p
+    · right; assumption
+    · left; assumption
 
 
-theorem xor_assoc (p q r : Prop) : ((p ⊕ q) ⊕ r) ↔ (p ⊕ (q ⊕ r)) := by
-admit
+
+theorem xor_assoc_cl (p q r : Prop) : ((p ⊕ q) ⊕ r) ↔ (p ⊕ (q ⊕ r)) := by
+  intro_iff
+  · intro h_pqr
+    elim_or h_pqr, h_pq_nr, h_npq_r
+    · elim_and h_pq_nr, h_pq, h_nr
+      elim_or h_pq, h_pnq, h_qnp
+      · elim_and h_pnq, h_p, h_nq
+        left
+        intro_and
+        · assumption
+        · intro_neg h_qr
+          elim_or h_qr, h_qnr, h_rnq
+          · elim_and h_qnr, h_q, h_nr₂
+            elim_neg_ h_nq
+          · elim_and h_rnq, h_r, h_nq₂
+            elim_neg_ h_nr
+      · elim_and h_pq_nr, h_pq, h_nr₂
+        elim_and h_qnp, h_q, h_np
+        right
+        intro_and
+        · left; intro_and <;> assumption
+        · assumption
+    elim_and h_npq_r, h_r, h_pq
+    apply (cases_analysis_cl q)
+    · intro h_q
+      left
+      intro_and
+      · by_contra h_np
+        elim_neg h_pq
+        right ; intro_and <;> assumption
+      · intro_neg h_qr
+        elim_or h_qr, h_q_nr, h_r_nq
+        · elim_and h_q_nr, h_q₂, h_nr
+          elim_neg h_nr <;> assumption
+        · elim_and h_r_nq, h_r, h_nq
+          elim_f_neg h_nq
+    intro h_nq
+    right
+    intro_and
+    · right ; intro_and <;> assumption
+    · intro_neg h_p
+      elim_neg h_pq
+      left ; intro_and <;> assumption
+  · intro h_pqr
+    elim_or h_pqr, h_p_nqr, h_qr_np
+    · elim_and h_p_nqr, h_p, h_nqr
+      apply (cases_analysis_cl q)
+      · intro h_q
+        right
+        intro_and
+        · by_contra h_nr
+          elim_neg h_nqr
+          left; intro_and <;> assumption
+        · intro_neg h_pq
+          elim_or h_pq, h_p_nq, h_q_np
+          · elim_and h_p_nq, h_p, h_nq
+            elim_neg_ h_nq
+          · elim_and h_q_np, h_q, h_np
+            elim_neg_ h_np
+      · intro h_nq
+        left
+        intro_and
+        · left; intro_and <;> assumption
+        · intro_neg h_r
+          elim_neg h_nqr
+          right <;> intro_and <;> assumption
+    elim_and h_qr_np, h_qr, h_np
+    apply (cases_analysis_cl q)
+    · intro h_q
+      left
+      intro_and
+      · right <;> intro_and <;> assumption
+      · intro_neg h_r
+        elim_or h_qr, h_qnr, h_rnq
+        · elim_and h_qnr, h_q, h_nr
+          elim_neg_ h_nr
+        · elim_and h_rnq, h_r₂, h_nq
+          elim_neg_ h_nq
+    · intro h_nq
+      right
+      intro_and
+      · by_contra h_nr
+        elim_or h_qr, h_q_nr, h_r_nq
+        · elim_and h_q_nr, h_q, h_nr₂
+          elim_neg_ h_nq
+        · elim_and h_r_nq, h_r, h_nq₂
+          elim_neg_ h_nr
+      · intro_neg h_pq
+        elim_or h_pq, h_p_nq, h_q_np
+        · elim_and h_p_nq, h_p, h_nq₂
+          elim_neg_ h_np
+        · elim_and h_q_np, h_q, h_np₂
+          elim_neg_ h_nq
+
+
+
 
 
 theorem xor_introl (p q : Prop) : (p ∧ ¬q) → (p ⊕ q) := by
-admit
+  intro h_p_nq
+  left_
 
 
 theorem xor_intror (p q : Prop) : (q ∧ ¬p) → (p ⊕ q) := by
-admit
+  intro h_q_np
+  right_
 
 
 theorem xor_intro (p q : Prop) : (p ∨ q) → (¬ (p ∧ q)) → (p ⊕ q) := by
-admit
+  intros h_pq h_npq
+  apply_r (xor_equiv_def p q)
+  intro_and <;> assumption
+
 
 
 theorem xor_left (p q : Prop) : (p ⊕ q) → (p ∨ q) := by
-admit
+  intro h_pq
+  _apply_l (xor_equiv_def p q), h_pq, h_pq_npq
+  elim_and_ h_pq_npq
 
 
 theorem xor_right (p q : Prop) : (p ⊕ q) → (¬ (p ∧ q)) := by
-admit
+  intro h_pq
+  _apply_l (xor_equiv_def p q), h_pq, h_pq_npq
+  elim_and_ h_pq_npq
 
 
 theorem xor_elim (p q r : Prop) : (p ⊕ q) → ((p ∧ ¬q) → r) → ((q ∧ ¬p) → r) → r := by
-admit
+  intros h_pq h_pnqr h_qnpr
+  _elim_or_app h_pq, h_pnqr, h_qnpr, h_r
+  assumption

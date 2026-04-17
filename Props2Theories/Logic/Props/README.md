@@ -41,7 +41,7 @@ If a theorem `has _cl suffix` in its name, it means it `requires` `Classical` ru
 
 If a theorem `doesn't have this suffix`, it means, that you should try to prove it `without using any of Classical` rules.
 
-After each prove you should change each `sorry` to prove.
+After each prove you should change each `sorry` to your proof.
 
 You can find solution in `Solution.lean`
 
