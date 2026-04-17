@@ -261,9 +261,6 @@ elab_rules : tactic
 
   | `(tactic| intro_exists $arg) => do
     evalTactic (← `(tactic| apply Exists.intro $arg))
-
--- 2. BACKWARD: Provide witness 'a' and proof 'h'
--- Usage: intro_exists_ a; h
 syntax "intro_exists_" term "," term : tactic
 elab_rules : tactic
 
@@ -278,12 +275,10 @@ elab_rules : tactic
     let hExpr ← elabTerm h none
     let argExpr ← elabTerm arg none
 
-    -- mkAppM automatically finds the correct predicate P such that P arg = type(h)
     let currentExpr ← mkAppM ``Exists.intro #[argExpr, hExpr]
     let type ← inferType currentExpr
 
     liftMetaTactic fun mvarId => do
-      -- Define the new hypothesis and bring it into the context
       let mvarIdNew ← mvarId.define h_new.getId type currentExpr
       let (_, mvarIdPost) ← mvarIdNew.intro1P
       return [mvarIdPost]
@@ -309,31 +304,25 @@ elab "_elim_exists" h:term "," Q:term "," newH:ident : tactic => do
   let hExpr ← elabTerm h none
   let hType ← inferType hExpr
 
-  -- 2. Разбираем тип: должен быть Exists P
   let (fn, args) := hType.getAppFnArgs
 
   if fn == ``Exists && args.size == 2 then
-    let pExpr := args[1]!   -- это предикат (обычно λx. P x)
+    let pExpr := args[1]!
     let qExpr ← elabTerm Q none
 
-    -- 3. Получаем тип переменной x (домен предиката)
     let predType ← inferType pExpr
-    let xType := predType.bindingDomain!   -- для Exists всегда Pi-тип
+    let xType := predType.bindingDomain!
 
-    -- 4. Строим тип (∀ x, P x → Q) → Q с помощью whnf,
-    --    чтобы убрать β-редекс (fun x => P x) x
     let innerForallExpr ← Meta.withLocalDecl `x BinderInfo.default xType fun x => do
       let pApp := mkApp pExpr x
-      let pAppRed ← whnf pApp          -- ← вот ключ: редуцируем приложение
+      let pAppRed ← whnf pApp
       let pxQ ← mkArrow pAppRed qExpr
-      mkForallFVars #[x] pxQ           -- абстрагируем fvar → ∀-квантор
+      mkForallFVars #[x] pxQ
 
     let fullTypeExpr ← mkArrow innerForallExpr qExpr
 
-    -- 5. Превращаем готовый Expr обратно в красивый Syntax
     let fullTypeSyntax ← delab fullTypeExpr
 
-    -- 6. Запускаем тактику с уже редуцированным типом
     evalTactic (← `(tactic|
        (have $newH : $fullTypeSyntax := by
           let ⟨_a, _Ha⟩ := $h
@@ -347,35 +336,29 @@ elab "_elim_exists" h:term "," Q:term "," newH:ident : tactic => do
 
 
 elab "_elim_exists_app" h:term "," Q:term "," h_Q:term "," newH:ident : tactic => do
-    -- 1. Elaborate 'h' и получаем его тип
   let hExpr ← elabTerm h none
   let hType ← inferType hExpr
 
-  -- 2. Разбираем тип: должен быть Exists P
   let (fn, args) := hType.getAppFnArgs
 
   if fn == ``Exists && args.size == 2 then
-    let pExpr := args[1]!   -- это предикат (обычно λx. P x)
+    let pExpr := args[1]!
     let qExpr ← elabTerm Q none
 
-    -- 3. Получаем тип переменной x (домен предиката)
     let predType ← inferType pExpr
-    let xType := predType.bindingDomain!   -- для Exists всегда Pi-тип
+    let xType := predType.bindingDomain!
 
-    -- 4. Строим тип (∀ x, P x → Q) → Q с помощью whnf,
-    --    чтобы убрать β-редекс (fun x => P x) x
+
     let innerForallExpr ← Meta.withLocalDecl `x BinderInfo.default xType fun x => do
       let pApp := mkApp pExpr x
-      let pAppRed ← whnf pApp          -- ← вот ключ: редуцируем приложение
+      let pAppRed ← whnf pApp
       let pxQ ← mkArrow pAppRed qExpr
-      mkForallFVars #[x] pxQ           -- абстрагируем fvar → ∀-квантор
+      mkForallFVars #[x] pxQ
 
     let fullTypeExpr ← mkArrow innerForallExpr qExpr
 
-    -- 5. Превращаем готовый Expr обратно в красивый Syntax
     let fullTypeSyntax ← delab fullTypeExpr
 
-    -- 6. Запускаем тактику с уже редуцированным типом
     evalTactic (← `(tactic|
        (have $newH : $fullTypeSyntax := by
           let ⟨_a, _Ha⟩ := $h
@@ -387,3 +370,47 @@ elab "_elim_exists_app" h:term "," Q:term "," h_Q:term "," newH:ident : tactic =
     ))
   else
     throwError "Hypothesis {h} is not an existential (expected Exists P)."
+
+
+
+elab "_rfl" x:term "," h:ident : tactic => do
+evalTactic (← `(tactic|
+    have $h : $x = $x := by rfl
+  ))
+
+elab "propext_cl" h:term : tactic => do
+  evalTactic (← `(tactic|
+    apply propext;
+    exact $h
+  ))
+
+
+elab "propext_cl_" : tactic => do
+  evalTactic (← `(tactic|
+    apply propext;
+    assumption
+  ))
+
+elab "_propext_cl" h:term "," h_new:ident : tactic => do
+  evalTactic (← `(tactic|
+    have $h_new : _ = _ := propext $h
+  ))
+
+
+elab "funext_cl" h:term : tactic => do
+  evalTactic (← `(tactic|
+    funext _x;
+    apply $h
+  ))
+
+elab "funext_cl_" : tactic => do
+  evalTactic (← `(tactic|
+    apply funext;
+    assumption
+  ))
+
+
+elab "_funext_cl_" h:term "," h_new:ident : tactic => do
+  evalTactic (← `(tactic|
+    have $h_new : _ = _ := funext $h
+  ))
