@@ -1820,6 +1820,20 @@ static const lean_object* lp_Props2Theories_Props2Theories_tactic__propext__cl__
 LEAN_EXPORT const lean_object* lp_Props2Theories_Props2Theories_tactic__propext__cl___x2c__ = (const lean_object*)&lp_Props2Theories_Props2Theories_tactic__propext__cl___x2c___00__closed__7_value;
 LEAN_EXPORT lean_object* lp_Props2Theories_Props2Theories___aux__Props2Theories__TacticNames______elabRules__Props2Theories__tactic__propext__cl___x2c____1(lean_object*, lean_object*, lean_object*, lean_object*, lean_object*, lean_object*, lean_object*, lean_object*, lean_object*);
 LEAN_EXPORT lean_object* lp_Props2Theories_Props2Theories___aux__Props2Theories__TacticNames______elabRules__Props2Theories__tactic__propext__cl___x2c____1___boxed(lean_object*, lean_object*, lean_object*, lean_object*, lean_object*, lean_object*, lean_object*, lean_object*, lean_object*, lean_object*);
+static const lean_string_object lp_Props2Theories_Props2Theories_tactic__propext__cl___00__closed__0_value = {.m_header = {.m_rc = 0, .m_cs_sz = 0, .m_other = 0, .m_tag = 249}, .m_size = 19, .m_capacity = 19, .m_length = 18, .m_data = "tactic_propext_cl_"};
+static const lean_object* lp_Props2Theories_Props2Theories_tactic__propext__cl___00__closed__0 = (const lean_object*)&lp_Props2Theories_Props2Theories_tactic__propext__cl___00__closed__0_value;
+static const lean_ctor_object lp_Props2Theories_Props2Theories_tactic__propext__cl___00__closed__1_value_aux_0 = {.m_header = {.m_rc = 0, .m_cs_sz = sizeof(lean_ctor_object) + sizeof(void*)*2 + 8, .m_other = 2, .m_tag = 1}, .m_objs = {((lean_object*)(((size_t)(0) << 1) | 1)),((lean_object*)&lp_Props2Theories_Props2Theories_tacticIntro__true___closed__0_value),LEAN_SCALAR_PTR_LITERAL(203, 60, 219, 252, 222, 124, 42, 218)}};
+static const lean_ctor_object lp_Props2Theories_Props2Theories_tactic__propext__cl___00__closed__1_value = {.m_header = {.m_rc = 0, .m_cs_sz = sizeof(lean_ctor_object) + sizeof(void*)*2 + 8, .m_other = 2, .m_tag = 1}, .m_objs = {((lean_object*)&lp_Props2Theories_Props2Theories_tactic__propext__cl___00__closed__1_value_aux_0),((lean_object*)&lp_Props2Theories_Props2Theories_tactic__propext__cl___00__closed__0_value),LEAN_SCALAR_PTR_LITERAL(12, 110, 42, 215, 172, 182, 61, 211)}};
+static const lean_object* lp_Props2Theories_Props2Theories_tactic__propext__cl___00__closed__1 = (const lean_object*)&lp_Props2Theories_Props2Theories_tactic__propext__cl___00__closed__1_value;
+static const lean_string_object lp_Props2Theories_Props2Theories_tactic__propext__cl___00__closed__2_value = {.m_header = {.m_rc = 0, .m_cs_sz = 0, .m_other = 0, .m_tag = 249}, .m_size = 13, .m_capacity = 13, .m_length = 12, .m_data = "_propext_cl_"};
+static const lean_object* lp_Props2Theories_Props2Theories_tactic__propext__cl___00__closed__2 = (const lean_object*)&lp_Props2Theories_Props2Theories_tactic__propext__cl___00__closed__2_value;
+static const lean_ctor_object lp_Props2Theories_Props2Theories_tactic__propext__cl___00__closed__3_value = {.m_header = {.m_rc = 0, .m_cs_sz = sizeof(lean_ctor_object) + sizeof(void*)*1 + 8, .m_other = 1, .m_tag = 6}, .m_objs = {((lean_object*)&lp_Props2Theories_Props2Theories_tactic__propext__cl___00__closed__2_value),LEAN_SCALAR_PTR_LITERAL(0, 0, 0, 0, 0, 0, 0, 0)}};
+static const lean_object* lp_Props2Theories_Props2Theories_tactic__propext__cl___00__closed__3 = (const lean_object*)&lp_Props2Theories_Props2Theories_tactic__propext__cl___00__closed__3_value;
+static const lean_ctor_object lp_Props2Theories_Props2Theories_tactic__propext__cl___00__closed__4_value = {.m_header = {.m_rc = 0, .m_cs_sz = sizeof(lean_ctor_object) + sizeof(void*)*3 + 0, .m_other = 3, .m_tag = 3}, .m_objs = {((lean_object*)&lp_Props2Theories_Props2Theories_tactic__propext__cl___00__closed__1_value),((lean_object*)(((size_t)(1024) << 1) | 1)),((lean_object*)&lp_Props2Theories_Props2Theories_tactic__propext__cl___00__closed__3_value)}};
+static const lean_object* lp_Props2Theories_Props2Theories_tactic__propext__cl___00__closed__4 = (const lean_object*)&lp_Props2Theories_Props2Theories_tactic__propext__cl___00__closed__4_value;
+LEAN_EXPORT const lean_object* lp_Props2Theories_Props2Theories_tactic__propext__cl__ = (const lean_object*)&lp_Props2Theories_Props2Theories_tactic__propext__cl___00__closed__4_value;
+LEAN_EXPORT lean_object* lp_Props2Theories_Props2Theories___aux__Props2Theories__TacticNames______elabRules__Props2Theories__tactic__propext__cl____1(lean_object*, lean_object*, lean_object*, lean_object*, lean_object*, lean_object*, lean_object*, lean_object*, lean_object*);
+LEAN_EXPORT lean_object* lp_Props2Theories_Props2Theories___aux__Props2Theories__TacticNames______elabRules__Props2Theories__tactic__propext__cl____1___boxed(lean_object*, lean_object*, lean_object*, lean_object*, lean_object*, lean_object*, lean_object*, lean_object*, lean_object*, lean_object*);
 static const lean_string_object lp_Props2Theories_Props2Theories_tacticFunext__cl___00__closed__0_value = {.m_header = {.m_rc = 0, .m_cs_sz = 0, .m_other = 0, .m_tag = 249}, .m_size = 17, .m_capacity = 17, .m_length = 16, .m_data = "tacticFunext_cl_"};
 static const lean_object* lp_Props2Theories_Props2Theories_tacticFunext__cl___00__closed__0 = (const lean_object*)&lp_Props2Theories_Props2Theories_tacticFunext__cl___00__closed__0_value;
 static const lean_ctor_object lp_Props2Theories_Props2Theories_tacticFunext__cl___00__closed__1_value_aux_0 = {.m_header = {.m_rc = 0, .m_cs_sz = sizeof(lean_ctor_object) + sizeof(void*)*2 + 8, .m_other = 2, .m_tag = 1}, .m_objs = {((lean_object*)(((size_t)(0) << 1) | 1)),((lean_object*)&lp_Props2Theories_Props2Theories_tacticIntro__true___closed__0_value),LEAN_SCALAR_PTR_LITERAL(203, 60, 219, 252, 222, 124, 42, 218)}};
@@ -1870,26 +1884,40 @@ static const lean_ctor_object lp_Props2Theories_Props2Theories___aux__Props2Theo
 static const lean_object* lp_Props2Theories_Props2Theories___aux__Props2Theories__TacticNames______elabRules__Props2Theories__tacticFunext__cl____1__1___closed__3 = (const lean_object*)&lp_Props2Theories_Props2Theories___aux__Props2Theories__TacticNames______elabRules__Props2Theories__tacticFunext__cl____1__1___closed__3_value;
 LEAN_EXPORT lean_object* lp_Props2Theories_Props2Theories___aux__Props2Theories__TacticNames______elabRules__Props2Theories__tacticFunext__cl____1__1(lean_object*, lean_object*, lean_object*, lean_object*, lean_object*, lean_object*, lean_object*, lean_object*, lean_object*);
 LEAN_EXPORT lean_object* lp_Props2Theories_Props2Theories___aux__Props2Theories__TacticNames______elabRules__Props2Theories__tacticFunext__cl____1__1___boxed(lean_object*, lean_object*, lean_object*, lean_object*, lean_object*, lean_object*, lean_object*, lean_object*, lean_object*, lean_object*);
-static const lean_string_object lp_Props2Theories_Props2Theories_tactic__funext__cl_____x2c___00__closed__0_value = {.m_header = {.m_rc = 0, .m_cs_sz = 0, .m_other = 0, .m_tag = 249}, .m_size = 21, .m_capacity = 21, .m_length = 20, .m_data = "tactic_funext_cl__,_"};
-static const lean_object* lp_Props2Theories_Props2Theories_tactic__funext__cl_____x2c___00__closed__0 = (const lean_object*)&lp_Props2Theories_Props2Theories_tactic__funext__cl_____x2c___00__closed__0_value;
-static const lean_ctor_object lp_Props2Theories_Props2Theories_tactic__funext__cl_____x2c___00__closed__1_value_aux_0 = {.m_header = {.m_rc = 0, .m_cs_sz = sizeof(lean_ctor_object) + sizeof(void*)*2 + 8, .m_other = 2, .m_tag = 1}, .m_objs = {((lean_object*)(((size_t)(0) << 1) | 1)),((lean_object*)&lp_Props2Theories_Props2Theories_tacticIntro__true___closed__0_value),LEAN_SCALAR_PTR_LITERAL(203, 60, 219, 252, 222, 124, 42, 218)}};
-static const lean_ctor_object lp_Props2Theories_Props2Theories_tactic__funext__cl_____x2c___00__closed__1_value = {.m_header = {.m_rc = 0, .m_cs_sz = sizeof(lean_ctor_object) + sizeof(void*)*2 + 8, .m_other = 2, .m_tag = 1}, .m_objs = {((lean_object*)&lp_Props2Theories_Props2Theories_tactic__funext__cl_____x2c___00__closed__1_value_aux_0),((lean_object*)&lp_Props2Theories_Props2Theories_tactic__funext__cl_____x2c___00__closed__0_value),LEAN_SCALAR_PTR_LITERAL(109, 126, 56, 91, 167, 44, 25, 112)}};
-static const lean_object* lp_Props2Theories_Props2Theories_tactic__funext__cl_____x2c___00__closed__1 = (const lean_object*)&lp_Props2Theories_Props2Theories_tactic__funext__cl_____x2c___00__closed__1_value;
-static const lean_string_object lp_Props2Theories_Props2Theories_tactic__funext__cl_____x2c___00__closed__2_value = {.m_header = {.m_rc = 0, .m_cs_sz = 0, .m_other = 0, .m_tag = 249}, .m_size = 12, .m_capacity = 12, .m_length = 11, .m_data = "_funext_cl_"};
-static const lean_object* lp_Props2Theories_Props2Theories_tactic__funext__cl_____x2c___00__closed__2 = (const lean_object*)&lp_Props2Theories_Props2Theories_tactic__funext__cl_____x2c___00__closed__2_value;
-static const lean_ctor_object lp_Props2Theories_Props2Theories_tactic__funext__cl_____x2c___00__closed__3_value = {.m_header = {.m_rc = 0, .m_cs_sz = sizeof(lean_ctor_object) + sizeof(void*)*1 + 8, .m_other = 1, .m_tag = 6}, .m_objs = {((lean_object*)&lp_Props2Theories_Props2Theories_tactic__funext__cl_____x2c___00__closed__2_value),LEAN_SCALAR_PTR_LITERAL(0, 0, 0, 0, 0, 0, 0, 0)}};
-static const lean_object* lp_Props2Theories_Props2Theories_tactic__funext__cl_____x2c___00__closed__3 = (const lean_object*)&lp_Props2Theories_Props2Theories_tactic__funext__cl_____x2c___00__closed__3_value;
-static const lean_ctor_object lp_Props2Theories_Props2Theories_tactic__funext__cl_____x2c___00__closed__4_value = {.m_header = {.m_rc = 0, .m_cs_sz = sizeof(lean_ctor_object) + sizeof(void*)*3 + 0, .m_other = 3, .m_tag = 2}, .m_objs = {((lean_object*)&lp_Props2Theories_Props2Theories_tactic__intro__true___00__closed__3_value),((lean_object*)&lp_Props2Theories_Props2Theories_tactic__funext__cl_____x2c___00__closed__3_value),((lean_object*)&lp_Props2Theories_Props2Theories_tacticIntro__and_____x2c___00__closed__6_value)}};
-static const lean_object* lp_Props2Theories_Props2Theories_tactic__funext__cl_____x2c___00__closed__4 = (const lean_object*)&lp_Props2Theories_Props2Theories_tactic__funext__cl_____x2c___00__closed__4_value;
-static const lean_ctor_object lp_Props2Theories_Props2Theories_tactic__funext__cl_____x2c___00__closed__5_value = {.m_header = {.m_rc = 0, .m_cs_sz = sizeof(lean_ctor_object) + sizeof(void*)*3 + 0, .m_other = 3, .m_tag = 2}, .m_objs = {((lean_object*)&lp_Props2Theories_Props2Theories_tactic__intro__true___00__closed__3_value),((lean_object*)&lp_Props2Theories_Props2Theories_tactic__funext__cl_____x2c___00__closed__4_value),((lean_object*)&lp_Props2Theories_Props2Theories_tacticIntro__and_____x2c___00__closed__9_value)}};
-static const lean_object* lp_Props2Theories_Props2Theories_tactic__funext__cl_____x2c___00__closed__5 = (const lean_object*)&lp_Props2Theories_Props2Theories_tactic__funext__cl_____x2c___00__closed__5_value;
-static const lean_ctor_object lp_Props2Theories_Props2Theories_tactic__funext__cl_____x2c___00__closed__6_value = {.m_header = {.m_rc = 0, .m_cs_sz = sizeof(lean_ctor_object) + sizeof(void*)*3 + 0, .m_other = 3, .m_tag = 2}, .m_objs = {((lean_object*)&lp_Props2Theories_Props2Theories_tactic__intro__true___00__closed__3_value),((lean_object*)&lp_Props2Theories_Props2Theories_tactic__funext__cl_____x2c___00__closed__5_value),((lean_object*)&lp_Props2Theories_Props2Theories_tactic__intro__true___00__closed__8_value)}};
-static const lean_object* lp_Props2Theories_Props2Theories_tactic__funext__cl_____x2c___00__closed__6 = (const lean_object*)&lp_Props2Theories_Props2Theories_tactic__funext__cl_____x2c___00__closed__6_value;
-static const lean_ctor_object lp_Props2Theories_Props2Theories_tactic__funext__cl_____x2c___00__closed__7_value = {.m_header = {.m_rc = 0, .m_cs_sz = sizeof(lean_ctor_object) + sizeof(void*)*3 + 0, .m_other = 3, .m_tag = 3}, .m_objs = {((lean_object*)&lp_Props2Theories_Props2Theories_tactic__funext__cl_____x2c___00__closed__1_value),((lean_object*)(((size_t)(1022) << 1) | 1)),((lean_object*)&lp_Props2Theories_Props2Theories_tactic__funext__cl_____x2c___00__closed__6_value)}};
-static const lean_object* lp_Props2Theories_Props2Theories_tactic__funext__cl_____x2c___00__closed__7 = (const lean_object*)&lp_Props2Theories_Props2Theories_tactic__funext__cl_____x2c___00__closed__7_value;
-LEAN_EXPORT const lean_object* lp_Props2Theories_Props2Theories_tactic__funext__cl_____x2c__ = (const lean_object*)&lp_Props2Theories_Props2Theories_tactic__funext__cl_____x2c___00__closed__7_value;
-LEAN_EXPORT lean_object* lp_Props2Theories_Props2Theories___aux__Props2Theories__TacticNames______elabRules__Props2Theories__tactic__funext__cl_____x2c____1(lean_object*, lean_object*, lean_object*, lean_object*, lean_object*, lean_object*, lean_object*, lean_object*, lean_object*);
-LEAN_EXPORT lean_object* lp_Props2Theories_Props2Theories___aux__Props2Theories__TacticNames______elabRules__Props2Theories__tactic__funext__cl_____x2c____1___boxed(lean_object*, lean_object*, lean_object*, lean_object*, lean_object*, lean_object*, lean_object*, lean_object*, lean_object*, lean_object*);
+static const lean_string_object lp_Props2Theories_Props2Theories_tactic__funext__cl___00__closed__0_value = {.m_header = {.m_rc = 0, .m_cs_sz = 0, .m_other = 0, .m_tag = 249}, .m_size = 18, .m_capacity = 18, .m_length = 17, .m_data = "tactic_funext_cl_"};
+static const lean_object* lp_Props2Theories_Props2Theories_tactic__funext__cl___00__closed__0 = (const lean_object*)&lp_Props2Theories_Props2Theories_tactic__funext__cl___00__closed__0_value;
+static const lean_ctor_object lp_Props2Theories_Props2Theories_tactic__funext__cl___00__closed__1_value_aux_0 = {.m_header = {.m_rc = 0, .m_cs_sz = sizeof(lean_ctor_object) + sizeof(void*)*2 + 8, .m_other = 2, .m_tag = 1}, .m_objs = {((lean_object*)(((size_t)(0) << 1) | 1)),((lean_object*)&lp_Props2Theories_Props2Theories_tacticIntro__true___closed__0_value),LEAN_SCALAR_PTR_LITERAL(203, 60, 219, 252, 222, 124, 42, 218)}};
+static const lean_ctor_object lp_Props2Theories_Props2Theories_tactic__funext__cl___00__closed__1_value = {.m_header = {.m_rc = 0, .m_cs_sz = sizeof(lean_ctor_object) + sizeof(void*)*2 + 8, .m_other = 2, .m_tag = 1}, .m_objs = {((lean_object*)&lp_Props2Theories_Props2Theories_tactic__funext__cl___00__closed__1_value_aux_0),((lean_object*)&lp_Props2Theories_Props2Theories_tactic__funext__cl___00__closed__0_value),LEAN_SCALAR_PTR_LITERAL(227, 13, 231, 85, 200, 223, 178, 186)}};
+static const lean_object* lp_Props2Theories_Props2Theories_tactic__funext__cl___00__closed__1 = (const lean_object*)&lp_Props2Theories_Props2Theories_tactic__funext__cl___00__closed__1_value;
+static const lean_string_object lp_Props2Theories_Props2Theories_tactic__funext__cl___00__closed__2_value = {.m_header = {.m_rc = 0, .m_cs_sz = 0, .m_other = 0, .m_tag = 249}, .m_size = 12, .m_capacity = 12, .m_length = 11, .m_data = "_funext_cl_"};
+static const lean_object* lp_Props2Theories_Props2Theories_tactic__funext__cl___00__closed__2 = (const lean_object*)&lp_Props2Theories_Props2Theories_tactic__funext__cl___00__closed__2_value;
+static const lean_ctor_object lp_Props2Theories_Props2Theories_tactic__funext__cl___00__closed__3_value = {.m_header = {.m_rc = 0, .m_cs_sz = sizeof(lean_ctor_object) + sizeof(void*)*1 + 8, .m_other = 1, .m_tag = 6}, .m_objs = {((lean_object*)&lp_Props2Theories_Props2Theories_tactic__funext__cl___00__closed__2_value),LEAN_SCALAR_PTR_LITERAL(0, 0, 0, 0, 0, 0, 0, 0)}};
+static const lean_object* lp_Props2Theories_Props2Theories_tactic__funext__cl___00__closed__3 = (const lean_object*)&lp_Props2Theories_Props2Theories_tactic__funext__cl___00__closed__3_value;
+static const lean_ctor_object lp_Props2Theories_Props2Theories_tactic__funext__cl___00__closed__4_value = {.m_header = {.m_rc = 0, .m_cs_sz = sizeof(lean_ctor_object) + sizeof(void*)*3 + 0, .m_other = 3, .m_tag = 3}, .m_objs = {((lean_object*)&lp_Props2Theories_Props2Theories_tactic__funext__cl___00__closed__1_value),((lean_object*)(((size_t)(1024) << 1) | 1)),((lean_object*)&lp_Props2Theories_Props2Theories_tactic__funext__cl___00__closed__3_value)}};
+static const lean_object* lp_Props2Theories_Props2Theories_tactic__funext__cl___00__closed__4 = (const lean_object*)&lp_Props2Theories_Props2Theories_tactic__funext__cl___00__closed__4_value;
+LEAN_EXPORT const lean_object* lp_Props2Theories_Props2Theories_tactic__funext__cl__ = (const lean_object*)&lp_Props2Theories_Props2Theories_tactic__funext__cl___00__closed__4_value;
+LEAN_EXPORT lean_object* lp_Props2Theories_Props2Theories___aux__Props2Theories__TacticNames______elabRules__Props2Theories__tactic__funext__cl____1(lean_object*, lean_object*, lean_object*, lean_object*, lean_object*, lean_object*, lean_object*, lean_object*, lean_object*);
+LEAN_EXPORT lean_object* lp_Props2Theories_Props2Theories___aux__Props2Theories__TacticNames______elabRules__Props2Theories__tactic__funext__cl____1___boxed(lean_object*, lean_object*, lean_object*, lean_object*, lean_object*, lean_object*, lean_object*, lean_object*, lean_object*, lean_object*);
+static const lean_string_object lp_Props2Theories_Props2Theories_tactic__funext__cl___x2c___00__closed__0_value = {.m_header = {.m_rc = 0, .m_cs_sz = 0, .m_other = 0, .m_tag = 249}, .m_size = 20, .m_capacity = 20, .m_length = 19, .m_data = "tactic_funext_cl_,_"};
+static const lean_object* lp_Props2Theories_Props2Theories_tactic__funext__cl___x2c___00__closed__0 = (const lean_object*)&lp_Props2Theories_Props2Theories_tactic__funext__cl___x2c___00__closed__0_value;
+static const lean_ctor_object lp_Props2Theories_Props2Theories_tactic__funext__cl___x2c___00__closed__1_value_aux_0 = {.m_header = {.m_rc = 0, .m_cs_sz = sizeof(lean_ctor_object) + sizeof(void*)*2 + 8, .m_other = 2, .m_tag = 1}, .m_objs = {((lean_object*)(((size_t)(0) << 1) | 1)),((lean_object*)&lp_Props2Theories_Props2Theories_tacticIntro__true___closed__0_value),LEAN_SCALAR_PTR_LITERAL(203, 60, 219, 252, 222, 124, 42, 218)}};
+static const lean_ctor_object lp_Props2Theories_Props2Theories_tactic__funext__cl___x2c___00__closed__1_value = {.m_header = {.m_rc = 0, .m_cs_sz = sizeof(lean_ctor_object) + sizeof(void*)*2 + 8, .m_other = 2, .m_tag = 1}, .m_objs = {((lean_object*)&lp_Props2Theories_Props2Theories_tactic__funext__cl___x2c___00__closed__1_value_aux_0),((lean_object*)&lp_Props2Theories_Props2Theories_tactic__funext__cl___x2c___00__closed__0_value),LEAN_SCALAR_PTR_LITERAL(27, 61, 19, 44, 15, 124, 34, 15)}};
+static const lean_object* lp_Props2Theories_Props2Theories_tactic__funext__cl___x2c___00__closed__1 = (const lean_object*)&lp_Props2Theories_Props2Theories_tactic__funext__cl___x2c___00__closed__1_value;
+static const lean_string_object lp_Props2Theories_Props2Theories_tactic__funext__cl___x2c___00__closed__2_value = {.m_header = {.m_rc = 0, .m_cs_sz = 0, .m_other = 0, .m_tag = 249}, .m_size = 11, .m_capacity = 11, .m_length = 10, .m_data = "_funext_cl"};
+static const lean_object* lp_Props2Theories_Props2Theories_tactic__funext__cl___x2c___00__closed__2 = (const lean_object*)&lp_Props2Theories_Props2Theories_tactic__funext__cl___x2c___00__closed__2_value;
+static const lean_ctor_object lp_Props2Theories_Props2Theories_tactic__funext__cl___x2c___00__closed__3_value = {.m_header = {.m_rc = 0, .m_cs_sz = sizeof(lean_ctor_object) + sizeof(void*)*1 + 8, .m_other = 1, .m_tag = 6}, .m_objs = {((lean_object*)&lp_Props2Theories_Props2Theories_tactic__funext__cl___x2c___00__closed__2_value),LEAN_SCALAR_PTR_LITERAL(0, 0, 0, 0, 0, 0, 0, 0)}};
+static const lean_object* lp_Props2Theories_Props2Theories_tactic__funext__cl___x2c___00__closed__3 = (const lean_object*)&lp_Props2Theories_Props2Theories_tactic__funext__cl___x2c___00__closed__3_value;
+static const lean_ctor_object lp_Props2Theories_Props2Theories_tactic__funext__cl___x2c___00__closed__4_value = {.m_header = {.m_rc = 0, .m_cs_sz = sizeof(lean_ctor_object) + sizeof(void*)*3 + 0, .m_other = 3, .m_tag = 2}, .m_objs = {((lean_object*)&lp_Props2Theories_Props2Theories_tactic__intro__true___00__closed__3_value),((lean_object*)&lp_Props2Theories_Props2Theories_tactic__funext__cl___x2c___00__closed__3_value),((lean_object*)&lp_Props2Theories_Props2Theories_tacticIntro__and_____x2c___00__closed__6_value)}};
+static const lean_object* lp_Props2Theories_Props2Theories_tactic__funext__cl___x2c___00__closed__4 = (const lean_object*)&lp_Props2Theories_Props2Theories_tactic__funext__cl___x2c___00__closed__4_value;
+static const lean_ctor_object lp_Props2Theories_Props2Theories_tactic__funext__cl___x2c___00__closed__5_value = {.m_header = {.m_rc = 0, .m_cs_sz = sizeof(lean_ctor_object) + sizeof(void*)*3 + 0, .m_other = 3, .m_tag = 2}, .m_objs = {((lean_object*)&lp_Props2Theories_Props2Theories_tactic__intro__true___00__closed__3_value),((lean_object*)&lp_Props2Theories_Props2Theories_tactic__funext__cl___x2c___00__closed__4_value),((lean_object*)&lp_Props2Theories_Props2Theories_tacticIntro__and_____x2c___00__closed__9_value)}};
+static const lean_object* lp_Props2Theories_Props2Theories_tactic__funext__cl___x2c___00__closed__5 = (const lean_object*)&lp_Props2Theories_Props2Theories_tactic__funext__cl___x2c___00__closed__5_value;
+static const lean_ctor_object lp_Props2Theories_Props2Theories_tactic__funext__cl___x2c___00__closed__6_value = {.m_header = {.m_rc = 0, .m_cs_sz = sizeof(lean_ctor_object) + sizeof(void*)*3 + 0, .m_other = 3, .m_tag = 2}, .m_objs = {((lean_object*)&lp_Props2Theories_Props2Theories_tactic__intro__true___00__closed__3_value),((lean_object*)&lp_Props2Theories_Props2Theories_tactic__funext__cl___x2c___00__closed__5_value),((lean_object*)&lp_Props2Theories_Props2Theories_tactic__intro__true___00__closed__8_value)}};
+static const lean_object* lp_Props2Theories_Props2Theories_tactic__funext__cl___x2c___00__closed__6 = (const lean_object*)&lp_Props2Theories_Props2Theories_tactic__funext__cl___x2c___00__closed__6_value;
+static const lean_ctor_object lp_Props2Theories_Props2Theories_tactic__funext__cl___x2c___00__closed__7_value = {.m_header = {.m_rc = 0, .m_cs_sz = sizeof(lean_ctor_object) + sizeof(void*)*3 + 0, .m_other = 3, .m_tag = 3}, .m_objs = {((lean_object*)&lp_Props2Theories_Props2Theories_tactic__funext__cl___x2c___00__closed__1_value),((lean_object*)(((size_t)(1022) << 1) | 1)),((lean_object*)&lp_Props2Theories_Props2Theories_tactic__funext__cl___x2c___00__closed__6_value)}};
+static const lean_object* lp_Props2Theories_Props2Theories_tactic__funext__cl___x2c___00__closed__7 = (const lean_object*)&lp_Props2Theories_Props2Theories_tactic__funext__cl___x2c___00__closed__7_value;
+LEAN_EXPORT const lean_object* lp_Props2Theories_Props2Theories_tactic__funext__cl___x2c__ = (const lean_object*)&lp_Props2Theories_Props2Theories_tactic__funext__cl___x2c___00__closed__7_value;
+LEAN_EXPORT lean_object* lp_Props2Theories_Props2Theories___aux__Props2Theories__TacticNames______elabRules__Props2Theories__tactic__funext__cl___x2c____1(lean_object*, lean_object*, lean_object*, lean_object*, lean_object*, lean_object*, lean_object*, lean_object*, lean_object*);
+LEAN_EXPORT lean_object* lp_Props2Theories_Props2Theories___aux__Props2Theories__TacticNames______elabRules__Props2Theories__tactic__funext__cl___x2c____1___boxed(lean_object*, lean_object*, lean_object*, lean_object*, lean_object*, lean_object*, lean_object*, lean_object*, lean_object*, lean_object*);
 static lean_object* _init_lp_Props2Theories_Props2Theories___aux__Props2Theories__TacticNames______elabRules__Props2Theories__tacticIntro__true__1___closed__6(void) {
 _start:
 {
@@ -10868,6 +10896,66 @@ x_11 = lp_Props2Theories_Props2Theories___aux__Props2Theories__TacticNames______
 return x_11;
 }
 }
+LEAN_EXPORT lean_object* lp_Props2Theories_Props2Theories___aux__Props2Theories__TacticNames______elabRules__Props2Theories__tactic__propext__cl____1(lean_object* x_1, lean_object* x_2, lean_object* x_3, lean_object* x_4, lean_object* x_5, lean_object* x_6, lean_object* x_7, lean_object* x_8, lean_object* x_9) {
+_start:
+{
+lean_object* x_11; uint8_t x_12; 
+x_11 = ((lean_object*)(lp_Props2Theories_Props2Theories_tactic__propext__cl___00__closed__1));
+x_12 = l_Lean_Syntax_isOfKind(x_1, x_11);
+if (x_12 == 0)
+{
+lean_object* x_13; 
+lean_dec(x_9);
+lean_dec_ref(x_8);
+lean_dec(x_7);
+lean_dec_ref(x_6);
+lean_dec(x_5);
+lean_dec_ref(x_4);
+lean_dec(x_3);
+lean_dec_ref(x_2);
+x_13 = l_Lean_Elab_throwUnsupportedSyntax___at___00Lean_Server_Test_Cancel___aux__Lean__Server__Test__Cancel______elabRules__Lean__Server__Test__Cancel__tacticWait__for__cancel__once__1_spec__0___redArg();
+return x_13;
+}
+else
+{
+lean_object* x_14; lean_object* x_15; lean_object* x_16; uint8_t x_17; lean_object* x_18; lean_object* x_19; lean_object* x_20; lean_object* x_21; lean_object* x_22; lean_object* x_23; lean_object* x_24; lean_object* x_25; lean_object* x_26; lean_object* x_27; lean_object* x_28; 
+x_14 = lean_ctor_get(x_8, 5);
+x_15 = lean_ctor_get(x_8, 10);
+x_16 = lean_ctor_get(x_8, 11);
+x_17 = 0;
+x_18 = l_Lean_SourceInfo_fromRef(x_14, x_17);
+x_19 = ((lean_object*)(lp_Props2Theories_Props2Theories___aux__Props2Theories__TacticNames______elabRules__Props2Theories__tacticElim__false__1___closed__0));
+x_20 = ((lean_object*)(lp_Props2Theories_Props2Theories___aux__Props2Theories__TacticNames______elabRules__Props2Theories__tacticElim__false__1___closed__1));
+lean_inc(x_18);
+x_21 = lean_alloc_ctor(2, 2, 0);
+lean_ctor_set(x_21, 0, x_18);
+lean_ctor_set(x_21, 1, x_19);
+x_22 = lean_obj_once(&lp_Props2Theories_Props2Theories___aux__Props2Theories__TacticNames______elabRules__Props2Theories__tacticPropext__cl____1___closed__1, &lp_Props2Theories_Props2Theories___aux__Props2Theories__TacticNames______elabRules__Props2Theories__tacticPropext__cl____1___closed__1_once, _init_lp_Props2Theories_Props2Theories___aux__Props2Theories__TacticNames______elabRules__Props2Theories__tacticPropext__cl____1___closed__1);
+x_23 = ((lean_object*)(lp_Props2Theories_Props2Theories___aux__Props2Theories__TacticNames______elabRules__Props2Theories__tacticPropext__cl____1___closed__2));
+lean_inc(x_16);
+lean_inc(x_15);
+x_24 = l_Lean_addMacroScope(x_15, x_23, x_16);
+x_25 = ((lean_object*)(lp_Props2Theories_Props2Theories___aux__Props2Theories__TacticNames______elabRules__Props2Theories__tacticPropext__cl____1___closed__4));
+lean_inc(x_18);
+x_26 = lean_alloc_ctor(3, 4, 0);
+lean_ctor_set(x_26, 0, x_18);
+lean_ctor_set(x_26, 1, x_22);
+lean_ctor_set(x_26, 2, x_24);
+lean_ctor_set(x_26, 3, x_25);
+x_27 = l_Lean_Syntax_node2(x_18, x_20, x_21, x_26);
+x_28 = l_Lean_Elab_Tactic_evalTactic(x_27, x_2, x_3, x_4, x_5, x_6, x_7, x_8, x_9);
+return x_28;
+}
+}
+}
+LEAN_EXPORT lean_object* lp_Props2Theories_Props2Theories___aux__Props2Theories__TacticNames______elabRules__Props2Theories__tactic__propext__cl____1___boxed(lean_object* x_1, lean_object* x_2, lean_object* x_3, lean_object* x_4, lean_object* x_5, lean_object* x_6, lean_object* x_7, lean_object* x_8, lean_object* x_9, lean_object* x_10) {
+_start:
+{
+lean_object* x_11; 
+x_11 = lp_Props2Theories_Props2Theories___aux__Props2Theories__TacticNames______elabRules__Props2Theories__tactic__propext__cl____1(x_1, x_2, x_3, x_4, x_5, x_6, x_7, x_8, x_9);
+return x_11;
+}
+}
 static lean_object* _init_lp_Props2Theories_Props2Theories___aux__Props2Theories__TacticNames______elabRules__Props2Theories__tacticFunext__cl____1___closed__4(void) {
 _start:
 {
@@ -11051,11 +11139,71 @@ x_11 = lp_Props2Theories_Props2Theories___aux__Props2Theories__TacticNames______
 return x_11;
 }
 }
-LEAN_EXPORT lean_object* lp_Props2Theories_Props2Theories___aux__Props2Theories__TacticNames______elabRules__Props2Theories__tactic__funext__cl_____x2c____1(lean_object* x_1, lean_object* x_2, lean_object* x_3, lean_object* x_4, lean_object* x_5, lean_object* x_6, lean_object* x_7, lean_object* x_8, lean_object* x_9) {
+LEAN_EXPORT lean_object* lp_Props2Theories_Props2Theories___aux__Props2Theories__TacticNames______elabRules__Props2Theories__tactic__funext__cl____1(lean_object* x_1, lean_object* x_2, lean_object* x_3, lean_object* x_4, lean_object* x_5, lean_object* x_6, lean_object* x_7, lean_object* x_8, lean_object* x_9) {
 _start:
 {
 lean_object* x_11; uint8_t x_12; 
-x_11 = ((lean_object*)(lp_Props2Theories_Props2Theories_tactic__funext__cl_____x2c___00__closed__1));
+x_11 = ((lean_object*)(lp_Props2Theories_Props2Theories_tactic__funext__cl___00__closed__1));
+x_12 = l_Lean_Syntax_isOfKind(x_1, x_11);
+if (x_12 == 0)
+{
+lean_object* x_13; 
+lean_dec(x_9);
+lean_dec_ref(x_8);
+lean_dec(x_7);
+lean_dec_ref(x_6);
+lean_dec(x_5);
+lean_dec_ref(x_4);
+lean_dec(x_3);
+lean_dec_ref(x_2);
+x_13 = l_Lean_Elab_throwUnsupportedSyntax___at___00Lean_Server_Test_Cancel___aux__Lean__Server__Test__Cancel______elabRules__Lean__Server__Test__Cancel__tacticWait__for__cancel__once__1_spec__0___redArg();
+return x_13;
+}
+else
+{
+lean_object* x_14; lean_object* x_15; lean_object* x_16; uint8_t x_17; lean_object* x_18; lean_object* x_19; lean_object* x_20; lean_object* x_21; lean_object* x_22; lean_object* x_23; lean_object* x_24; lean_object* x_25; lean_object* x_26; lean_object* x_27; lean_object* x_28; 
+x_14 = lean_ctor_get(x_8, 5);
+x_15 = lean_ctor_get(x_8, 10);
+x_16 = lean_ctor_get(x_8, 11);
+x_17 = 0;
+x_18 = l_Lean_SourceInfo_fromRef(x_14, x_17);
+x_19 = ((lean_object*)(lp_Props2Theories_Props2Theories___aux__Props2Theories__TacticNames______elabRules__Props2Theories__tacticElim__false__1___closed__0));
+x_20 = ((lean_object*)(lp_Props2Theories_Props2Theories___aux__Props2Theories__TacticNames______elabRules__Props2Theories__tacticElim__false__1___closed__1));
+lean_inc(x_18);
+x_21 = lean_alloc_ctor(2, 2, 0);
+lean_ctor_set(x_21, 0, x_18);
+lean_ctor_set(x_21, 1, x_19);
+x_22 = lean_obj_once(&lp_Props2Theories_Props2Theories___aux__Props2Theories__TacticNames______elabRules__Props2Theories__tacticFunext__cl____1__1___closed__0, &lp_Props2Theories_Props2Theories___aux__Props2Theories__TacticNames______elabRules__Props2Theories__tacticFunext__cl____1__1___closed__0_once, _init_lp_Props2Theories_Props2Theories___aux__Props2Theories__TacticNames______elabRules__Props2Theories__tacticFunext__cl____1__1___closed__0);
+x_23 = ((lean_object*)(lp_Props2Theories_Props2Theories___aux__Props2Theories__TacticNames______elabRules__Props2Theories__tacticFunext__cl____1__1___closed__1));
+lean_inc(x_16);
+lean_inc(x_15);
+x_24 = l_Lean_addMacroScope(x_15, x_23, x_16);
+x_25 = ((lean_object*)(lp_Props2Theories_Props2Theories___aux__Props2Theories__TacticNames______elabRules__Props2Theories__tacticFunext__cl____1__1___closed__3));
+lean_inc(x_18);
+x_26 = lean_alloc_ctor(3, 4, 0);
+lean_ctor_set(x_26, 0, x_18);
+lean_ctor_set(x_26, 1, x_22);
+lean_ctor_set(x_26, 2, x_24);
+lean_ctor_set(x_26, 3, x_25);
+x_27 = l_Lean_Syntax_node2(x_18, x_20, x_21, x_26);
+x_28 = l_Lean_Elab_Tactic_evalTactic(x_27, x_2, x_3, x_4, x_5, x_6, x_7, x_8, x_9);
+return x_28;
+}
+}
+}
+LEAN_EXPORT lean_object* lp_Props2Theories_Props2Theories___aux__Props2Theories__TacticNames______elabRules__Props2Theories__tactic__funext__cl____1___boxed(lean_object* x_1, lean_object* x_2, lean_object* x_3, lean_object* x_4, lean_object* x_5, lean_object* x_6, lean_object* x_7, lean_object* x_8, lean_object* x_9, lean_object* x_10) {
+_start:
+{
+lean_object* x_11; 
+x_11 = lp_Props2Theories_Props2Theories___aux__Props2Theories__TacticNames______elabRules__Props2Theories__tactic__funext__cl____1(x_1, x_2, x_3, x_4, x_5, x_6, x_7, x_8, x_9);
+return x_11;
+}
+}
+LEAN_EXPORT lean_object* lp_Props2Theories_Props2Theories___aux__Props2Theories__TacticNames______elabRules__Props2Theories__tactic__funext__cl___x2c____1(lean_object* x_1, lean_object* x_2, lean_object* x_3, lean_object* x_4, lean_object* x_5, lean_object* x_6, lean_object* x_7, lean_object* x_8, lean_object* x_9) {
+_start:
+{
+lean_object* x_11; uint8_t x_12; 
+x_11 = ((lean_object*)(lp_Props2Theories_Props2Theories_tactic__funext__cl___x2c___00__closed__1));
 lean_inc(x_1);
 x_12 = l_Lean_Syntax_isOfKind(x_1, x_11);
 if (x_12 == 0)
@@ -11167,11 +11315,11 @@ return x_61;
 }
 }
 }
-LEAN_EXPORT lean_object* lp_Props2Theories_Props2Theories___aux__Props2Theories__TacticNames______elabRules__Props2Theories__tactic__funext__cl_____x2c____1___boxed(lean_object* x_1, lean_object* x_2, lean_object* x_3, lean_object* x_4, lean_object* x_5, lean_object* x_6, lean_object* x_7, lean_object* x_8, lean_object* x_9, lean_object* x_10) {
+LEAN_EXPORT lean_object* lp_Props2Theories_Props2Theories___aux__Props2Theories__TacticNames______elabRules__Props2Theories__tactic__funext__cl___x2c____1___boxed(lean_object* x_1, lean_object* x_2, lean_object* x_3, lean_object* x_4, lean_object* x_5, lean_object* x_6, lean_object* x_7, lean_object* x_8, lean_object* x_9, lean_object* x_10) {
 _start:
 {
 lean_object* x_11; 
-x_11 = lp_Props2Theories_Props2Theories___aux__Props2Theories__TacticNames______elabRules__Props2Theories__tactic__funext__cl_____x2c____1(x_1, x_2, x_3, x_4, x_5, x_6, x_7, x_8, x_9);
+x_11 = lp_Props2Theories_Props2Theories___aux__Props2Theories__TacticNames______elabRules__Props2Theories__tactic__funext__cl___x2c____1(x_1, x_2, x_3, x_4, x_5, x_6, x_7, x_8, x_9);
 return x_11;
 }
 }

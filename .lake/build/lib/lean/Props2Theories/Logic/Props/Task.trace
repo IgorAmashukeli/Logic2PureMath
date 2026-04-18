@@ -232,7 +232,7 @@
       ["imports",
        [["Props2Theories.TacticNames transitive imports (legacy)",
          "00000000000006bb"],
-        ["Props2Theories.TacticNames:importAllArts", "69078d109fb28796"]]]]],
+        ["Props2Theories.TacticNames:importAllArts", "bfb7b4864c6477e2"]]]]],
     ["libs",
      [["import dynlibs", "00000000000006bb"],
       ["package external libraries", "00000000000006bb"],
@@ -247,4 +247,4 @@
   ["Module.name: Props2Theories.Logic.Props.Task", "3891897fbe1f4244"],
   ["Package.id?: (some Props2Theories)", "bf69640ed8a43e05"],
   ["Module.leanArgs: #[]", "00000000000006bb"]],
- "depHash": "755a9d0c26002dcd"}
+ "depHash": "c6d53c2466f081ae"}

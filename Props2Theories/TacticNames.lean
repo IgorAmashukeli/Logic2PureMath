@@ -397,6 +397,13 @@ elab "_propext_cl" h:term "," h_new:ident : tactic => do
   ))
 
 
+elab "_propext_cl_" : tactic => do
+  evalTactic (← `(tactic|
+    apply propext
+  ))
+
+
+
 elab "funext_cl" h:term : tactic => do
   evalTactic (← `(tactic|
     funext _x;
@@ -409,8 +416,13 @@ elab "funext_cl_" : tactic => do
     assumption
   ))
 
+elab "_funext_cl_" : tactic => do
+  evalTactic (← `(tactic|
+    apply funext
+  ))
 
-elab "_funext_cl_" h:term "," h_new:ident : tactic => do
+
+elab "_funext_cl" h:term "," h_new:ident : tactic => do
   evalTactic (← `(tactic|
     have $h_new : _ = _ := funext $h
   ))
