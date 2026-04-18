@@ -260,7 +260,14 @@ syntax "intro_exists" term : tactic
 elab_rules : tactic
 
   | `(tactic| intro_exists $arg) => do
-    evalTactic (← `(tactic| apply Exists.intro $arg))
+    evalTactic (← `(tactic|
+
+    apply Exists.intro $arg
+
+
+    ))
+
+
 syntax "intro_exists_" term "," term : tactic
 elab_rules : tactic
 
@@ -285,7 +292,9 @@ elab_rules : tactic
 
 
 macro "elim_exists" h:term "," a:ident "," ha:ident : tactic =>
-  `(tactic| let ⟨$a, $ha⟩ := $h)
+  `(tactic|
+      let ⟨$a, $ha⟩ := $h
+  )
 
 
 elab "elim_exists_" h:term "," hq:term : tactic => do
@@ -426,3 +435,118 @@ elab "_funext_cl" h:term "," h_new:ident : tactic => do
   evalTactic (← `(tactic|
     have $h_new : _ = _ := funext $h
   ))
+
+
+def exists_unique {T : Type} (P : T → Prop) : Prop := (∃ (x : T), P x ∧ (∀ y : T, (P y → x = y)))
+
+
+open Lean TSyntax.Compat in
+macro "∃!" xs:explicitBinders ", " b:term : term => expandExplicitBinders ``exists_unique xs b
+
+
+@[app_unexpander exists_unique] def unexpandexists_unique: Lean.PrettyPrinter.Unexpander
+  | `($(_) fun $x:ident ↦ ∃! $xs:binderIdent*, $b) => `(∃! $x:ident $xs:binderIdent*, $b)
+  | `($(_) fun $x:ident ↦ $b)                      => `(∃! $x:ident, $b)
+  | `($(_) fun ($x:ident : $t) ↦ $b)               => `(∃! ($x:ident : $t), $b)
+  | _                                               => throw ()
+
+
+
+elab "intro_exists_unique" h:term : tactic => do
+  evalTactic (← `(tactic|
+    intro_exists $h;
+    dsimp (config := { beta := true, zeta := false, iota := false })
+  ))
+
+
+elab "intro_exists_unique" x:term : tactic => do
+  evalTactic (← `(tactic|
+    intro_exists $x;
+    dsimp (config := { beta := true, zeta := false, iota := false })
+  ))
+
+
+elab "intro_exists_unique_" x:term "," hex:term "," hun:term : tactic => do
+  evalTactic (← `(tactic|
+    intro_exists $x;
+    dsimp (config := { beta := true, zeta := false, iota := false });
+    intro_and_ $hex, $hun
+  ))
+
+
+
+
+syntax "_intro_exists_unique" term "," term "," term "," ident : tactic
+elab_rules : tactic
+  | `(tactic| _intro_exists_unique $x, $hex, $hun, $h_new) => do
+    let xExpr   ← elabTerm x   none
+    let hexExpr ← elabTerm hex none
+    let hunExpr ← elabTerm hun none
+
+    let andExpr ← mkAppM ``And.intro #[hexExpr, hunExpr]
+    let andType ← inferType andExpr
+    let predExpr ← mkLambdaFVars #[xExpr] andType
+
+    let currentExpr ← mkAppOptM ``Exists.intro #[none, some predExpr, some xExpr, some andExpr]
+    let type ← inferType currentExpr
+
+    liftMetaTactic fun mvarId => do
+      let mvarIdNew ← mvarId.assert h_new.getId type currentExpr
+      let (_, mvarIdPost) ← mvarIdNew.intro1P
+      return [mvarIdPost]
+
+macro "elim_exists_unique" h:term "," a:ident "," hpa:ident "," hfora:ident : tactic =>
+  `(tactic|
+      (
+        let ⟨$a, ⟨$hpa, $hfora⟩⟩ := $h
+        dsimp (config := { beta := true, zeta := false, iota := false }) at $hpa $hfora
+      )
+  )
+
+
+elab "elim_exists_unique_" h:term "," hq:term : tactic => do
+  evalTactic (← `(tactic|
+     let ⟨_a, ⟨_Hpa, _HFra⟩⟩ := $h;
+      specialize ($hq _a);
+      apply $hq;
+      assumption
+  ))
+
+
+elab "_elim_exists_unique" h:term "," Q:term "," newH:ident : tactic => do
+  let hExpr ← elabTerm h none
+  let hType ← inferType hExpr
+  let hType ← whnf hType
+
+  let (fn, args) := hType.getAppFnArgs
+
+  if fn == ``Exists && args.size == 2 then
+    let pExpr := args[1]!
+    let qExpr ← elabTerm Q none
+
+    let predType ← inferType pExpr
+    let xType := predType.bindingDomain!
+
+    let innerForallExpr ← Meta.withLocalDecl `x BinderInfo.default xType fun x => do
+      let pApp := mkApp pExpr x
+      let pAppRed ← whnf pApp
+      let pxOnly := pAppRed.appFn!.appArg!
+      let pxQ ← mkArrow pxOnly qExpr
+      mkForallFVars #[x] pxQ
+
+    let fullTypeExpr ← mkArrow innerForallExpr qExpr
+    let fullTypeExpr ← reduce fullTypeExpr
+
+    let fullTypeSyntax ← delab fullTypeExpr
+
+    evalTactic (← `(tactic|
+       (have $newH : $fullTypeSyntax := by
+          let ⟨_a, _Hpa, _HFra⟩ := $h
+          intro _h_forq
+          apply (_h_forq _a)
+          exact _Hpa
+       );
+       dsimp (config := { beta := true, zeta := false, iota := false }) at $(← `(Lean.Parser.Tactic.locationHyp| $newH:ident))
+    ))
+  else
+    throwError "Hypothesis {h} is not an existential (expected Exists P)."

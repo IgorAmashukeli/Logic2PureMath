@@ -1,9 +1,9 @@
 {"synthetic": false,
  "schemaVersion": "2025-09-10",
  "outputs":
- {"o": ["ba49e690ad2ac641.olean"],
-  "i": "8b6e7c32b18dc4b9.ilean",
-  "c": "3868f366bcceca2c.c"},
+ {"o": ["4519751d65d5bee1.olean"],
+  "i": "b44487ed2f72508d.ilean",
+  "c": "78ab49d36bd23a45.c"},
  "log":
  [{"message":
    ".> LEAN_PATH=/home/igor/ComputerScience/Props2Theories/.lake/build/lib/lean /home/igor/.elan/toolchains/leanprover--lean4---v4.29.1/bin/lean /home/igor/ComputerScience/Props2Theories/Props2Theories/TacticNames.lean -o /home/igor/ComputerScience/Props2Theories/.lake/build/lib/lean/Props2Theories/TacticNames.olean -i /home/igor/ComputerScience/Props2Theories/.lake/build/lib/lean/Props2Theories/TacticNames.ilean -c /home/igor/ComputerScience/Props2Theories/.lake/build/ir/Props2Theories/TacticNames.c --setup /home/igor/ComputerScience/Props2Theories/.lake/build/ir/Props2Theories/TacticNames.setup.json --json",
@@ -22,10 +22,10 @@
   ["Lean 4.29.1, commit f72c35b3f637c8c6571d353742168ab66cc22c00",
    "fa77a35a41db35c0"],
   ["/home/igor/ComputerScience/Props2Theories/Props2Theories/TacticNames.lean",
-   "b2f345c37ee92818"],
+   "b2473c3652e6d546"],
   ["options", "00000000000006bb"],
   ["isModule: false", "feefd2a0d3a1847e"],
   ["Module.name: Props2Theories.TacticNames", "59c89c2c2c3b6e13"],
   ["Package.id?: (some Props2Theories)", "bf69640ed8a43e05"],
   ["Module.leanArgs: #[]", "00000000000006bb"]],
- "depHash": "3bf60a58c2f826b8"}
+ "depHash": "eeb7c6ddb8875815"}

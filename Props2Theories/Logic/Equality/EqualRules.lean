@@ -117,13 +117,68 @@ example (P Q : Prop) (h : P ↔ Q) : P = Q := by
   _propext_cl h, h_new
   assumption
 
+example (P Q : Prop) (h : P ↔ Q) : P = Q := by
+  _propext_cl_
+  assumption
+
 example (T T₂: Type) (P Q : T → T₂) (h : ∀ x, (P x = Q x)) : P = Q := by
   funext_cl h
 
 example (T T₂: Type) (P Q : T → T₂) (h : ∀ x, (P x = Q x)) : P = Q := by
   funext_cl_
 
+example (T T₂ : Type) (P Q : T → T₂) (h : ∀ x, (P x = Q x)) : P = Q := by
+  _funext_cl h, h_new
+  assumption
 
 example (T T₂ : Type) (P Q : T → T₂) (h : ∀ x, (P x = Q x)) : P = Q := by
-  _funext_cl_ h, h_new
+  _funext_cl_
   assumption
+
+
+-- Exists Unique Quantifier Notation:
+-- (∃! x, P x) is notation for exists_unique
+set_option pp.notation false in
+#check (T : Type) → (P : T → Prop) → (∃! x, P x)
+
+-- Exists Unique Definition Notation
+#print Props2Theories.exists_unique
+
+
+-- Optional number of tactics:
+-- because exists_unique is defined in previous terms, you could do this without
+-- new tactics, but I will add this for convinience
+
+-- Exists Unique Introduction
+example (T : Type) (P : T → Prop) (w : T) (h : P w) (g : ∀ y, P y → w = y) : ∃! x, P x := by
+  intro_exists_unique w
+  intro_and <;> assumption
+
+example (T : Type) (P : T → Prop) (w : T) (h : P w) (g : ∀ y, P y → w = y) : ∃! x, P x := by
+  intro_exists_unique_ w, h, g
+
+example (T : Type) (P : T → Prop) (w : T) (h : P w) (g : ∀ y, P y → w = y) : ∃! x, P x := by
+  _intro_exists_unique w, h, g, h_new
+  assumption
+
+example (T : Type) (P : T → Prop) (Q : Prop) (h : ∃! x, P x) (hq : ∀ x, (P x → Q)) : Q := by
+  elim_exists_unique h, x, hp, hw
+  specialize hq x
+  apply hq
+  assumption
+
+example (T : Type) (P : T → Prop) (Q : Prop) (h : ∃! x, P x) (hq : ∀ x, (P x → Q)) : Q := by
+  elim_exists_unique_ h, hq
+
+example (T : Type) (P : T → Prop) (Q : Prop) (h : ∃! x, P x) (hq : ∀ x, (P x → Q)) : Q := by
+  _elim_exists_unique h, Q, hfoll
+  apply hfoll
+  assumption
+
+
+-- (≠) is default Lean symbol too
+example (T : Type) : (∀ (x y : T), ¬(x = y) ↔ x ≠ y) := by
+  intro x y
+  intro_iff
+  · intro h_xy; assumption
+  · intro h_xy; assumption
