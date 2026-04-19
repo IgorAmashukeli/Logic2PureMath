@@ -1,9 +1,9 @@
 {"synthetic": false,
  "schemaVersion": "2025-09-10",
  "outputs":
- {"o": ["9ffd1829841e37b5.olean"],
+ {"o": ["5418e06343912d2a.olean"],
   "m": false,
-  "i": "7186cee349872604.ilean",
+  "i": "b611448c45d69179.ilean",
   "c": "4fcab9d1f25b7aab.c"},
  "log":
  [{"message":
@@ -187,6 +187,27 @@
    "Props2Theories/Logic/Props/Task.lean:142:8: declaration uses `sorry`",
    "level": "warning"},
   {"message":
+   "Props2Theories/Logic/Props/Task.lean:151:8: declaration uses `sorry`",
+   "level": "warning"},
+  {"message":
+   "Props2Theories/Logic/Props/Task.lean:152:8: declaration uses `sorry`",
+   "level": "warning"},
+  {"message":
+   "Props2Theories/Logic/Props/Task.lean:153:8: declaration uses `sorry`",
+   "level": "warning"},
+  {"message":
+   "Props2Theories/Logic/Props/Task.lean:154:8: declaration uses `sorry`",
+   "level": "warning"},
+  {"message":
+   "Props2Theories/Logic/Props/Task.lean:155:8: declaration uses `sorry`",
+   "level": "warning"},
+  {"message":
+   "Props2Theories/Logic/Props/Task.lean:156:8: declaration uses `sorry`",
+   "level": "warning"},
+  {"message":
+   "Props2Theories/Logic/Props/Task.lean:157:8: declaration uses `sorry`",
+   "level": "warning"},
+  {"message":
    "Props2Theories/Logic/Props/Task.lean:158:8: declaration uses `sorry`",
    "level": "warning"},
   {"message":
@@ -203,27 +224,6 @@
    "level": "warning"},
   {"message":
    "Props2Theories/Logic/Props/Task.lean:163:8: declaration uses `sorry`",
-   "level": "warning"},
-  {"message":
-   "Props2Theories/Logic/Props/Task.lean:164:8: declaration uses `sorry`",
-   "level": "warning"},
-  {"message":
-   "Props2Theories/Logic/Props/Task.lean:165:8: declaration uses `sorry`",
-   "level": "warning"},
-  {"message":
-   "Props2Theories/Logic/Props/Task.lean:166:8: declaration uses `sorry`",
-   "level": "warning"},
-  {"message":
-   "Props2Theories/Logic/Props/Task.lean:167:8: declaration uses `sorry`",
-   "level": "warning"},
-  {"message":
-   "Props2Theories/Logic/Props/Task.lean:168:8: declaration uses `sorry`",
-   "level": "warning"},
-  {"message":
-   "Props2Theories/Logic/Props/Task.lean:169:8: declaration uses `sorry`",
-   "level": "warning"},
-  {"message":
-   "Props2Theories/Logic/Props/Task.lean:170:8: declaration uses `sorry`",
    "level": "warning"}],
  "inputs":
  [["Props2Theories.Logic.Props.Task:deps",
@@ -242,10 +242,10 @@
   ["Lean 4.30.0, commit 3dc1a088b6d2d8eafe25a7cd7ec7b58d731bd7cc",
    "2c8d2623007dfc36"],
   ["/home/igor/ComputerScience/Props2Theories/Props2Theories/Logic/Props/Task.lean",
-   "6f9e7525db8a2f3e"],
+   "d759a3fb6ab74f31"],
   ["options", "00000000000006bb"],
   ["isModule: false", "feefd2a0d3a1847e"],
   ["Module.name: Props2Theories.Logic.Props.Task", "3891897fbe1f4244"],
   ["Package.id?: (some Props2Theories)", "bf69640ed8a43e05"],
   ["Module.leanArgs: #[]", "00000000000006bb"]],
- "depHash": "c614cddadaf988a7"}
+ "depHash": "2c4f3db038166330"}

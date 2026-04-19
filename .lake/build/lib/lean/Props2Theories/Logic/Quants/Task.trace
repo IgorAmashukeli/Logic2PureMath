@@ -1,0 +1,135 @@
+{"synthetic": false,
+ "schemaVersion": "2025-09-10",
+ "outputs":
+ {"o": ["95dfa2ffc89d88d1.olean"],
+  "m": false,
+  "i": "73b2ef8c0ba696a0.ilean",
+  "c": "0d5d1ef07088dfbd.c"},
+ "log":
+ [{"message":
+   ".> LEAN_PATH=/home/igor/ComputerScience/Props2Theories/.lake/build/lib/lean /home/igor/.elan/toolchains/leanprover--lean4---v4.30.0-rc2/bin/lean /home/igor/ComputerScience/Props2Theories/Props2Theories/Logic/Quants/Task.lean -o /home/igor/ComputerScience/Props2Theories/.lake/build/lib/lean/Props2Theories/Logic/Quants/Task.olean -i /home/igor/ComputerScience/Props2Theories/.lake/build/lib/lean/Props2Theories/Logic/Quants/Task.ilean -c /home/igor/ComputerScience/Props2Theories/.lake/build/ir/Props2Theories/Logic/Quants/Task.c --setup /home/igor/ComputerScience/Props2Theories/.lake/build/ir/Props2Theories/Logic/Quants/Task.setup.json --json",
+   "level": "trace"},
+  {"message":
+   "Props2Theories/Logic/Quants/Task.lean:5:8: declaration uses `sorry`",
+   "level": "warning"},
+  {"message":
+   "Props2Theories/Logic/Quants/Task.lean:8:8: declaration uses `sorry`",
+   "level": "warning"},
+  {"message":
+   "Props2Theories/Logic/Quants/Task.lean:9:8: declaration uses `sorry`",
+   "level": "warning"},
+  {"message":
+   "Props2Theories/Logic/Quants/Task.lean:10:8: declaration uses `sorry`",
+   "level": "warning"},
+  {"message":
+   "Props2Theories/Logic/Quants/Task.lean:11:8: declaration uses `sorry`",
+   "level": "warning"},
+  {"message":
+   "Props2Theories/Logic/Quants/Task.lean:12:8: declaration uses `sorry`",
+   "level": "warning"},
+  {"message":
+   "Props2Theories/Logic/Quants/Task.lean:16:8: declaration uses `sorry`",
+   "level": "warning"},
+  {"message":
+   "Props2Theories/Logic/Quants/Task.lean:17:8: declaration uses `sorry`",
+   "level": "warning"},
+  {"message":
+   "Props2Theories/Logic/Quants/Task.lean:21:8: declaration uses `sorry`",
+   "level": "warning"},
+  {"message":
+   "Props2Theories/Logic/Quants/Task.lean:22:8: declaration uses `sorry`",
+   "level": "warning"},
+  {"message":
+   "Props2Theories/Logic/Quants/Task.lean:26:8: declaration uses `sorry`",
+   "level": "warning"},
+  {"message":
+   "Props2Theories/Logic/Quants/Task.lean:30:8: declaration uses `sorry`",
+   "level": "warning"},
+  {"message":
+   "Props2Theories/Logic/Quants/Task.lean:31:8: declaration uses `sorry`",
+   "level": "warning"},
+  {"message":
+   "Props2Theories/Logic/Quants/Task.lean:35:8: declaration uses `sorry`",
+   "level": "warning"},
+  {"message":
+   "Props2Theories/Logic/Quants/Task.lean:36:8: declaration uses `sorry`",
+   "level": "warning"},
+  {"message":
+   "Props2Theories/Logic/Quants/Task.lean:40:8: declaration uses `sorry`",
+   "level": "warning"},
+  {"message":
+   "Props2Theories/Logic/Quants/Task.lean:41:8: declaration uses `sorry`",
+   "level": "warning"},
+  {"message":
+   "Props2Theories/Logic/Quants/Task.lean:42:8: declaration uses `sorry`",
+   "level": "warning"},
+  {"message":
+   "Props2Theories/Logic/Quants/Task.lean:43:8: declaration uses `sorry`",
+   "level": "warning"},
+  {"message":
+   "Props2Theories/Logic/Quants/Task.lean:44:8: declaration uses `sorry`",
+   "level": "warning"},
+  {"message":
+   "Props2Theories/Logic/Quants/Task.lean:45:8: declaration uses `sorry`",
+   "level": "warning"},
+  {"message":
+   "Props2Theories/Logic/Quants/Task.lean:46:8: declaration uses `sorry`",
+   "level": "warning"},
+  {"message":
+   "Props2Theories/Logic/Quants/Task.lean:47:8: declaration uses `sorry`",
+   "level": "warning"},
+  {"message":
+   "Props2Theories/Logic/Quants/Task.lean:55:8: declaration uses `sorry`",
+   "level": "warning"},
+  {"message":
+   "Props2Theories/Logic/Quants/Task.lean:59:8: declaration uses `sorry`",
+   "level": "warning"},
+  {"message":
+   "Props2Theories/Logic/Quants/Task.lean:63:8: declaration uses `sorry`",
+   "level": "warning"},
+  {"message":
+   "Props2Theories/Logic/Quants/Task.lean:64:8: declaration uses `sorry`",
+   "level": "warning"},
+  {"message":
+   "Props2Theories/Logic/Quants/Task.lean:68:8: declaration uses `sorry`",
+   "level": "warning"},
+  {"message":
+   "Props2Theories/Logic/Quants/Task.lean:72:8: declaration uses `sorry`",
+   "level": "warning"},
+  {"message":
+   "Props2Theories/Logic/Quants/Task.lean:73:8: declaration uses `sorry`",
+   "level": "warning"},
+  {"message":
+   "Props2Theories/Logic/Quants/Task.lean:74:8: declaration uses `sorry`",
+   "level": "warning"},
+  {"message":
+   "Props2Theories/Logic/Quants/Task.lean:79:8: declaration uses `sorry`",
+   "level": "warning"}],
+ "inputs":
+ [["Props2Theories.Logic.Quants.Task:deps",
+   [["deps",
+     [["Props2Theories/Props2Theories:extraDep",
+       [["@Props2Theories:extraDep", "00000000000006bb"]]],
+      ["imports",
+       [["Props2Theories.TacticNames transitive imports (legacy)",
+         "00000000000006bb"],
+        ["Props2Theories.TacticNames:importAllArts", "ba5c2407b6bf0f05"],
+        ["Props2Theories.Logic.Props.Task transitive imports (legacy)",
+         "e17e140f360835d1"],
+        ["Props2Theories.Logic.Props.Task:importAllArts",
+         "ce5fbcfc7523f44a"]]]]],
+    ["libs",
+     [["import dynlibs", "00000000000006bb"],
+      ["package external libraries", "00000000000006bb"],
+      ["module dynlibs", "00000000000006bb"],
+      ["module plugins", "00000000000006bb"]]]]],
+  ["Lean 4.30.0, commit 3dc1a088b6d2d8eafe25a7cd7ec7b58d731bd7cc",
+   "2c8d2623007dfc36"],
+  ["/home/igor/ComputerScience/Props2Theories/Props2Theories/Logic/Quants/Task.lean",
+   "348c2162d9022655"],
+  ["options", "00000000000006bb"],
+  ["isModule: false", "feefd2a0d3a1847e"],
+  ["Module.name: Props2Theories.Logic.Quants.Task", "9c6e94d3b09e3c69"],
+  ["Package.id?: (some Props2Theories)", "bf69640ed8a43e05"],
+  ["Module.leanArgs: #[]", "00000000000006bb"]],
+ "depHash": "8439438f5e9e21b7"}

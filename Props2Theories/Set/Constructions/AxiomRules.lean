@@ -32,6 +32,11 @@ example (A : Set) (P : Set → Prop) (h : ∀ x ∈ A, P x) : ∀ x ∈ A, P x :
   assumption
 
 example (A : Set) (P : Set → Prop) (h : ∀ x ∈ A, P x) : ∀ x ∈ A, P x := by
+  intro_in_ x, hx
+  apply h
+  assumption
+
+example (A : Set) (P : Set → Prop) (h : ∀ x ∈ A, P x) : ∀ x ∈ A, P x := by
   intros x hx
   apply h
   assumption

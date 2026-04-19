@@ -1,10 +1,10 @@
 {"synthetic": false,
  "schemaVersion": "2025-09-10",
  "outputs":
- {"o": ["1aa67c8c00b3c20a.olean"],
+ {"o": ["1630f4be02a58064.olean"],
   "m": false,
-  "i": "b6234cbcfc6360db.ilean",
-  "c": "15c68082eaeee3bd.c"},
+  "i": "6cddd4299b0073be.ilean",
+  "c": "cbc803fe70967987.c"},
  "log":
  [{"message":
    ".> LEAN_PATH=/home/igor/ComputerScience/Props2Theories/.lake/build/lib/lean /home/igor/.elan/toolchains/leanprover--lean4---v4.30.0-rc2/bin/lean /home/igor/ComputerScience/Props2Theories/Props2Theories/Axioms.lean -o /home/igor/ComputerScience/Props2Theories/.lake/build/lib/lean/Props2Theories/Axioms.olean -i /home/igor/ComputerScience/Props2Theories/.lake/build/lib/lean/Props2Theories/Axioms.ilean -c /home/igor/ComputerScience/Props2Theories/.lake/build/ir/Props2Theories/Axioms.c --setup /home/igor/ComputerScience/Props2Theories/.lake/build/ir/Props2Theories/Axioms.setup.json --json",
@@ -26,10 +26,10 @@
   ["Lean 4.30.0, commit 3dc1a088b6d2d8eafe25a7cd7ec7b58d731bd7cc",
    "2c8d2623007dfc36"],
   ["/home/igor/ComputerScience/Props2Theories/Props2Theories/Axioms.lean",
-   "4c5a5b05ff2d2a69"],
+   "1455a277b1a12ced"],
   ["options", "00000000000006bb"],
   ["isModule: false", "feefd2a0d3a1847e"],
   ["Module.name: Props2Theories.Axioms", "d28e21cd9c83a095"],
   ["Package.id?: (some Props2Theories)", "bf69640ed8a43e05"],
   ["Module.leanArgs: #[]", "00000000000006bb"]],
- "depHash": "e9beb04e67cae9d2"}
+ "depHash": "d18ac74e0bb8230d"}

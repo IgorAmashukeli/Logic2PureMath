@@ -143,13 +143,6 @@ theorem impl_assoc_cl (p q r : Prop) : (p ↔ (q ↔ r)) ↔ ((p ↔ q) ↔ r) :
 
 
 
-
-
-
-
-
-
-
 --Xor definition and notation
 def xor_pr (p q : Prop) : Prop := (p ∧ ¬q) ∨ (q ∧ ¬p)
 notation:10 p " ⊕ " q:11 => xor_pr p q

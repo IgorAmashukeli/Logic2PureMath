@@ -89,6 +89,12 @@ elab "intro_in" x:ident : tactic => do
 
   ))
 
+elab "intro_in_" x:ident "," hx:ident : tactic => do
+  evalTactic (← `(tactic|
+    intro $x:ident $hx:ident;
+    try dsimp (config := { beta := true, zeta := false, iota := false })
+  ))
+
 
 syntax "intro_exists_in" term : tactic
 elab_rules : tactic
@@ -311,7 +317,7 @@ axiom set_extensionality_ax : ∀ A B, (∀ x, (x ∈ A ↔ x ∈ B)) → (A = B
 axiom emp_st_ax : ∃ A, (∀ x, x ∉ A)
 axiom boolean_ax : ∀ A, ∃ B, ∀ x, (x ∈ B ↔ (∀ s ∈ x, s ∈ A))
 axiom union_ax : ∀ A, ∃ B, ∀ x, (x ∈ B ↔ (∃ y ∈ A, x ∈ y))
-axiom replacement_ax : ∀ (P : Set → Set → Prop),
+axiom replacement_ax (P : Set → Set → Prop) :
 ∀ A, (∀ x, ∀ y, ∀ z, P x y → P x z → y = z) -> ∃ B, ∀ y, (y ∈ B ↔ ∃ x ∈ A, P x y)
 axiom infinity_ax : ∃ A, (∀ b, (∀ x, x ∉ b) → b ∈ A) ∧
 (∀ x ∈ A, ∀ y, (∀ t, (t ∈ y ↔ t ∈ x ∨ t = x)) → y ∈ A)
