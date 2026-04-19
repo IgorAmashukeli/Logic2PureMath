@@ -455,21 +455,21 @@ macro "∃!" xs:explicitBinders ", " b:term : term => expandExplicitBinders ``ex
 elab "intro_exists_unique" h:term : tactic => do
   evalTactic (← `(tactic|
     intro_exists $h;
-    dsimp (config := { beta := true, zeta := false, iota := false })
+    try dsimp (config := { beta := true, zeta := false, iota := false })
   ))
 
 
 elab "intro_exists_unique" x:term : tactic => do
   evalTactic (← `(tactic|
     intro_exists $x;
-    dsimp (config := { beta := true, zeta := false, iota := false })
+    try dsimp (config := { beta := true, zeta := false, iota := false })
   ))
 
 
 elab "intro_exists_unique_" x:term "," hex:term "," hun:term : tactic => do
   evalTactic (← `(tactic|
     intro_exists $x;
-    dsimp (config := { beta := true, zeta := false, iota := false });
+    (try dsimp (config := { beta := true, zeta := false, iota := false }));
     intro_and_ $hex, $hun
   ))
 
@@ -499,7 +499,7 @@ macro "elim_exists_unique" h:term "," a:ident "," hpa:ident "," hfora:ident : ta
   `(tactic|
       (
         let ⟨$a, ⟨$hpa, $hfora⟩⟩ := $h
-        dsimp (config := { beta := true, zeta := false, iota := false }) at $hpa $hfora
+        try dsimp (config := { beta := true, zeta := false, iota := false }) at $hpa $hfora
       )
   )
 
@@ -546,7 +546,7 @@ elab "_elim_exists_unique" h:term "," Q:term "," newH:ident : tactic => do
           apply (_h_forq _a)
           exact _Hpa
        );
-       dsimp (config := { beta := true, zeta := false, iota := false }) at $(← `(Lean.Parser.Tactic.locationHyp| $newH:ident))
+       try dsimp (config := { beta := true, zeta := false, iota := false }) at $(← `(Lean.Parser.Tactic.locationHyp| $newH:ident))
     ))
   else
     throwError "Hypothesis {h} is not an existential (expected Exists P)."

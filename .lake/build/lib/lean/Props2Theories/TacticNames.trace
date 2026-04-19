@@ -1,12 +1,13 @@
 {"synthetic": false,
  "schemaVersion": "2025-09-10",
  "outputs":
- {"o": ["4519751d65d5bee1.olean"],
-  "i": "b44487ed2f72508d.ilean",
-  "c": "78ab49d36bd23a45.c"},
+ {"o": ["2695ee21be8b7eaf.olean"],
+  "m": false,
+  "i": "425966fa31c85a97.ilean",
+  "c": "abc836655b6e330e.c"},
  "log":
  [{"message":
-   ".> LEAN_PATH=/home/igor/ComputerScience/Props2Theories/.lake/build/lib/lean /home/igor/.elan/toolchains/leanprover--lean4---v4.29.1/bin/lean /home/igor/ComputerScience/Props2Theories/Props2Theories/TacticNames.lean -o /home/igor/ComputerScience/Props2Theories/.lake/build/lib/lean/Props2Theories/TacticNames.olean -i /home/igor/ComputerScience/Props2Theories/.lake/build/lib/lean/Props2Theories/TacticNames.ilean -c /home/igor/ComputerScience/Props2Theories/.lake/build/ir/Props2Theories/TacticNames.c --setup /home/igor/ComputerScience/Props2Theories/.lake/build/ir/Props2Theories/TacticNames.setup.json --json",
+   ".> LEAN_PATH=/home/igor/ComputerScience/Props2Theories/.lake/build/lib/lean /home/igor/.elan/toolchains/leanprover--lean4---v4.30.0-rc2/bin/lean /home/igor/ComputerScience/Props2Theories/Props2Theories/TacticNames.lean -o /home/igor/ComputerScience/Props2Theories/.lake/build/lib/lean/Props2Theories/TacticNames.olean -i /home/igor/ComputerScience/Props2Theories/.lake/build/lib/lean/Props2Theories/TacticNames.ilean -c /home/igor/ComputerScience/Props2Theories/.lake/build/ir/Props2Theories/TacticNames.c --setup /home/igor/ComputerScience/Props2Theories/.lake/build/ir/Props2Theories/TacticNames.setup.json --json",
    "level": "trace"}],
  "inputs":
  [["Props2Theories.TacticNames:deps",
@@ -19,13 +20,13 @@
       ["package external libraries", "00000000000006bb"],
       ["module dynlibs", "00000000000006bb"],
       ["module plugins", "00000000000006bb"]]]]],
-  ["Lean 4.29.1, commit f72c35b3f637c8c6571d353742168ab66cc22c00",
-   "fa77a35a41db35c0"],
+  ["Lean 4.30.0, commit 3dc1a088b6d2d8eafe25a7cd7ec7b58d731bd7cc",
+   "2c8d2623007dfc36"],
   ["/home/igor/ComputerScience/Props2Theories/Props2Theories/TacticNames.lean",
-   "b2473c3652e6d546"],
+   "957f4a2723f2ba1e"],
   ["options", "00000000000006bb"],
   ["isModule: false", "feefd2a0d3a1847e"],
   ["Module.name: Props2Theories.TacticNames", "59c89c2c2c3b6e13"],
   ["Package.id?: (some Props2Theories)", "bf69640ed8a43e05"],
   ["Module.leanArgs: #[]", "00000000000006bb"]],
- "depHash": "eeb7c6ddb8875815"}
+ "depHash": "59b894a84d56f6f4"}

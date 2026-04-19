@@ -3,5 +3,7 @@
  "options": {},
  "name": "Props2Theories.Axioms",
  "isModule": false,
- "importArts": {},
+ "importArts":
+ {"Props2Theories.TacticNames":
+  ["/home/igor/ComputerScience/Props2Theories/.lake/build/lib/lean/Props2Theories/TacticNames.olean"]},
  "dynlibs": []}
