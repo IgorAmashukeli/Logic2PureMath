@@ -273,7 +273,7 @@ theorem is_repl_repl_set (P : Set → Set → Prop) (A : Set) (h : ∀ x y z, P 
   assumption
 
 
--- Unordered Pair Constructions
+-- Unordered Pair Definition And Properties
 def unord_pr_predicate (a b : Set) (x y : Set) := (x = ∅ ∧ y = a) ∨ (x = (𝒫 ∅) ∧ y = b)
 
 theorem unord_pr_predicate_f (a b : Set) : ∀ x y z, (unord_pr_predicate a b x y) → (unord_pr_predicate a b x z) → y = z := by
