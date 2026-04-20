@@ -1,6 +1,7 @@
 import Props2Theories.TacticNames
 import Props2Theories.Axioms
 import Props2Theories.Logic.Props.Task
+import Props2Theories.Logic.Quants.Task
 import Props2Theories.Logic.Equality.Task
 open Lean PrettyPrinter Delaborator
 
@@ -81,6 +82,21 @@ theorem equality_then_subset : ∀ A B, (A = B) → (A ⊆ B) := by
 
 -- Empty Set Definition And Properties
 def is_empty (X : Set) : Prop := ∀ y, (y ∉ X)
+def is_nempty (X : Set) : Prop := ∃ y, (y ∈ X)
+
+theorem n_nemp_is_emp : ∀ X, ¬is_nempty X → is_empty (X) := by
+  intros X h_x
+  intro_in_ y, h_y
+  elim_neg h_x
+  intro_exists y
+  assumption
+
+theorem n_emp_is_nemp_cl : ∀ X, ¬is_empty X → is_nempty (X) := by
+  intros X h_x
+  by_contra h_nemp
+  have h := n_nemp_is_emp X h_nemp
+  elim_neg_ h_x
+
 
 theorem is_empty_subset_any : ∀ A B, is_empty A → (A ⊆ B) := by
   intros A B hAB
@@ -135,7 +151,7 @@ theorem exists_then_nonempty : ∀ A, (∃ x, x ∈ A) → (A ≠ ∅) := by
   apply (empty_set_is_empty x)
   assumption
 
-theorem nonempty_then_exists_cl : ∀ A, (A ≠ ∅) → ∃ x, x ∈ A := by
+theorem nonempty_then_exists_cl : ∀ A, (A ≠ ∅) → (is_nempty A) := by
   intros A hAnemp
   by_contra h_nex
   elim_neg hAnemp
@@ -145,7 +161,7 @@ theorem nonempty_then_exists_cl : ∀ A, (A ≠ ∅) → ∃ x, x ∈ A := by
   elim_neg h_nex
   intro_exists_ x, hx
 
-theorem nonempty_iff_exists_cl : ∀ A, (A ≠ ∅) ↔ ∃ x, x ∈ A := by
+theorem nonempty_iff_exists_cl : ∀ A, (A ≠ ∅) ↔ (is_nempty A) := by
   intro A
   intro_iff
   · apply nonempty_then_exists_cl
@@ -197,6 +213,25 @@ theorem boolean_not_empty : ∀ A, 𝒫 A ≠ ∅ := by
   apply empty_belongs_boolean
 
 
+theorem boolean_monotonic : ∀ A B, A ⊆ B ↔ 𝒫 A ⊆ 𝒫 B := by
+  intros A B
+  intro_iff
+  · intro h_AB
+    intro_in_ x, h_x
+    apply_r (boolean_set_is_boolean _ _)
+    intro_in_ t, h_t
+    apply h_AB
+    _apply_l (boolean_set_is_boolean _ _), h_x, h_xA
+    apply h_xA
+    assumption
+  · intro h_pAB
+    have h := set_belongs_boolean_set A
+    specialize_in_ h_pAB, A, h
+    apply_l (boolean_set_is_boolean _ _)
+    assumption
+
+
+
 -- Replacement Set Definition And Properties
 theorem exists_unique_replacement (P : Set → Set → Prop) : ∀ A, (∀ x, ∀ y, ∀ z, P x y → P x z → y = z) → ∃! B, ∀ y, (y ∈ B ↔ ∃ x ∈ A, P x y) := by
   intro A
@@ -221,6 +256,9 @@ def unexpandReplSet : Unexpander
         `(ReplImg { $y_id | ∃ $x_id ∈ $A, $body } of $h)
     | _ => throw ()
   | _ => throw ()
+
+
+
 
 
 theorem repl_set_is_repl (P : Set → Set → Prop) (A : Set) (h : ∀ x y z, P x y → P x z → y = z) :
@@ -333,7 +371,7 @@ theorem unordered_pair_subs : ∀ a b A, (a ∈ A) → (b ∈ A) → ({a, b} ⊆
 
 
 -- Singleton Set Definition And Properties
-noncomputable def singleton_set : (Set → Set) := fun (a) => unord_pr_set a a
+noncomputable def singleton_set (a : Set) : Set := unord_pr_set a a
 notation (priority := high) "{" a "}" => singleton_set a
 
 
@@ -349,6 +387,18 @@ theorem singleton_a_elem_is_a : ∀ a x, x ∈ {a} ↔ x = a := by
   · intro h_xeqa
     rw [h_xeqa]
     apply left_un_pr
+
+theorem singl_is_singl_set : ∀ C a, (∀ x, (x ∈ C ↔ x = a)) → C = {a} := by
+  intro C a h_C
+  apply unord_pr_is_unord_pr_set
+  intro x
+  intro_iff
+  · intro h_xC
+    left
+    apply_l_ (h_C x)
+  · intro h_xa
+    apply_r (h_C x)
+    elim_or h_xa, h, h <;> assumption
 
 theorem x_in_singl_x : ∀ x, x ∈ {x} := by
   intro x
@@ -516,4 +566,132 @@ theorem sub_bool_un_mem_bool : ∀ A B, (A ⊆ 𝒫 B → ((⋃ A) ∈ 𝒫 B)) 
   assumption
 
 
---
+-- Specification Set Definition And Properties
+def specific_pred (P : Set → Prop) (x y : Set) : Prop := P x ∧ x = y
+
+theorem specific_pred_f (P : Set → Prop) : ∀ x y z, specific_pred P x y → specific_pred P x z → y = z := by
+  intros x y z h_xy h_xz
+  apply (equal_trans _ _ x _)
+  · apply equal_symm
+    elim_and_ h_xy
+  · elim_and_ h_xz
+
+noncomputable def specific_set (A : Set) (P : Set → Prop) : Set := ReplImg{ y | ∃ x ∈ A, specific_pred P x y } of (specific_pred_f P)
+syntax "{ " ident " ∈ " term " | " term " }" : term
+macro_rules
+  | `({ $x:ident ∈ $A | $P }) => `(specific_set $A (fun $x => $P))
+@[app_unexpander specific_set]
+def unexpandSpecificSet : Unexpander
+  | `($_ $A fun $x => $P) =>
+    let x_id : TSyntax `ident := ⟨x.raw⟩
+    `({ $x_id ∈ $A | $P })
+  | _ => throw ()
+
+
+theorem spec_is_spec (A : Set) (P : Set → Prop) : (∀ x, x ∈ {x ∈ A | P x} ↔ x ∈ A ∧ P x) := by
+  intro x
+  have h : x ∈ {x ∈ A | P x} ↔ _ := repl_set_is_repl (specific_pred P) A (specific_pred_f P) x
+  apply (iff_transitivity _  (∃ y ∈ A , specific_pred P y x) _) <;> try assumption
+  clear h
+  intro_iff
+  · intro hex
+    elim_exists_in hex, C, h_Cin, h_Cpr; clear hex
+    elim_and h_Cpr, h_Pc, h_Cx
+    intro_and <;> rewrite [← h_Cx] <;> assumption
+  · intro h_xAP
+    elim_and h_xAP, h_xA, h_Px
+    intro_exists_in x
+    · assumption
+    · intro_and; assumption; rfl
+
+theorem spec_then_P (A : Set) (P : Set → Prop) : ∀ x, (x ∈ {x ∈ A | P x}) → P x := by
+  intro x h_x
+  _apply_l (spec_is_spec A P x), h_x, h_xA
+  elim_and_ h_xA
+
+theorem spec_subs (A : Set) (P : Set → Prop) : {x ∈ A | P x} ⊆ A := by
+  intro_in_ x, h_x
+  _apply_l (spec_is_spec A P x), h_x, h_xA
+  elim_and_ h_xA
+
+theorem elem_P_then_spec (A : Set) (P : Set → Prop) : ∀ x, (x ∈ A) → (P x) → x ∈ {x ∈ A | P x} := by
+  intros x h_x h_Px
+  apply_r (spec_is_spec A P x)
+  intro_and_ h_x, h_Px
+
+theorem is_spec_spec_set (A : Set) (P : Set → Prop) : ∀ B, (∀ x, x ∈ B ↔ (x ∈ A ∧ P x)) → B = {x ∈ A | P x} := by
+  intro B
+  intro h_xall
+  let Q x := x ∈ A ∧ P x
+  have h₁ : ∃ C, (∀ x, x ∈ C ↔ Q x) := by
+    intro_exists {x ∈ A | P x}
+    apply (spec_is_spec A P)
+  have h := describes_elem_then_unique Q h₁
+  elim_exists_unique h, D, hD, hunD
+  have h₂ := hunD B h_xall
+  have h₃ := hunD {x ∈ A | P x} (spec_is_spec A P)
+  rw [← h₂, h₃]
+
+-- There is no universal set (proof without using regularity_ax)
+theorem no_universal_set : ¬ ∃ A, ∀ x, x ∈ A := by
+  intro_neg h_ex
+  elim_exists h_ex, A, h_A
+  have h := Russel_paradox
+  elim_neg h
+  intro_exists {x ∈ A | x ∉ x}
+  intro x
+  intro_iff
+  · intro h_in
+    apply (spec_then_P A _ x)
+    assumption
+  · intro h_notin
+    apply (elem_P_then_spec A _ x) <;> try assumption
+    apply h_A
+
+
+-- Intersection Set Definition And Properties
+noncomputable def intersection_set (A : Set) : Set := {x ∈ ⋃ A | ∀ y ∈ A, x ∈ y}
+notation:max "⋂ " A:1024 => intersection_set A
+
+theorem interset_is_interset : ∀ A x, x ∈ ⋂ A ↔ (x ∈ ⋃ A ∧ ∀ y ∈ A, x ∈ y) := by
+  intro A x
+  apply spec_is_spec
+
+theorem interset_sub_union : ∀ A, ⋂ A ⊆ ⋃ A := by
+  intro A
+  apply spec_subs
+
+theorem interset_all_in : ∀ A x, (x ∈ ⋂ A) → (∀ y ∈ A, x ∈ y) := by
+  intros A x
+  apply spec_then_P
+
+theorem intersection_non_empty : ∀ A, ((is_nempty A) → ∀ x, (x ∈ ⋂ A) ↔ ∀ y ∈ A, x ∈ y) := by
+  intros A h_nemp
+  intro x
+  intro_iff
+  · intro hxinter
+    apply (spec_then_P (⋃ A) _ x)
+    assumption
+  · intro h_all
+    apply elem_P_then_spec <;> try assumption
+    elim_exists h_nemp, t, h_t
+    apply_r (union_set_is_union _ _)
+    intro_exists_in t <;> try assumption
+    apply h_all
+    assumption
+
+theorem all_in_exi_interset : ∀ A x, (is_nempty A) → (∀ y ∈ A, x ∈ y) → (x ∈ ⋂ A) := by
+  intros A x h_nemp h_for
+  have h := intersection_non_empty A h_nemp x
+  apply_r_ h
+
+theorem intersect_subset_monotonic : ∀ A B, (is_nempty A) → (A ⊆ B) → (⋂ B ⊆ ⋂ A) := by
+  intros A B h_nemp hAB
+  intro_in_ x, h_x
+  have h := intersection_non_empty A h_nemp x
+  apply_r h
+  intro_in_ y, h_y
+  specialize_in_ hAB, y, h_y
+  have h₁ := (interset_all_in B) x h_x
+  specialize_in_ h₁, y, hAB
+  assumption
