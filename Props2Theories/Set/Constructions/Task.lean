@@ -129,6 +129,7 @@ theorem union_subset_monotonic : ∀ A B, A ⊆ B → ⋃ A ⊆ ⋃ B := sorry
 theorem all_ss_then_union_ss : ∀ A B, (∀ X ∈ A, X ⊆ B) → (⋃ A ⊆ B) := sorry
 theorem boolean_union : (∀ A, A ⊆ 𝒫 (⋃ A)) := sorry
 theorem sub_bool_un_mem_bool : ∀ A B, (A ⊆ 𝒫 B → ((⋃ A) ∈ 𝒫 B)) := sorry
+theorem sing_equal : ∀ x y, (x = y) ↔ ({x} = {y}) := sorry
 
 
 -- Specification Set Definition And Properties
@@ -164,3 +165,20 @@ theorem interset_all_in : ∀ A x, (x ∈ ⋂ A) → (∀ y ∈ A, x ∈ y) := s
 theorem intersection_non_empty : ∀ A, ((is_nempty A) → ∀ x, (x ∈ ⋂ A) ↔ ∀ y ∈ A, x ∈ y) := sorry
 theorem all_in_exi_interset : ∀ A x, (is_nempty A) → (∀ y ∈ A, x ∈ y) → (x ∈ ⋂ A) := sorry
 theorem intersect_subset_monotonic : ∀ A B, (is_nempty A) → (A ⊆ B) → (⋂ B ⊆ ⋂ A) := sorry
+
+
+-- Boolean Without Empty Set Definition And Properties
+noncomputable def boolean_nemp (A : Set) := {S ∈ 𝒫 A | ∃ t, t ∈ S}
+notation:max "𝒫⋆ " A:1024 => boolean_nemp A
+
+theorem all_nemp_in_boolean_nemp : ∀ A, ∀ S ∈ 𝒫⋆ A, (∃ t, t ∈ S) := sorry
+theorem emp_not_in_boolean_nemp : ∀ A, ∅ ∉ 𝒫⋆ A := sorry
+theorem boolean_nemp_subs : ∀ A, 𝒫⋆ A ⊆ 𝒫 A := sorry
+theorem in_boolean_nemp_then_subs : ∀ A X, X ∈ 𝒫⋆ A → X ⊆ A := sorry
+theorem subs_nemp_then_boolean : ∀ A X, (∃ t, t ∈ X) → (X ⊆ A) → X ∈ 𝒫⋆ A := sorry
+theorem union_boolean_nemp : ∀ A, ⋃ 𝒫⋆ A = A := sorry
+
+
+-- 1-Boolean Set Definition And Properties
+noncomputable def boolean_one (A : Set) := {S ∈ 𝒫 A | ∃ t ∈ A, S = {t}}
+notation:max "𝒫₁ " A:1024 => boolean_one A

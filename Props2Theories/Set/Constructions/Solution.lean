@@ -565,6 +565,16 @@ theorem sub_bool_un_mem_bool : ∀ A B, (A ⊆ 𝒫 B → ((⋃ A) ∈ 𝒫 B)) 
   apply hCB
   assumption
 
+theorem sing_equal : ∀ x y, (x = y) ↔ ({x} = {y}) := by
+  intro x y
+  intro_iff
+  · intro h_xy
+    rw [h_xy]
+  · intro h_xs_ys
+    rewrite [← union_singleton x]
+    rewrite [← union_singleton y]
+    rw [h_xs_ys]
+
 
 -- Specification Set Definition And Properties
 def specific_pred (P : Set → Prop) (x y : Set) : Prop := P x ∧ x = y
@@ -695,3 +705,96 @@ theorem intersect_subset_monotonic : ∀ A B, (is_nempty A) → (A ⊆ B) → (�
   have h₁ := (interset_all_in B) x h_x
   specialize_in_ h₁, y, hAB
   assumption
+
+
+noncomputable def boolean_nemp (A : Set) := {S ∈ 𝒫 A | ∃ t, t ∈ S}
+notation:max "𝒫⋆ " A:1024 => boolean_nemp A
+
+
+theorem all_nemp_in_boolean_nemp : ∀ A, ∀ S ∈ 𝒫⋆ A, (∃ t, t ∈ S) := by
+  intro A
+  intro_in_ S, h_S
+  let Q x := ∃ t, t ∈ x
+  apply (spec_then_P (𝒫 A) (Q))
+  assumption
+
+theorem emp_not_in_boolean_nemp : ∀ A, ∅ ∉ 𝒫⋆ A := by
+  intro A
+  intro_neg h_in
+  let Q x := ∃ t, t ∈ x
+  have h := (spec_then_P (𝒫 A) (Q)) ∅ h_in
+  have g := exists_then_nonempty ∅ h
+  elim_neg g
+  rfl
+
+theorem boolean_nemp_subs : ∀ A, 𝒫⋆ A ⊆ 𝒫 A := by
+  intro A
+  apply spec_subs
+
+theorem in_boolean_nemp_then_subs : ∀ A X, X ∈ 𝒫⋆ A → X ⊆ A := by
+  intro A X h_X
+  apply_l (boolean_set_is_boolean _ _)
+  apply boolean_nemp_subs
+  assumption
+
+theorem subs_nemp_then_boolean : ∀ A X, (∃ t, t ∈ X) → (X ⊆ A) → X ∈ 𝒫⋆ A := by
+  intro A X h_emp h_XA
+  let Q x := ∃ t, t ∈ x
+  have h := (spec_is_spec (𝒫 A) (Q)) X
+  apply_r h
+  intro_and <;> try assumption
+  apply_r (boolean_set_is_boolean _ _)
+  assumption
+
+theorem union_boolean_nemp : ∀ A, ⋃ 𝒫⋆ A = A := by
+  intro A
+  apply_l (subs_subs_then_eq _ _); intro_and
+  · conv =>
+      rhs
+      rewrite [← union_boolean A]
+    apply union_subset_monotonic
+    apply spec_subs
+  · intro_in_ x, h_x
+    apply_r (union_set_is_union _ _)
+    intro_exists_in {x}
+    · apply (elem_P_then_spec _ _ _)
+      · apply_r (boolean_set_is_boolean _ _)
+        apply singl_subs
+        assumption
+      · intro_exists x
+        apply x_in_singl_x
+    · apply x_in_singl_x
+
+
+-- 1-Boolean Set Definition And Properties
+noncomputable def boolean_one (A : Set) := {S ∈ 𝒫 A | ∃ t ∈ A, S = {t}}
+notation:max "𝒫₁ " A:1024 => boolean_one A
+
+
+theorem boolean_one_pr : ∀ A S, (S ∈ 𝒫₁ (A)) ↔ (∃ x ∈ A, S = {x}) := by
+  intro A S
+  let Q S:= ∃ t ∈ A, S = {t}
+  intro_iff
+  · intro hS
+    apply (spec_then_P (𝒫 A) Q) S hS
+  · intro hS
+    apply (elem_P_then_spec (𝒫 A) Q) S
+    · apply_r (boolean_set_is_boolean _ _)
+      elim_exists_in hS, x, h_xin, h_xpr
+      rewrite [h_xpr]
+      apply singl_subs
+      assumption
+    · assumption
+
+theorem in_singlbool_set : ∀ A x, ({x} ∈ 𝒫₁ (A)) ↔ (x ∈ A) := by
+  intro A x
+  intro_iff
+  · intro h_x
+    _apply_l (boolean_one_pr A {x}), h_x, h_exi
+    elim_exists_in h_exi, C, h_inC, h_Cpr
+    _apply_r (sing_equal x C), h_Cpr, h_xC
+    rewrite [h_xC]
+    assumption
+  · intro h_x
+    apply_r (boolean_one_pr A {x})
+    intro_exists_in x; assumption; rfl
