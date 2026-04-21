@@ -1,5 +1,5 @@
 import Props2Theories.TacticNames
-import Props2Theories.Logic.Props.Task
+import Props2Theories.A_Logic.A_Props.Task
 
 -- true is true for every element
 theorem uni (T : Type) : ∀ _ : T, True := sorry

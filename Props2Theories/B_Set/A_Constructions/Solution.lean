@@ -1,8 +1,8 @@
 import Props2Theories.TacticNames
 import Props2Theories.Axioms
-import Props2Theories.Logic.Props.Task
-import Props2Theories.Logic.Quants.Task
-import Props2Theories.Logic.Equality.Task
+import Props2Theories.A_Logic.A_Props.Task
+import Props2Theories.A_Logic.B_Quants.Task
+import Props2Theories.A_Logic.C_Equality.Task
 open Lean PrettyPrinter Delaborator
 
 theorem Russel_paradox : ¬ (∃ A, ∀ x, (x ∈ A ↔ x ∉ x)) := by

@@ -1,0 +1,9 @@
+{"plugins": [],
+ "package": "Props2Theories",
+ "options": {},
+ "name": "Props2Theories.A_Logic.Props.Task",
+ "isModule": false,
+ "importArts":
+ {"Props2Theories.TacticNames":
+  ["/home/igor/ComputerScience/Props2Theories/.lake/build/lib/lean/Props2Theories/TacticNames.olean"]},
+ "dynlibs": []}

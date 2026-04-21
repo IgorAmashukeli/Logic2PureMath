@@ -42,9 +42,7 @@ Look up installation instructions online for your system.
 4. The root directory contains `Props2Theories` subdirectory,
    we will work there
 
-5. `ChapterOrder.md` file lists the order of chapters
-
-6. We will use my `TacticNames.lean` and `Axioms.lean` files
+5. We will use my `TacticNames.lean` and `Axioms.lean` files
 
 I generally expect you to use Linux (I use Fedora), although it can usually also be installed on macOS and Windows. However, it is your responsibility to install VS Code, vsrocq, etc.
 

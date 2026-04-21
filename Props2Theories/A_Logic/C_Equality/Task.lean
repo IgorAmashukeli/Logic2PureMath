@@ -1,4 +1,4 @@
-import Props2Theories.Logic.Props.Task
+import Props2Theories.A_Logic.A_Props.Task
 import Props2Theories.TacticNames
 
 -- Equality Properties
