@@ -188,7 +188,7 @@ theorem in_singlbool_set : ∀ A x, ({x} ∈ 𝒫₁ (A)) ↔ (x ∈ A) := sorry
 theorem union_boolean_one : ∀ A, ⋃ 𝒫₁ (A) = A := sorry
 
 
--- Comphension Set Definition For Collecting Properties
+-- Comphension Set Definition And Properties For Collecting Predicates
 def is_collective (P : Set → Prop) := ∃ A, ∀ x, (P x) → x ∈ A
 def is_collective_on (P : Set → Prop) (A : Set) := ∀ x, (P x) → x ∈ A
 def is_comprehense (P : Set → Prop) (X : Set) := (is_collective P ∧ ∀ x, (x ∈ X ↔ P x)) ∨ (¬(is_collective P) ∧ X = ∅)
