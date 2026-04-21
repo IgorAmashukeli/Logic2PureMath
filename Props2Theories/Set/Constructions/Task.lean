@@ -182,3 +182,28 @@ theorem union_boolean_nemp : ∀ A, ⋃ 𝒫⋆ A = A := sorry
 -- 1-Boolean Set Definition And Properties
 noncomputable def boolean_one (A : Set) := {S ∈ 𝒫 A | ∃ t ∈ A, S = {t}}
 notation:max "𝒫₁ " A:1024 => boolean_one A
+
+theorem boolean_one_pr : ∀ A S, (S ∈ 𝒫₁ (A)) ↔ (∃ x ∈ A, S = {x}) := sorry
+theorem in_singlbool_set : ∀ A x, ({x} ∈ 𝒫₁ (A)) ↔ (x ∈ A) := sorry
+theorem union_boolean_one : ∀ A, ⋃ 𝒫₁ (A) = A := sorry
+
+
+-- Comphension Set Definition For Collecting Properties
+def is_collective (P : Set → Prop) := ∃ A, ∀ x, (P x) → x ∈ A
+def is_collective_on (P : Set → Prop) (A : Set) := ∀ x, (P x) → x ∈ A
+def is_comprehense (P : Set → Prop) (X : Set) := (is_collective P ∧ ∀ x, (x ∈ X ↔ P x)) ∨ (¬(is_collective P) ∧ X = ∅)
+theorem compr_unique_cl (P : Set → Prop) : ∃! X, is_comprehense P X := sorry
+noncomputable def collect_compreh_set_cl (P : Set → Prop) := iota_op (compr_unique_cl P)
+syntax "{ " ident " | " term " }" : term
+macro_rules
+  | `({ $x:ident | $property:term })  => `(collect_compreh_set_cl (fun ($x) => $property))
+@[app_unexpander collect_compreh_set_cl]
+def unexpandCollectComprehSet : Unexpander
+  | `($_ fun $x => $P) =>
+    let x_id : TSyntax `ident := ⟨x.raw⟩
+    `({ $x_id | $P })
+  | _ => throw ()
+
+theorem compr_is_compr_cl (P : Set → Prop) : is_collective P →
+(∀ x, (x ∈ {x | P x} ↔ P x)) := sorry
+theorem compr_subs_cl (P : Set → Prop) (A : Set) : is_collective_on P A → ({x | P x} ⊆ A) := sorry

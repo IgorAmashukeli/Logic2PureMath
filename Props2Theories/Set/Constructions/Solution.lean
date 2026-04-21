@@ -798,3 +798,123 @@ theorem in_singlbool_set : ∀ A x, ({x} ∈ 𝒫₁ (A)) ↔ (x ∈ A) := by
   · intro h_x
     apply_r (boolean_one_pr A {x})
     intro_exists_in x; assumption; rfl
+
+
+theorem union_boolean_one : ∀ A, ⋃ 𝒫₁ (A) = A := by
+  intro A
+  apply_l (subs_subs_then_eq _ _); intro_and
+  · conv =>
+      rhs
+      rewrite [← union_boolean A]
+    apply union_subset_monotonic
+    apply spec_subs
+  · intro_in_ x, hx
+    apply_r (union_set_is_union _ _)
+    intro_exists_in {x}
+    · apply (elem_P_then_spec _ _ _)
+      · apply_r (boolean_set_is_boolean _ _)
+        apply singl_subs
+        assumption
+      · intro_exists_in x; assumption; rfl
+    · apply x_in_singl_x
+
+
+-- Comphension For Collecting Properties
+def is_collective (P : Set → Prop) := ∃ A, ∀ x, (P x) → x ∈ A
+def is_collective_on (P : Set → Prop) (A : Set) := ∀ x, (P x) → x ∈ A
+def is_comprehense (P : Set → Prop) (X : Set) := ((is_collective P) ∧ ∀ x, (x ∈ X ↔ P x)) ∨ ((¬(is_collective P)) ∧ X = ∅)
+
+theorem coll_spec_is_comp (A : Set) (P : Set → Prop) (h : ∀ x, (P x) → x ∈ A) : is_comprehense P { x ∈ A | P x } := by
+  left
+  intro_and
+  · intro_exists A
+    assumption
+  · intro x
+    intro_iff
+    · intro h_x
+      apply (spec_then_P A P)
+      assumption
+    · intro h_Px
+      apply (elem_P_then_spec A P)
+      · apply h
+        assumption
+      · assumption
+
+
+theorem coll_compr_is_spec (A y : Set) (P : Set → Prop) (h : ∀ x, (P x) → x ∈ A) (hy : is_comprehense P y) : { x ∈ A | P x } = y := by
+  elim_or hy, h_col, h_ncol
+  · elim_and h_col, h_col₂, h_Py
+    apply set_extensionality_ax
+    intro t; intro_iff
+    · intro h_t
+      apply_r (h_Py t)
+      apply (spec_then_P A P)
+      assumption
+    · intro h_t
+      apply (elem_P_then_spec A P t)
+      · apply h
+        apply_l (h_Py t)
+        assumption
+      · apply_l (h_Py t)
+        assumption
+  · elim_and h_ncol, h_ncoll, h_yeq
+    elim_false
+    elim_neg h_ncoll
+    intro_exists A
+    assumption
+
+
+
+
+
+theorem compr_unique_cl (P : Set → Prop) : ∃! X, is_comprehense P X := by
+  have h := tnd_cl (is_collective P)
+  elim_or h, h_p, h_np
+  · elim_exists h_p, A, h_pA
+    intro_exists_unique {x ∈ A | P x}
+    intro_and
+    · apply coll_spec_is_comp
+      assumption
+    · intro y h_y
+      apply coll_compr_is_spec
+      assumption; assumption
+  · intro_exists_in ∅
+    · right
+      intro_and; assumption; rfl
+    · intro y hy
+      elim_or hy, h_col, h_ncol
+      · elim_and h_col, h_coll, h_xP
+        elim_f_neg h_np
+      · apply equal_symm
+        elim_and_ h_ncol
+
+
+noncomputable def collect_compreh_set_cl (P : Set → Prop) := iota_op (compr_unique_cl P)
+syntax "{ " ident " | " term " }" : term
+macro_rules
+  | `({ $x:ident | $property:term })  => `(collect_compreh_set_cl (fun ($x) => $property))
+@[app_unexpander collect_compreh_set_cl]
+def unexpandCollectComprehSet : Unexpander
+  | `($_ fun $x => $P) =>
+    let x_id : TSyntax `ident := ⟨x.raw⟩
+    `({ $x_id | $P })
+  | _ => throw ()
+
+
+theorem compr_is_compr_cl (P : Set → Prop) : is_collective P → (∀ x, (x ∈ {x | P x} ↔ P x)) := by
+  intro h_col
+  have h := iota_pr (compr_unique_cl P)
+  elim_or h, h_coll, h_ncol
+  · elim_and_ h_coll
+  · elim_and h_ncol, h_ncoll, h_eq
+    elim_f_neg h_ncoll
+
+theorem compr_subs_cl (P : Set → Prop) (A : Set) : is_collective_on P A → ({x | P x} ⊆ A) := by
+  intro h_coll
+  intro_in_ x, h_x
+  apply h_coll
+  have h : ∃ B, is_collective_on P B := by
+    intro_exists A
+    assumption
+  apply_l (compr_is_compr_cl P h x)
+  assumption
