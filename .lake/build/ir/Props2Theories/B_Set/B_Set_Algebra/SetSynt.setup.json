@@ -1,0 +1,15 @@
+{"plugins": [],
+ "package": "Props2Theories",
+ "options": {},
+ "name": "Props2Theories.B_Set.B_Set_Algebra.SetSynt",
+ "isModule": false,
+ "importArts":
+ {"Props2Theories.TacticNames":
+  ["/home/igor/ComputerScience/Props2Theories/.lake/build/lib/lean/Props2Theories/TacticNames.olean"],
+  "Props2Theories.B_Set.B_Set_Algebra.Task":
+  ["/home/igor/ComputerScience/Props2Theories/.lake/build/lib/lean/Props2Theories/B_Set/B_Set_Algebra/Task.olean"],
+  "Props2Theories.B_Set.A_Constructions.Task":
+  ["/home/igor/ComputerScience/Props2Theories/.lake/build/lib/lean/Props2Theories/B_Set/A_Constructions/Task.olean"],
+  "Props2Theories.Axioms":
+  ["/home/igor/ComputerScience/Props2Theories/.lake/build/lib/lean/Props2Theories/Axioms.olean"]},
+ "dynlibs": []}
