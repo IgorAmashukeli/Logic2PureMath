@@ -396,7 +396,7 @@ theorem neg_congr (p q : Prop) : (p ↔ q) → (¬p ↔ ¬q) := by
 
 
 
-theorem disj_congr (p q r : Prop) : (p ↔ q) → ((p ∨ r) ↔ (q ∨ r)) := by
+theorem disj_congr_r (p q r : Prop) : (p ↔ q) → ((p ∨ r) ↔ (q ∨ r)) := by
   intro h_pq
   intro_iff
   · intro h_pr
@@ -411,7 +411,7 @@ theorem disj_congr (p q r : Prop) : (p ↔ q) → ((p ∨ r) ↔ (q ∨ r)) := b
     · right_
 
 
-theorem conj_congr (p q r : Prop) : (p ↔ q) → ((p ∧ r) ↔ (q ∧ r)) := by
+theorem conj_congr_r (p q r : Prop) : (p ↔ q) → ((p ∧ r) ↔ (q ∧ r)) := by
   intro h_pq
   intro_iff
   · intro h_pr
@@ -424,6 +424,38 @@ theorem conj_congr (p q r : Prop) : (p ↔ q) → ((p ∧ r) ↔ (q ∧ r)) := b
     intro_and <;>
     (try (apply_r_ h_pq)) <;>
     assumption
+
+
+theorem disj_congr_l (p q r : Prop) : (p ↔ q) → ((r ∨ p) ↔ (r ∨ q)) := by
+  intro h_pq
+  intro_iff
+  · intro h_rp
+    elim_or h_rp, h_r, h_p
+    · left_
+    · right
+      apply_l h_pq; assumption
+  · intro h_rp
+    elim_or h_rp, h_r, h_p
+    · left_
+    · right
+      apply_r h_pq; assumption
+
+
+
+theorem conj_congr_l (p q r : Prop) : (p ↔ q) → ((r ∧ p) ↔ (r ∧ q)) := by
+  intro h_pq
+  intro_iff
+  · intro h_rp
+    elim_and h_rp, h_r, h_p
+    intro_and
+    · assumption
+    · apply_l h_pq; assumption
+  · intro h_rq
+    elim_and h_rq, h_r, h_q
+    intro_and
+    · assumption
+    · apply_r h_pq; assumption
+
 
 
 
@@ -578,7 +610,7 @@ theorem cases_impl_right_cl (p q r : Prop) : (p → q ∨ r) → ((p → q) ∨ 
 
 
 --One of the De Morgan classical law
-theorem Morgan_conj_cl (p q : Prop) : ¬ (p ∧ q) ↔ ¬p ∨ ¬q := by
+theorem morgan_conj_cl (p q : Prop) : ¬ (p ∧ q) ↔ ¬p ∨ ¬q := by
   intro_iff <;> try (apply (morgan_conj_rl p q))
   intro h_npq
   by_contra h_n_np_nq

@@ -182,3 +182,29 @@ example (T : Type) : (∀ (x y : T), ¬(x = y) ↔ x ≠ y) := by
   intro_iff
   · intro h_xy; assumption
   · intro h_xy; assumption
+
+
+
+
+-- Suppose, that for some predicate, you add instance trans_R
+variable {T : Type}
+variable {R : T → T → Prop}
+axiom trans_R : ∀ (a b c : T), R a b → R b c → R a c
+instance : Trans R R R where
+  trans h1 h2 := trans_R _ _ _ h1 h2
+
+-- Then, instead of using trans_R explicitly
+example (a b c d : T) (h1 : R a b) (h2 : R b c) (h3 : R c d) : R a d := by
+  apply trans_R _ c _ <;> try assumption
+  apply trans_R _ b _ <;> try assumption
+
+
+-- you can use calc tactic
+-- Which looks more elegant
+example (a b c d : T) (h1 : R a b) (h2 : R b c) (h3 : R c d) : R a d := by
+  calc
+    R a b := h1
+    R _ c := h2
+    R _ d := h3
+
+-- For "=" and "<->" it is already added

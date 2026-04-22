@@ -1,10 +1,10 @@
-# Construction
+# 2.1 Construction
 
 We are starting `Set Theory`.
 
 In my `Axioms.lean` library, I declared:
 
-- `set` type
+- `Set` Type
 - `∈` `Predicate`
 - `iota` `Operator` of [Definite Description](https://en.wikipedia.org/wiki/Definite_description) (it is `Functional Symbol`) and its properties
 - [ZF Axioms](https://en.wikipedia.org/wiki/Zermelo%E2%80%93Fraenkel_set_theory)

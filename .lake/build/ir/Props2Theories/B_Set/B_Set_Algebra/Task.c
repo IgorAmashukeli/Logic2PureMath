@@ -1,6 +1,6 @@
 // Lean compiler output
 // Module: Props2Theories.B_Set.B_Set_Algebra.Task
-// Imports: public import Init public meta import Init public import Props2Theories.B_Set.A_Constructions.Task
+// Imports: public import Init public meta import Init public import Props2Theories.A_Logic.A_Props.Task public import Props2Theories.B_Set.A_Constructions.Task
 #include <lean/lean.h>
 #if defined(__clang__)
 #pragma clang diagnostic ignored "-Wunused-parameter"
@@ -60,11 +60,11 @@ static const lean_ctor_object lp_Props2Theories___aux__Props2Theories__B__Set__B
 static const lean_ctor_object lp_Props2Theories___aux__Props2Theories__B__Set__B__Set__Algebra__Task______macroRules__term___u222a____1__1___closed__4_value_aux_2 = {.m_header = {.m_rc = 0, .m_cs_sz = sizeof(lean_ctor_object) + sizeof(void*)*2 + 8, .m_other = 2, .m_tag = 1}, .m_objs = {((lean_object*)&lp_Props2Theories___aux__Props2Theories__B__Set__B__Set__Algebra__Task______macroRules__term___u222a____1__1___closed__4_value_aux_1),((lean_object*)&lp_Props2Theories___aux__Props2Theories__B__Set__B__Set__Algebra__Task______macroRules__term___u222a____1__1___closed__2_value),LEAN_SCALAR_PTR_LITERAL(75, 170, 162, 138, 136, 204, 251, 229)}};
 static const lean_ctor_object lp_Props2Theories___aux__Props2Theories__B__Set__B__Set__Algebra__Task______macroRules__term___u222a____1__1___closed__4_value = {.m_header = {.m_rc = 0, .m_cs_sz = sizeof(lean_ctor_object) + sizeof(void*)*2 + 8, .m_other = 2, .m_tag = 1}, .m_objs = {((lean_object*)&lp_Props2Theories___aux__Props2Theories__B__Set__B__Set__Algebra__Task______macroRules__term___u222a____1__1___closed__4_value_aux_2),((lean_object*)&lp_Props2Theories___aux__Props2Theories__B__Set__B__Set__Algebra__Task______macroRules__term___u222a____1__1___closed__3_value),LEAN_SCALAR_PTR_LITERAL(69, 118, 10, 41, 220, 156, 243, 179)}};
 static const lean_object* lp_Props2Theories___aux__Props2Theories__B__Set__B__Set__Algebra__Task______macroRules__term___u222a____1__1___closed__4 = (const lean_object*)&lp_Props2Theories___aux__Props2Theories__B__Set__B__Set__Algebra__Task______macroRules__term___u222a____1__1___closed__4_value;
-static const lean_string_object lp_Props2Theories___aux__Props2Theories__B__Set__B__Set__Algebra__Task______macroRules__term___u222a____1__1___closed__5_value = {.m_header = {.m_rc = 0, .m_cs_sz = 0, .m_other = 0, .m_tag = 249}, .m_size = 12, .m_capacity = 12, .m_length = 11, .m_data = "union_2sets"};
+static const lean_string_object lp_Props2Theories___aux__Props2Theories__B__Set__B__Set__Algebra__Task______macroRules__term___u222a____1__1___closed__5_value = {.m_header = {.m_rc = 0, .m_cs_sz = 0, .m_other = 0, .m_tag = 249}, .m_size = 7, .m_capacity = 7, .m_length = 6, .m_data = "union2"};
 static const lean_object* lp_Props2Theories___aux__Props2Theories__B__Set__B__Set__Algebra__Task______macroRules__term___u222a____1__1___closed__5 = (const lean_object*)&lp_Props2Theories___aux__Props2Theories__B__Set__B__Set__Algebra__Task______macroRules__term___u222a____1__1___closed__5_value;
 static lean_once_cell_t lp_Props2Theories___aux__Props2Theories__B__Set__B__Set__Algebra__Task______macroRules__term___u222a____1__1___closed__6_once = LEAN_ONCE_CELL_INITIALIZER;
 static lean_object* lp_Props2Theories___aux__Props2Theories__B__Set__B__Set__Algebra__Task______macroRules__term___u222a____1__1___closed__6;
-static const lean_ctor_object lp_Props2Theories___aux__Props2Theories__B__Set__B__Set__Algebra__Task______macroRules__term___u222a____1__1___closed__7_value = {.m_header = {.m_rc = 0, .m_cs_sz = sizeof(lean_ctor_object) + sizeof(void*)*2 + 8, .m_other = 2, .m_tag = 1}, .m_objs = {((lean_object*)(((size_t)(0) << 1) | 1)),((lean_object*)&lp_Props2Theories___aux__Props2Theories__B__Set__B__Set__Algebra__Task______macroRules__term___u222a____1__1___closed__5_value),LEAN_SCALAR_PTR_LITERAL(135, 255, 169, 52, 18, 126, 16, 252)}};
+static const lean_ctor_object lp_Props2Theories___aux__Props2Theories__B__Set__B__Set__Algebra__Task______macroRules__term___u222a____1__1___closed__7_value = {.m_header = {.m_rc = 0, .m_cs_sz = sizeof(lean_ctor_object) + sizeof(void*)*2 + 8, .m_other = 2, .m_tag = 1}, .m_objs = {((lean_object*)(((size_t)(0) << 1) | 1)),((lean_object*)&lp_Props2Theories___aux__Props2Theories__B__Set__B__Set__Algebra__Task______macroRules__term___u222a____1__1___closed__5_value),LEAN_SCALAR_PTR_LITERAL(123, 128, 17, 152, 107, 120, 87, 129)}};
 static const lean_object* lp_Props2Theories___aux__Props2Theories__B__Set__B__Set__Algebra__Task______macroRules__term___u222a____1__1___closed__7 = (const lean_object*)&lp_Props2Theories___aux__Props2Theories__B__Set__B__Set__Algebra__Task______macroRules__term___u222a____1__1___closed__7_value;
 static const lean_ctor_object lp_Props2Theories___aux__Props2Theories__B__Set__B__Set__Algebra__Task______macroRules__term___u222a____1__1___closed__8_value = {.m_header = {.m_rc = 0, .m_cs_sz = sizeof(lean_ctor_object) + sizeof(void*)*2 + 0, .m_other = 2, .m_tag = 1}, .m_objs = {((lean_object*)&lp_Props2Theories___aux__Props2Theories__B__Set__B__Set__Algebra__Task______macroRules__term___u222a____1__1___closed__7_value),((lean_object*)(((size_t)(0) << 1) | 1))}};
 static const lean_object* lp_Props2Theories___aux__Props2Theories__B__Set__B__Set__Algebra__Task______macroRules__term___u222a____1__1___closed__8 = (const lean_object*)&lp_Props2Theories___aux__Props2Theories__B__Set__B__Set__Algebra__Task______macroRules__term___u222a____1__1___closed__8_value;
@@ -76,12 +76,12 @@ static const lean_ctor_object lp_Props2Theories___aux__Props2Theories__B__Set__B
 static const lean_object* lp_Props2Theories___aux__Props2Theories__B__Set__B__Set__Algebra__Task______macroRules__term___u222a____1__1___closed__11 = (const lean_object*)&lp_Props2Theories___aux__Props2Theories__B__Set__B__Set__Algebra__Task______macroRules__term___u222a____1__1___closed__11_value;
 LEAN_EXPORT lean_object* lp_Props2Theories___aux__Props2Theories__B__Set__B__Set__Algebra__Task______macroRules__term___u222a____1__1(lean_object*, lean_object*, lean_object*);
 LEAN_EXPORT lean_object* lp_Props2Theories___aux__Props2Theories__B__Set__B__Set__Algebra__Task______macroRules__term___u222a____1__1___boxed(lean_object*, lean_object*, lean_object*);
-static const lean_string_object lp_Props2Theories___aux__Props2Theories__B__Set__B__Set__Algebra__Task______unexpand__union__2sets__1___closed__0_value = {.m_header = {.m_rc = 0, .m_cs_sz = 0, .m_other = 0, .m_tag = 249}, .m_size = 6, .m_capacity = 6, .m_length = 5, .m_data = "ident"};
-static const lean_object* lp_Props2Theories___aux__Props2Theories__B__Set__B__Set__Algebra__Task______unexpand__union__2sets__1___closed__0 = (const lean_object*)&lp_Props2Theories___aux__Props2Theories__B__Set__B__Set__Algebra__Task______unexpand__union__2sets__1___closed__0_value;
-static const lean_ctor_object lp_Props2Theories___aux__Props2Theories__B__Set__B__Set__Algebra__Task______unexpand__union__2sets__1___closed__1_value = {.m_header = {.m_rc = 0, .m_cs_sz = sizeof(lean_ctor_object) + sizeof(void*)*2 + 8, .m_other = 2, .m_tag = 1}, .m_objs = {((lean_object*)(((size_t)(0) << 1) | 1)),((lean_object*)&lp_Props2Theories___aux__Props2Theories__B__Set__B__Set__Algebra__Task______unexpand__union__2sets__1___closed__0_value),LEAN_SCALAR_PTR_LITERAL(52, 159, 208, 51, 14, 60, 6, 71)}};
-static const lean_object* lp_Props2Theories___aux__Props2Theories__B__Set__B__Set__Algebra__Task______unexpand__union__2sets__1___closed__1 = (const lean_object*)&lp_Props2Theories___aux__Props2Theories__B__Set__B__Set__Algebra__Task______unexpand__union__2sets__1___closed__1_value;
-LEAN_EXPORT lean_object* lp_Props2Theories___aux__Props2Theories__B__Set__B__Set__Algebra__Task______unexpand__union__2sets__1(lean_object*, lean_object*, lean_object*);
-LEAN_EXPORT lean_object* lp_Props2Theories___aux__Props2Theories__B__Set__B__Set__Algebra__Task______unexpand__union__2sets__1___boxed(lean_object*, lean_object*, lean_object*);
+static const lean_string_object lp_Props2Theories___aux__Props2Theories__B__Set__B__Set__Algebra__Task______unexpand__union2__1___closed__0_value = {.m_header = {.m_rc = 0, .m_cs_sz = 0, .m_other = 0, .m_tag = 249}, .m_size = 6, .m_capacity = 6, .m_length = 5, .m_data = "ident"};
+static const lean_object* lp_Props2Theories___aux__Props2Theories__B__Set__B__Set__Algebra__Task______unexpand__union2__1___closed__0 = (const lean_object*)&lp_Props2Theories___aux__Props2Theories__B__Set__B__Set__Algebra__Task______unexpand__union2__1___closed__0_value;
+static const lean_ctor_object lp_Props2Theories___aux__Props2Theories__B__Set__B__Set__Algebra__Task______unexpand__union2__1___closed__1_value = {.m_header = {.m_rc = 0, .m_cs_sz = sizeof(lean_ctor_object) + sizeof(void*)*2 + 8, .m_other = 2, .m_tag = 1}, .m_objs = {((lean_object*)(((size_t)(0) << 1) | 1)),((lean_object*)&lp_Props2Theories___aux__Props2Theories__B__Set__B__Set__Algebra__Task______unexpand__union2__1___closed__0_value),LEAN_SCALAR_PTR_LITERAL(52, 159, 208, 51, 14, 60, 6, 71)}};
+static const lean_object* lp_Props2Theories___aux__Props2Theories__B__Set__B__Set__Algebra__Task______unexpand__union2__1___closed__1 = (const lean_object*)&lp_Props2Theories___aux__Props2Theories__B__Set__B__Set__Algebra__Task______unexpand__union2__1___closed__1_value;
+LEAN_EXPORT lean_object* lp_Props2Theories___aux__Props2Theories__B__Set__B__Set__Algebra__Task______unexpand__union2__1(lean_object*, lean_object*, lean_object*);
+LEAN_EXPORT lean_object* lp_Props2Theories___aux__Props2Theories__B__Set__B__Set__Algebra__Task______unexpand__union2__1___boxed(lean_object*, lean_object*, lean_object*);
 static const lean_string_object lp_Props2Theories_term___u2229____1___closed__0_value = {.m_header = {.m_rc = 0, .m_cs_sz = 0, .m_other = 0, .m_tag = 249}, .m_size = 12, .m_capacity = 12, .m_length = 9, .m_data = "term_∩__1"};
 static const lean_object* lp_Props2Theories_term___u2229____1___closed__0 = (const lean_object*)&lp_Props2Theories_term___u2229____1___closed__0_value;
 static const lean_ctor_object lp_Props2Theories_term___u2229____1___closed__1_value = {.m_header = {.m_rc = 0, .m_cs_sz = sizeof(lean_ctor_object) + sizeof(void*)*2 + 8, .m_other = 2, .m_tag = 1}, .m_objs = {((lean_object*)(((size_t)(0) << 1) | 1)),((lean_object*)&lp_Props2Theories_term___u2229____1___closed__0_value),LEAN_SCALAR_PTR_LITERAL(228, 37, 176, 82, 164, 22, 93, 100)}};
@@ -95,11 +95,11 @@ static const lean_object* lp_Props2Theories_term___u2229____1___closed__4 = (con
 static const lean_ctor_object lp_Props2Theories_term___u2229____1___closed__5_value = {.m_header = {.m_rc = 0, .m_cs_sz = sizeof(lean_ctor_object) + sizeof(void*)*4 + 0, .m_other = 4, .m_tag = 4}, .m_objs = {((lean_object*)&lp_Props2Theories_term___u2229____1___closed__1_value),((lean_object*)(((size_t)(1024) << 1) | 1)),((lean_object*)(((size_t)(1024) << 1) | 1)),((lean_object*)&lp_Props2Theories_term___u2229____1___closed__4_value)}};
 static const lean_object* lp_Props2Theories_term___u2229____1___closed__5 = (const lean_object*)&lp_Props2Theories_term___u2229____1___closed__5_value;
 LEAN_EXPORT const lean_object* lp_Props2Theories_term___u2229____1 = (const lean_object*)&lp_Props2Theories_term___u2229____1___closed__5_value;
-static const lean_string_object lp_Props2Theories___aux__Props2Theories__B__Set__B__Set__Algebra__Task______macroRules__term___u2229____1__1___closed__0_value = {.m_header = {.m_rc = 0, .m_cs_sz = 0, .m_other = 0, .m_tag = 249}, .m_size = 16, .m_capacity = 16, .m_length = 15, .m_data = "intersect_2sets"};
+static const lean_string_object lp_Props2Theories___aux__Props2Theories__B__Set__B__Set__Algebra__Task______macroRules__term___u2229____1__1___closed__0_value = {.m_header = {.m_rc = 0, .m_cs_sz = 0, .m_other = 0, .m_tag = 249}, .m_size = 7, .m_capacity = 7, .m_length = 6, .m_data = "inter2"};
 static const lean_object* lp_Props2Theories___aux__Props2Theories__B__Set__B__Set__Algebra__Task______macroRules__term___u2229____1__1___closed__0 = (const lean_object*)&lp_Props2Theories___aux__Props2Theories__B__Set__B__Set__Algebra__Task______macroRules__term___u2229____1__1___closed__0_value;
 static lean_once_cell_t lp_Props2Theories___aux__Props2Theories__B__Set__B__Set__Algebra__Task______macroRules__term___u2229____1__1___closed__1_once = LEAN_ONCE_CELL_INITIALIZER;
 static lean_object* lp_Props2Theories___aux__Props2Theories__B__Set__B__Set__Algebra__Task______macroRules__term___u2229____1__1___closed__1;
-static const lean_ctor_object lp_Props2Theories___aux__Props2Theories__B__Set__B__Set__Algebra__Task______macroRules__term___u2229____1__1___closed__2_value = {.m_header = {.m_rc = 0, .m_cs_sz = sizeof(lean_ctor_object) + sizeof(void*)*2 + 8, .m_other = 2, .m_tag = 1}, .m_objs = {((lean_object*)(((size_t)(0) << 1) | 1)),((lean_object*)&lp_Props2Theories___aux__Props2Theories__B__Set__B__Set__Algebra__Task______macroRules__term___u2229____1__1___closed__0_value),LEAN_SCALAR_PTR_LITERAL(217, 233, 251, 240, 87, 221, 69, 188)}};
+static const lean_ctor_object lp_Props2Theories___aux__Props2Theories__B__Set__B__Set__Algebra__Task______macroRules__term___u2229____1__1___closed__2_value = {.m_header = {.m_rc = 0, .m_cs_sz = sizeof(lean_ctor_object) + sizeof(void*)*2 + 8, .m_other = 2, .m_tag = 1}, .m_objs = {((lean_object*)(((size_t)(0) << 1) | 1)),((lean_object*)&lp_Props2Theories___aux__Props2Theories__B__Set__B__Set__Algebra__Task______macroRules__term___u2229____1__1___closed__0_value),LEAN_SCALAR_PTR_LITERAL(83, 99, 167, 72, 61, 9, 27, 104)}};
 static const lean_object* lp_Props2Theories___aux__Props2Theories__B__Set__B__Set__Algebra__Task______macroRules__term___u2229____1__1___closed__2 = (const lean_object*)&lp_Props2Theories___aux__Props2Theories__B__Set__B__Set__Algebra__Task______macroRules__term___u2229____1__1___closed__2_value;
 static const lean_ctor_object lp_Props2Theories___aux__Props2Theories__B__Set__B__Set__Algebra__Task______macroRules__term___u2229____1__1___closed__3_value = {.m_header = {.m_rc = 0, .m_cs_sz = sizeof(lean_ctor_object) + sizeof(void*)*2 + 0, .m_other = 2, .m_tag = 1}, .m_objs = {((lean_object*)&lp_Props2Theories___aux__Props2Theories__B__Set__B__Set__Algebra__Task______macroRules__term___u2229____1__1___closed__2_value),((lean_object*)(((size_t)(0) << 1) | 1))}};
 static const lean_object* lp_Props2Theories___aux__Props2Theories__B__Set__B__Set__Algebra__Task______macroRules__term___u2229____1__1___closed__3 = (const lean_object*)&lp_Props2Theories___aux__Props2Theories__B__Set__B__Set__Algebra__Task______macroRules__term___u2229____1__1___closed__3_value;
@@ -107,8 +107,8 @@ static const lean_ctor_object lp_Props2Theories___aux__Props2Theories__B__Set__B
 static const lean_object* lp_Props2Theories___aux__Props2Theories__B__Set__B__Set__Algebra__Task______macroRules__term___u2229____1__1___closed__4 = (const lean_object*)&lp_Props2Theories___aux__Props2Theories__B__Set__B__Set__Algebra__Task______macroRules__term___u2229____1__1___closed__4_value;
 LEAN_EXPORT lean_object* lp_Props2Theories___aux__Props2Theories__B__Set__B__Set__Algebra__Task______macroRules__term___u2229____1__1(lean_object*, lean_object*, lean_object*);
 LEAN_EXPORT lean_object* lp_Props2Theories___aux__Props2Theories__B__Set__B__Set__Algebra__Task______macroRules__term___u2229____1__1___boxed(lean_object*, lean_object*, lean_object*);
-LEAN_EXPORT lean_object* lp_Props2Theories___aux__Props2Theories__B__Set__B__Set__Algebra__Task______unexpand__intersect__2sets__1(lean_object*, lean_object*, lean_object*);
-LEAN_EXPORT lean_object* lp_Props2Theories___aux__Props2Theories__B__Set__B__Set__Algebra__Task______unexpand__intersect__2sets__1___boxed(lean_object*, lean_object*, lean_object*);
+LEAN_EXPORT lean_object* lp_Props2Theories___aux__Props2Theories__B__Set__B__Set__Algebra__Task______unexpand__inter2__1(lean_object*, lean_object*, lean_object*);
+LEAN_EXPORT lean_object* lp_Props2Theories___aux__Props2Theories__B__Set__B__Set__Algebra__Task______unexpand__inter2__1___boxed(lean_object*, lean_object*, lean_object*);
 static const lean_string_object lp_Props2Theories_term___x5c____1___closed__0_value = {.m_header = {.m_rc = 0, .m_cs_sz = 0, .m_other = 0, .m_tag = 249}, .m_size = 10, .m_capacity = 10, .m_length = 9, .m_data = "term_\\__1"};
 static const lean_object* lp_Props2Theories_term___x5c____1___closed__0 = (const lean_object*)&lp_Props2Theories_term___x5c____1___closed__0_value;
 static const lean_ctor_object lp_Props2Theories_term___x5c____1___closed__1_value = {.m_header = {.m_rc = 0, .m_cs_sz = sizeof(lean_ctor_object) + sizeof(void*)*2 + 8, .m_other = 2, .m_tag = 1}, .m_objs = {((lean_object*)(((size_t)(0) << 1) | 1)),((lean_object*)&lp_Props2Theories_term___x5c____1___closed__0_value),LEAN_SCALAR_PTR_LITERAL(179, 124, 208, 4, 116, 72, 98, 208)}};
@@ -140,7 +140,7 @@ static const lean_string_object lp_Props2Theories_term___u25b3___00__closed__0_v
 static const lean_object* lp_Props2Theories_term___u25b3___00__closed__0 = (const lean_object*)&lp_Props2Theories_term___u25b3___00__closed__0_value;
 static const lean_ctor_object lp_Props2Theories_term___u25b3___00__closed__1_value = {.m_header = {.m_rc = 0, .m_cs_sz = sizeof(lean_ctor_object) + sizeof(void*)*2 + 8, .m_other = 2, .m_tag = 1}, .m_objs = {((lean_object*)(((size_t)(0) << 1) | 1)),((lean_object*)&lp_Props2Theories_term___u25b3___00__closed__0_value),LEAN_SCALAR_PTR_LITERAL(58, 37, 12, 61, 137, 28, 138, 146)}};
 static const lean_object* lp_Props2Theories_term___u25b3___00__closed__1 = (const lean_object*)&lp_Props2Theories_term___u25b3___00__closed__1_value;
-static const lean_string_object lp_Props2Theories_term___u25b3___00__closed__2_value = {.m_header = {.m_rc = 0, .m_cs_sz = 0, .m_other = 0, .m_tag = 249}, .m_size = 4, .m_capacity = 4, .m_length = 1, .m_data = "△"};
+static const lean_string_object lp_Props2Theories_term___u25b3___00__closed__2_value = {.m_header = {.m_rc = 0, .m_cs_sz = 0, .m_other = 0, .m_tag = 249}, .m_size = 6, .m_capacity = 6, .m_length = 3, .m_data = " △ "};
 static const lean_object* lp_Props2Theories_term___u25b3___00__closed__2 = (const lean_object*)&lp_Props2Theories_term___u25b3___00__closed__2_value;
 static const lean_ctor_object lp_Props2Theories_term___u25b3___00__closed__3_value = {.m_header = {.m_rc = 0, .m_cs_sz = sizeof(lean_ctor_object) + sizeof(void*)*1 + 0, .m_other = 1, .m_tag = 5}, .m_objs = {((lean_object*)&lp_Props2Theories_term___u25b3___00__closed__2_value)}};
 static const lean_object* lp_Props2Theories_term___u25b3___00__closed__3 = (const lean_object*)&lp_Props2Theories_term___u25b3___00__closed__3_value;
@@ -234,7 +234,7 @@ lean_dec_ref(v_a_75_);
 return v_res_77_;
 }
 }
-LEAN_EXPORT lean_object* lp_Props2Theories___aux__Props2Theories__B__Set__B__Set__Algebra__Task______unexpand__union__2sets__1(lean_object* v_x_81_, lean_object* v_a_82_, lean_object* v_a_83_){
+LEAN_EXPORT lean_object* lp_Props2Theories___aux__Props2Theories__B__Set__B__Set__Algebra__Task______unexpand__union2__1(lean_object* v_x_81_, lean_object* v_a_82_, lean_object* v_a_83_){
 _start:
 {
 lean_object* v___x_84_; uint8_t v___x_85_; 
@@ -256,7 +256,7 @@ else
 lean_object* v___x_88_; lean_object* v___x_89_; lean_object* v___x_90_; uint8_t v___x_91_; 
 v___x_88_ = lean_unsigned_to_nat(0u);
 v___x_89_ = l_Lean_Syntax_getArg(v_x_81_, v___x_88_);
-v___x_90_ = ((lean_object*)(lp_Props2Theories___aux__Props2Theories__B__Set__B__Set__Algebra__Task______unexpand__union__2sets__1___closed__1));
+v___x_90_ = ((lean_object*)(lp_Props2Theories___aux__Props2Theories__B__Set__B__Set__Algebra__Task______unexpand__union2__1___closed__1));
 lean_inc(v___x_89_);
 v___x_91_ = l_Lean_Syntax_isOfKind(v___x_89_, v___x_90_);
 if (v___x_91_ == 0)
@@ -317,11 +317,11 @@ return v___x_109_;
 }
 }
 }
-LEAN_EXPORT lean_object* lp_Props2Theories___aux__Props2Theories__B__Set__B__Set__Algebra__Task______unexpand__union__2sets__1___boxed(lean_object* v_x_110_, lean_object* v_a_111_, lean_object* v_a_112_){
+LEAN_EXPORT lean_object* lp_Props2Theories___aux__Props2Theories__B__Set__B__Set__Algebra__Task______unexpand__union2__1___boxed(lean_object* v_x_110_, lean_object* v_a_111_, lean_object* v_a_112_){
 _start:
 {
 lean_object* v_res_113_; 
-v_res_113_ = lp_Props2Theories___aux__Props2Theories__B__Set__B__Set__Algebra__Task______unexpand__union__2sets__1(v_x_110_, v_a_111_, v_a_112_);
+v_res_113_ = lp_Props2Theories___aux__Props2Theories__B__Set__B__Set__Algebra__Task______unexpand__union2__1(v_x_110_, v_a_111_, v_a_112_);
 lean_dec(v_a_111_);
 return v_res_113_;
 }
@@ -397,7 +397,7 @@ lean_dec_ref(v_a_167_);
 return v_res_169_;
 }
 }
-LEAN_EXPORT lean_object* lp_Props2Theories___aux__Props2Theories__B__Set__B__Set__Algebra__Task______unexpand__intersect__2sets__1(lean_object* v_x_170_, lean_object* v_a_171_, lean_object* v_a_172_){
+LEAN_EXPORT lean_object* lp_Props2Theories___aux__Props2Theories__B__Set__B__Set__Algebra__Task______unexpand__inter2__1(lean_object* v_x_170_, lean_object* v_a_171_, lean_object* v_a_172_){
 _start:
 {
 lean_object* v___x_173_; uint8_t v___x_174_; 
@@ -419,7 +419,7 @@ else
 lean_object* v___x_177_; lean_object* v___x_178_; lean_object* v___x_179_; uint8_t v___x_180_; 
 v___x_177_ = lean_unsigned_to_nat(0u);
 v___x_178_ = l_Lean_Syntax_getArg(v_x_170_, v___x_177_);
-v___x_179_ = ((lean_object*)(lp_Props2Theories___aux__Props2Theories__B__Set__B__Set__Algebra__Task______unexpand__union__2sets__1___closed__1));
+v___x_179_ = ((lean_object*)(lp_Props2Theories___aux__Props2Theories__B__Set__B__Set__Algebra__Task______unexpand__union2__1___closed__1));
 lean_inc(v___x_178_);
 v___x_180_ = l_Lean_Syntax_isOfKind(v___x_178_, v___x_179_);
 if (v___x_180_ == 0)
@@ -480,11 +480,11 @@ return v___x_198_;
 }
 }
 }
-LEAN_EXPORT lean_object* lp_Props2Theories___aux__Props2Theories__B__Set__B__Set__Algebra__Task______unexpand__intersect__2sets__1___boxed(lean_object* v_x_199_, lean_object* v_a_200_, lean_object* v_a_201_){
+LEAN_EXPORT lean_object* lp_Props2Theories___aux__Props2Theories__B__Set__B__Set__Algebra__Task______unexpand__inter2__1___boxed(lean_object* v_x_199_, lean_object* v_a_200_, lean_object* v_a_201_){
 _start:
 {
 lean_object* v_res_202_; 
-v_res_202_ = lp_Props2Theories___aux__Props2Theories__B__Set__B__Set__Algebra__Task______unexpand__intersect__2sets__1(v_x_199_, v_a_200_, v_a_201_);
+v_res_202_ = lp_Props2Theories___aux__Props2Theories__B__Set__B__Set__Algebra__Task______unexpand__inter2__1(v_x_199_, v_a_200_, v_a_201_);
 lean_dec(v_a_200_);
 return v_res_202_;
 }
@@ -582,7 +582,7 @@ else
 lean_object* v___x_266_; lean_object* v___x_267_; lean_object* v___x_268_; uint8_t v___x_269_; 
 v___x_266_ = lean_unsigned_to_nat(0u);
 v___x_267_ = l_Lean_Syntax_getArg(v_x_259_, v___x_266_);
-v___x_268_ = ((lean_object*)(lp_Props2Theories___aux__Props2Theories__B__Set__B__Set__Algebra__Task______unexpand__union__2sets__1___closed__1));
+v___x_268_ = ((lean_object*)(lp_Props2Theories___aux__Props2Theories__B__Set__B__Set__Algebra__Task______unexpand__union2__1___closed__1));
 lean_inc(v___x_267_);
 v___x_269_ = l_Lean_Syntax_isOfKind(v___x_267_, v___x_268_);
 if (v___x_269_ == 0)
@@ -745,7 +745,7 @@ else
 lean_object* v___x_355_; lean_object* v___x_356_; lean_object* v___x_357_; uint8_t v___x_358_; 
 v___x_355_ = lean_unsigned_to_nat(0u);
 v___x_356_ = l_Lean_Syntax_getArg(v_x_348_, v___x_355_);
-v___x_357_ = ((lean_object*)(lp_Props2Theories___aux__Props2Theories__B__Set__B__Set__Algebra__Task______unexpand__union__2sets__1___closed__1));
+v___x_357_ = ((lean_object*)(lp_Props2Theories___aux__Props2Theories__B__Set__B__Set__Algebra__Task______unexpand__union2__1___closed__1));
 lean_inc(v___x_356_);
 v___x_358_ = l_Lean_Syntax_isOfKind(v___x_356_, v___x_357_);
 if (v___x_358_ == 0)
@@ -817,6 +817,7 @@ return v_res_380_;
 }
 lean_object* initialize_Init(uint8_t builtin);
 lean_object* initialize_Init(uint8_t builtin);
+lean_object* initialize_Props2Theories_Props2Theories_A__Logic_A__Props_Task(uint8_t builtin);
 lean_object* initialize_Props2Theories_Props2Theories_B__Set_A__Constructions_Task(uint8_t builtin);
 static bool _G_initialized = false;
 LEAN_EXPORT lean_object* initialize_Props2Theories_Props2Theories_B__Set_B__Set__Algebra_Task(uint8_t builtin) {
@@ -827,6 +828,9 @@ res = initialize_Init(builtin);
 if (lean_io_result_is_error(res)) return res;
 lean_dec_ref(res);
 res = initialize_Init(builtin);
+if (lean_io_result_is_error(res)) return res;
+lean_dec_ref(res);
+res = initialize_Props2Theories_Props2Theories_A__Logic_A__Props_Task(builtin);
 if (lean_io_result_is_error(res)) return res;
 lean_dec_ref(res);
 res = initialize_Props2Theories_Props2Theories_B__Set_A__Constructions_Task(builtin);

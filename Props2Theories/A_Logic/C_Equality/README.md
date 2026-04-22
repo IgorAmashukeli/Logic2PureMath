@@ -1,4 +1,4 @@
-# Equality Rules
+# 1.3 Equality Rules
 
 We finish studying [Natural Deduction](https://en.wikipedia.org/wiki/Natural_deduction#Gentzen-style_propositional_logic).
 
@@ -23,11 +23,13 @@ Tactics consists of the following parts:
 
 - `Exists Unique` (∃!) quantifier definition and tactics
 
-First two parts are already default `Lean` tactics.
+- `calc` LEAN tactic
+
+First two parts and the last one are already default `Lean` tactics.
 
 I tried to include both `Forward` (enriching the `Context`) and `Backward` (simplifying the `Goal`) reasoning for the `third`, `fourth` and `fifth` part.
 
-Note, that the rules from the `first two` and `fifth` rules can be used both in the `Intuitionistic` and `Classical` Logic.
+Note, that the rules from the `first two` and `fifth`, `sixth` rules can be used both in the `Intuitionistic` and `Classical` Logic.
 
 While the third and the fourth rule (`Introduction` rules for `Prop` and `Functional Symbols` `Equality`) is usually added only for the `Classical` Logic. Sometimes, it is not even included for the `Classical` Logic.
 
@@ -46,6 +48,13 @@ But we need `Predicates` as an object to make formulas in Logic
 And we need `Functional Symbols` as an object to make conviniet set notations.
 
 (for example, later, we declare `iota definite description operator` (`ι`) as `Functional Symbol`)
+
+Also `calc` tactic is default LEAN tactic to deal with `transitive` `predicates` or `connectictives`.
+If you create instance of `Trans`, it will help you to deal with chains of transitivity, using very concise way.
+Instead of writing `apply iff_transitivity` or `apply equal_trans` multiple times with arguments, you can use calc chains, which is much more elegant.
+Moreover, for some default predicates, like `↔` or `=`, there are default instances
+
+Look at the example in `EqualRules.lean`.
 
 Your task is to prove all the `Equality` properties in `Task.lean`, using these tactics.
 

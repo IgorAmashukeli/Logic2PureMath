@@ -1,10 +1,10 @@
 {"synthetic": false,
  "schemaVersion": "2025-09-10",
  "outputs":
- {"o": ["0733684adea60513.olean"],
+ {"o": ["2fb9584fdca3cd65.olean"],
   "m": false,
-  "i": "288e90af16d6221e.ilean",
-  "c": "392ebc2ea165b4f4.c"},
+  "i": "0d5276ef135ba3d4.ilean",
+  "c": "3289394ce32e7aa4.c"},
  "log":
  [{"message":
    ".> LEAN_PATH=/home/igor/ComputerScience/Props2Theories/.lake/build/lib/lean /home/igor/.elan/toolchains/leanprover--lean4---v4.30.0-rc2/bin/lean /home/igor/ComputerScience/Props2Theories/Props2Theories/B_Set/B_Set_Algebra/SetSynt.lean -o /home/igor/ComputerScience/Props2Theories/.lake/build/lib/lean/Props2Theories/B_Set/B_Set_Algebra/SetSynt.olean -i /home/igor/ComputerScience/Props2Theories/.lake/build/lib/lean/Props2Theories/B_Set/B_Set_Algebra/SetSynt.ilean -c /home/igor/ComputerScience/Props2Theories/.lake/build/ir/Props2Theories/B_Set/B_Set_Algebra/SetSynt.c --setup /home/igor/ComputerScience/Props2Theories/.lake/build/ir/Props2Theories/B_Set/B_Set_Algebra/SetSynt.setup.json --json",
@@ -18,7 +18,11 @@
        [["Props2Theories.B_Set.A_Constructions.Task transitive imports (legacy)",
          "28bafacd3c38981c"],
         ["Props2Theories.B_Set.A_Constructions.Task:importAllArts",
-         "864516f12d09cff9"]]]]],
+         "864516f12d09cff9"],
+        ["Props2Theories.B_Set.B_Set_Algebra.Task transitive imports (legacy)",
+         "8d8e90c97ab110bc"],
+        ["Props2Theories.B_Set.B_Set_Algebra.Task:importAllArts",
+         "6ba53a355c5623d0"]]]]],
     ["libs",
      [["import dynlibs", "00000000000006bb"],
       ["package external libraries", "00000000000006bb"],
@@ -27,11 +31,11 @@
   ["Lean 4.30.0, commit 3dc1a088b6d2d8eafe25a7cd7ec7b58d731bd7cc",
    "2c8d2623007dfc36"],
   ["/home/igor/ComputerScience/Props2Theories/Props2Theories/B_Set/B_Set_Algebra/SetSynt.lean",
-   "775b0c7c166bbfe3"],
+   "0d75646d25212e36"],
   ["options", "00000000000006bb"],
   ["isModule: false", "feefd2a0d3a1847e"],
   ["Module.name: Props2Theories.B_Set.B_Set_Algebra.SetSynt",
    "079f0b629e2c6d0c"],
   ["Package.id?: (some Props2Theories)", "bf69640ed8a43e05"],
   ["Module.leanArgs: #[]", "00000000000006bb"]],
- "depHash": "f57f251611ebb468"}
+ "depHash": "05b18133944b288a"}

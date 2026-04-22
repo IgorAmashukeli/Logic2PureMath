@@ -1,4 +1,4 @@
-# Quantifier Rules
+# 1.2 Quantifier Rules
 
 We continue studying [Natural Deduction](https://en.wikipedia.org/wiki/Natural_deduction#Gentzen-style_propositional_logic).
 

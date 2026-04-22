@@ -1,4 +1,4 @@
-# Proposition Rules
+# 1.1 Proposition Rules
 
 [Natural Deduction](https://en.wikipedia.org/wiki/Natural_deduction#Gentzen-style_propositional_logic) is one of the most common and convinient underlying systems for formal proof in Math.
 

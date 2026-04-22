@@ -18,11 +18,11 @@ macro:2000 "{" e:set_comprehension "}" : term => do
   | a :: b :: rest =>
     let mut res ← `(unord_pr_set $(⟨a⟩) $(⟨b⟩))
     for item in rest do
-      res ← `(union_2sets $res (singleton_set $(⟨item⟩)))
+      res ← `(union2 $res (singleton_set $(⟨item⟩)))
     return res
 partial def collectExprElems : DelabM (List Syntax) := do
   let e ← getExpr
-  if e.isAppOfArity ``union_2sets 2 then
+  if e.isAppOfArity ``union2 2 then
     let args := e.getAppArgs
     let rhs := args[1]!
     if rhs.isAppOfArity ``singleton_set 1 then
@@ -41,7 +41,7 @@ partial def collectExprElems : DelabM (List Syntax) := do
     return [a.raw]
   else return []
 
-@[app_delab union_2sets]
+@[app_delab union2]
 def delabUnionChain : Delab := do
   let _ ← getExpr
   let elems ← collectExprElems
