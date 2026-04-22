@@ -1,10 +1,10 @@
 {"synthetic": false,
  "schemaVersion": "2025-09-10",
  "outputs":
- {"o": ["cc3734d6b30174f1.olean"],
+ {"o": ["9606aacd50746d19.olean"],
   "m": false,
-  "i": "7f67a5d3a557a01d.ilean",
-  "c": "3a73cad4c10c81e0.c"},
+  "i": "e3bc862ef00901e2.ilean",
+  "c": "9222cf8fd00923f2.c"},
  "log":
  [{"message":
    ".> LEAN_PATH=/home/igor/ComputerScience/Props2Theories/.lake/build/lib/lean /home/igor/.elan/toolchains/leanprover--lean4---v4.30.0-rc2/bin/lean /home/igor/ComputerScience/Props2Theories/Props2Theories/B_Set/B_Set_Algebra/Task.lean -o /home/igor/ComputerScience/Props2Theories/.lake/build/lib/lean/Props2Theories/B_Set/B_Set_Algebra/Task.olean -i /home/igor/ComputerScience/Props2Theories/.lake/build/lib/lean/Props2Theories/B_Set/B_Set_Algebra/Task.ilean -c /home/igor/ComputerScience/Props2Theories/.lake/build/ir/Props2Theories/B_Set/B_Set_Algebra/Task.c --setup /home/igor/ComputerScience/Props2Theories/.lake/build/ir/Props2Theories/B_Set/B_Set_Algebra/Task.setup.json --json",
@@ -27,10 +27,10 @@
   ["Lean 4.30.0, commit 3dc1a088b6d2d8eafe25a7cd7ec7b58d731bd7cc",
    "2c8d2623007dfc36"],
   ["/home/igor/ComputerScience/Props2Theories/Props2Theories/B_Set/B_Set_Algebra/Task.lean",
-   "778941ef8426c73f"],
+   "e9fe4d65f6a6fe96"],
   ["options", "00000000000006bb"],
   ["isModule: false", "feefd2a0d3a1847e"],
   ["Module.name: Props2Theories.B_Set.B_Set_Algebra.Task", "ee61b974b85c0122"],
   ["Package.id?: (some Props2Theories)", "bf69640ed8a43e05"],
   ["Module.leanArgs: #[]", "00000000000006bb"]],
- "depHash": "87c6b2430b749b7a"}
+ "depHash": "faeb2e8efa6c4f95"}

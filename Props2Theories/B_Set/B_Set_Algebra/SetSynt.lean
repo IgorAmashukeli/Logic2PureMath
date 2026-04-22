@@ -1,9 +1,6 @@
 import Props2Theories.B_Set.A_Constructions.Task
 import Props2Theories.B_Set.B_Set_Algebra.Task
 open Lean Meta Elab PrettyPrinter Delaborator SubExpr
-
-
-
 declare_syntax_cat set_comprehension
 syntax term : set_comprehension
 syntax set_comprehension ", " term : set_comprehension
@@ -30,12 +27,11 @@ partial def collectExprElems : DelabM (List Syntax) := do
     let rhs := args[1]!
     if rhs.isAppOfArity ``singleton_set 1 then
       let last ← withAppArg delab
-      let lastElem := match last with
-        | `({ $a }) => a.raw
-        | _ => last.raw
+      let lastElem := match last with | `({ $a }) => a.raw | _ => last.raw
       let rest ← withAppFn $ withAppArg collectExprElems
+      if rest.isEmpty then return []
       return rest ++ [lastElem]
-    else return [(← delab).raw]
+    else return []
   else if e.isAppOfArity ``unord_pr_set 2 then
     let a ← withAppFn $ withAppArg delab
     let b ← withAppArg delab
@@ -43,18 +39,18 @@ partial def collectExprElems : DelabM (List Syntax) := do
   else if e.isAppOfArity ``singleton_set 1 then
     let a ← withAppArg delab
     return [a.raw]
-  else return [(← delab).raw]
+  else return []
+
 @[app_delab union_2sets]
 def delabUnionChain : Delab := do
-  let e ← getExpr
-  let args := e.getAppArgs
-  if args.size == 2 && !args[1]!.isAppOfArity ``singleton_set 1 then
-    let lhs ← withAppFn $ withAppArg delab
-    let rhs ← withAppArg delab
-    return ← `($lhs ∪ $rhs)
+  let _ ← getExpr
   let elems ← collectExprElems
   match elems with
-  | [] => failure
+
+  | [] =>
+    let lhs ← withAppFn $ withAppArg delab
+    let rhs ← withAppArg delab
+    `($lhs ∪ $rhs)
   | [single] => `({ $(⟨single⟩):term })
   | a :: rest =>
     let mut sc : TSyntax `set_comprehension := ⟨a⟩
@@ -63,11 +59,15 @@ def delabUnionChain : Delab := do
       let newSc ← `(set_comprehension| $sc, $itemTerm)
       sc := ⟨newSc.raw⟩
     `({ $sc:set_comprehension })
+
 @[app_unexpander unord_pr_set]
 def unexpandUnordPrSet : Unexpander
+
   | `($(_) $a $b) => `({ $a, $b })
   | _ => throw ()
+
 @[app_unexpander singleton_set]
 def unexpandSingletonSet : Unexpander
+
   | `($(_) $a) => `({ $a })
   | _ => throw ()
