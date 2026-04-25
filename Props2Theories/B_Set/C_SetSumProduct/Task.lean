@@ -72,23 +72,41 @@ theorem disj_union2_in_right :  ∀ B x, (x ∈ B) → (x, {∅}) ∈ (B × {{�
 theorem disj_union2_left_in : ∀ A B x, (x ∈ A) → ((x, ∅) ∈ (A ⊔ B)) := sorry
 theorem disj_union2_right_in : ∀ A B x, (x ∈ B) → ((x, {∅}) ∈ (A ⊔ B)) := sorry
 
+
+theorem disj_union2_pr_emp_in_l : ∀ A B x, (x, ∅) ∈ (A ⊔ B) → x ∈ A := sorry
+theorem disj_union2_pr_semp_in_r : ∀ A B x, (x, {∅}) ∈ (A ⊔ B) → x ∈ B := sorry
+
 theorem disj_union2_prop_pr_el (P : Set → Prop) : ∀ A B, (∀ x ∈ A, P (x, ∅)) → (∀ y ∈ B, P (y, {∅})) → ∀ t ∈ (A ⊔ B), P t := sorry
 theorem disj_union2_prop_el_pr (P : Set → Prop) : ∀ A B, (∀ t ∈ (A ⊔ B), P t) → ((∀ x ∈ A, P (x, ∅)) ∧ ∀ y ∈ B, P (y, {∅})) := sorry
 
--- Left And Right Sets From Disjoint Union
+-- Left And Right Sets Of Pairs From Disjoint Union
 noncomputable def disjoint_union2_left (X: Set) := {y ∈ X | (π₂ y) = ∅}
 noncomputable def disjoint_union2_right (X : Set) := {y ∈ X | (π₂ y) = {∅}}
-notation:max "DUL " dsjun:1024 => disjoint_union2_left dsjun
-notation:max "DUR " dsjun:1024 => disjoint_union2_right dsjun
+notation:max "DU2LP " dsjun:1024 => disjoint_union2_left dsjun
+notation:max "DU2RP " dsjun:1024 => disjoint_union2_right dsjun
 
-theorem dul_subs : ∀ X, (DUL X) ⊆ X := sorry
-theorem dur_subs : ∀ X, (DUR X) ⊆ X := sorry
-theorem dulr_inter2 : ∀ X, (DUL X) ∩ (DUR X) = ∅ := sorry
+theorem dul_subs : ∀ X, (DU2LP X) ⊆ X := sorry
+theorem dur_subs : ∀ X, (DU2RP X) ⊆ X := sorry
+theorem dulr_inter2 : ∀ X, (DU2LP X) ∩ (DU2RP X) = ∅ := sorry
 
-theorem dul_disj_union2 : ∀ A B, (DUL (A ⊔ B)) = (A × {∅}) := sorry
-theorem dur_disj_union2 : ∀ A B, (DUR (A ⊔ B)) = (B × {{∅}}) := sorry
+theorem dul_disj_union2 : ∀ A B, (DU2LP (A ⊔ B)) = (A × {∅}) := sorry
+theorem dur_disj_union2 : ∀ A B, (DU2RP (A ⊔ B)) = (B × {{∅}}) := sorry
 
-theorem dulr_union2 : ∀ A B, (DUL (A ⊔ B)) ∪ (DUR (A ⊔ B)) = (A ⊔ B) := sorry
+theorem disj_union2_in_dul : ∀ A B x, ((x, ∅) ∈ DU2LP (A ⊔ B)) → x ∈ A := sorry
+theorem disj_union2_in_dur : ∀ A B x, ((x, ∅) ∈ DU2RP (A ⊔ B)) → x ∈ B := sorry
+
+theorem dulr_union2 : ∀ A B, (DU2LP (A ⊔ B)) ∪ (DU2RP (A ⊔ B)) = (A ⊔ B) := sorry
+
+theorem in_l_pred_f : ∀ x y z, π₁ x = y → π₁ x = z → (y = z) := sorry
+
+-- Left And Right Original Sets From Disjiont Union
+noncomputable def disjoint_union2_left_set (X: Set) := (ReplImg{y | ∃ pr ∈ (DU2LP (X)), (π₁ pr) = y} of (in_l_pred_f))
+noncomputable def disjoint_union2_right_set (X : Set) := (ReplImg{y | ∃ pr ∈ (DU2RP (X)), (π₁ pr) = y} of (in_l_pred_f))
+notation:max "DU2L " dsjun:1024 => disjoint_union2_left_set dsjun
+notation:max "DU2R " dsjun:1024 => disjoint_union2_right_set dsjun
+
+theorem disj_union2_repl_img_l : ∀ A B, DU2L (A ⊔ B) = A := sorry
+theorem disj_union2_repl_img_r : ∀ A B, DU2R (A ⊔ B) = B := sorry
 
 theorem disj_union2_emp_l : ∀ A, A ⊔ ∅ = A × {∅} := sorry
 theorem disj_union2_emp_r : ∀ A, ∅ ⊔ A = A × {{∅}} := sorry
@@ -98,8 +116,18 @@ theorem disj_union2_emp_lr : ∅ ⊔ ∅ = ∅ := sorry
 theorem disj_union2_nemp_l : ∀ A B, (is_nempty A) → (is_nempty (A ⊔ B)) := sorry
 theorem disj_union2_nemp_r : ∀ A B, (is_nempty B) → (is_nempty (A ⊔ B)) := sorry
 
+theorem disj_union2_nidemp_emp_semp : ∀ A, A ⊔ A = A × {∅, {∅}} := sorry
+
+theorem disj_union2_eq : ∀ A B C D, (((A ⊔ B) = (C ⊔ D)) ↔ (A = C) ∧ (B = D)) := sorry
+
 theorem disj_union2_mon_l : ∀ A B C, (A ⊆ C) → (A ⊔ B) ⊆ (C ⊔ B) := sorry
 theorem disj_union2_mon_r : ∀ A B C, (B ⊆ C) → (A ⊔ B) ⊆ (A ⊔ C) := sorry
+theorem disj_union2_subs_then : ∀ A B C D, (A ⊔ B) ⊆ (C ⊔ D) → (A ⊆ C ∧ B ⊆ D) := sorry
+theorem subs_is_disj_union2_of : ∀ S A B, (S ⊆ (A ⊔ B)) → (S = ({x ∈ A | (x, ∅) ∈ S}) ⊔ ({x ∈ B | (x, {∅}) ∈ S})) := sorry
+theorem subs_disj_union2_ex : ∀ S A B, (S ⊆ (A ⊔ B)) → ∃ C D, C ⊆ A ∧ D ⊆ B ∧ S = C ⊔ D := sorry
+theorem subs_disj_union2_ex_un : ∀ S A B, (S ⊆ (A ⊔ B)) → ∃! C D, S = C ⊔ D := sorry
 
 theorem disj_union2_union2_distrib : ∀ A B C D, (A ⊔ B) ∪ (C ⊔ D) = ((A ∪ C) ⊔ (B ∪ D)) := sorry
+
 theorem disj_union2_inter2_distrib : ∀ A B C D, (A ⊔ B) ∩ (C ⊔ D) = ((A ∩ C) ⊔ (B ∩ D)) := sorry
+theorem disj_union2_diff_distrib : ∀ A B C D, (A ⊔ B) \ (C ⊔ D) = ((A \ C) ⊔ (B \ D)) := sorry

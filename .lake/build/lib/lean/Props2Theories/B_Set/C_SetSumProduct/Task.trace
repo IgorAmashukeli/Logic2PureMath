@@ -1,0 +1,242 @@
+{"synthetic": false,
+ "schemaVersion": "2025-09-10",
+ "outputs":
+ {"o": ["a7332d0d89548f57.olean"],
+  "m": false,
+  "i": "af7852c4216734c1.ilean",
+  "c": "b985b9f390278e0c.c"},
+ "log":
+ [{"message":
+   ".> LEAN_PATH=/home/igor/ComputerScience/Props2Theories/.lake/build/lib/lean /home/igor/.elan/toolchains/leanprover--lean4---v4.30.0-rc2/bin/lean /home/igor/ComputerScience/Props2Theories/Props2Theories/B_Set/C_SetSumProduct/Task.lean -o /home/igor/ComputerScience/Props2Theories/.lake/build/lib/lean/Props2Theories/B_Set/C_SetSumProduct/Task.olean -i /home/igor/ComputerScience/Props2Theories/.lake/build/lib/lean/Props2Theories/B_Set/C_SetSumProduct/Task.ilean -c /home/igor/ComputerScience/Props2Theories/.lake/build/ir/Props2Theories/B_Set/C_SetSumProduct/Task.c --setup /home/igor/ComputerScience/Props2Theories/.lake/build/ir/Props2Theories/B_Set/C_SetSumProduct/Task.setup.json --json",
+   "level": "trace"},
+  {"message":
+   "Props2Theories/B_Set/C_SetSumProduct/Task.lean:8:8: declaration uses `sorry`",
+   "level": "warning"},
+  {"message":
+   "Props2Theories/B_Set/C_SetSumProduct/Task.lean:9:8: declaration uses `sorry`",
+   "level": "warning"},
+  {"message":
+   "Props2Theories/B_Set/C_SetSumProduct/Task.lean:10:8: declaration uses `sorry`",
+   "level": "warning"},
+  {"message":
+   "Props2Theories/B_Set/C_SetSumProduct/Task.lean:11:8: declaration uses `sorry`",
+   "level": "warning"},
+  {"message":
+   "Props2Theories/B_Set/C_SetSumProduct/Task.lean:19:8: declaration uses `sorry`",
+   "level": "warning"},
+  {"message":
+   "Props2Theories/B_Set/C_SetSumProduct/Task.lean:20:8: declaration uses `sorry`",
+   "level": "warning"},
+  {"message":
+   "Props2Theories/B_Set/C_SetSumProduct/Task.lean:24:8: declaration uses `sorry`",
+   "level": "warning"},
+  {"message":
+   "Props2Theories/B_Set/C_SetSumProduct/Task.lean:28:8: declaration uses `sorry`",
+   "level": "warning"},
+  {"message":
+   "Props2Theories/B_Set/C_SetSumProduct/Task.lean:29:8: declaration uses `sorry`",
+   "level": "warning"},
+  {"message":
+   "Props2Theories/B_Set/C_SetSumProduct/Task.lean:31:8: declaration uses `sorry`",
+   "level": "warning"},
+  {"message":
+   "Props2Theories/B_Set/C_SetSumProduct/Task.lean:32:8: declaration uses `sorry`",
+   "level": "warning"},
+  {"message":
+   "Props2Theories/B_Set/C_SetSumProduct/Task.lean:33:8: declaration uses `sorry`",
+   "level": "warning"},
+  {"message":
+   "Props2Theories/B_Set/C_SetSumProduct/Task.lean:34:8: declaration uses `sorry`",
+   "level": "warning"},
+  {"message":
+   "Props2Theories/B_Set/C_SetSumProduct/Task.lean:36:8: declaration uses `sorry`",
+   "level": "warning"},
+  {"message":
+   "Props2Theories/B_Set/C_SetSumProduct/Task.lean:37:8: declaration uses `sorry`",
+   "level": "warning"},
+  {"message":
+   "Props2Theories/B_Set/C_SetSumProduct/Task.lean:39:8: declaration uses `sorry`",
+   "level": "warning"},
+  {"message":
+   "Props2Theories/B_Set/C_SetSumProduct/Task.lean:40:8: declaration uses `sorry`",
+   "level": "warning"},
+  {"message":
+   "Props2Theories/B_Set/C_SetSumProduct/Task.lean:41:8: declaration uses `sorry`",
+   "level": "warning"},
+  {"message":
+   "Props2Theories/B_Set/C_SetSumProduct/Task.lean:42:8: declaration uses `sorry`",
+   "level": "warning"},
+  {"message":
+   "Props2Theories/B_Set/C_SetSumProduct/Task.lean:45:8: declaration uses `sorry`",
+   "level": "warning"},
+  {"message":
+   "Props2Theories/B_Set/C_SetSumProduct/Task.lean:46:8: declaration uses `sorry`",
+   "level": "warning"},
+  {"message":
+   "Props2Theories/B_Set/C_SetSumProduct/Task.lean:47:8: declaration uses `sorry`",
+   "level": "warning"},
+  {"message":
+   "Props2Theories/B_Set/C_SetSumProduct/Task.lean:48:8: declaration uses `sorry`",
+   "level": "warning"},
+  {"message":
+   "Props2Theories/B_Set/C_SetSumProduct/Task.lean:49:8: declaration uses `sorry`",
+   "level": "warning"},
+  {"message":
+   "Props2Theories/B_Set/C_SetSumProduct/Task.lean:50:8: declaration uses `sorry`",
+   "level": "warning"},
+  {"message":
+   "Props2Theories/B_Set/C_SetSumProduct/Task.lean:51:8: declaration uses `sorry`",
+   "level": "warning"},
+  {"message":
+   "Props2Theories/B_Set/C_SetSumProduct/Task.lean:58:8: declaration uses `sorry`",
+   "level": "warning"},
+  {"message":
+   "Props2Theories/B_Set/C_SetSumProduct/Task.lean:60:8: declaration uses `sorry`",
+   "level": "warning"},
+  {"message":
+   "Props2Theories/B_Set/C_SetSumProduct/Task.lean:63:8: declaration uses `sorry`",
+   "level": "warning"},
+  {"message":
+   "Props2Theories/B_Set/C_SetSumProduct/Task.lean:64:8: declaration uses `sorry`",
+   "level": "warning"},
+  {"message":
+   "Props2Theories/B_Set/C_SetSumProduct/Task.lean:65:8: declaration uses `sorry`",
+   "level": "warning"},
+  {"message":
+   "Props2Theories/B_Set/C_SetSumProduct/Task.lean:66:8: declaration uses `sorry`",
+   "level": "warning"},
+  {"message":
+   "Props2Theories/B_Set/C_SetSumProduct/Task.lean:69:8: declaration uses `sorry`",
+   "level": "warning"},
+  {"message":
+   "Props2Theories/B_Set/C_SetSumProduct/Task.lean:70:8: declaration uses `sorry`",
+   "level": "warning"},
+  {"message":
+   "Props2Theories/B_Set/C_SetSumProduct/Task.lean:72:8: declaration uses `sorry`",
+   "level": "warning"},
+  {"message":
+   "Props2Theories/B_Set/C_SetSumProduct/Task.lean:73:8: declaration uses `sorry`",
+   "level": "warning"},
+  {"message":
+   "Props2Theories/B_Set/C_SetSumProduct/Task.lean:76:8: declaration uses `sorry`",
+   "level": "warning"},
+  {"message":
+   "Props2Theories/B_Set/C_SetSumProduct/Task.lean:77:8: declaration uses `sorry`",
+   "level": "warning"},
+  {"message":
+   "Props2Theories/B_Set/C_SetSumProduct/Task.lean:79:8: declaration uses `sorry`",
+   "level": "warning"},
+  {"message":
+   "Props2Theories/B_Set/C_SetSumProduct/Task.lean:80:8: declaration uses `sorry`",
+   "level": "warning"},
+  {"message":
+   "Props2Theories/B_Set/C_SetSumProduct/Task.lean:88:8: declaration uses `sorry`",
+   "level": "warning"},
+  {"message":
+   "Props2Theories/B_Set/C_SetSumProduct/Task.lean:89:8: declaration uses `sorry`",
+   "level": "warning"},
+  {"message":
+   "Props2Theories/B_Set/C_SetSumProduct/Task.lean:90:8: declaration uses `sorry`",
+   "level": "warning"},
+  {"message":
+   "Props2Theories/B_Set/C_SetSumProduct/Task.lean:92:8: declaration uses `sorry`",
+   "level": "warning"},
+  {"message":
+   "Props2Theories/B_Set/C_SetSumProduct/Task.lean:93:8: declaration uses `sorry`",
+   "level": "warning"},
+  {"message":
+   "Props2Theories/B_Set/C_SetSumProduct/Task.lean:95:8: declaration uses `sorry`",
+   "level": "warning"},
+  {"message":
+   "Props2Theories/B_Set/C_SetSumProduct/Task.lean:96:8: declaration uses `sorry`",
+   "level": "warning"},
+  {"message":
+   "Props2Theories/B_Set/C_SetSumProduct/Task.lean:98:8: declaration uses `sorry`",
+   "level": "warning"},
+  {"message":
+   "Props2Theories/B_Set/C_SetSumProduct/Task.lean:100:8: declaration uses `sorry`",
+   "level": "warning"},
+  {"message":
+   "Props2Theories/B_Set/C_SetSumProduct/Task.lean:108:8: declaration uses `sorry`",
+   "level": "warning"},
+  {"message":
+   "Props2Theories/B_Set/C_SetSumProduct/Task.lean:109:8: declaration uses `sorry`",
+   "level": "warning"},
+  {"message":
+   "Props2Theories/B_Set/C_SetSumProduct/Task.lean:111:8: declaration uses `sorry`",
+   "level": "warning"},
+  {"message":
+   "Props2Theories/B_Set/C_SetSumProduct/Task.lean:112:8: declaration uses `sorry`",
+   "level": "warning"},
+  {"message":
+   "Props2Theories/B_Set/C_SetSumProduct/Task.lean:114:8: declaration uses `sorry`",
+   "level": "warning"},
+  {"message":
+   "Props2Theories/B_Set/C_SetSumProduct/Task.lean:116:8: declaration uses `sorry`",
+   "level": "warning"},
+  {"message":
+   "Props2Theories/B_Set/C_SetSumProduct/Task.lean:117:8: declaration uses `sorry`",
+   "level": "warning"},
+  {"message":
+   "Props2Theories/B_Set/C_SetSumProduct/Task.lean:119:8: declaration uses `sorry`",
+   "level": "warning"},
+  {"message":
+   "Props2Theories/B_Set/C_SetSumProduct/Task.lean:121:8: declaration uses `sorry`",
+   "level": "warning"},
+  {"message":
+   "Props2Theories/B_Set/C_SetSumProduct/Task.lean:123:8: declaration uses `sorry`",
+   "level": "warning"},
+  {"message":
+   "Props2Theories/B_Set/C_SetSumProduct/Task.lean:124:8: declaration uses `sorry`",
+   "level": "warning"},
+  {"message":
+   "Props2Theories/B_Set/C_SetSumProduct/Task.lean:125:8: declaration uses `sorry`",
+   "level": "warning"},
+  {"message":
+   "Props2Theories/B_Set/C_SetSumProduct/Task.lean:126:8: declaration uses `sorry`",
+   "level": "warning"},
+  {"message":
+   "Props2Theories/B_Set/C_SetSumProduct/Task.lean:127:8: declaration uses `sorry`",
+   "level": "warning"},
+  {"message":
+   "Props2Theories/B_Set/C_SetSumProduct/Task.lean:128:8: declaration uses `sorry`",
+   "level": "warning"},
+  {"message":
+   "Props2Theories/B_Set/C_SetSumProduct/Task.lean:130:8: declaration uses `sorry`",
+   "level": "warning"},
+  {"message":
+   "Props2Theories/B_Set/C_SetSumProduct/Task.lean:132:8: declaration uses `sorry`",
+   "level": "warning"},
+  {"message":
+   "Props2Theories/B_Set/C_SetSumProduct/Task.lean:133:8: declaration uses `sorry`",
+   "level": "warning"}],
+ "inputs":
+ [["Props2Theories.B_Set.C_SetSumProduct.Task:deps",
+   [["deps",
+     [["Props2Theories/Props2Theories:extraDep",
+       [["@Props2Theories:extraDep", "00000000000006bb"]]],
+      ["imports",
+       [["Props2Theories.B_Set.A_Constructions.Task transitive imports (legacy)",
+         "28bafacd3c38981c"],
+        ["Props2Theories.B_Set.A_Constructions.Task:importAllArts",
+         "864516f12d09cff9"],
+        ["Props2Theories.B_Set.B_Set_Algebra.SetSynt transitive imports (legacy)",
+         "aea6b35e5cc63229"],
+        ["Props2Theories.B_Set.B_Set_Algebra.SetSynt:importAllArts",
+         "779480bd75d885ea"]]]]],
+    ["libs",
+     [["import dynlibs", "00000000000006bb"],
+      ["package external libraries", "00000000000006bb"],
+      ["module dynlibs", "00000000000006bb"],
+      ["module plugins", "00000000000006bb"]]]]],
+  ["Lean 4.30.0, commit 3dc1a088b6d2d8eafe25a7cd7ec7b58d731bd7cc",
+   "2c8d2623007dfc36"],
+  ["/home/igor/ComputerScience/Props2Theories/Props2Theories/B_Set/C_SetSumProduct/Task.lean",
+   "77e94d93d016dee0"],
+  ["options", "00000000000006bb"],
+  ["isModule: false", "feefd2a0d3a1847e"],
+  ["Module.name: Props2Theories.B_Set.C_SetSumProduct.Task",
+   "257468e1df09832a"],
+  ["Package.id?: (some Props2Theories)", "bf69640ed8a43e05"],
+  ["Module.leanArgs: #[]", "00000000000006bb"]],
+ "depHash": "2a4c0545c9ee58d6"}

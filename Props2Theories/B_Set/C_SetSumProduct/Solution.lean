@@ -613,6 +613,30 @@ theorem disj_union2_right_in : ∀ A B x, (x ∈ B) → ((x, {∅}) ∈ (A ⊔ B
   right; intro_and; assumption; rfl
 
 
+theorem disj_union2_pr_emp_in_l : ∀ A B x, (x, ∅) ∈ (A ⊔ B) → x ∈ A := by
+  intros A B x h_x
+  _apply_l (disj_union2_pr_prop _ _ _ _), h_x, h
+  elim_or h, h_Aemp, h_Bsemp
+  · elim_and_ h_Aemp
+  · elim_and h_Bsemp, h_B, h_semp
+    elim_false; have h_neg := empty_set_is_empty ∅; elim_neg h_neg;
+      conv =>
+        rhs
+        rw [h_semp]
+    apply x_in_singl_x
+
+
+theorem disj_union2_pr_semp_in_r : ∀ A B x, (x, {∅}) ∈ (A ⊔ B) → x ∈ B := by
+  intros A B x h_x
+  _apply_l (disj_union2_pr_prop _ _ _ _), h_x, h
+  elim_or h, h_Asemp, h_Bsemp
+  · elim_and h_Asemp, h_A, h_semp
+    elim_false; have h_neg := empty_set_is_empty ∅; elim_neg h_neg;
+      conv =>
+        rhs
+        rw [← h_semp]
+    apply x_in_singl_x
+  · elim_and_ h_Bsemp
 
 
 
@@ -637,20 +661,21 @@ theorem disj_union2_prop_el_pr (P : Set → Prop) : ∀ A B, (∀ t ∈ (A ⊔ B
     apply h_AB;
     apply disj_union2_right_in; assumption
 
+-- Left And Right Sets Of Pairs From Disjoint Union
 noncomputable def disjoint_union2_left (X: Set) := {y ∈ X | (π₂ y) = ∅}
 noncomputable def disjoint_union2_right (X : Set) := {y ∈ X | (π₂ y) = {∅}}
-notation:max "DUL " dsjun:1024 => disjoint_union2_left dsjun
-notation:max "DUR " dsjun:1024 => disjoint_union2_right dsjun
+notation:max "DU2LP " dsjun:1024 => disjoint_union2_left dsjun
+notation:max "DU2RP " dsjun:1024 => disjoint_union2_right dsjun
 
-theorem dul_subs : ∀ X, (DUL X) ⊆ X := by
+theorem dul_subs : ∀ X, (DU2LP X) ⊆ X := by
   intro X
   apply spec_subs
 
-theorem dur_subs : ∀ X, (DUR X) ⊆ X := by
+theorem dur_subs : ∀ X, (DU2RP X) ⊆ X := by
   intro X
   apply spec_subs
 
-theorem dulr_inter2 : ∀ X, (DUL X) ∩ (DUR X) = ∅ := by
+theorem dulr_inter2 : ∀ X, (DU2LP X) ∩ (DU2RP X) = ∅ := by
   intro X
   apply subset_empty_is_empty
   intro_in_ t, h_t
@@ -665,7 +690,7 @@ theorem dulr_inter2 : ∀ X, (DUL X) ∩ (DUR X) = ∅ := by
   apply x_in_singl_x
 
 
-theorem dul_disj_union2 : ∀ A B, (DUL (A ⊔ B)) = (A × {∅}) := by
+theorem dul_disj_union2 : ∀ A B, (DU2LP (A ⊔ B)) = (A × {∅}) := by
   intros A B
   apply (set_extensionality_ax _ _); intro t;
   intro_iff
@@ -696,7 +721,7 @@ theorem dul_disj_union2 : ∀ A B, (DUL (A ⊔ B)) = (A × {∅}) := by
       apply_l (singleton_a_elem_is_a _ _); assumption
 
 
-theorem dur_disj_union2 : ∀ A B, (DUR (A ⊔ B)) = (B × {{∅}}) := by
+theorem dur_disj_union2 : ∀ A B, (DU2RP (A ⊔ B)) = (B × {{∅}}) := by
   intros A B
   apply (set_extensionality_ax _ _); intro t;
   intro_iff
@@ -726,10 +751,72 @@ theorem dur_disj_union2 : ∀ A B, (DUR (A ⊔ B)) = (B × {{∅}}) := by
     · rewrite [pi2_right]
       apply_l (singleton_a_elem_is_a _ _); assumption
 
-theorem dulr_union2 : ∀ A B, (DUL (A ⊔ B)) ∪ (DUR (A ⊔ B)) = (A ⊔ B) := by
+theorem disj_union2_in_dul : ∀ A B x, ((x, ∅) ∈ DU2LP (A ⊔ B)) → x ∈ A := by
+  intros A B x h_x
+  rw [dul_disj_union2] at h_x
+  _apply_l (cart_prod_pr_prop _ _ _ _), h_x, h_inAemp
+  elim_and_ h_inAemp
+
+
+theorem disj_union2_in_dur : ∀ A B x, ((x, ∅) ∈ DU2RP (A ⊔ B)) → x ∈ B := by
+  intros A B x h_x
+  rw [dur_disj_union2] at h_x
+  _apply_l (cart_prod_pr_prop _ _ _ _), h_x, h_inBemp
+  elim_and_ h_inBemp
+
+
+theorem dulr_union2 : ∀ A B, (DU2LP (A ⊔ B)) ∪ (DU2RP (A ⊔ B)) = (A ⊔ B) := by
   intros A B
   rewrite [dul_disj_union2, dur_disj_union2]
   rfl
+
+theorem in_l_pred_f : ∀ x y z, π₁ x = y → π₁ x = z → (y = z) := by
+  intros x y z h_xy h_xz
+  rewrite [← h_xy]
+  rw [h_xz]
+
+
+-- Left And Right Original Sets From Disjiont Union
+noncomputable def disjoint_union2_left_set (X: Set) := (ReplImg{y | ∃ pr ∈ (DU2LP (X)), (π₁ pr) = y} of (in_l_pred_f))
+noncomputable def disjoint_union2_right_set (X : Set) := (ReplImg{y | ∃ pr ∈ (DU2RP (X)), (π₁ pr) = y} of (in_l_pred_f))
+notation:max "DU2L " dsjun:1024 => disjoint_union2_left_set dsjun
+notation:max "DU2R " dsjun:1024 => disjoint_union2_right_set dsjun
+
+theorem disj_union2_repl_img_l : ∀ A B, DU2L (A ⊔ B) = A := by
+  intros A B
+  apply (set_extensionality_ax); intro t; intro_iff
+  · intro h_t
+    _apply_l (repl_set_is_repl _ DU2LP (A ⊔ B) (in_l_pred_f) t), h_t, h_ex; clear h_t
+    elim_exists_in h_ex, pr, h_prin, h_pr
+    rewrite [dul_disj_union2] at h_prin
+    revert h_pr; revert h_prin; apply cart_prop_pr_el
+    intro_in_ x, h_x; intro_in_ y, h_y; intro h_eq
+    rewrite [pi1_left] at h_eq; rewrite [← h_eq]; assumption
+  · intro h_t
+    apply_r (repl_set_is_repl _ DU2LP (A ⊔ B) (in_l_pred_f) t)
+    intro_exists_in (t, ∅)
+    · rw [dul_disj_union2]
+      apply disj_union2_in_left; assumption
+    · rw [pi1_left]
+
+
+
+theorem disj_union2_repl_img_r : ∀ A B, DU2R (A ⊔ B) = B := by
+  intros A B
+  apply (set_extensionality_ax); intro t; intro_iff
+  · intro h_t
+    _apply_l (repl_set_is_repl _ DU2RP (A ⊔ B) (in_l_pred_f) t), h_t, h_ex; clear h_t
+    elim_exists_in h_ex, pr, h_prin, h_pr
+    rewrite [dur_disj_union2] at h_prin
+    revert h_pr; revert h_prin; apply cart_prop_pr_el
+    intro_in_ x, h_x; intro_in_ y, h_y; intro h_eq
+    rewrite [pi1_left] at h_eq; rewrite [← h_eq]; assumption
+  · intro h_t
+    apply_r (repl_set_is_repl _ DU2RP (A ⊔ B) (in_l_pred_f) t)
+    intro_exists_in (t, {∅})
+    · rw [dur_disj_union2]
+      apply disj_union2_in_right; assumption
+    · rw [pi1_left]
 
 theorem disj_union2_emp_l : ∀ A, A ⊔ ∅ = A × {∅} := by
   intros A
@@ -763,6 +850,74 @@ theorem disj_union2_nemp_r : ∀ A B, (is_nempty B) → (is_nempty (A ⊔ B)) :=
   apply disj_union2_right_in; assumption
 
 
+theorem disj_union2_nidemp_emp_semp : ∀ A, A ⊔ A = (A × ({∅, {∅}})) := by
+  intro A
+  calc
+  _ = (A × {∅}) ∪ (A × {{∅}}) := by rfl
+  _ = A × ({∅} ∪ {{∅}}) := by (apply_r equal_commut _ _ _); apply cart_union2_distrib_l
+  _ = _ := by
+      have h : {∅} ∪ {{∅}} = {∅, {∅}} := by
+        apply set_extensionality_ax; intro t; intro_iff
+        · intro h_t
+          apply_r (unord_pr_set_is_unord_pr _ _ _)
+          _apply_l (union2_prop _ _ _), h_t, h_in
+          elim_or h_in, h_in, h_in
+          · left; apply_l (singleton_a_elem_is_a ∅ t); assumption
+          · right; apply_l (singleton_a_elem_is_a {∅} t); assumption
+        · intro h_t
+          apply_r (union2_prop _ _ _)
+          _apply_l (unord_pr_set_is_unord_pr _ _ _), h_t, h_eq
+          elim_or h_eq, h_eq, h_eq
+          · left; apply_r (singleton_a_elem_is_a _ _); assumption
+          · right; apply_r (singleton_a_elem_is_a _ _); assumption
+      rw [h]
+
+
+
+
+theorem disj_union2_eq : ∀ A B C D, (((A ⊔ B) = (C ⊔ D)) ↔ (A = C) ∧ (B = D)) := by
+  intros A B C D
+  intro_iff
+  · intro h
+    intro_and
+    · have h₁ : DU2LP (A ⊔ B) = DU2LP (A ⊔ B) := by rfl
+      conv at h₁ =>
+        rhs
+        rewrite [h]
+      rewrite [dul_disj_union2, dul_disj_union2] at h₁
+      apply set_extensionality_ax; intro t;
+      intro_iff
+      · intro h_t
+        have h₂ : (t, ∅) ∈ A × {∅} := by apply_r (cart_prod_pr_prop _ _ _ _); intro_and; assumption; apply x_in_singl_x
+        rewrite [h₁] at h₂
+        _apply_l (cart_prod_pr_prop _ _ _ _), h₂, h_C
+        elim_and_ h_C
+      · intro h_t
+        have h₂ : (t, ∅) ∈ C × {∅} := by apply_r (cart_prod_pr_prop _ _ _ _); intro_and; assumption; apply x_in_singl_x
+        rewrite [← h₁] at h₂
+        _apply_l (cart_prod_pr_prop _ _ _ _), h₂, h_A
+        elim_and_ h_A
+    · have h₁ : DU2RP (A ⊔ B) = DU2RP (A ⊔ B) := by rfl
+      conv at h₁ =>
+        rhs
+        rewrite [h]
+      rewrite [dur_disj_union2, dur_disj_union2] at h₁
+      apply set_extensionality_ax; intro t;
+      intro_iff
+      · intro h_t
+        have h₂ : (t, {∅}) ∈ B × {{∅}} := by apply_r (cart_prod_pr_prop _ _ _ _); intro_and; assumption; apply x_in_singl_x
+        rewrite [h₁] at h₂
+        _apply_l (cart_prod_pr_prop _ _ _ _), h₂, h_D
+        elim_and_ h_D
+      · intro h_t
+        have h₂ : (t, {∅}) ∈ D × {{∅}} := by apply_r (cart_prod_pr_prop _ _ _ _); intro_and; assumption; apply x_in_singl_x
+        rewrite [← h₁] at h₂
+        _apply_l (cart_prod_pr_prop _ _ _ _), h₂, h_C
+        elim_and_ h_C
+  · intro h; elim_and h, h_AC, h_BD
+    rw [h_AC, h_BD]
+
+
 theorem disj_union2_mon_l : ∀ A B C, (A ⊆ C) → (A ⊔ B) ⊆ (C ⊔ B) := by
   intros A B C h_AC
   apply disj_union2_prop_pr_el
@@ -779,6 +934,67 @@ theorem disj_union2_mon_r : ∀ A B C, (B ⊆ C) → (A ⊔ B) ⊆ (A ⊔ C) := 
     apply disj_union2_left_in; assumption
   · intro_in_ y, h_y
     apply disj_union2_right_in; apply h_BC; assumption
+
+
+theorem disj_union2_subs_then : ∀ A B C D, (A ⊔ B) ⊆ (C ⊔ D) → (A ⊆ C ∧ B ⊆ D) := by
+  intros A B C D h_ABCD
+  intro_and
+  · intro_in_ t, h_t
+    have h := (disj_union2_left_in A B t) h_t
+    specialize_in_ h_ABCD, (t, ∅), h
+    apply disj_union2_pr_emp_in_l C D; assumption
+  · intro_in_ t, h_t
+    have h := (disj_union2_right_in A B t) h_t
+    specialize_in_ h_ABCD, (t, {∅}), h
+    apply disj_union2_pr_semp_in_r C D; assumption
+
+
+theorem subs_is_disj_union2_of : ∀ S A B, (S ⊆ (A ⊔ B)) → (S = ({x ∈ A | (x, ∅) ∈ S}) ⊔ ({x ∈ B | (x, {∅}) ∈ S})) := by
+  intros S A B h_S
+  apply set_extensionality_ax; intro t; intro_iff
+  · intro h_t
+    have h := h_S
+    specialize_in_ h_S, t, h_t; revert h_t; revert h_S
+    apply disj_union2_prop_pr_el
+    · intro_in_ x, h_x
+      intro h_xemp
+      apply disj_union2_left_in
+      apply elem_P_then_spec <;> assumption
+    · intro_in_ y, h_y
+      intro h_ysemp
+      apply disj_union2_right_in
+      apply elem_P_then_spec <;> assumption
+  · apply disj_union2_prop_pr_el
+    · intro_in_ x, h_x
+      have h := spec_then_P _ _ x h_x; assumption
+    · intro_in_ y, h_y
+      have h := spec_then_P _ _ y h_y; assumption
+
+
+theorem subs_disj_union2_ex : ∀ S A B, (S ⊆ (A ⊔ B)) → ∃ C D, C ⊆ A ∧ D ⊆ B ∧ S = C ⊔ D := by
+  intros S A B h_S
+  intro_exists {x ∈ A | (x, ∅) ∈ S}
+  intro_exists {x ∈ B | (x, {∅}) ∈ S}
+  (intro_and <;> try intro_and); all_goals try apply spec_subs
+  apply subs_is_disj_union2_of; assumption
+
+
+theorem subs_disj_union2_ex_un : ∀ S A B, (S ⊆ (A ⊔ B)) → ∃! C D, S = C ⊔ D := by
+  intros S A B h_S
+  elim_exists (subs_disj_union2_ex S A B h_S), C, h_ex; elim_exists h_ex, D, h;
+  elim_and h, h_A, h_B_eq; elim_and h_B_eq, h_B, h_eq; clear h_ex h h_B_eq
+  intro_exists_unique C; intro_and
+  · intro_exists_unique D; intro_and
+    · assumption
+    · intro M h_M
+      rewrite [h_eq] at h_M
+      _apply_l (disj_union2_eq _ _ _ _), h_M, h_DM; elim_and_ h_DM
+  · intro N h_unD
+    elim_exists_unique h_unD, K, h_K, h_unK
+    rewrite [h_eq] at h_K
+    _apply_l (disj_union2_eq _ _ _ _), h_K, h_CN; elim_and_ h_CN
+
+
 
 
 theorem disj_union2_union2_distrib : ∀ A B C D, (A ⊔ B) ∪ (C ⊔ D) = ((A ∪ C) ⊔ (B ∪ D)) := by
@@ -813,3 +1029,86 @@ theorem disj_union2_union2_distrib : ∀ A B C D, (A ⊔ B) ∪ (C ⊔ D) = ((A 
 
 theorem disj_union2_inter2_distrib : ∀ A B C D, (A ⊔ B) ∩ (C ⊔ D) = ((A ∩ C) ⊔ (B ∩ D)) := by
   intros A B C D
+  apply set_extensionality_ax; intro t
+  intro_iff
+  · intro h_t
+    _apply_l (inter2_prop _ _ _), h_t, h; clear h_t; elim_and h, h_AB, h_CD; clear h
+    revert h_AB; revert h_CD; apply disj_union2_prop_pr_el
+    · intro_in_ x, h_x
+      intro h_inAB
+      _apply_l (disj_union2_pr_prop _ _ _ _), h_inAB, h_inAB_emp;
+      elim_or h_inAB_emp, h, h <;> elim_and h, h_in, h_eq <;> clear h
+      · apply disj_union2_left_in; apply_r (inter2_prop _ _ _); intro_and <;> assumption
+      · elim_false; have h_neg := empty_set_is_empty ∅; elim_neg h_neg;
+        conv =>
+          rhs
+          rewrite [h_eq]
+        apply x_in_singl_x
+    · intro_in_ y, h_y
+      intro h_inAB
+      _apply_l (disj_union2_pr_prop _ _ _ _), h_inAB, h_inAB_emp;
+      elim_or h_inAB_emp, h, h <;> elim_and h, h_in, h_eq <;> clear h
+      · elim_false; have h_neg := empty_set_is_empty ∅; elim_neg h_neg;
+        conv =>
+          rhs
+          rewrite [← h_eq]
+        apply x_in_singl_x
+      · apply disj_union2_right_in; apply_r (inter2_prop _ _ _); intro_and <;> assumption
+  · apply disj_union2_prop_pr_el
+    · intro_in_ x, h_x
+      _apply_l (inter2_prop _ _ _), h_x, h_xAC; elim_and h_xAC, h_xA, h_xC; clear h_x h_xAC
+      apply_r (inter2_prop _ _ _); intro_and
+      · apply disj_union2_left_in; assumption
+      · apply disj_union2_left_in; assumption
+    · intro_in_ y, h_y
+      _apply_l (inter2_prop _ _ _), h_y, h_yBD; elim_and h_yBD, h_yB, h_yD; clear h_y h_yBD
+      apply_r (inter2_prop _ _ _); intro_and
+      · apply disj_union2_right_in; assumption
+      · apply disj_union2_right_in; assumption
+
+
+
+
+
+theorem disj_union2_diff_distrib : ∀ A B C D, (A ⊔ B) \ (C ⊔ D) = ((A \ C) ⊔ (B \ D)) := by
+  intros A B C D
+  apply set_extensionality_ax; intro t
+  intro_iff
+  · intro h_t
+    _apply_l (difference_prop _ _ _), h_t, h; clear h_t; elim_and h, h_AB, h_nCD; clear h;
+    revert h_nCD
+    revert h_AB
+    apply disj_union2_prop_pr_el
+    · intro_in_ x, h_x
+      intro h_inCD
+      apply_r (disj_union2_pr_prop _ _ _ _)
+      left; intro_and;
+      · apply elem_P_then_spec; try assumption
+        intro_neg h_C
+        elim_neg h_inCD
+        apply disj_union2_left_in; assumption
+      · rfl
+    · intro_in_ y, h_y
+      intro h_ninCD
+      apply_r (disj_union2_pr_prop _ _ _ _)
+      right; intro_and;
+      · apply elem_P_then_spec; try assumption
+        intro_neg h_D
+        elim_neg h_ninCD
+        apply disj_union2_right_in; assumption
+      · rfl
+  · apply disj_union2_prop_pr_el
+    · intro_in_ x, h_x
+      _apply_l (difference_prop _ _ _), h_x, h; clear h_x; elim_and h, h_A, h_nC; clear h
+      apply_r (difference_prop _ _ _); intro_and
+      · apply disj_union2_left_in; assumption
+      · intro_neg h_inCD
+        elim_neg h_nC
+        apply disj_union2_pr_emp_in_l C D x; assumption
+    · intro_in_ y, h_y
+      _apply_l (difference_prop _ _ _), h_y, h; clear h_y; elim_and h, h_B, h_nD; clear h
+      apply_r (difference_prop _ _ _); intro_and
+      · apply disj_union2_right_in; assumption
+      · intro_neg h_inCD
+        elim_neg h_nD
+        apply disj_union2_pr_semp_in_r C D y; assumption

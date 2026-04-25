@@ -2,10 +2,10 @@
 
 Now, using constructions from the first chapter, we can define
 
-- union (`∪`) of 2 sets
-- intersection (`∩`) of 2 sets
-- difference (`\`) of 2 sets
-- symmetric difference (`△`) of 2 sets
+- Union (`∪`) of 2 sets
+- Intersection (`∩`) of 2 sets
+- Difference (`\`) of 2 sets
+- Symmetric Difference (`△`) of 2 sets
 
 Using this operations, we want to prove the basic theorems of [Set Algebra](https://en.wikipedia.org/wiki/Algebra_of_sets):
 

@@ -1,73 +1,43 @@
 import Props2Theories.B_Set.A_Constructions.Task
 import Props2Theories.B_Set.B_Set_Algebra.Task
-open Lean Meta Elab PrettyPrinter Delaborator SubExpr
-declare_syntax_cat set_comprehension
-syntax term : set_comprehension
-syntax set_comprehension ", " term : set_comprehension
-partial def collectSetElems (stx : Syntax) (acc : List Syntax := []) : List Syntax :=
-  match stx with
-  | `(set_comprehension| $rest:set_comprehension , $last:term) => collectSetElems rest.raw (last.raw :: acc)
-  | `(set_comprehension| $a:term) => a.raw :: acc
-  | _ => acc
-macro:2000 "{" e:set_comprehension "}" : term => do
-  let elems := collectSetElems e.raw
-  match elems with
-  | [] => Macro.throwUnsupported
-  | [a] => `(singleton_set $(⟨a⟩))
-  | [a, b] => `(unord_pr_set $(⟨a⟩) $(⟨b⟩))
-  | a :: b :: rest =>
-    let mut res ← `(unord_pr_set $(⟨a⟩) $(⟨b⟩))
-    for item in rest do
-      res ← `(union2 $res (singleton_set $(⟨item⟩)))
-    return res
-partial def collectExprElems : DelabM (List Syntax) := do
-  let e ← getExpr
-  if e.isAppOfArity ``union2 2 then
-    let args := e.getAppArgs
-    let rhs := args[1]!
-    if rhs.isAppOfArity ``singleton_set 1 then
-      let last ← withAppArg delab
-      let lastElem := match last with | `({ $a }) => a.raw | _ => last.raw
-      let rest ← withAppFn $ withAppArg collectExprElems
-      if rest.isEmpty then return []
-      return rest ++ [lastElem]
-    else return []
-  else if e.isAppOfArity ``unord_pr_set 2 then
-    let a ← withAppFn $ withAppArg delab
-    let b ← withAppArg delab
-    return [a.raw, b.raw]
-  else if e.isAppOfArity ``singleton_set 1 then
-    let a ← withAppArg delab
-    return [a.raw]
-  else return []
 
-@[app_delab union2]
-def delabUnionChain : Delab := do
-  let _ ← getExpr
-  let elems ← collectExprElems
-  match elems with
+-- 1. ВВОД (Макросы для создания цепочки объединений)
+syntax (priority := high) "{" term ", " term ", " term,+ "}" : term
 
-  | [] =>
-    let lhs ← withAppFn $ withAppArg delab
-    let rhs ← withAppArg delab
-    `($lhs ∪ $rhs)
-  | [single] => `({ $(⟨single⟩):term })
-  | a :: rest =>
-    let mut sc : TSyntax `set_comprehension := ⟨a⟩
-    for item in rest do
-      let itemTerm : TSyntax `term := ⟨item⟩
-      let newSc ← `(set_comprehension| $sc, $itemTerm)
-      sc := ⟨newSc.raw⟩
-    `({ $sc:set_comprehension })
+macro_rules
 
+  | `({ $a, $b, $c }) => `(union2 (unord_pr_set $a $b) (singleton_set $c))
+  | `({ $a, $b, $c, $d }) => `(union2 (union2 (unord_pr_set $a $b) (singleton_set $c)) (singleton_set $d))
+  | `({ $a, $b, $c, $d, $e }) => `(union2 (union2 (union2 (unord_pr_set $a $b) (singleton_set $c)) (singleton_set $d)) (singleton_set $e))
+
+  | `({ $a, $b, $c, $d, $e, $f }) => `(union2 (union2 (union2 (union2 (unord_pr_set $a $b) (singleton_set $c)) (singleton_set $d)) (singleton_set $e)) (singleton_set $f))
+
+-- 2. ВЫВОД (Принтер для Infoview)
+-- Чтобы избежать конфликта со структурами {}, мы используем встроенную категорию sepBy
+@[app_unexpander union2]
+def unexpandUnion2 : Lean.PrettyPrinter.Unexpander
+  | `($$f (union2 (union2 (union2 (unord_pr_set $a $b) (singleton_set $c)) (singleton_set $d)) (singleton_set $e)) (singleton_set $f)) => `({$a, $b, $c, $d, $e, $f})
+  | `($$f (union2 (union2 (unord_pr_set $a $b) (singleton_set $c)) (singleton_set $d)) (singleton_set $e)) => `({$a, $b, $c, $d, $e})
+
+  | `($$f (union2 (unord_pr_set $a $b) (singleton_set $c)) (singleton_set $d)) => `({$a, $b, $c, $d})
+  | `($$f (unord_pr_set $a $b) (singleton_set $c)) => `({$a, $b, $c})
+  | _ => throw ()
+
+-- Базовые принтеры (обязательно БЕЗ пробелов внутри { }, чтобы Lean не путал со структурами)
 @[app_unexpander unord_pr_set]
-def unexpandUnordPrSet : Unexpander
+def unexpandUnordPrSet : Lean.PrettyPrinter.Unexpander
 
-  | `($(_) $a $b) => `({ $a, $b })
+  | `($(_) $a $b) => `({$a, $b})
   | _ => throw ()
 
 @[app_unexpander singleton_set]
-def unexpandSingletonSet : Unexpander
+def unexpandSingletonSet : Lean.PrettyPrinter.Unexpander
 
-  | `($(_) $a) => `({ $a })
+  | `($(_) $a) => `({$a})
   | _ => throw ()
+
+-- 3. ПРОВЕРКА
+variable (a b c d e f : Set)
+#check {a, b, c}
+#check {a, b, c, d}
+#check {a, b, c, d, e, f}
