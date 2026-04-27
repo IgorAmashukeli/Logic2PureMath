@@ -32,20 +32,23 @@ theorem subs_is_eq_uinion2 : ∀ A B, (A ⊆ B ↔ A ∪ B = B) := sorry
 -- Idemdpotency
 theorem union2_idepm : (∀ A, A ∪ A = A) := sorry
 theorem inter2_idemp : (∀ A, A ∩ A = A) := sorry
-
+theorem differ_idemp_emp : ∀ A, A \ A = ∅ := sorry
+theorem symm_differ_idemp_emp : ∀ A, A △ A = ∅ := sorry
 
 -- Commutativity
 theorem union2_comm : (∀ A B, A ∪ B = B ∪ A) := sorry
 theorem intersec2_comm : (∀ A B, A ∩ B = B ∩ A) := sorry
-
+theorem symm_diff_comm : ∀ A B, A △ B = B △ A := sorry
 
 -- Associativivty
 theorem union2_assoc : (∀ A B C, (A ∪ B) ∪ C = A ∪ (B ∪ C)) := sorry
 theorem inter2_assoc : (∀ A B C, (A ∩ B) ∩ C = A ∩ (B ∩ C)) := sorry
+theorem symm_differ_assoc_cl : ∀ A B C, ((A △ B) △ C) = (A △ (B △ C)) := sorry
 
 -- Absorbtion
 theorem inter2_union2_absorb : (∀ A B, A ∩ (A ∪ B) = A) := sorry
 theorem union_inter_absorb : (∀ A B, A ∪ (A ∩ B) = A) := sorry
+theorem symm_differ_absorb : ∀ A B, (A △ B) △ A = B := sorry
 
 -- Distributivity
 theorem inter_union_distrib : (∀ A B C, A ∩ (B ∪ C) = (A ∩ B) ∪ (A ∩ C)) := sorry
@@ -61,6 +64,10 @@ theorem difference_inter_prop : ∀ U A B, (A ⊆ U) → (A \ B = A ∩ (U \ B))
 -- ∅ and U properties
 theorem inter2_empty : (∀ A, A ∩ ∅ = ∅) := sorry
 theorem union2_empty : (∀ A, A ∪ ∅ = A) := sorry
+theorem differ_empty_l : ∀ A, A \ ∅ = A := sorry
+theorem differ_empty_r : ∀ A, ∅ \ A = ∅ := sorry
+theorem symm_differ_empty : ∀ A, A △ ∅ = A := sorry
+theorem symm_differ_universum : ∀ A U, (A ⊆ U) → (A △ U) = U \ A := sorry
 theorem inter2_universum : ∀ U A, (A ⊆ U) → A ∩ U = A := sorry
 theorem union2_universum : ∀ U A, (A ⊆ U) → A ∪ U = U := sorry
 theorem inter2_to_empty: ∀ U A, (A ∩ (U \ A) = ∅) := sorry
@@ -68,6 +75,9 @@ theorem union2_to_universum_cl : ∀ U A, (A ⊆ U) → (A ∪ (U \ A) = U) := s
 
 -- Double Difference Equal Definition
 theorem diff_diff_is_diff_inter2_cl  : (∀ A B C, A \ (B \ C) = (A \ B) ∪ (A ∩ C)) := sorry
+
+-- Symmetric Difference Equal Definition
+theorem sym_diff_eq : ∀ A B, A △ B = (A ∪ B) \ (A ∩ B) := sorry
 
 -- Monotonous properties
 theorem mon_union2_l : ∀ A B C, (A ⊆ B) → (A ∪ C) ⊆ (B ∪ C) := sorry

@@ -82,7 +82,7 @@ def unexpandReplSet : Unexpander
   | _ => throw ()
 
 theorem repl_set_is_repl (P : Set → Set → Prop) (A : Set) (h : ∀ x y z, P x y → P x z → y = z) :
-    ∀ y, y ∈ (ReplImg{ y | ∃ x ∈ A, P x y} of h) ↔ ∃ x ∈ A, P x y := sorry
+∀ y, y ∈ (ReplImg{ y | ∃ x ∈ A, P x y} of h) ↔ ∃ x ∈ A, P x y := sorry
 theorem is_repl_repl_set (P : Set → Set → Prop) (A : Set) (h : ∀ x y z, P x y → P x z → y = z) (B : Set) (hB : ∀ y, (y ∈ B ↔ ∃ x ∈ A, P x y)) :
   B = ReplImg{ y | ∃ x ∈ A, P x y} of h := sorry
 
@@ -165,6 +165,8 @@ theorem interset_all_in : ∀ A x, (x ∈ ⋂ A) → (∀ y ∈ A, x ∈ y) := s
 theorem intersection_non_empty : ∀ A, ((is_nempty A) → ∀ x, (x ∈ ⋂ A) ↔ ∀ y ∈ A, x ∈ y) := sorry
 theorem all_in_exi_interset : ∀ A x, (is_nempty A) → (∀ y ∈ A, x ∈ y) → (x ∈ ⋂ A) := sorry
 theorem intersect_subset_monotonic : ∀ A B, (is_nempty A) → (A ⊆ B) → (⋂ B ⊆ ⋂ A) := sorry
+theorem inter_subset_elem : (∀ A, ∀ x ∈ A, ⋂ A ⊆ x) := sorry
+theorem all_ss_then_inter_ss : ∀ A B, (is_nempty A) → (∀ X ∈ A, B ⊆ X) → (B ⊆ ⋂ A) := sorry
 
 
 -- Boolean Without Empty Set Definition And Properties
@@ -204,6 +206,5 @@ def unexpandCollectComprehSet : Unexpander
     `({ $x_id | $P })
   | _ => throw ()
 
-theorem compr_is_compr_cl (P : Set → Prop) : is_collective P →
-(∀ x, (x ∈ {x | P x} ↔ P x)) := sorry
+theorem compr_is_compr_cl (P : Set → Prop) : is_collective P → (∀ x, (x ∈ {x | P x} ↔ P x)) := sorry
 theorem compr_subs_cl (P : Set → Prop) (A : Set) : is_collective_on P A → ({x | P x} ⊆ A) := sorry

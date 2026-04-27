@@ -1,7 +1,7 @@
 {"synthetic": false,
  "schemaVersion": "2025-09-10",
  "outputs":
- {"o": ["a7332d0d89548f57.olean"],
+ {"o": ["337e387835f944d2.olean"],
   "m": false,
   "i": "af7852c4216734c1.ilean",
   "c": "b985b9f390278e0c.c"},
@@ -219,9 +219,9 @@
        [["Props2Theories.B_Set.A_Constructions.Task transitive imports (legacy)",
          "28bafacd3c38981c"],
         ["Props2Theories.B_Set.A_Constructions.Task:importAllArts",
-         "864516f12d09cff9"],
+         "d6946d9b9c467a04"],
         ["Props2Theories.B_Set.B_Set_Algebra.SetSynt transitive imports (legacy)",
-         "aea6b35e5cc63229"],
+         "7482cc2717461359"],
         ["Props2Theories.B_Set.B_Set_Algebra.SetSynt:importAllArts",
          "779480bd75d885ea"]]]]],
     ["libs",
@@ -239,4 +239,4 @@
    "257468e1df09832a"],
   ["Package.id?: (some Props2Theories)", "bf69640ed8a43e05"],
   ["Module.leanArgs: #[]", "00000000000006bb"]],
- "depHash": "2a4c0545c9ee58d6"}
+ "depHash": "86cf13c764616316"}

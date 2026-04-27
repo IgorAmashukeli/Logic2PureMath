@@ -232,6 +232,9 @@ theorem boolean_monotonic : ∀ A B, A ⊆ B ↔ 𝒫 A ⊆ 𝒫 B := by
 
 
 
+
+
+
 -- Replacement Set Definition And Properties
 theorem exists_unique_replacement (P : Set → Set → Prop) : ∀ A, (∀ x, ∀ y, ∀ z, P x y → P x z → y = z) → ∃! B, ∀ y, (y ∈ B ↔ ∃ x ∈ A, P x y) := by
   intro A
@@ -704,6 +707,23 @@ theorem intersect_subset_monotonic : ∀ A B, (is_nempty A) → (A ⊆ B) → (�
   specialize_in_ hAB, y, h_y
   have h₁ := (interset_all_in B) x h_x
   specialize_in_ h₁, y, hAB
+  assumption
+
+
+theorem inter_subset_elem : (∀ A, ∀ x ∈ A, ⋂ A ⊆ x) := by
+  intros A x h_x
+  intro t h_t
+  _apply_l (interset_is_interset _ _), h_t, h_in; elim_and h_in, h_inun, h_for
+  specialize_in_ h_for, x, h_x
+  assumption
+
+theorem all_ss_then_inter_ss : ∀ A B, (is_nempty A) → (∀ X ∈ A, B ⊆ X) → (B ⊆ ⋂ A) := by
+  intros A B h_nemp h
+  intro t h_t
+  apply all_in_exi_interset; assumption
+  intro_in_ y, h_y
+  specialize_in_ h, y, h_y
+  apply h
   assumption
 
 

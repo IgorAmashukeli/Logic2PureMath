@@ -955,6 +955,25 @@ theorem xor_assoc_cl (p q r : Prop) : ((p ⊕ q) ⊕ r) ↔ (p ⊕ (q ⊕ r)) :=
           elim_neg_ h_nq
 
 
+theorem xor_absorb_cl (p q : Prop) : q ↔ ((p ⊕ q) ⊕ p) := by
+  intro_iff
+  · intro h_q
+    elim_or (tnd_cl p), h_p, h_np
+    · right; intro_and
+      · assumption
+      · intro_neg h_pq
+        elim_or h_pq, h, h <;> elim_and h, h_1, h_2 <;> clear h <;> elim_neg_ h_2
+    · left; intro_and;
+      · right; intro_and <;> assumption
+      · assumption
+  · intro h_pqp
+    elim_or h_pqp, h, h <;> elim_and h, h_1, h_2 <;> clear h
+    · elim_or h_1, h_l, h_r
+      · elim_and h_l, h_p, h_nq; elim_f_neg h_2
+      · elim_and_ h_r
+    · by_contra h_nq
+      elim_neg h_2
+      left; intro_and <;> assumption
 
 
 

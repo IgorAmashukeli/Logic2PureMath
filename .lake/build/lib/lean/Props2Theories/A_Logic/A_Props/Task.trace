@@ -1,9 +1,9 @@
 {"synthetic": false,
  "schemaVersion": "2025-09-10",
  "outputs":
- {"o": ["f1d7dd9b30b4af8a.olean"],
+ {"o": ["a1758e060793bb64.olean"],
   "m": false,
-  "i": "4e4b69864d42151d.ilean",
+  "i": "c4fcbfee1e8ca82c.ilean",
   "c": "78c2336bc3e9cb94.c"},
  "log":
  [{"message":
@@ -193,6 +193,9 @@
    "Props2Theories/A_Logic/A_Props/Task.lean:144:8: declaration uses `sorry`",
    "level": "warning"},
   {"message":
+   "Props2Theories/A_Logic/A_Props/Task.lean:153:8: declaration uses `sorry`",
+   "level": "warning"},
+  {"message":
    "Props2Theories/A_Logic/A_Props/Task.lean:154:8: declaration uses `sorry`",
    "level": "warning"},
   {"message":
@@ -206,9 +209,6 @@
    "level": "warning"},
   {"message":
    "Props2Theories/A_Logic/A_Props/Task.lean:158:8: declaration uses `sorry`",
-   "level": "warning"},
-  {"message":
-   "Props2Theories/A_Logic/A_Props/Task.lean:159:8: declaration uses `sorry`",
    "level": "warning"},
   {"message":
    "Props2Theories/A_Logic/A_Props/Task.lean:160:8: declaration uses `sorry`",
@@ -230,6 +230,9 @@
    "level": "warning"},
   {"message":
    "Props2Theories/A_Logic/A_Props/Task.lean:166:8: declaration uses `sorry`",
+   "level": "warning"},
+  {"message":
+   "Props2Theories/A_Logic/A_Props/Task.lean:167:8: declaration uses `sorry`",
    "level": "warning"}],
  "inputs":
  [["Props2Theories.A_Logic.A_Props.Task:deps",
@@ -248,10 +251,10 @@
   ["Lean 4.30.0, commit 3dc1a088b6d2d8eafe25a7cd7ec7b58d731bd7cc",
    "2c8d2623007dfc36"],
   ["/home/igor/ComputerScience/Props2Theories/Props2Theories/A_Logic/A_Props/Task.lean",
-   "0afe753b80e571cd"],
+   "f8cfd6cd073a8ab3"],
   ["options", "00000000000006bb"],
   ["isModule: false", "feefd2a0d3a1847e"],
   ["Module.name: Props2Theories.A_Logic.A_Props.Task", "23aef66af9caf14f"],
   ["Package.id?: (some Props2Theories)", "bf69640ed8a43e05"],
   ["Module.leanArgs: #[]", "00000000000006bb"]],
- "depHash": "74c8c1066305d4fd"}
+ "depHash": "9d3e0cb4fd352798"}

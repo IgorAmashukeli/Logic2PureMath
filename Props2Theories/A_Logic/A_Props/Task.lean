@@ -149,8 +149,14 @@ theorem impl_assoc_cl (p q r : Prop) : (p ↔ (q ↔ r)) ↔ ((p ↔ q) ↔ r) :
 def xor_pr (p q : Prop) : Prop := (p ∧ ¬q) ∨ (q ∧ ¬p)
 notation:10 p " ⊕ " q:11 => xor_pr p q
 
-
 --Xor properties
+theorem xor_introl (p q : Prop) : (p ∧ ¬q) → (p ⊕ q) := sorry
+theorem xor_intror (p q : Prop) : (q ∧ ¬p) → (p ⊕ q) := sorry
+theorem xor_intro (p q : Prop) : (p ∨ q) → (¬ (p ∧ q)) → (p ⊕ q) := sorry
+theorem xor_left (p q : Prop) : (p ⊕ q) → (p ∨ q) := sorry
+theorem xor_right (p q : Prop) : (p ⊕ q) → (¬ (p ∧ q)) := sorry
+theorem xor_elim (p q r : Prop) : (p ⊕ q) → ((p ∧ ¬q) → r) → ((q ∧ ¬p) → r) → r := sorry
+
 theorem xor_equiv_def (p q : Prop) : (p ⊕ q) ↔ ((p ∨ q) ∧ (¬ (p ∧ q))) := sorry
 theorem xor_not_iff_cl (p q : Prop) : (p ⊕ q) ↔ (¬ (p ↔ q)) := sorry
 theorem iff_not_xor_cl (p q : Prop) : (p ↔ q) ↔ (¬ (p ⊕ q)) := sorry
@@ -158,9 +164,4 @@ theorem xor_equal (p : Prop) : ¬ (p ⊕ p) := sorry
 theorem xor_neg (p : Prop) : (p ⊕ ¬ p) := sorry
 theorem xor_commut (p q : Prop) : (p ⊕ q) ↔ (q ⊕ p) := sorry
 theorem xor_assoc_cl (p q r : Prop) : ((p ⊕ q) ⊕ r) ↔ (p ⊕ (q ⊕ r)) := sorry
-theorem xor_introl (p q : Prop) : (p ∧ ¬q) → (p ⊕ q) := sorry
-theorem xor_intror (p q : Prop) : (q ∧ ¬p) → (p ⊕ q) := sorry
-theorem xor_intro (p q : Prop) : (p ∨ q) → (¬ (p ∧ q)) → (p ⊕ q) := sorry
-theorem xor_left (p q : Prop) : (p ⊕ q) → (p ∨ q) := sorry
-theorem xor_right (p q : Prop) : (p ⊕ q) → (¬ (p ∧ q)) := sorry
-theorem xor_elim (p q r : Prop) : (p ⊕ q) → ((p ∧ ¬q) → r) → ((q ∧ ¬p) → r) → r := sorry
+theorem xor_absorb_cl (p q : Prop) : q ↔ ((p ⊕ q) ⊕ p) := sorry

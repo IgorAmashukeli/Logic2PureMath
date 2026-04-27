@@ -123,7 +123,7 @@
        [["Props2Theories.A_Logic.A_Props.Task transitive imports (legacy)",
          "e17e140f360835d1"],
         ["Props2Theories.A_Logic.A_Props.Task:importAllArts",
-         "283f5caaf9c24cae"],
+         "d29153e215c409a9"],
         ["Props2Theories.TacticNames transitive imports (legacy)",
          "00000000000006bb"],
         ["Props2Theories.TacticNames:importAllArts", "ba5c2407b6bf0f05"]]]]],
@@ -141,4 +141,4 @@
   ["Module.name: Props2Theories.A_Logic.C_Equality.Task", "7e7bde035fcae227"],
   ["Package.id?: (some Props2Theories)", "bf69640ed8a43e05"],
   ["Module.leanArgs: #[]", "00000000000006bb"]],
- "depHash": "8a26f4a317ae3c02"}
+ "depHash": "e53431433f169a1d"}

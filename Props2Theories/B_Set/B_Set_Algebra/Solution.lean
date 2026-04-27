@@ -151,6 +151,21 @@ theorem inter2_idemp : (∀ A, A ∩ A = A) := by
   apply subset_refl
 
 
+theorem differ_idemp_emp : ∀ A, A \ A = ∅ := by
+  intro A
+  apply subset_empty_is_empty
+  intro t h_t
+  _apply_l (difference_prop _ _ _), h_t, h_inA_ninA; elim_and h_inA_ninA, h_inA, h_ninA
+  elim_f_neg h_ninA
+
+theorem symm_differ_idemp_emp : ∀ A, A △ A = ∅ := by
+  intro A
+  apply subset_empty_is_empty
+  intro t h_t
+  _apply_l (sym_diff_prop _ _ _), h_t, h_xor
+  elim_or h_xor, h_and, h_and <;> elim_and h_and, h_A, h_nA <;> elim_f_neg h_nA
+
+
 theorem union2_comm : (∀ A B, A ∪ B = B ∪ A) := by
   intros A B
   apply set_extensionality_ax; intro x
@@ -166,6 +181,16 @@ theorem inter2_comm : (∀ A B, A ∩ B = B ∩ A) := by
   _ ↔ x ∈ A ∧ x ∈ B := by apply inter2_prop
   _ ↔ x ∈ B ∧ x ∈ A := by apply conj_commut
   _ ↔ _ := by apply iff_symm; apply inter2_prop
+
+
+theorem symm_diff_comm : ∀ A B, A △ B = B △ A := by
+  intros A B
+  apply set_extensionality_ax; intro x
+  calc
+  _ ↔ (x ∈ A ⊕ x ∈ B) := by apply sym_diff_prop
+  _ ↔ (x ∈ B ⊕ x ∈ A) := by apply xor_commut
+  _ ↔ _ := by apply iff_symm; apply sym_diff_prop
+
 
 theorem union2_assoc : (∀ A B C, (A ∪ B) ∪ C = A ∪ (B ∪ C)) := by
   intros A B C
@@ -188,6 +213,34 @@ theorem inter2_assoc : (∀ A B C, (A ∩ B) ∩ C = A ∩ (B ∩ C)) := by
     _ ↔ _ := by apply iff_symm; apply inter2_prop
 
 
+  theorem symm_differ_assoc_cl : ∀ A B C, ((A △ B) △ C) = (A △ (B △ C)) := by
+    intros A B C
+    apply set_extensionality_ax; intro x
+    calc
+    _ ↔ ((x ∈ (A △ B)) ⊕ x ∈ C) := by apply sym_diff_prop
+    _ ↔ (((x ∈ A) ⊕ (x ∈ B)) ⊕ (x ∈ C)) := by
+      have h₁ : (x ∈ A △ B) = (x ∈ A ⊕ x ∈ B) := by
+        _propext_cl_
+        apply sym_diff_prop
+      have h : (x ∈ A △ B ⊕ x ∈ C) = ((x ∈ A ⊕ x ∈ B) ⊕ x ∈ C) := by rw [h₁]
+      rewrite [h]
+      apply trivial_equivalence
+    _ ↔ ((x ∈ A) ⊕ ((x ∈ B) ⊕ (x ∈ C))) := by apply xor_assoc_cl
+    _ ↔ ((x ∈ A) ⊕ (x ∈ B △ C)) := by
+      have h₁ : ((x ∈ B) ⊕ (x ∈ C)) = (x ∈ (B △ C)) := by
+        _propext_cl_
+        apply iff_symm; apply sym_diff_prop
+      have h : ((x ∈ A) ⊕ ((x ∈ B) ⊕ (x ∈ C))) = ((x ∈ A) ⊕ (x ∈ B △ C)) := by rw [h₁]
+      rewrite [h]
+      apply trivial_equivalence
+    _ ↔ _ := by apply iff_symm; apply sym_diff_prop
+
+
+
+
+
+
+
 
 theorem inter2_union2_absorb : (∀ A B, A ∩ (A ∪ B) = A) := by
   intros A B
@@ -199,6 +252,22 @@ theorem union_inter_absorb : (∀ A B, A ∪ (A ∩ B) = A) := by
   calc
     _ = (A ∩ B) ∪ A := by apply union2_comm
     _ = _ := by apply_l (subs_is_eq_uinion2 _ _); apply inter2_subs_left
+
+
+theorem symm_differ_absorb : ∀ A B, (A △ B) △ A = B := by
+  intros A B
+  apply set_extensionality_ax; intro x
+  calc
+  _ ↔ (x ∈ (A △ B) ⊕ (x ∈ A)) := by apply sym_diff_prop
+  _ ↔ (((x ∈ A) ⊕ (x ∈ B)) ⊕ (x ∈ A)) := by
+    have h₁ : (x ∈ A △ B) = (x ∈ A ⊕ x ∈ B) := by
+        _propext_cl_
+        apply sym_diff_prop
+    have h : (x ∈ (A △ B) ⊕ (x ∈ A)) = (((x ∈ A) ⊕ (x ∈ B)) ⊕ (x ∈ A)) := by rw [h₁]
+    rewrite [h]
+    apply trivial_equivalence
+  _ ↔ _ := by apply iff_symm; apply xor_absorb_cl (x ∈ A) (x ∈ B)
+
 
 theorem inter_union_distrib : (∀ A B C, A ∩ (B ∪ C) = (A ∩ B) ∪ (A ∩ C)) := by
   intros A B C
@@ -322,6 +391,60 @@ theorem union2_empty : (∀ A, A ∪ ∅ = A) := by
   rewrite [union2_comm]
   apply_l (subs_is_eq_uinion2 _ _)
   apply empty_subset_any
+
+
+theorem differ_empty_l : ∀ A, A \ ∅ = A := by
+  intro A
+  apply set_extensionality_ax; intro t;
+  intro_iff
+  · apply difference_subs_left
+  · intro h_t
+    apply_r (difference_prop _ _ _); intro_and
+    · assumption
+    · exact empty_set_is_empty t
+
+
+theorem differ_empty_r : ∀ A, ∅ \ A = ∅ := by
+  intro A
+  apply subset_empty_is_empty
+  apply difference_subs_left
+
+
+
+theorem symm_differ_empty : ∀ A, A △ ∅ = A := by
+  intro A
+  apply set_extensionality_ax; intro t;
+  intro_iff
+  · intro h_t
+    _apply_l (sym_diff_prop _ _ _), h_t, h_xor; clear h_t;
+    elim_or h_xor, h_or, h_or
+    · elim_and_ h_or
+    · elim_and h_or, h_inemp, h_ninA
+      elim_f_neg (empty_set_is_empty t)
+  · intro h_t
+    apply_r (sym_diff_prop _ _ _)
+    left; intro_and
+    · assumption
+    · exact empty_set_is_empty t
+
+
+theorem symm_differ_universum : ∀ A U, (A ⊆ U) → (A △ U) = U \ A := by
+  intro A U h_AU
+  apply_l (subs_subs_then_eq _ _)
+  intro_and
+  · intro t h_t
+    apply_r (difference_prop _ _ _)
+    _apply_l (sym_diff_prop _ _ _), h_t, h_xor; elim_or h_xor, h_and, h_and <;> elim_and h_and, h_l, h_r
+    · intro_and
+      · apply h_AU; assumption
+      · intro_neg h_inA
+        specialize_in_ h_AU, t, h_inA
+        elim_neg_ h_r
+    · intro_and
+      · assumption
+      · assumption
+  · apply right_union2_subs
+
 
 
 
