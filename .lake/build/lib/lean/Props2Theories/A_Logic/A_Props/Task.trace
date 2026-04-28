@@ -1,13 +1,12 @@
 {"synthetic": false,
  "schemaVersion": "2025-09-10",
  "outputs":
- {"o": ["a1758e060793bb64.olean"],
-  "m": false,
+ {"o": ["b1c7d811ee8c69a0.olean"],
   "i": "c4fcbfee1e8ca82c.ilean",
-  "c": "78c2336bc3e9cb94.c"},
+  "c": "d146111b0b41543e.c"},
  "log":
  [{"message":
-   ".> LEAN_PATH=/home/igor/ComputerScience/Props2Theories/.lake/build/lib/lean /home/igor/.elan/toolchains/leanprover--lean4---v4.30.0-rc2/bin/lean /home/igor/ComputerScience/Props2Theories/Props2Theories/A_Logic/A_Props/Task.lean -o /home/igor/ComputerScience/Props2Theories/.lake/build/lib/lean/Props2Theories/A_Logic/A_Props/Task.olean -i /home/igor/ComputerScience/Props2Theories/.lake/build/lib/lean/Props2Theories/A_Logic/A_Props/Task.ilean -c /home/igor/ComputerScience/Props2Theories/.lake/build/ir/Props2Theories/A_Logic/A_Props/Task.c --setup /home/igor/ComputerScience/Props2Theories/.lake/build/ir/Props2Theories/A_Logic/A_Props/Task.setup.json --json",
+   ".> LEAN_PATH=/home/igor/ComputerScience/Props2Theories/.lake/build/lib/lean /home/igor/.elan/toolchains/leanprover--lean4---v4.29.1/bin/lean /home/igor/ComputerScience/Props2Theories/Props2Theories/A_Logic/A_Props/Task.lean -o /home/igor/ComputerScience/Props2Theories/.lake/build/lib/lean/Props2Theories/A_Logic/A_Props/Task.olean -i /home/igor/ComputerScience/Props2Theories/.lake/build/lib/lean/Props2Theories/A_Logic/A_Props/Task.ilean -c /home/igor/ComputerScience/Props2Theories/.lake/build/ir/Props2Theories/A_Logic/A_Props/Task.c --setup /home/igor/ComputerScience/Props2Theories/.lake/build/ir/Props2Theories/A_Logic/A_Props/Task.setup.json --json",
    "level": "trace"},
   {"message":
    "Props2Theories/A_Logic/A_Props/Task.lean:4:8: declaration uses `sorry`",
@@ -242,14 +241,14 @@
       ["imports",
        [["Props2Theories.TacticNames transitive imports (legacy)",
          "00000000000006bb"],
-        ["Props2Theories.TacticNames:importAllArts", "ba5c2407b6bf0f05"]]]]],
+        ["Props2Theories.TacticNames:importAllArts", "f00e17ef7ded015f"]]]]],
     ["libs",
      [["import dynlibs", "00000000000006bb"],
       ["package external libraries", "00000000000006bb"],
       ["module dynlibs", "00000000000006bb"],
       ["module plugins", "00000000000006bb"]]]]],
-  ["Lean 4.30.0, commit 3dc1a088b6d2d8eafe25a7cd7ec7b58d731bd7cc",
-   "2c8d2623007dfc36"],
+  ["Lean 4.29.1, commit f72c35b3f637c8c6571d353742168ab66cc22c00",
+   "fa77a35a41db35c0"],
   ["/home/igor/ComputerScience/Props2Theories/Props2Theories/A_Logic/A_Props/Task.lean",
    "f8cfd6cd073a8ab3"],
   ["options", "00000000000006bb"],
@@ -257,4 +256,4 @@
   ["Module.name: Props2Theories.A_Logic.A_Props.Task", "23aef66af9caf14f"],
   ["Package.id?: (some Props2Theories)", "bf69640ed8a43e05"],
   ["Module.leanArgs: #[]", "00000000000006bb"]],
- "depHash": "9d3e0cb4fd352798"}
+ "depHash": "de183658088d8989"}
