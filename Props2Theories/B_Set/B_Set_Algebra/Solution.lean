@@ -3,10 +3,13 @@ import Props2Theories.B_Set.A_Constructions.Task
 
 noncomputable def union2 (A B : Set) := ⋃ {A, B}
 notation:max A:1024 " ∪ " B:1024 => union2 A B
+
 noncomputable def inter2 (A B : Set) := {x ∈ A | x ∈ B}
 notation:max A:1024 " ∩ " B:1024 => inter2 A B
+
 noncomputable def difference (A B : Set) := {x ∈ A | x ∉ B}
 notation:max A:1024 " \\ " B:1024 => difference A B
+
 noncomputable def symmetric_difference (A B : Set) := (A \ B) ∪ (B \ A)
 notation:max A:1024 " △ " B:1024 => symmetric_difference A B
 
@@ -34,15 +37,18 @@ theorem union2_prop : (∀ A B x, x ∈ A ∪ B ↔ x ∈ A ∨ x ∈ B) := by
       apply right_un_pr
       assumption
 
+
 theorem inter2_prop : (∀ A B x, x ∈ A ∩ B ↔ x ∈ A ∧ x ∈ B) := by
   intros A B
   let Q t := t ∈ B
   exact (spec_is_spec A Q)
 
+
 theorem difference_prop : (∀ A B x, x ∈ A \ B ↔ x ∈ A ∧ x ∉ B) := by
   intros A B
   let Q t := t ∉ B
   exact (spec_is_spec A Q)
+
 
 theorem sym_diff_prop : ∀ A B x, x ∈ A △ B ↔ (x ∈ A ⊕ x ∈ B) := by
   intros A B x
@@ -67,11 +73,13 @@ theorem sym_diff_prop : ∀ A B x, x ∈ A △ B ↔ (x ∈ A ⊕ x ∈ B) := by
       apply_r (difference_prop _ _ _)
       assumption
 
+
 theorem left_union2_subs : ∀ A B, (A ⊆ A ∪ B) := by
   intros A B
   intro_in_ x, h_x
   apply_r (union2_prop _ _ _)
   left_
+
 
 theorem right_union2_subs : ∀ A B, (B ⊆ A ∪ B) := by
   intros A B
@@ -79,9 +87,11 @@ theorem right_union2_subs : ∀ A B, (B ⊆ A ∪ B) := by
   apply_r (union2_prop _ _ _)
   right_
 
+
 theorem inter2_subs_left : ∀ A B, (A ∩ B ⊆ A) := by
   intros A B
   apply spec_subs
+
 
 theorem inter2_subs_right : ∀ A B, (A ∩ B ⊆ B) := by
   intros A B
@@ -90,12 +100,14 @@ theorem inter2_subs_right : ∀ A B, (A ∩ B ⊆ B) := by
   apply (spec_then_P A Q x)
   assumption
 
+
 theorem difference_subs_left : ∀ A B, (A \ B ⊆ A) := by
   intros A B
   intro_in_ x, h_x
   let Q t := t ∉ B
   apply (spec_subs A Q x)
   assumption
+
 
 theorem subs_l_subs_r_subs_inter2 : ∀ A B X, (X ⊆ A) → (X ⊆ B) → (X ⊆ (A ∩ B)) := by
   intros A B X h_XA h_XB
@@ -105,6 +117,7 @@ theorem subs_l_subs_r_subs_inter2 : ∀ A B X, (X ⊆ A) → (X ⊆ B) → (X �
   · apply h_XA; assumption
   · apply h_XB; assumption
 
+
 theorem l_subs_r_subs_uinion2_subs : ∀ A B X, (A ⊆ X) → (B ⊆ X) → ((A ∪ B) ⊆ X) := by
   intros A B X h_XA h_XB
   intro_in_ x, h_x
@@ -112,6 +125,7 @@ theorem l_subs_r_subs_uinion2_subs : ∀ A B X, (A ⊆ X) → (B ⊆ X) → ((A 
   elim_or h_xAB, h_A, h_B
   · apply h_XA; assumption
   · apply h_XB; assumption
+
 
 theorem subs_is_eq_inter2 : ∀ A B, (A ⊆ B ↔ A ∩ B = A) := by
   intro A B
@@ -126,6 +140,7 @@ theorem subs_is_eq_inter2 : ∀ A B, (A ⊆ B ↔ A ∩ B = A) := by
     rewrite [← h_AB]
     apply inter2_subs_right
 
+
 theorem subs_is_eq_uinion2 : ∀ A B, (A ⊆ B ↔ A ∪ B = B) := by
   intro A B
   intro_iff
@@ -138,6 +153,7 @@ theorem subs_is_eq_uinion2 : ∀ A B, (A ⊆ B ↔ A ∪ B = B) := by
   · intro h_AB
     rewrite [← h_AB]
     apply left_union2_subs
+
 
 theorem union2_idepm : (∀ A, A ∪ A = A) := by
   intro A
@@ -158,6 +174,7 @@ theorem differ_idemp_emp : ∀ A, A \ A = ∅ := by
   _apply_l (difference_prop _ _ _), h_t, h_inA_ninA; elim_and h_inA_ninA, h_inA, h_ninA
   elim_f_neg h_ninA
 
+
 theorem symm_differ_idemp_emp : ∀ A, A △ A = ∅ := by
   intro A
   apply subset_empty_is_empty
@@ -173,6 +190,7 @@ theorem union2_comm : (∀ A B, A ∪ B = B ∪ A) := by
     _ ↔ x ∈ A ∨ x ∈ B := by apply union2_prop
     _ ↔ x ∈ B ∨ x ∈ A := by apply disj_commut
     _ ↔ _ := by apply iff_symm; apply union2_prop
+
 
 theorem inter2_comm : (∀ A B, A ∩ B = B ∩ A) := by
   intros A B
@@ -202,6 +220,7 @@ theorem union2_assoc : (∀ A B C, (A ∪ B) ∪ C = A ∪ (B ∪ C)) := by
     _ ↔ _ ∨ (x ∈ B ∪ C) := by apply disj_congr_l; apply iff_symm; apply union2_prop
     _ ↔ _ := by apply iff_symm; apply union2_prop
 
+
 theorem inter2_assoc : (∀ A B C, (A ∩ B) ∩ C = A ∩ (B ∩ C)) := by
   intros A B C
   apply set_extensionality_ax; intro x
@@ -213,39 +232,34 @@ theorem inter2_assoc : (∀ A B C, (A ∩ B) ∩ C = A ∩ (B ∩ C)) := by
     _ ↔ _ := by apply iff_symm; apply inter2_prop
 
 
-  theorem symm_differ_assoc_cl : ∀ A B C, ((A △ B) △ C) = (A △ (B △ C)) := by
-    intros A B C
-    apply set_extensionality_ax; intro x
-    calc
-    _ ↔ ((x ∈ (A △ B)) ⊕ x ∈ C) := by apply sym_diff_prop
-    _ ↔ (((x ∈ A) ⊕ (x ∈ B)) ⊕ (x ∈ C)) := by
-      have h₁ : (x ∈ A △ B) = (x ∈ A ⊕ x ∈ B) := by
-        _propext_cl_
-        apply sym_diff_prop
-      have h : (x ∈ A △ B ⊕ x ∈ C) = ((x ∈ A ⊕ x ∈ B) ⊕ x ∈ C) := by rw [h₁]
-      rewrite [h]
-      apply trivial_equivalence
-    _ ↔ ((x ∈ A) ⊕ ((x ∈ B) ⊕ (x ∈ C))) := by apply xor_assoc_cl
-    _ ↔ ((x ∈ A) ⊕ (x ∈ B △ C)) := by
-      have h₁ : ((x ∈ B) ⊕ (x ∈ C)) = (x ∈ (B △ C)) := by
-        _propext_cl_
-        apply iff_symm; apply sym_diff_prop
-      have h : ((x ∈ A) ⊕ ((x ∈ B) ⊕ (x ∈ C))) = ((x ∈ A) ⊕ (x ∈ B △ C)) := by rw [h₁]
-      rewrite [h]
-      apply trivial_equivalence
-    _ ↔ _ := by apply iff_symm; apply sym_diff_prop
-
-
-
-
-
-
+theorem symm_differ_assoc_cl : ∀ A B C, ((A △ B) △ C) = (A △ (B △ C)) := by
+  intros A B C
+  apply set_extensionality_ax; intro x
+  calc
+  _ ↔ ((x ∈ (A △ B)) ⊕ x ∈ C) := by apply sym_diff_prop
+  _ ↔ (((x ∈ A) ⊕ (x ∈ B)) ⊕ (x ∈ C)) := by
+    have h₁ : (x ∈ A △ B) = (x ∈ A ⊕ x ∈ B) := by
+      _propext_cl_
+      apply sym_diff_prop
+    have h : (x ∈ A △ B ⊕ x ∈ C) = ((x ∈ A ⊕ x ∈ B) ⊕ x ∈ C) := by rw [h₁]
+    rewrite [h]
+    apply trivial_equivalence
+  _ ↔ ((x ∈ A) ⊕ ((x ∈ B) ⊕ (x ∈ C))) := by apply xor_assoc_cl
+  _ ↔ ((x ∈ A) ⊕ (x ∈ B △ C)) := by
+    have h₁ : ((x ∈ B) ⊕ (x ∈ C)) = (x ∈ (B △ C)) := by
+      _propext_cl_
+      apply iff_symm; apply sym_diff_prop
+    have h : ((x ∈ A) ⊕ ((x ∈ B) ⊕ (x ∈ C))) = ((x ∈ A) ⊕ (x ∈ B △ C)) := by rw [h₁]
+    rewrite [h]
+    apply trivial_equivalence
+  _ ↔ _ := by apply iff_symm; apply sym_diff_prop
 
 
 theorem inter2_union2_absorb : (∀ A B, A ∩ (A ∪ B) = A) := by
   intros A B
   apply_l (subs_is_eq_inter2 _ _)
   apply left_union2_subs
+
 
 theorem union_inter_absorb : (∀ A B, A ∪ (A ∩ B) = A) := by
   intros A B
@@ -292,6 +306,7 @@ theorem union_inter_distrib : (∀ A B C, A ∪ (B ∩ C) = (A ∪ B) ∩ (A ∪
   _ ↔ _ ∧ (x ∈ A ∪ C) := by apply conj_congr_l; apply iff_symm; apply union2_prop
   _ ↔ _ := by apply iff_symm; apply inter2_prop
 
+
 theorem compl_compl_cl : ∀ U A, (A ⊆ U) → (U \ (U \ A)) = A := by
   intros U A h
   apply set_extensionality_ax; intro x
@@ -323,6 +338,7 @@ theorem compl_compl_cl : ∀ U A, (A ⊆ U) → (U \ (U \ A)) = A := by
     rewrite [inter2_comm]
     apply inter2_prop
 
+
 theorem demorgan_inter_cl : ∀ U A B, (U \ (A ∩ B) = (U \ A) ∪ (U \ B)) := by
   intro U A B
   apply set_extensionality_ax; intro x
@@ -352,8 +368,6 @@ theorem demorgan_union: ∀ U A B, (U \ (A ∪ B) = (U \ A) ∩ (U \ B)) := by
   _ ↔ (x ∈ U \ A) ∧ (x ∈ U ∧ x ∉ B) := by apply conj_assoc
   _ ↔ _ ∧ (x ∈ U \ B) := by apply conj_congr_l; apply iff_symm; apply difference_prop
   _ ↔ (x ∈ (U \ A) ∩ (U \ B)) := by apply iff_symm; apply inter2_prop
-
-
 
 
 theorem difference_inter_prop : ∀ U A B, (A ⊆ U) → (A \ B = A ∩ (U \ B)) := by
@@ -410,7 +424,6 @@ theorem differ_empty_r : ∀ A, ∅ \ A = ∅ := by
   apply difference_subs_left
 
 
-
 theorem symm_differ_empty : ∀ A, A △ ∅ = A := by
   intro A
   apply set_extensionality_ax; intro t;
@@ -446,8 +459,6 @@ theorem symm_differ_universum : ∀ A U, (A ⊆ U) → (A △ U) = U \ A := by
   · apply right_union2_subs
 
 
-
-
 theorem inter2_universum : ∀ U A, (A ⊆ U) → A ∩ U = A := by
   intro U A h_AU
   apply_l_ (subs_is_eq_inter2 _ _)
@@ -467,6 +478,7 @@ theorem inter2_to_empty: ∀ U A, (A ∩ (U \ A) = ∅) := by
   _apply_l (difference_prop _ _ _), h_inUnA, h_inUandnA
   elim_and h_inUandnA, h_inU, h_innA
   elim_f_neg h_innA
+
 
 theorem union2_to_universum_cl : ∀ U A, (A ⊆ U) → (A ∪ (U \ A) = U) := by
   intros U A h_AU
@@ -511,8 +523,6 @@ theorem diff_diff_is_diff_inter2_cl  : (∀ A B C, A \ (B \ C) = (A \ B) ∪ (A 
   _ = _ := by rw [← difference_inter_prop U A B h_a]
 
 
-
-
 theorem sym_diff_eq : ∀ A B, A △ B = (A ∪ B) \ (A ∩ B) := by
   intros A B
   apply set_extensionality_ax; intro x;
@@ -532,6 +542,7 @@ theorem mon_union2_l : ∀ A B C, (A ⊆ B) → (A ∪ C) ⊆ (B ∪ C) := by
   elim_or h, h_A, h_C
   · left; apply h_AB; assumption
   · right_
+
 
 theorem mon_union2_r : ∀ A B C, (A ⊆ B) → (C ∪ A) ⊆ (C ∪ B) := by
   intro A B C h_AB
@@ -554,6 +565,7 @@ theorem mon_inter2_l : ∀ A B C, (A ⊆ B) → (A ∩ C) ⊆ (B ∩ C) := by
   · apply h_AB; assumption
   · assumption
 
+
 theorem mon_inter2_r : ∀ A B C, (A ⊆ B) → (C ∩ A) ⊆ (C ∩ B) := by
   intro A B C h_AB
   conv =>
@@ -574,6 +586,7 @@ theorem mon_diff_l : ∀ A B C, (A ⊆ B) → (A \ C) ⊆ (B \ C) := by
   intro_and
   · apply h_AB; assumption
   · assumption
+
 
 theorem anti_mon_diff_r : ∀ A B C, (A ⊆ B) → (C \ B) ⊆ (C \ A) := by
   intro A B C h_AB

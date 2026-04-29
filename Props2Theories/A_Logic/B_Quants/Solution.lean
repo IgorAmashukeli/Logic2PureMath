@@ -1,28 +1,30 @@
 import Props2Theories.TacticNames
 import Props2Theories.A_Logic.A_Props.Task
 
--- true is true for every element
 theorem uni (T : Type) : ∀ _ : T, True := by
     intro t
     intro_true
 
- -- Fictitious quantifier
+
 theorem exi_uni_then_uni (T : Type) (P : T → Prop) : (∃ _ : T, ∀ x : T, P x) → (∀ x : T, P x) := by
     intro h_ex_for
     elim_exists h_ex_for, y, h_x
     intro x
     apply h_x
 
+
 theorem exi_exi_then_exi (T : Type) (P : T → Prop) : (∃ _ : T, ∃ x : T, P x) → (∃ x : T, P x) := by
     intro h_ex_ex
     elim_exists h_ex_ex, y, h_ex
     assumption
+
 
 theorem uni_uni_then_uni (T : Type) (P : T → Prop) : (∀ _ : T, ∀ x : T, P x) → (∀ x : T, P x) := by
     intro h_y_x
     intro x
     specialize (h_y_x x x)
     assumption
+
 
 theorem change_variable_uni (T : Type) (P: T → Prop) : (∀ x : T, P x) ↔ (∀ y : T, P y) := by
     intro_iff
@@ -44,7 +46,7 @@ theorem change_variable_exi (T : Type) (P: T → Prop) : (∃ x : T, P x) ↔ (�
       intro_exists_ y, h_y
 
 
--- Quantifier congruence
+
 theorem uni_congr (T : Type) (P Q : T → Prop) : (∀ x : T, (P x ↔ Q x)) → ((∀ x : T, P x) ↔ (∀ x : T, Q x)) := by
     intro h_for
     intro_iff
@@ -58,6 +60,7 @@ theorem uni_congr (T : Type) (P Q : T → Prop) : (∀ x : T, (P x ↔ Q x)) →
       specialize (h_for_p y)
       specialize (h_for y)
       apply_r_ h_for
+
 
 theorem exi_congr (T : Type) (P Q : T → Prop) : (∀ x : T, (P x ↔ Q x)) → ((∃ x : T, P x) ↔ (∃ x: T, Q x)) := by
     intro h_for
@@ -74,7 +77,6 @@ theorem exi_congr (T : Type) (P Q : T → Prop) : (∀ x : T, (P x ↔ Q x)) →
       apply_r_ h_for
 
 
--- Quantifier commutativity --
 theorem uni_comm (T T₂ : Type) (P : T →  T₂ → Prop) : (∀ x : T, ∀ y : T₂, P x y) ↔ (∀ y : T₂, ∀ x : T, P x y) := by
     intro_iff
     · intro h_x_y
@@ -83,6 +85,7 @@ theorem uni_comm (T T₂ : Type) (P : T →  T₂ → Prop) : (∀ x : T, ∀ y 
     · intro h_y_x
       intros x y
       apply h_y_x
+
 
 theorem exi_comm (T T₂ : Type) (P : T → T₂ → Prop) : (∃ x : T, ∃ y : T₂, P x y) ↔ (∃ y : T₂, ∃ x : T, P x y) := by
     intro_iff
@@ -99,7 +102,7 @@ theorem exi_comm (T T₂ : Type) (P : T → T₂ → Prop) : (∃ x : T, ∃ y :
       intro_exists y
       assumption
 
--- Quantifier Order Change
+
 theorem exi_uni_then_uni_exi (T T₂ : Type) (P : T → T₂ → Prop) : (∃ x : T, ∀ y : T₂, P x y) → (∀ y : T₂, ∃ x : T, P x y) := by
     intro h_exi_uni
     elim_exists h_exi_uni, x, h_uni
@@ -108,7 +111,6 @@ theorem exi_uni_then_uni_exi (T T₂ : Type) (P : T → T₂ → Prop) : (∃ x 
     intro_exists_ x, h_uni
 
 
--- Quantifier distributivity --
 theorem uni_conj (T : Type) (P Q: T → Prop) : (∀ x: T, P x ∧ Q x) ↔ (∀ x : T, P x) ∧ (∀ x : T, Q x) := by
     intro_iff
     · intro h_for
@@ -146,7 +148,6 @@ theorem exi_disj (T : Type) (P Q : T → Prop) : (∃ x : T, P x ∨ Q x) ↔ (�
         right_
 
 
--- De morgan intutionists quantifier laws --
 theorem morgan_uni (T : Type) (P : T → Prop) : (∀ x : T, ¬ P x) ↔ (¬ ∃ x : T, P x) := by
     intro_iff
     · intro h_for_npx
@@ -161,6 +162,7 @@ theorem morgan_uni (T : Type) (P : T → Prop) : (∀ x : T, ¬ P x) ↔ (¬ ∃
       intro_exists x
       assumption
 
+
 theorem morgan_exi_lr (T : Type) (P : T → Prop) : (∃ x : T, ¬ P x) →  (¬ ∀ x : T, P x) := by
     intro h_ex_npx
     intro_neg h_for_px
@@ -169,7 +171,6 @@ theorem morgan_exi_lr (T : Type) (P : T → Prop) : (∃ x : T, ¬ P x) →  (¬
     apply h_for_px
 
 
--- Quantifiers intutionists and constant predicates --
 theorem brackets_exi_conj (T : Type) (P : Prop) (Q : T → Prop) : (∃ x : T, P ∧ Q x) ↔ (P ∧ ∃ x : T, Q x):= by
     intro_iff
     · intro h_ex_p_qx
@@ -218,6 +219,7 @@ theorem brackets_left_uni_impl (T : Type) (P : Prop) (Q : T → Prop) : (P → �
       specialize (h_x_pqx x h_p)
       assumption
 
+
 theorem brackets_left_exi_impl_rl (T : Type) (P : Prop) (Q : T → Prop) : (∃ x : T, (P → Q x)) → (P → ∃ x : T, Q x):= by
     intros h_ex_p_qx h_p
     elim_exists h_ex_p_qx, x, hp_qx
@@ -245,10 +247,9 @@ theorem brackets_right_exi_impl (T : Type) (P : T → Prop) (Q : Prop) : ((∃ x
       exact (h_px_q h_px)
 
 
--- Inhabitance --
 def is_inhabited (T : Type) : Prop := ∃ _ : T, True
 
--- Inhabited fictitious quantifier --
+
 theorem inh_uni_exi_then_exi (T : Type) (h : is_inhabited T) (P : T → Prop) : (∀ _ : T, ∃ x : T, P x) → (∃ x : T, P x) := by
     intro h_y_ex
     elim_exists h, z, tr
@@ -256,14 +257,13 @@ theorem inh_uni_exi_then_exi (T : Type) (h : is_inhabited T) (P : T → Prop) : 
     assumption
 
 
--- Inhabited quantifier change --
 theorem inh_uni_then_exi (T : Type) (h : is_inhabited T) (P : T → Prop) : (∀ x : T, P x) → (∃ x : T, P x) := by
     intro h_for
     elim_exists h, y, tr
     specialize (h_for y)
     intro_exists_ y, h_for
 
--- Inhabited intutionists quantifiers and constant predicates --
+
 theorem inh_brackets_uni_conj (T : Type) (h : is_inhabited T) (P : Prop) (Q : T → Prop) : (∀ x : T, P ∧ Q x) ↔ (P ∧ ∀ x : T, Q x) := by
     intro_iff
     elim_exists h, v, tr
@@ -277,6 +277,7 @@ theorem inh_brackets_uni_conj (T : Type) (h : is_inhabited T) (P : Prop) (Q : T 
       intro x
       specialize (h_for_qx x)
       intro_and <;> assumption
+
 
 theorem inh_brackets_exi_disj (T : Type) (h : is_inhabited T) (P : Prop) (Q : T → Prop) : (∃ x : T, P ∨ Q x) ↔ (P ∨ ∃ x : T, Q x) := by
     intro_iff
@@ -293,7 +294,6 @@ theorem inh_brackets_exi_disj (T : Type) (h : is_inhabited T) (P : Prop) (Q : T 
         intro_exists x; right_
 
 
--- Classical quantifiers and constant predicates --
 theorem brackets_uni_disj_cl (T : Type) (P : Prop) (Q : T → Prop) : (∀ x : T, P ∨ Q x) ↔ (P ∨ ∀ x : T, Q x) := by
     intro_iff
     · intro h_for_p_qx
@@ -315,7 +315,6 @@ theorem brackets_uni_disj_cl (T : Type) (P : Prop) (Q : T → Prop) : (∀ x : T
         apply h_forx
 
 
--- Classical de morgan law --
 theorem morgan_exi_cl (T : Type) (P : T → Prop) : (∃ x : T, ¬ P x) ↔ (¬ ∀ x : T, P x) := by
     intro_iff
     · exact (morgan_exi_lr _ P)
@@ -345,7 +344,6 @@ theorem inh_brackets_left_exi_impl_cl (T : Type) (h : is_inhabited T) (P : Prop)
     · exact (brackets_left_exi_impl_rl T P Q)
 
 
-
 theorem inh_brackets_right_uni_impl_cl (T : Type) (h : is_inhabited T) (P: T → Prop) (Q : Prop) :  ((∀ x : T, P x) → Q) ↔ (∃ x : T, (P x → Q)) := by
     intro_iff
     · intro h_px_q
@@ -364,8 +362,6 @@ theorem inh_brackets_right_uni_impl_cl (T : Type) (h : is_inhabited T) (P: T →
     · exact (brackets_right_uni_impl_rl T P Q)
 
 
-
---In non empty pub there is someone in the pub such that, if he or she is drinking, then everyone in the pub is drinking --
 theorem drinker_paradox_cl (Pub : Type) (h : is_inhabited Pub) (is_drinking : Pub → Prop):
  (∃ someone : Pub, (is_drinking someone  → ∀ person : Pub, is_drinking person)) := by
     apply_l (inh_brackets_right_uni_impl_cl Pub h is_drinking (∀ someone, is_drinking someone))

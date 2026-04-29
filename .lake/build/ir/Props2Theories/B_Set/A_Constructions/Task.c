@@ -133,6 +133,7 @@ static const lean_object* lp_Props2Theories___aux__Props2Theories__B__Set__A__Co
 LEAN_EXPORT lean_object* lp_Props2Theories___aux__Props2Theories__B__Set__A__Constructions__Task______macroRules__term___u2288____1(lean_object*, lean_object*, lean_object*);
 LEAN_EXPORT lean_object* lp_Props2Theories___aux__Props2Theories__B__Set__A__Constructions__Task______unexpand__no__subset__1(lean_object*, lean_object*, lean_object*);
 LEAN_EXPORT lean_object* lp_Props2Theories___aux__Props2Theories__B__Set__A__Constructions__Task______unexpand__no__subset__1___boxed(lean_object*, lean_object*, lean_object*);
+LEAN_EXPORT lean_object* lp_Props2Theories_instTransSetSubset;
 static const lean_string_object lp_Props2Theories_term_u2205__1___closed__0_value = {.m_header = {.m_rc = 0, .m_cs_sz = 0, .m_other = 0, .m_tag = 249}, .m_size = 10, .m_capacity = 10, .m_length = 7, .m_data = "term∅_1"};
 static const lean_object* lp_Props2Theories_term_u2205__1___closed__0 = (const lean_object*)&lp_Props2Theories_term_u2205__1___closed__0_value;
 static const lean_ctor_object lp_Props2Theories_term_u2205__1___closed__1_value = {.m_header = {.m_rc = 0, .m_cs_sz = sizeof(lean_ctor_object) + sizeof(void*)*2 + 8, .m_other = 2, .m_tag = 1}, .m_objs = {((lean_object*)(((size_t)(0) << 1) | 1)),((lean_object*)&lp_Props2Theories_term_u2205__1___closed__0_value),LEAN_SCALAR_PTR_LITERAL(234, 108, 240, 78, 120, 195, 19, 157)}};
@@ -1054,6 +1055,12 @@ lean_object* x_4;
 x_4 = lp_Props2Theories___aux__Props2Theories__B__Set__A__Constructions__Task______unexpand__no__subset__1(x_1, x_2, x_3);
 lean_dec(x_2);
 return x_4;
+}
+}
+static lean_object* _init_lp_Props2Theories_instTransSetSubset(void) {
+_start:
+{
+return lean_box(0);
 }
 }
 static lean_object* _init_lp_Props2Theories___aux__Props2Theories__B__Set__A__Constructions__Task______macroRules__term_u2205__1__1___closed__1(void) {
@@ -3459,6 +3466,7 @@ lean_dec_ref(res);
 res = initialize_Props2Theories_Props2Theories_Axioms(builtin);
 if (lean_io_result_is_error(res)) return res;
 lean_dec_ref(res);
+lp_Props2Theories_instTransSetSubset = _init_lp_Props2Theories_instTransSetSubset();
 return lean_io_result_mk_ok(lean_box(0));
 }
 #ifdef __cplusplus

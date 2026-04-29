@@ -9,7 +9,6 @@ theorem equal_trans (T : Type) : (∀ (x y z : T), x = y → y = z → x = z) :=
 theorem eq_subst (T : Type) (P : T → Prop) : (∀ (a b : T), a = b → P a → P b) := sorry
 theorem eq_substr (T : Type) (P : T → Prop) : (∀ (a b : T), a = b → P b → P a) := sorry
 
-
 -- Congr and Extensionality
 theorem eq_congr_func_arg (T : Type) (S : Type) (f : T → S) : (∀ (x y : T), x = y → f x = f y) := sorry
 theorem eq_congr_pred_arg (T : Type) (P : T → Prop) : (∀ (x y : T), x = y → (P x ↔ P y)) := sorry
@@ -33,23 +32,18 @@ theorem stated_neg_equiv_false_cl (p : Prop) : ¬p ↔ (p = False) := sorry
 theorem stated_equiv_not_false_cl (p : Prop) : p ↔ ((¬p) = False) := sorry
 theorem prop_is_bool_cl (p : Prop) : p = True ∨ p = False := sorry
 
-
 -- Some quantifier properties of being equal to constant
 theorem exists_eq_C_PC_then_P (T : Type) (P : T → Prop) (C : T) : (∃ x, x = C) → (P C) → (∃ x, P x) := sorry
 theorem forall_eq_C_PC_then_P (T : Type) (P : T → Prop) (C : T) : (∀ x, x = C) → (P C) → (∀ x, P x) := sorry
 
 -- Partition in to equality and non-equality
-theorem uni_eq_partition_cl (T : Type) (P : T → T → Prop) :
- (∀ x : T, ∀ y : T, P x y) ↔ ((∀ x : T, P x x) ∧ ∀ x : T, ∀ y : T, (x ≠ y → P x y)) := sorry
-theorem exi_eq_partition_cl (T : Type) (P : T → T → Prop) :
- (∃ x : T, ∃ y : T, P x y) ↔ ((∃ x : T, P x x) ∨ ∃ x : T, ∃ y : T, (x ≠ y ∧ P x y)) := sorry
-
+theorem uni_eq_partition_cl (T : Type) (P : T → T → Prop) : (∀ x : T, ∀ y : T, P x y) ↔ ((∀ x : T, P x x) ∧ ∀ x : T, ∀ y : T, (x ≠ y → P x y)) := sorry
+theorem exi_eq_partition_cl (T : Type) (P : T → T → Prop) : (∃ x : T, ∃ y : T, P x y) ↔ ((∃ x : T, P x x) ∨ ∃ x : T, ∃ y : T, (x ≠ y ∧ P x y)) := sorry
 
 -- Exists And Unique Quantifier Properties
 theorem exists_unique_then_exists (T : Type) (P : T → Prop) (h : ∃! x, P x) : (∃ x, P x)  := sorry
 theorem exists_unique_then_unique (T : Type) (P : T → Prop)  (h : ∃! x, P x) (a : T) (b : T) (h₁ : P a) (h₂ : P b) : a = b := sorry
 theorem exists_unique_congr (T : Type) (P Q : T → Prop) : (∀ x, (P x ↔ Q x)) → ((∃! x, P x) ↔ (∃! x, Q x)) := sorry
-theorem exists_unique_eqv (T : Type) (P : T → Prop) :
-   (∃! x, P x) ↔ (∃ x, P x) ∧ (∀ x y, (P x → P y → x = y)) := sorry
+theorem exists_unique_eqv (T : Type) (P : T → Prop) : (∃! x, P x) ↔ (∃ x, P x) ∧ (∀ x y, (P x → P y → x = y)) := sorry
 theorem uniq_then_exi_uni (T : Type) (P : T → Prop) (h : ∀ x y : T, x = y) (hex : ∃ x, P x) : ∀ x, P x := sorry
 theorem exuniq_then_exi_uni (T : Type) (P : T → Prop) (h : ∃! _ : T, True) (hex : ∃ x, P x) : ∀ x, P x := sorry

@@ -1,6 +1,5 @@
 import Props2Theories.TacticNames
 
--- True and False laws
 theorem neg_true : ¬ True ↔ False:= by
   intro_iff
   · intro h_nt
@@ -8,7 +7,6 @@ theorem neg_true : ¬ True ↔ False:= by
     intro_true
   · intro h_f
     elim_false_
-
 
 
 theorem neg_false : ¬ False ↔ True := by
@@ -28,8 +26,6 @@ theorem conj_true (p : Prop) : p ∧ True ↔ p := by
     intro_and
     · assumption
     · intro_true
-
-
 
 
 theorem conj_false (p : Prop) : p ∧ False ↔ False := by
@@ -66,7 +62,6 @@ theorem impl_true (p : Prop) : (p → True) ↔ True := by
     assumption
 
 
-
 theorem true_impl (p : Prop) : (True → p) ↔ p := by
   intro_iff
   · intro h_tp
@@ -92,12 +87,6 @@ theorem false_impl (p : Prop) : (False → p) ↔ True := by
     elim_false_
 
 
-
-
-
-
-
---Impodent laws
 theorem axiomatic_rule (p : Prop) : p → p := by
   intro h_p
   assumption
@@ -123,8 +112,6 @@ theorem disj_idemp (p : Prop) : p ↔ (p ∨ p) := by
     elim_or_ h_pp, (axiomatic_rule p), (axiomatic_rule p)
 
 
-
---Absorbtion laws
 theorem absorbtion_disj (p q : Prop) : p ∨ (p ∧ q) ↔ p := by
   intro_iff
   · intro h_ppq
@@ -144,15 +131,15 @@ theorem absorbtion_conj (p q : Prop) : p ∧ (p ∨ q) ↔ p := by
     · left_
 
 
-
---Commutativity laws
 theorem conj_symm (p q : Prop) : (p ∧ q) → (q ∧ p) := by
   intro h_pq
   elim_and h_pq, h_p, h_q
   intro_and <;> assumption
 
+
 theorem conj_commut (p q : Prop) : (p ∧ q) ↔ (q ∧ p) := by
   intro_iff <;> apply conj_symm
+
 
 theorem disj_symm (p q : Prop) : (p ∨ q) → (q ∨ p) := by
   intro h_pq
@@ -160,18 +147,20 @@ theorem disj_symm (p q : Prop) : (p ∨ q) → (q ∨ p) := by
   · right_
   · left_
 
+
 theorem disj_commut (p q : Prop) : (p ∨ q) ↔ (q ∨ p) := by
   intro_iff <;> apply disj_symm
+
 
 theorem iff_symm (p q : Prop) : (p ↔ q) → (q ↔ p) := by
   intro h_pq
   intro_iff <;> elim_iff_ h_pq
 
+
 theorem iff_commut (p q : Prop) : (p ↔ q) ↔ (q ↔ p) := by
   intro_iff <;> apply iff_symm
 
 
---Associativity laws
 theorem conj_assoc (p q r : Prop) : (p ∧ q) ∧ r ↔ p ∧ (q ∧ r) := by
   intro_iff
   · intro h_pqr
@@ -184,7 +173,6 @@ theorem conj_assoc (p q r : Prop) : (p ∧ q) ∧ r ↔ p ∧ (q ∧ r) := by
     elim_and h_qr, h_q, h_r
     intro_and <;> try assumption
     intro_and <;> assumption
-
 
 
 theorem disj_assoc (p q r : Prop) : (p ∨ q) ∨ r ↔ p ∨ (q ∨ r) := by
@@ -206,7 +194,6 @@ theorem disj_assoc (p q r : Prop) : (p ∨ q) ∨ r ↔ p ∨ (q ∨ r) := by
       · right_
 
 
---Distributivity laws
 theorem conj_disj_distrib (p q r : Prop) : p ∧ (q ∨ r) ↔ (p ∧ q) ∨ (p ∧ r) := by
   intro_iff
   · intro h_pqr
@@ -228,7 +215,6 @@ theorem conj_disj_distrib (p q r : Prop) : p ∧ (q ∨ r) ↔ (p ∧ q) ∨ (p 
       · right_
 
 
-
 theorem disj_conj_distrib (p q r : Prop) : p ∨ (q ∧ r) ↔ (p ∨ q) ∧ (p ∨ r) := by
   intro_iff
   · intro h_pqr
@@ -245,10 +231,6 @@ theorem disj_conj_distrib (p q r : Prop) : p ∨ (q ∧ r) ↔ (p ∨ q) ∧ (p 
     intro_and_ h_q, h_r
 
 
-
-
---Weak pierce law
---Dont' use classical rules
 theorem weak_pierce_law (p q : Prop) : ((((p → q) → p) → p) → q) → q := by
   intro h_pqppq
   apply h_pqppq
@@ -260,9 +242,6 @@ theorem weak_pierce_law (p q : Prop) : ((((p → q) → p) → p) → q) → q :
   assumption
 
 
-
---3 De Morgan Intuitionistic implications
---Don't use classic rules
 theorem morgan_disj (p q : Prop) : ¬(p ∨ q) ↔ ¬p ∧ ¬q := by
   intro_iff
   · intro h_npq
@@ -290,9 +269,6 @@ theorem morgan_conj_rl (p q : Prop) : ¬p ∨ ¬q → ¬(p ∧ q) := by
   · elim_neg_ h_nq
 
 
-
-
---Implication and negative implication sufficiencies
 theorem neg_to_impl (p q : Prop) : ¬p → (p → q)  := by
   intros h_np h_p
   elim_f_neg h_np
@@ -313,8 +289,6 @@ theorem neg_imp_def_rl (p q : Prop) : p ∧ ¬q → ¬(p → q)  := by
   elim_neg_ h_nq
 
 
-
--- Direct contraposition
 theorem contraposition_lr (p q : Prop) : (p → q) → (¬q → ¬p) := by
   intro h_pq h_nq
   intro_neg h_p
@@ -323,9 +297,6 @@ theorem contraposition_lr (p q : Prop) : (p → q) → (¬q → ¬p) := by
   assumption
 
 
-
-
--- Exportation (currying) law
 theorem exportation_law (p q r : Prop) : (p → (q → r)) ↔ (p ∧ q → r) := by
   intro_iff
   · intros h_pqr h_pq
@@ -336,8 +307,6 @@ theorem exportation_law (p q r : Prop) : (p → (q → r)) ↔ (p ∧ q → r) :
     intro_and_ h_p, h_q
 
 
-
---* Disjunction in implication antecedent
 theorem cases_impl_left (p q r : Prop) : ((p ∨ q) → r) ↔ (p → r) ∧ (q → r) := by
   intro_iff
   · intro h_pqr
@@ -355,8 +324,6 @@ theorem cases_impl_left (p q r : Prop) : ((p ∨ q) → r) ↔ (p → r) ∧ (q 
     · exact (h_qr h_q)
 
 
-
--- Syllogism
 theorem syllogism (p q r : Prop) : (p → q) → (q → r) → (p → r) := by
   intros h_pq h_qr h_p
   apply h_qr
@@ -364,9 +331,6 @@ theorem syllogism (p q r : Prop) : (p → q) → (q → r) → (p → r) := by
   assumption
 
 
-
-
---Transitivity of equivalence
 theorem iff_transitivity (p q r : Prop) : (p ↔ q) → (q ↔ r) → (p ↔ r) := by
   intro h_pq
   intro h_qr
@@ -379,9 +343,6 @@ theorem iff_transitivity (p q r : Prop) : (p ↔ q) → (q ↔ r) → (p ↔ r) 
     · elim_iff_ h_pq
 
 
-
-
---Congruence laws
 theorem neg_congr (p q : Prop) : (p ↔ q) → (¬p ↔ ¬q) := by
   intro h_pq
   intro_iff
@@ -393,7 +354,6 @@ theorem neg_congr (p q : Prop) : (p ↔ q) → (¬p ↔ ¬q) := by
     intro_neg h_p
     elim_neg h_nq
     apply_l_ h_pq
-
 
 
 theorem disj_congr_r (p q r : Prop) : (p ↔ q) → ((p ∨ r) ↔ (q ∨ r)) := by
@@ -441,7 +401,6 @@ theorem disj_congr_l (p q r : Prop) : (p ↔ q) → ((r ∨ p) ↔ (r ∨ q)) :=
       apply_r h_pq; assumption
 
 
-
 theorem conj_congr_l (p q r : Prop) : (p ↔ q) → ((r ∧ p) ↔ (r ∧ q)) := by
   intro h_pq
   intro_iff
@@ -455,8 +414,6 @@ theorem conj_congr_l (p q r : Prop) : (p ↔ q) → ((r ∧ p) ↔ (r ∧ q)) :=
     intro_and
     · assumption
     · apply_r h_pq; assumption
-
-
 
 
 theorem impl_congr_right (p q r : Prop) : (p ↔ q) → ((p → r) ↔ (q → r)) := by
@@ -481,8 +438,6 @@ theorem impl_congr_left (p q r : Prop) : (p ↔ q) → ((r → p) ↔ (r → q))
     exact (h_rq h_r)
 
 
-
-
 theorem iff_congr_ (p q r : Prop) : (p ↔ q) → ((p ↔ r) ↔ (q ↔ r)) := by
   intro h_pq
   have h_pr_qr := impl_congr_right p q r h_pq
@@ -500,10 +455,6 @@ theorem iff_congr_ (p q r : Prop) : (p ↔ q) → ((p ↔ r) ↔ (q ↔ r)) := b
     intro_iff_ h_pr, h_rp
 
 
-
-
-
---Equivalence to both conditions
 theorem iff_conj_intro(p q r : Prop) : (p ↔ q) → (p ↔ r) → (p ↔ (q ∧ r)) := by
   intros h_pq h_pr
   intro_iff
@@ -516,24 +467,18 @@ theorem iff_conj_intro(p q r : Prop) : (p ↔ q) → (p ↔ r) → (p ↔ (q ∧
     apply_r_ h_pq
 
 
-
---Noncontradiction law
 theorem no_contradiction (p : Prop) : ¬(p ∧ ¬ p) := by
   intro_neg h_p_np
   elim_and h_p_np, h_p, h_np
   elim_neg_ h_np
 
 
---Direct double negation
 theorem double_negation_lr (p : Prop) : p → ¬¬ p := by
   intro hp
   intro_neg h_np
   elim_neg_ h_np
 
 
-
---Nonequivalence of opposites
---Don't use classical rules
 theorem negation_not_equiv (p : Prop) : ¬(p ↔ ¬p) := by
   intro h_p_np
   have h_np : ¬p := by
@@ -544,9 +489,6 @@ theorem negation_not_equiv (p : Prop) : ¬(p ↔ ¬p) := by
   elim_neg_ h_np
 
 
-
-
---Classical double negation
 theorem double_negation_cl (p : Prop) : p ↔ ¬¬p := by
   intro_iff
   · exact (double_negation_lr p)
@@ -555,8 +497,6 @@ theorem double_negation_cl (p : Prop) : p ↔ ¬¬p := by
     elim_neg_ h_n_np
 
 
-
---Classical tertsium non datur (law of excluded middle)
 theorem tnd_cl (p : Prop) : p ∨ ¬ p := by
   by_contra h_n_pnp
   _apply_l (morgan_disj p (¬p)), h_n_pnp, h_np_nnp
@@ -565,8 +505,6 @@ theorem tnd_cl (p : Prop) : p ∨ ¬ p := by
   elim_neg_ h_nnp
 
 
-
---Classical cases
 theorem cases_analysis_cl (p q : Prop) : (p → q) → (¬p → q) → q := by
   intros h_pq h_npq
   elim_or (tnd_cl p), h_p, h_np
@@ -583,7 +521,6 @@ theorem cases_analysis_l_cl (p q r : Prop) : (p ∨ q) → (p → r) → (q → 
     · apply h_qnpr <;> assumption
 
 
-
 theorem cases_analysis_r_cl (p q r : Prop) : (p ∨ q) → (q → r) → (p → (¬q → r)) → r := by
   intros h_pq h_qr h_pnqr
   apply cases_analysis_cl q r
@@ -591,7 +528,6 @@ theorem cases_analysis_r_cl (p q r : Prop) : (p ∨ q) → (q → r) → (p → 
   · elim_or h_pq, h_p, h_q <;> intro h_nq
     · apply h_pnqr <;> assumption
     · elim_f_neg h_nq
-
 
 
 theorem cases_impl_right_cl (p q r : Prop) : (p → q ∨ r) → ((p → q) ∨ (p → r)) := by
@@ -608,8 +544,6 @@ theorem cases_impl_right_cl (p q r : Prop) : (p → q ∨ r) → ((p → q) ∨ 
     assumption
 
 
-
---One of the De Morgan classical law
 theorem morgan_conj_cl (p q : Prop) : ¬ (p ∧ q) ↔ ¬p ∨ ¬q := by
   intro_iff <;> try (apply (morgan_conj_rl p q))
   intro h_npq
@@ -620,7 +554,6 @@ theorem morgan_conj_cl (p q : Prop) : ¬ (p ∧ q) ↔ ¬p ∨ ¬q := by
   intro_and <;> apply_r_ (double_negation_cl _)
 
 
---Implication and neg implication classical equivalence
 theorem impl_def_cl (p q : Prop) : (p → q) ↔ (¬p ∨ q) := by
   intro_iff <;> try (apply (impl_def_lr (p) q))
   intro h_pq
@@ -644,8 +577,6 @@ theorem neg_imp_def_cl (p q : Prop) :  ¬ (p → q) ↔ p ∧ ¬ q := by
     intro h_p; assumption
 
 
-
---Classical contraposition
 theorem contraposition_cl (p q : Prop) : (p → q) ↔ (¬q → ¬p) := by
   intro_iff <;> try (apply (contraposition_lr p q))
   intro h_nq_np
@@ -655,8 +586,6 @@ theorem contraposition_cl (p q : Prop) : (p → q) ↔ (¬q → ¬p) := by
   elim_neg_ h_nq_np
 
 
-
---Classical Pierce law
 theorem pierce_cl (p q : Prop) : (((p → q) → p) → p) := by
   intro h_pqp
   by_contra h_np
@@ -664,8 +593,6 @@ theorem pierce_cl (p q : Prop) : (((p → q) → p) → p) := by
   elim_neg_ h_np
 
 
-
---Associativity of Equivalence
 theorem impl_assoc_cl (p q r : Prop) : (p ↔ (q ↔ r)) ↔ ((p ↔ q) ↔ r) := by
   intro_iff
   · intro h_pqr
@@ -736,19 +663,10 @@ theorem impl_assoc_cl (p q r : Prop) : (p ↔ (q ↔ r)) ↔ ((p ↔ q) ↔ r) :
         elim_neg_ h_nq
 
 
-
-
-
-
-
-
-
-
---Xor definition and notation
 def xor_pr (p q : Prop) : Prop := (p ∧ ¬q) ∨ (q ∧ ¬p)
 notation:10 p " ⊕ " q:11 => xor_pr p q
 
---Xor properties
+
 theorem xor_equiv_def (p q : Prop) : (p ⊕ q) ↔ ((p ∨ q) ∧ (¬ (p ∧ q))) := by
   intro_iff
   · intro h_pq
@@ -781,7 +699,6 @@ theorem xor_equiv_def (p q : Prop) : (p ⊕ q) ↔ ((p ∨ q) ∧ (¬ (p ∧ q))
         intro_and <;> assumption
 
 
-
 theorem xor_not_iff_cl (p q : Prop) : (p ⊕ q) ↔ (¬ (p ↔ q)) := by
   intro_iff
   · intro h_pxq
@@ -811,7 +728,6 @@ theorem xor_not_iff_cl (p q : Prop) : (p ⊕ q) ↔ (¬ (p ↔ q)) := by
         · intro h_p; elim_f_neg h_np
         · intro h_q; elim_f_neg h_nq
       · assumption
-
 
 
 theorem iff_not_xor_cl (p q : Prop) : (p ↔ q) ↔ (¬ (p ⊕ q)) := by
@@ -846,7 +762,6 @@ theorem xor_neg (p : Prop) : (p ⊕ ¬ p) := by
     intro_and <;> assumption
 
 
-
 theorem xor_commut (p q : Prop) : (p ⊕ q) ↔ (q ⊕ p) := by
   intro_iff
   · intro h_pq
@@ -857,7 +772,6 @@ theorem xor_commut (p q : Prop) : (p ⊕ q) ↔ (q ⊕ p) := by
     elim_or h_qp, h_q_np, h_nq_p
     · right; assumption
     · left; assumption
-
 
 
 theorem xor_assoc_cl (p q r : Prop) : ((p ⊕ q) ⊕ r) ↔ (p ⊕ (q ⊕ r)) := by
@@ -976,7 +890,6 @@ theorem xor_absorb_cl (p q : Prop) : q ↔ ((p ⊕ q) ⊕ p) := by
       left; intro_and <;> assumption
 
 
-
 theorem xor_introl (p q : Prop) : (p ∧ ¬q) → (p ⊕ q) := by
   intro h_p_nq
   left_
@@ -991,7 +904,6 @@ theorem xor_intro (p q : Prop) : (p ∨ q) → (¬ (p ∧ q)) → (p ⊕ q) := b
   intros h_pq h_npq
   apply_r (xor_equiv_def p q)
   intro_and <;> assumption
-
 
 
 theorem xor_left (p q : Prop) : (p ⊕ q) → (p ∨ q) := by

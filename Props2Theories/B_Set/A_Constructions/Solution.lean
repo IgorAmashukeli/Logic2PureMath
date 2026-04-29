@@ -12,14 +12,13 @@ theorem Russel_paradox : ¬ (∃ A, ∀ x, (x ∈ A ↔ x ∉ x)) := by
   apply (negation_not_equiv (A ∈ A))
   assumption
 
--- Why we don't use Naive Set Theory - It is Contraversial
 
 theorem no_comprehension : ¬ (∀ (P : Set → Prop), ∃ A, ∀ x, x ∈ A ↔ P x) := by
   intro_neg h_comp
   elim_neg (Russel_paradox)
   apply h_comp
 
--- If P describes existing set, it is also unique
+
 theorem describes_elem_then_unique (P : Set → Prop) : (∃ C, ∀ x, x ∈ C ↔ P x) → (∃! C, ∀ x, x ∈ C ↔ P x) := by
   intro hex
   elim_exists hex, C, hC
@@ -34,7 +33,7 @@ theorem describes_elem_then_unique (P : Set → Prop) : (∃ C, ∀ x, x ∈ C �
     have hy₂ := (iff_symm _ _) hy
     apply (iff_transitivity _ (P t) _) <;> assumption
 
--- Subset Definition And Properties
+
 def subset (A B : Set) : Prop := ∀ x ∈ A, x ∈ B
 infix:50 (priority := high) " ⊆ " => subset
 def neq_subset (A B : Set) : Prop := (A ⊆ B) ∧ (A ≠ B)
@@ -42,10 +41,12 @@ infix:50 (priority := high) " ⊊ " => neq_subset
 def no_subset (A B : Set) : Prop := ¬ (A ⊆ B)
 infix:50 (priority := high) " ⊈ " => no_subset
 
+
 theorem subset_refl : ∀ A, A ⊆ A := by
   intro A
   intro_in x
   apply (axiomatic_rule)
+
 
 theorem subset_trans : ∀ A B C, A ⊆ B → B ⊆ C → A ⊆ C := by
   intros A B C hAB hBC
@@ -54,6 +55,7 @@ theorem subset_trans : ∀ A B C, A ⊆ B → B ⊆ C → A ⊆ C := by
   apply hBC
   apply hAB
   assumption
+
 
 theorem subs_subs_then_eq : ∀ A B, (A ⊆ B ∧ B ⊆ A) ↔ A = B := by
   intros A B
@@ -80,9 +82,9 @@ theorem equality_then_subset : ∀ A B, (A = B) → (A ⊆ B) := by
   apply subset_refl
 
 
--- Empty Set Definition And Properties
 def is_empty (X : Set) : Prop := ∀ y, (y ∉ X)
 def is_nempty (X : Set) : Prop := ∃ y, (y ∈ X)
+
 
 theorem n_nemp_is_emp : ∀ X, ¬is_nempty X → is_empty (X) := by
   intros X h_x
@@ -90,6 +92,7 @@ theorem n_nemp_is_emp : ∀ X, ¬is_nempty X → is_empty (X) := by
   elim_neg h_x
   intro_exists y
   assumption
+
 
 theorem n_emp_is_nemp_cl : ∀ X, ¬is_empty X → is_nempty (X) := by
   intros X h_x
@@ -104,8 +107,11 @@ theorem is_empty_subset_any : ∀ A B, is_empty A → (A ⊆ B) := by
   intro hx
   specialize hAB x
   elim_f_neg hAB
+
+
 theorem exists_empty : (∃ x, is_empty x) := by
   exact emp_st_ax
+
 
 theorem exists_unique_empty : (∃! x, is_empty x) := by
   elim_exists (exists_empty), x, h_x
@@ -115,16 +121,20 @@ theorem exists_unique_empty : (∃! x, is_empty x) := by
   apply_l (subs_subs_then_eq x y)
   intro_and <;> apply is_empty_subset_any <;> assumption
 
+
 noncomputable def empty_set := iota_op (exists_unique_empty)
 notation (priority := high) "∅" => empty_set
 
+
 theorem empty_set_is_empty : is_empty ∅ := by
   apply iota_pr
+
 
 theorem empty_subset_any : ∀ A, ∅ ⊆ A := by
   intro A
   apply is_empty_subset_any
   exact empty_set_is_empty
+
 
 theorem is_empty_empty_set : ∀ A, is_empty A ↔ (A = ∅) := by
   intro A
@@ -136,12 +146,14 @@ theorem is_empty_empty_set : ∀ A, is_empty A ↔ (A = ∅) := by
     rewrite [hAe]
     exact empty_set_is_empty
 
+
 theorem subset_empty_is_empty : ∀ A, (A ⊆ ∅) → (A = ∅) := by
   intros A hA
   apply_l (subs_subs_then_eq A ∅)
   intro_and
   · assumption
   · apply empty_subset_any
+
 
 theorem exists_then_nonempty : ∀ A, (∃ x, x ∈ A) → (A ≠ ∅) := by
   intros A hex
@@ -150,6 +162,7 @@ theorem exists_then_nonempty : ∀ A, (∃ x, x ∈ A) → (A ≠ ∅) := by
   rewrite [h_Aemp] at hx
   apply (empty_set_is_empty x)
   assumption
+
 
 theorem nonempty_then_exists_cl : ∀ A, (A ≠ ∅) → (is_nempty A) := by
   intros A hAnemp
@@ -161,11 +174,13 @@ theorem nonempty_then_exists_cl : ∀ A, (A ≠ ∅) → (is_nempty A) := by
   elim_neg h_nex
   intro_exists_ x, hx
 
+
 theorem nonempty_iff_exists_cl : ∀ A, (A ≠ ∅) ↔ (is_nempty A) := by
   intro A
   intro_iff
   · apply nonempty_then_exists_cl
   · apply exists_then_nonempty
+
 
 theorem non_empty_uni_then_exi_cl (P : Set → Prop) : ∀ A, (A ≠ ∅) → (∀ x ∈ A, P x) → ∃ x ∈ A, P x := by
   intros A hAnemp hfor_P
@@ -178,33 +193,38 @@ theorem non_empty_uni_then_exi_cl (P : Set → Prop) : ∀ A, (A ≠ ∅) → (�
   assumption
 
 
--- Boolean Set
 theorem exists_unique_boolean : ∀ A, ∃! B, ∀ x, (x ∈ B ↔ x ⊆ A) := by
   intro A
   apply describes_elem_then_unique
   apply boolean_ax
 
+
 noncomputable def boolean (A : Set) : Set := iota_op (exists_unique_boolean A)
 notation:max "𝒫 " A:1024 => boolean A
+
 
 theorem boolean_set_is_boolean : ∀ A, (∀ x, x ∈ 𝒫 A ↔ x ⊆ A) := by
   intro A
   apply iota_pr (exists_unique_boolean A)
+
 
 theorem is_boolean_boolean_set : ∀ A B, (∀ x, x ∈ B ↔ x ⊆ A) → (B = 𝒫 A) := by
   intros A B hBA
   apply iota_e (exists_unique_boolean A)
   assumption
 
+
 theorem empty_belongs_boolean : ∀ A, ∅ ∈ 𝒫 A := by
   intro A
   apply_r (boolean_set_is_boolean A ∅)
   apply empty_subset_any
 
+
 theorem set_belongs_boolean_set : ∀ A, A ∈ (𝒫 A) := by
   intro A
   apply_r (boolean_set_is_boolean A A)
   apply subset_refl
+
 
 theorem boolean_not_empty : ∀ A, 𝒫 A ≠ ∅ := by
   intro A
@@ -231,11 +251,6 @@ theorem boolean_monotonic : ∀ A B, A ⊆ B ↔ 𝒫 A ⊆ 𝒫 B := by
     assumption
 
 
-
-
-
-
--- Replacement Set Definition And Properties
 theorem exists_unique_replacement (P : Set → Set → Prop) : ∀ A, (∀ x, ∀ y, ∀ z, P x y → P x z → y = z) → ∃! B, ∀ y, (y ∈ B ↔ ∃ x ∈ A, P x y) := by
   intro A
   intro h_fP
@@ -261,9 +276,6 @@ def unexpandReplSet : Unexpander
   | _ => throw ()
 
 
-
-
-
 theorem repl_set_is_repl (P : Set → Set → Prop) (A : Set) (h : ∀ x y z, P x y → P x z → y = z) :
     ∀ y, y ∈ (ReplImg{ y | ∃ x ∈ A, P x y} of h) ↔ ∃ x ∈ A, P x y := by
   intro y
@@ -276,8 +288,8 @@ theorem is_repl_repl_set (P : Set → Set → Prop) (A : Set) (h : ∀ x y z, P 
   assumption
 
 
--- Unordered Pair Definition And Properties
 def unord_pr_predicate (a b : Set) (x y : Set) := (x = ∅ ∧ y = a) ∨ (x = (𝒫 ∅) ∧ y = b)
+
 
 theorem unord_pr_predicate_f (a b : Set) : ∀ x y z, (unord_pr_predicate a b x y) → (unord_pr_predicate a b x z) → y = z := by
   intros x y z h_unxy h_unxz
@@ -295,6 +307,7 @@ theorem unord_pr_predicate_f (a b : Set) : ∀ x y z, (unord_pr_predicate a b x 
     assumption
   · rewrite [g_r]
     assumption
+
 
 noncomputable def unord_pr_set (a b : Set) := ReplImg{ y | ∃ x ∈ 𝒫 (𝒫 ∅), unord_pr_predicate a b x y } of (unord_pr_predicate_f a b)
 notation (priority := high) "{" a ", " b "}" => unord_pr_set a b
@@ -320,6 +333,7 @@ theorem unord_pr_set_is_unord_pr : ∀ a b, ∀ x, (x ∈ {a , b} ↔ x = a ∨ 
       · apply set_belongs_boolean_set
       · right; intro_and; rfl; assumption
 
+
 theorem unord_pr_is_unord_pr_set : ∀ C a b, (∀ x, (x ∈ C ↔ x = a ∨ x = b)) → C = {a , b} := by
   intro C a b h_x
   let Q t := t = a ∨ t = b
@@ -340,10 +354,12 @@ theorem left_un_pr : ∀ a b, a ∈ {a, b} := by
   apply_r (unord_pr_set_is_unord_pr a b a)
   left; rfl
 
+
 theorem right_un_pr : ∀ a b, b ∈ {a, b} := by
   intros a b
   apply_r (unord_pr_set_is_unord_pr a b b)
   right; rfl
+
 
 theorem unord_pr_rev : ∀ a b, {a, b} = {b, a} := by
   intros a b
@@ -362,6 +378,7 @@ theorem unord_pr_rev : ∀ a b, {a, b} = {b, a} := by
     · rewrite [h_a]
       apply left_un_pr
 
+
 theorem unordered_pair_subs : ∀ a b A, (a ∈ A) → (b ∈ A) → ({a, b} ⊆ A) := by
   intros a b A h_a h_b
   intro x hx
@@ -373,7 +390,6 @@ theorem unordered_pair_subs : ∀ a b A, (a ∈ A) → (b ∈ A) → ({a, b} ⊆
     assumption
 
 
--- Singleton Set Definition And Properties
 noncomputable def singleton_set (a : Set) : Set := unord_pr_set a a
 notation (priority := high) "{" a "}" => singleton_set a
 
@@ -391,6 +407,7 @@ theorem singleton_a_elem_is_a : ∀ a x, x ∈ {a} ↔ x = a := by
     rw [h_xeqa]
     apply left_un_pr
 
+
 theorem singl_is_singl_set : ∀ C a, (∀ x, (x ∈ C ↔ x = a)) → C = {a} := by
   intro C a h_C
   apply unord_pr_is_unord_pr_set
@@ -403,9 +420,11 @@ theorem singl_is_singl_set : ∀ C a, (∀ x, (x ∈ C ↔ x = a)) → C = {a} :
     apply_r (h_C x)
     elim_or h_xa, h, h <;> assumption
 
+
 theorem x_in_singl_x : ∀ x, x ∈ {x} := by
   intro x
   apply left_un_pr
+
 
 theorem singleton_non_empty : (∀ x, ∃ t, t ∈ {x}) := by
   intro x
@@ -422,7 +441,7 @@ theorem singl_subs : ∀ A x, x ∈ A → {x} ⊆ A := by
   assumption
 
 
-theorem neg_notin_refl : ∀ x, x ∉ x := by
+theorem belongs_irrefl : ∀ x, x ∉ x := by
   intro x
   intro_neg h_x
   have h := regularity_ax {x} (singleton_non_empty x)
@@ -436,7 +455,8 @@ theorem neg_notin_refl : ∀ x, x ∉ x := by
   elim_neg h_for
   apply x_in_singl_x
 
-theorem neg_notin_symm : ∀ x y, x ∈ y → y ∉ x := by
+
+theorem belongs_asymm : ∀ x y, x ∈ y → y ∉ x := by
   intro x y h_xy
   intro_neg h_yx
   have h_ex : ∃ t, t ∈ {x, y} := by
@@ -458,7 +478,6 @@ theorem neg_notin_symm : ∀ x y, x ∈ y → y ∉ x := by
     apply left_un_pr
 
 
--- Union Set Definition And Properties
 theorem exists_unique_union : ∀ A, ∃! B, ∀ x, (x ∈ B ↔ ∃ y ∈ A, x ∈ y) := by
   intro A
   apply describes_elem_then_unique
@@ -468,9 +487,11 @@ theorem exists_unique_union : ∀ A, ∃! B, ∀ x, (x ∈ B ↔ ∃ y ∈ A, x 
 noncomputable def union_set (A : Set) := iota_op (exists_unique_union A)
 notation:max "⋃ " A:1024 => union_set A
 
+
 theorem union_set_is_union : (∀ A x, (x ∈ ⋃ A ↔ ∃ y ∈ A, x ∈ y)) := by
   intro A x
   exact (iota_pr (exists_unique_union A) x)
+
 
 theorem is_union_then_union_set : ∀ A B, (∀ A x, (x ∈ B ↔ ∃ y ∈ A, x ∈ y)) → (B = ⋃ A) := by
   intros A B
@@ -487,6 +508,7 @@ theorem union_empty : ⋃ ∅ = ∅ := by
   elim_exists_in h_exy, s, h_ins, h_pts
   have h := empty_set_is_empty s
   elim_neg_ h
+
 
 theorem union_singleton : ∀ A, ⋃ {A} = A := by
   intro A
@@ -507,6 +529,7 @@ theorem union_singleton : ∀ A, ⋃ {A} = A := by
     · apply x_in_singl_x
     · assumption
 
+
 theorem union_boolean : (∀ A, ⋃ (𝒫 A) = A) := by
   intro A
   apply set_extensionality_ax; intro x
@@ -522,12 +545,14 @@ theorem union_boolean : (∀ A, ⋃ (𝒫 A) = A) := by
     · apply set_belongs_boolean_set
     · assumption
 
+
 theorem elem_subset_union : (∀ A, ∀ x ∈ A, x ⊆ ⋃ A) := by
   intro A
   intro_in_ x, h_x
   intro t h_t
   apply_r (union_set_is_union _ _)
   intro_exists_in_ x, h_x, h_t
+
 
 theorem union_subset_monotonic : ∀ A B, A ⊆ B → ⋃ A ⊆ ⋃ B := by
   intro A B hAB
@@ -538,6 +563,7 @@ theorem union_subset_monotonic : ∀ A B, A ⊆ B → ⋃ A ⊆ ⋃ B := by
   intro_exists_in C
   · apply hAB; assumption
   · assumption
+
 
 theorem all_ss_then_union_ss : ∀ A B, (∀ X ∈ A, X ⊆ B) → (⋃ A ⊆ B) := by
   intro A B h_xAB
@@ -568,6 +594,7 @@ theorem sub_bool_un_mem_bool : ∀ A B, (A ⊆ 𝒫 B → ((⋃ A) ∈ 𝒫 B)) 
   apply hCB
   assumption
 
+
 theorem sing_equal : ∀ x y, (x = y) ↔ ({x} = {y}) := by
   intro x y
   intro_iff
@@ -579,8 +606,8 @@ theorem sing_equal : ∀ x y, (x = y) ↔ ({x} = {y}) := by
     rw [h_xs_ys]
 
 
--- Specification Set Definition And Properties
 def specific_pred (P : Set → Prop) (x y : Set) : Prop := P x ∧ x = y
+
 
 theorem specific_pred_f (P : Set → Prop) : ∀ x y z, specific_pred P x y → specific_pred P x z → y = z := by
   intros x y z h_xy h_xz
@@ -588,6 +615,7 @@ theorem specific_pred_f (P : Set → Prop) : ∀ x y z, specific_pred P x y → 
   · apply equal_symm
     elim_and_ h_xy
   · elim_and_ h_xz
+
 
 noncomputable def specific_set (A : Set) (P : Set → Prop) : Set := ReplImg{ y | ∃ x ∈ A, specific_pred P x y } of (specific_pred_f P)
 syntax "{ " ident " ∈ " term " | " term " }" : term
@@ -617,20 +645,24 @@ theorem spec_is_spec (A : Set) (P : Set → Prop) : (∀ x, x ∈ {x ∈ A | P x
     · assumption
     · intro_and; assumption; rfl
 
+
 theorem spec_then_P (A : Set) (P : Set → Prop) : ∀ x, (x ∈ {x ∈ A | P x}) → P x := by
   intro x h_x
   _apply_l (spec_is_spec A P x), h_x, h_xA
   elim_and_ h_xA
+
 
 theorem spec_subs (A : Set) (P : Set → Prop) : {x ∈ A | P x} ⊆ A := by
   intro_in_ x, h_x
   _apply_l (spec_is_spec A P x), h_x, h_xA
   elim_and_ h_xA
 
+
 theorem elem_P_then_spec (A : Set) (P : Set → Prop) : ∀ x, (x ∈ A) → (P x) → x ∈ {x ∈ A | P x} := by
   intros x h_x h_Px
   apply_r (spec_is_spec A P x)
   intro_and_ h_x, h_Px
+
 
 theorem is_spec_spec_set (A : Set) (P : Set → Prop) : ∀ B, (∀ x, x ∈ B ↔ (x ∈ A ∧ P x)) → B = {x ∈ A | P x} := by
   intro B
@@ -645,7 +677,7 @@ theorem is_spec_spec_set (A : Set) (P : Set → Prop) : ∀ B, (∀ x, x ∈ B �
   have h₃ := hunD {x ∈ A | P x} (spec_is_spec A P)
   rw [← h₂, h₃]
 
--- There is no universal set (proof without using regularity_ax)
+
 theorem no_universal_set : ¬ ∃ A, ∀ x, x ∈ A := by
   intro_neg h_ex
   elim_exists h_ex, A, h_A
@@ -662,21 +694,24 @@ theorem no_universal_set : ¬ ∃ A, ∀ x, x ∈ A := by
     apply h_A
 
 
--- Intersection Set Definition And Properties
 noncomputable def intersection_set (A : Set) : Set := {x ∈ ⋃ A | ∀ y ∈ A, x ∈ y}
 notation:max "⋂ " A:1024 => intersection_set A
+
 
 theorem interset_is_interset : ∀ A x, x ∈ ⋂ A ↔ (x ∈ ⋃ A ∧ ∀ y ∈ A, x ∈ y) := by
   intro A x
   apply spec_is_spec
 
+
 theorem interset_sub_union : ∀ A, ⋂ A ⊆ ⋃ A := by
   intro A
   apply spec_subs
 
+
 theorem interset_all_in : ∀ A x, (x ∈ ⋂ A) → (∀ y ∈ A, x ∈ y) := by
   intros A x
   apply spec_then_P
+
 
 theorem intersection_non_empty : ∀ A, ((is_nempty A) → ∀ x, (x ∈ ⋂ A) ↔ ∀ y ∈ A, x ∈ y) := by
   intros A h_nemp
@@ -693,10 +728,12 @@ theorem intersection_non_empty : ∀ A, ((is_nempty A) → ∀ x, (x ∈ ⋂ A) 
     apply h_all
     assumption
 
+
 theorem all_in_exi_interset : ∀ A x, (is_nempty A) → (∀ y ∈ A, x ∈ y) → (x ∈ ⋂ A) := by
   intros A x h_nemp h_for
   have h := intersection_non_empty A h_nemp x
   apply_r_ h
+
 
 theorem intersect_subset_monotonic : ∀ A B, (is_nempty A) → (A ⊆ B) → (⋂ B ⊆ ⋂ A) := by
   intros A B h_nemp hAB
@@ -716,6 +753,7 @@ theorem inter_subset_elem : (∀ A, ∀ x ∈ A, ⋂ A ⊆ x) := by
   _apply_l (interset_is_interset _ _), h_t, h_in; elim_and h_in, h_inun, h_for
   specialize_in_ h_for, x, h_x
   assumption
+
 
 theorem all_ss_then_inter_ss : ∀ A B, (is_nempty A) → (∀ X ∈ A, B ⊆ X) → (B ⊆ ⋂ A) := by
   intros A B h_nemp h
@@ -738,6 +776,7 @@ theorem all_nemp_in_boolean_nemp : ∀ A, ∀ S ∈ 𝒫⋆ A, (∃ t, t ∈ S) 
   apply (spec_then_P (𝒫 A) (Q))
   assumption
 
+
 theorem emp_not_in_boolean_nemp : ∀ A, ∅ ∉ 𝒫⋆ A := by
   intro A
   intro_neg h_in
@@ -747,15 +786,18 @@ theorem emp_not_in_boolean_nemp : ∀ A, ∅ ∉ 𝒫⋆ A := by
   elim_neg g
   rfl
 
+
 theorem boolean_nemp_subs : ∀ A, 𝒫⋆ A ⊆ 𝒫 A := by
   intro A
   apply spec_subs
+
 
 theorem in_boolean_nemp_then_subs : ∀ A X, X ∈ 𝒫⋆ A → X ⊆ A := by
   intro A X h_X
   apply_l (boolean_set_is_boolean _ _)
   apply boolean_nemp_subs
   assumption
+
 
 theorem subs_nemp_then_boolean : ∀ A X, (∃ t, t ∈ X) → (X ⊆ A) → X ∈ 𝒫⋆ A := by
   intro A X h_emp h_XA
@@ -765,6 +807,7 @@ theorem subs_nemp_then_boolean : ∀ A X, (∃ t, t ∈ X) → (X ⊆ A) → X �
   intro_and <;> try assumption
   apply_r (boolean_set_is_boolean _ _)
   assumption
+
 
 theorem union_boolean_nemp : ∀ A, ⋃ 𝒫⋆ A = A := by
   intro A
@@ -786,7 +829,6 @@ theorem union_boolean_nemp : ∀ A, ⋃ 𝒫⋆ A = A := by
     · apply x_in_singl_x
 
 
--- 1-Boolean Set Definition And Properties
 noncomputable def boolean_one (A : Set) := {S ∈ 𝒫 A | ∃ t ∈ A, S = {t}}
 notation:max "𝒫₁ " A:1024 => boolean_one A
 
@@ -805,6 +847,7 @@ theorem boolean_one_pr : ∀ A S, (S ∈ 𝒫₁ (A)) ↔ (∃ x ∈ A, S = {x})
       apply singl_subs
       assumption
     · assumption
+
 
 theorem in_singlbool_set : ∀ A x, ({x} ∈ 𝒫₁ (A)) ↔ (x ∈ A) := by
   intro A x
@@ -839,10 +882,10 @@ theorem union_boolean_one : ∀ A, ⋃ 𝒫₁ (A) = A := by
     · apply x_in_singl_x
 
 
--- Comphension For Collecting Properties
 def is_collective (P : Set → Prop) := ∃ A, ∀ x, (P x) → x ∈ A
 def is_collective_on (P : Set → Prop) (A : Set) := ∀ x, (P x) → x ∈ A
 def is_comprehense (P : Set → Prop) (X : Set) := ((is_collective P) ∧ ∀ x, (x ∈ X ↔ P x)) ∨ ((¬(is_collective P)) ∧ X = ∅)
+
 
 theorem coll_spec_is_comp (A : Set) (P : Set → Prop) (h : ∀ x, (P x) → x ∈ A) : is_comprehense P { x ∈ A | P x } := by
   left
@@ -882,9 +925,6 @@ theorem coll_compr_is_spec (A y : Set) (P : Set → Prop) (h : ∀ x, (P x) → 
     elim_neg h_ncoll
     intro_exists A
     assumption
-
-
-
 
 
 theorem compr_unique_cl (P : Set → Prop) : ∃! X, is_comprehense P X := by
@@ -928,6 +968,7 @@ theorem compr_is_compr_cl (P : Set → Prop) : is_collective P → (∀ x, (x �
   · elim_and_ h_coll
   · elim_and h_ncol, h_ncoll, h_eq
     elim_f_neg h_ncoll
+
 
 theorem compr_subs_cl (P : Set → Prop) (A : Set) : is_collective_on P A → ({x | P x} ⊆ A) := by
   intro h_coll

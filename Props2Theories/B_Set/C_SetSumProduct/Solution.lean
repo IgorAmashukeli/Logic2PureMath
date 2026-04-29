@@ -6,6 +6,7 @@ import Props2Theories.B_Set.B_Set_Algebra.SetSynt
 noncomputable def ord_pr_set (a b : Set) := {{a}, {a, b}}
 notation (priority := high) "(" a ", " b ")" => ord_pr_set a b
 
+
 theorem ord_pr_prop : ∀ a b c d, a = c ∧ b = d ↔ (a, b) = (c, d) := by
   intros a b c d
   intro_iff
@@ -50,6 +51,7 @@ theorem ord_pr_prop : ∀ a b c d, a = c ∧ b = d ↔ (a, b) = (c, d) := by
         rw [h_dc, g_bc]
       · apply equal_symm
         assumption
+
 
 theorem int_ord_pr : ∀ a b, ⋂ (a, b) = {a} := by
   intros a b
@@ -118,6 +120,7 @@ noncomputable def snd_coor (pr : Set) : Set := ⋃ {y ∈ ⋃ pr | ∃ x, pr = (
 notation:max "π₁ " pr:1024 => fst_coor pr
 notation:max "π₂ " pr:1024 => snd_coor pr
 
+
 theorem pi1_left : ∀ a b, π₁ (a, b) = a := by
   intros a b
   have h : ⋃ (⋂ (a, b)) = a := by
@@ -153,6 +156,7 @@ theorem ord_pr_in_boolbool : ∀ A B, ∀ a ∈ A, ∀ b ∈ B, (a, b) ∈ 𝒫 
 noncomputable def cart_prod (A : Set) (B : Set) : Set := {z ∈ 𝒫 (𝒫 (A ∪ B)) | ∃ x ∈ A, ∃ y ∈ B, z = (x, y)}
 notation:max A:1024 " × " B:1024 => cart_prod A B
 
+
 theorem cart_prod_prop : ∀ A B pr, pr ∈ (A × B) ↔ (∃ x ∈ A, ∃ y ∈ B, pr = (x, y)) := by
   intros A B pr
   intro_iff
@@ -163,6 +167,7 @@ theorem cart_prod_prop : ∀ A B pr, pr ∈ (A × B) ↔ (∃ x ∈ A, ∃ y ∈
     elim_exists_in h_xpr, y, h_yin, h_ypr
     rewrite [h_ypr]
     apply ord_pr_in_boolbool <;> assumption
+
 
 theorem cart_prod_pr_prop : ∀ A B a b, (a, b) ∈ (A × B) ↔ (a ∈ A ∧ b ∈ B) := by
   intros A B a b
@@ -181,6 +186,7 @@ theorem cart_prod_pr_prop : ∀ A B a b, (a, b) ∈ (A × B) ↔ (a ∈ A ∧ b 
     intro_exists_in b; try assumption
     rfl
 
+
 theorem cart_pi1_in : ∀ A B pr, pr ∈ A × B → π₁ pr ∈ A := by
   intros A B pr h_pr
   _apply_l (cart_prod_prop _ _ _), h_pr, h
@@ -198,12 +204,14 @@ theorem cart_pi2_in : ∀ A B pr, pr ∈ A × B → π₂ pr ∈ B := by
   rewrite [h_ypr, pi2_right]
   assumption
 
+
 theorem cart_pr_pi12 : ∀ A B pr, pr ∈ A × B → pr = (π₁ pr, π₂ pr) := by
   intros A B pr h_pr_AB
   _apply_l (cart_prod_prop _ _ _), h_pr_AB, h
   elim_exists_in h, x, h_xin, h_xpr
   elim_exists_in h_xpr, y, h_yin, h_ypr
   rw [h_ypr, pi1_left, pi2_right]
+
 
 theorem cart_eq_pi_eq_pr : ∀ A B, ∀ pr₁ pr₂ ∈ A × B, (π₁ pr₁ = π₁ pr₂) → (π₂ pr₁ = π₂ pr₂) → pr₁ = pr₂ := by
   intros A B
@@ -215,6 +223,7 @@ theorem cart_eq_pi_eq_pr : ∀ A B, ∀ pr₁ pr₂ ∈ A × B, (π₁ pr₁ = �
   rewrite [h₁, h₂]
   apply_l (ord_pr_prop _ _ _ _)
   intro_and <;> assumption
+
 
 theorem cart_prop_pr_el (P : Set → Prop) : ∀ A B, (∀ x ∈ A, ∀ y ∈ B, P (x, y)) → ∀ t ∈ (A × B), P t := by
   intros A B h_AB
@@ -250,11 +259,13 @@ theorem cart_empty_r : ∀ A, (A × ∅) = ∅ := by
   intro_in_ x, h_x; intro_in_ y, h_y;
   (have h:= empty_set_is_empty y); elim_f_neg h
 
+
 theorem lr_nempty_cart : ∀ A B, (is_nempty A) → (is_nempty B) → (is_nempty (A × B)) := by
   intro A B h_A h_B
   elim_exists h_A, x, h_x; elim_exists h_B, y, h_y
   intro_exists (x, y)
   apply_r (cart_prod_pr_prop _ _ _ _) <;> intro_and <;> assumption
+
 
 theorem cart_nemp_eq : ∀ A B C D : Set, (is_nempty A) → (is_nempty B) →
 (((A × B) = (C × D)) ↔ ((A = C) ∧ (B = D))) := by
@@ -305,6 +316,7 @@ theorem cart_prod_mon_l : ∀ A B C, A ⊆ C → (A × B) ⊆ C × B := by
   intro_and <;> try apply h_AC
   all_goals assumption
 
+
 theorem cart_prod_mon_r : ∀ A B C, (B ⊆ C) → (A × B) ⊆ (A × C) := by
   intros A B C h_BC
   apply cart_prop_pr_el
@@ -313,6 +325,7 @@ theorem cart_prod_mon_r : ∀ A B C, (B ⊆ C) → (A × B) ⊆ (A × C) := by
   apply_r (cart_prod_pr_prop _ _ _ _)
   intro_and <;> try apply h_BC
   all_goals assumption
+
 
 theorem cart_prod_inter_subs : ∀ A B C D, (A × B) ∩ (C × D) ⊆ (A ∩ C) × (B ∩ D) := by
   intros A B C D
@@ -339,6 +352,7 @@ theorem cart_inter2_distrib : ∀ A B C D, (A × B) ∩ (C × D) = (A ∩ C) × 
   <;> apply_r (cart_prod_pr_prop _ _ _ _)
   <;> intro_and <;> assumption
 
+
 theorem cart_union2_distrib_l : ∀ A B C, (A × (B ∪ C)) = (A × B) ∪ (A × C) := by
   intros A B C
   apply_l (subs_subs_then_eq _ _); intro_and;
@@ -360,6 +374,7 @@ theorem cart_union2_distrib_l : ∀ A B C, (A × (B ∪ C)) = (A × B) ∪ (A ×
     all_goals apply_r (union2_prop _ _ _)
     left_; right_
 
+
 theorem cart_union2_distrib_r : ∀ A B C, ((A ∪ B) × C) = (A × C) ∪ (B × C) := by
   intros A B C
   apply_l (subs_subs_then_eq _ _); intro_and;
@@ -380,6 +395,7 @@ theorem cart_union2_distrib_r : ∀ A B C, ((A ∪ B) × C) = (A × C) ∪ (B ×
     <;> try assumption
     all_goals apply_r (union2_prop _ _ _)
     left_; right_
+
 
 theorem cart_diff_distrib_l :  ∀ A B C, (A × (B \ C)) = (A × B) \ (A × C) := by
   intros A B C
@@ -406,7 +422,6 @@ theorem cart_diff_distrib_l :  ∀ A B C, (A × (B \ C)) = (A × B) \ (A × C) :
     apply_r (difference_prop _ _ _); intro_and <;> try assumption
     intro_neg h_inC; elim_neg h_nxy;
     apply_r (cart_prod_pr_prop _ _ _ _); intro_and <;> assumption
-
 
 
 theorem cart_comp_cl : ∀ U V A B, (A ⊆ U) → (B ⊆ V) → ((U × V) \ (A × B)) = ((U \ A) × (V \ B)) ∪ ((U \ A) × B) ∪ (A × (V \ B)) := by
@@ -466,9 +481,9 @@ theorem cart_comp_cl : ∀ U V A B, (A ⊆ U) → (B ⊆ V) → ((U × V) \ (A �
           elim_f_neg spec_then_P _ _ y h_y
 
 
-
 noncomputable def disj_union2 (A B : Set) := (A × {∅}) ∪ (B × {{∅}})
 notation:max A:1024 " ⊔ " B:1024 => disj_union2 A B
+
 
 theorem disj_union2_prop : ∀ A B pr, (pr ∈ A ⊔ B) ↔ (∃ x ∈ A, pr = (x, ∅)) ∨ (∃ x ∈ B, pr = (x, {∅})) := by
   intros A B pr
@@ -498,6 +513,7 @@ theorem disj_union2_prop : ∀ A B pr, (pr ∈ A ⊔ B) ↔ (∃ x ∈ A, pr = (
       · intro h_t; elim_exists h_t, Y, h_Y; elim_and h_Y, h_Yemp, h_pr
         rewrite [← h_Yemp]; assumption
       · intro h_t; intro_exists_in {∅}; rfl; assumption
+
 
 theorem disj_union2_pr_prop : ∀ A B x y,
 (x, y) ∈ (A ⊔ B) ↔ (x ∈ A ∧ y = ∅) ∨ (x ∈ B ∧ y = {∅}) := by
@@ -549,12 +565,14 @@ theorem disj_union2_pi2_in : ∀ A B pr, pr ∈ A ⊔ B → π₂ pr ∈ {∅, {
     rewrite [h_t, pi2_right]
     apply right_un_pr
 
+
 theorem disj_union2_pr_pi12 : ∀ A B pr, pr ∈ A ⊔ B → pr = (π₁ pr, π₂ pr) := by
   intros A B pr h_prAB
   _apply_l (union2_prop _ _ _), h_prAB, h_or
   elim_or h_or, h_in, h_in
   · apply cart_pr_pi12 A {∅}; assumption
   · apply cart_pr_pi12 B {{∅}}; assumption
+
 
 theorem disj_union2_eq_pi_eq_pr : ∀ A B, ∀ pr₁ pr₂ ∈ A ⊔ B, (π₁ pr₁ = π₁ pr₂) → (π₂ pr₁ = π₂ pr₂) → pr₁ = pr₂ := by
   intros A B
@@ -588,6 +606,7 @@ theorem disj_union2_eq_pi_eq_pr : ∀ A B, ∀ pr₁ pr₂ ∈ A ⊔ B, (π₁ p
     apply x_in_singl_x
   · apply cart_eq_pi_eq_pr B {{∅}} <;> assumption
 
+
 theorem disj_union2_in_left :  ∀ A x, (x ∈ A) → (x, ∅) ∈ (A × {∅}) := by
   intros A x h_x
   apply_r (cart_prod_pr_prop _ _ _ _); intro_and
@@ -598,6 +617,7 @@ theorem disj_union2_in_right :  ∀ B x, (x ∈ B) → (x, {∅}) ∈ (B × {{�
   intros B x h_x
   apply_r (cart_prod_pr_prop _ _ _ _); intro_and
   assumption; apply x_in_singl_x
+
 
 theorem disj_union2_left_in : ∀ A B x, (x ∈ A) → ((x, ∅) ∈ (A ⊔ B)) := by
   intros A B x h_xA
@@ -639,7 +659,6 @@ theorem disj_union2_pr_semp_in_r : ∀ A B x, (x, {∅}) ∈ (A ⊔ B) → x ∈
   · elim_and_ h_Bsemp
 
 
-
 theorem disj_union2_prop_pr_el (P : Set → Prop) : ∀ A B, (∀ x ∈ A, P (x, ∅)) → (∀ y ∈ B, P (y, {∅})) → ∀ t ∈ (A ⊔ B), P t := by
   intros A B h_A h_B
   intro_in_ t, h_t
@@ -661,19 +680,22 @@ theorem disj_union2_prop_el_pr (P : Set → Prop) : ∀ A B, (∀ t ∈ (A ⊔ B
     apply h_AB;
     apply disj_union2_right_in; assumption
 
--- Left And Right Sets Of Pairs From Disjoint Union
+
 noncomputable def disjoint_union2_left (X: Set) := {y ∈ X | (π₂ y) = ∅}
 noncomputable def disjoint_union2_right (X : Set) := {y ∈ X | (π₂ y) = {∅}}
 notation:max "DU2LP " dsjun:1024 => disjoint_union2_left dsjun
 notation:max "DU2RP " dsjun:1024 => disjoint_union2_right dsjun
 
+
 theorem dul_subs : ∀ X, (DU2LP X) ⊆ X := by
   intro X
   apply spec_subs
 
+
 theorem dur_subs : ∀ X, (DU2RP X) ⊆ X := by
   intro X
   apply spec_subs
+
 
 theorem dulr_inter2 : ∀ X, (DU2LP X) ∩ (DU2RP X) = ∅ := by
   intro X
@@ -751,6 +773,7 @@ theorem dur_disj_union2 : ∀ A B, (DU2RP (A ⊔ B)) = (B × {{∅}}) := by
     · rewrite [pi2_right]
       apply_l (singleton_a_elem_is_a _ _); assumption
 
+
 theorem disj_union2_in_dul : ∀ A B x, ((x, ∅) ∈ DU2LP (A ⊔ B)) → x ∈ A := by
   intros A B x h_x
   rw [dul_disj_union2] at h_x
@@ -770,17 +793,18 @@ theorem dulr_union2 : ∀ A B, (DU2LP (A ⊔ B)) ∪ (DU2RP (A ⊔ B)) = (A ⊔ 
   rewrite [dul_disj_union2, dur_disj_union2]
   rfl
 
+
 theorem in_l_pred_f : ∀ x y z, π₁ x = y → π₁ x = z → (y = z) := by
   intros x y z h_xy h_xz
   rewrite [← h_xy]
   rw [h_xz]
 
 
--- Left And Right Original Sets From Disjiont Union
 noncomputable def disjoint_union2_left_set (X: Set) := (ReplImg{y | ∃ pr ∈ (DU2LP (X)), (π₁ pr) = y} of (in_l_pred_f))
 noncomputable def disjoint_union2_right_set (X : Set) := (ReplImg{y | ∃ pr ∈ (DU2RP (X)), (π₁ pr) = y} of (in_l_pred_f))
 notation:max "DU2L " dsjun:1024 => disjoint_union2_left_set dsjun
 notation:max "DU2R " dsjun:1024 => disjoint_union2_right_set dsjun
+
 
 theorem disj_union2_repl_img_l : ∀ A B, DU2L (A ⊔ B) = A := by
   intros A B
@@ -800,7 +824,6 @@ theorem disj_union2_repl_img_l : ∀ A B, DU2L (A ⊔ B) = A := by
     · rw [pi1_left]
 
 
-
 theorem disj_union2_repl_img_r : ∀ A B, DU2R (A ⊔ B) = B := by
   intros A B
   apply (set_extensionality_ax); intro t; intro_iff
@@ -818,12 +841,14 @@ theorem disj_union2_repl_img_r : ∀ A B, DU2R (A ⊔ B) = B := by
       apply disj_union2_in_right; assumption
     · rw [pi1_left]
 
+
 theorem disj_union2_emp_l : ∀ A, A ⊔ ∅ = A × {∅} := by
   intros A
   calc
   _ = (A × {∅}) ∪ ∅ × {{∅}} := by rfl
   _ = (A × {∅}) ∪ ∅ := by rw [cart_empty_l]
   _ = _ := by apply union2_empty
+
 
 theorem disj_union2_emp_r : ∀ A, ∅ ⊔ A = A × {{∅}} := by
   intros A
@@ -833,15 +858,18 @@ theorem disj_union2_emp_r : ∀ A, ∅ ⊔ A = A × {{∅}} := by
   _ = (A × {{∅}}) ∪ ∅ := by apply union2_comm
   _ = _ := by apply union2_empty
 
+
 theorem disj_union2_emp_lr : ∅ ⊔ ∅ = ∅ := by
   rw [disj_union2_emp_l]
   apply cart_empty_l
+
 
 theorem disj_union2_nemp_l : ∀ A B, (is_nempty A) → (is_nempty (A ⊔ B)) := by
   intros A B h_A
   elim_exists h_A, C, h_C
   intro_exists (C, ∅)
   apply disj_union2_left_in; assumption
+
 
 theorem disj_union2_nemp_r : ∀ A B, (is_nempty B) → (is_nempty (A ⊔ B)) := by
   intros A B h_A
@@ -871,8 +899,6 @@ theorem disj_union2_nidemp_emp_semp : ∀ A, A ⊔ A = (A × ({∅, {∅}})) := 
           · left; apply_r (singleton_a_elem_is_a _ _); assumption
           · right; apply_r (singleton_a_elem_is_a _ _); assumption
       rw [h]
-
-
 
 
 theorem disj_union2_eq : ∀ A B C D, (((A ⊔ B) = (C ⊔ D)) ↔ (A = C) ∧ (B = D)) := by
@@ -995,8 +1021,6 @@ theorem subs_disj_union2_ex_un : ∀ S A B, (S ⊆ (A ⊔ B)) → ∃! C D, S = 
     _apply_l (disj_union2_eq _ _ _ _), h_K, h_CN; elim_and_ h_CN
 
 
-
-
 theorem disj_union2_union2_distrib : ∀ A B C D, (A ⊔ B) ∪ (C ⊔ D) = ((A ∪ C) ⊔ (B ∪ D)) := by
   intros A B C D
   apply set_extensionality_ax; intro t
@@ -1026,6 +1050,7 @@ theorem disj_union2_union2_distrib : ∀ A B C D, (A ⊔ B) ∪ (C ⊔ D) = ((A 
       _apply_l (union2_prop _ _ _), h_y, h; clear h_y; elim_or h, h_A, h_C
       · apply_r (union2_prop _ _ _); left; apply disj_union2_right_in; assumption
       · apply_r (union2_prop _ _ _); right; apply disj_union2_right_in; assumption
+
 
 theorem disj_union2_inter2_distrib : ∀ A B C D, (A ⊔ B) ∩ (C ⊔ D) = ((A ∩ C) ⊔ (B ∩ D)) := by
   intros A B C D
@@ -1065,9 +1090,6 @@ theorem disj_union2_inter2_distrib : ∀ A B C D, (A ⊔ B) ∩ (C ⊔ D) = ((A 
       apply_r (inter2_prop _ _ _); intro_and
       · apply disj_union2_right_in; assumption
       · apply disj_union2_right_in; assumption
-
-
-
 
 
 theorem disj_union2_diff_distrib : ∀ A B C D, (A ⊔ B) \ (C ⊔ D) = ((A \ C) ⊔ (B \ D)) := by

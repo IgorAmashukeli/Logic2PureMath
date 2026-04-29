@@ -102,17 +102,107 @@ theorem dom_compl_cl : ∀ R A B, (is_nempty B) → (R BinRelBtw A AND B)
 → A \ (dom R) ⊆ (dom (compl R A B)) := sorry
 theorem rng_compl_cl : ∀ R A B, (is_nempty A) → (R BinRelBtw A AND B)
 → A \ (rng R) ⊆ (rng (compl R A B)) := sorry
+theorem dom_pred_f : ∀ x y z, (y = dom x) → (z = dom x) → (y = z) := sorry
+theorem rng_pred_f : ∀ x y z, (y = rng x) → (z = rng x) → (y = z) := sorry
+theorem dom_union : ∀ S, (∀ R ∈ S, (BinRel R)) → (dom (⋃ S) = ⋃ (ReplImg{d | ∃ R ∈ S, d = dom R} of (dom_pred_f))) := sorry
+theorem rng_union : ∀ S, (∀ R ∈ S, (BinRel R)) → (rng (⋃ S)) = ⋃ (ReplImg{d | ∃ R ∈ S, d = rng R} of (rng_pred_f)) := sorry
+theorem dom_inter_uni : ∀ S, (∀ R ∈ S, (BinRel R)) → (dom (⋂ S)) ⊆ ⋂ (ReplImg{d | ∃ R ∈ S, d = dom R} of (dom_pred_f)) := sorry
+theorem rng_inter_uni : ∀ S, (∀ R ∈ S, (BinRel R)) → (rng (⋂ S)) ⊆ ⋂ (ReplImg{d | ∃ R ∈ S, d = rng R} of (rng_pred_f)) := sorry
+theorem dom_inter_exi : ∀ S, (∃ R ∈ S, (BinRel R)) → (dom (⋂ S)) ⊆ ⋂ (ReplImg{d | ∃ R ∈ S, d = dom R} of (dom_pred_f)) := sorry
+theorem rng_inter_exi : ∀ S, (∃ R ∈ S, (BinRel R)) → (rng (⋂ S)) ⊆ ⋂ (ReplImg{d | ∃ R ∈ S, d = rng R} of (rng_pred_f)) := sorry
+
+
+-- Binary Relation Restriction
+noncomputable def l_restriction R S := R ∩ (S × (rng R))
+notation:max R:1024 " ⨡L " S:1024 => l_restriction R S
+
+noncomputable def r_restriction R S := R ∩ ((dom R) × S)
+notation:max R:1024 " ⨡R " S:1024 => r_restriction R S
+
+noncomputable def restriction R S:= R ∩ (S × S)
+notation:max R:1024 " ⨡ " S:1024 => restriction R S
+
+
+theorem l_rest_pr_prop : ∀ R S x y, (x . (R ⨡L S) . y) ↔ (x ∈ S ∧ (x . R . y)) := sorry
+theorem r_rest_pr_prop : ∀ R S x y, (x . (R ⨡R S) . y) ↔ (y ∈ S ∧ (x . R . y)) := sorry
+theorem rest_pr_prop : ∀ R S x y, (x . (R ⨡ S) . y) ↔ (x ∈ S ∧ y ∈ S ∧ (x . R . y)) := sorry
+
+theorem l_rest_bin_rel : ∀ R S, (BinRel R) → BinRel (R ⨡L S) := sorry
+theorem r_rest_bin_rel : ∀ R S, (BinRel R) → BinRel (R ⨡R S) := sorry
+theorem rest_bin_rel : ∀ R S, (BinRel R) → BinRel (R ⨡ S) := sorry
+
+theorem l_rest_bin_rel_btw : ∀ R A B S, (S ⊆ A) → (R BinRelBtw A AND B) → ((R ⨡L S) BinRelBtw S AND B) := sorry
+theorem r_rest_bin_rel_btw : ∀ R A B S, (S ⊆ B) → (R BinRelBtw A AND B) → ((R ⨡R S) BinRelBtw A AND S) := sorry
+theorem rest_bin_rel_btw : ∀ R A S, (S ⊆ A) → (R BinRelOn A) → ((R ⨡R S) BinRelOn S) := sorry
+
+theorem l_res_subs_main : ∀ R S, (R ⨡L S) ⊆ R := sorry
+theorem r_res_subs_main : ∀ R S, (R ⨡R S) ⊆ R := sorry
+theorem res_subs_main : ∀ R S, (R ⨡ S) ⊆ R := sorry
+
+theorem l_res_emp_l : ∀ S, ∅ ⨡L S = ∅ := sorry
+theorem r_res_emp_l : ∀ S, ∅ ⨡R S = ∅ := sorry
+theorem res_emp_l : ∀ S, ∅ ⨡ S = ∅ := sorry
+
+theorem l_res_emp_r : ∀ R, R ⨡L ∅ = ∅ := sorry
+theorem r_res_emp_r : ∀ R, R ⨡R ∅ = ∅ := sorry
+theorem res_emp_r : ∀ R, R ⨡ ∅ = ∅ := sorry
+
+theorem l_res_nemp : ∀ R S, (S ⊆ (dom R)) → (BinRel R) → (((is_nempty R) ∧ (is_nempty S)) ↔ (is_nempty (R ⨡L S))) := sorry
+theorem r_res_nemp : ∀ R S, (S ⊆ (rng R)) → (BinRel R) → (((is_nempty R) ∧ (is_nempty S)) ↔ (is_nempty (R ⨡R S))) := sorry
+
+theorem l_res_subs_l : ∀ P Q S, (P ⊆ Q) → (P ⨡L S) ⊆ (Q ⨡L S) := sorry
+theorem r_res_subs_l : ∀ P Q S, (P ⊆ Q) → (P ⨡R S) ⊆ (Q ⨡R S) := sorry
+theorem res_subs_l : ∀ P Q S, (P ⊆ Q) → (P ⨡ S) ⊆ (Q ⨡ S) := sorry
+
+theorem l_res_subs_r : ∀ P S T, (S ⊆ T) → (P ⨡L S) ⊆ (P ⨡L T) := sorry
+theorem r_res_subs_r : ∀ P S T, (S ⊆ T) → (P ⨡R S) ⊆ (P ⨡R T) := sorry
+theorem res_subs_r : ∀ P S T, (S ⊆ T) → (P ⨡ S) ⊆ (P ⨡ T) := sorry
 
 
 -- id Binary Relation Definition And Properties
 noncomputable def id_ A := {t ∈ (A × A) | ∃ x, t = (x, x)}
 
-
-theorem id_bin_rel : ∀ A, BinRel (id_ A) := sorry
-theorem id_bin_rel_on : ∀ A, (id_ A) BinRelOn A := sorry
 theorem id_prop : ∀ A, ∀ t, (t ∈ id_ A) ↔ ∃ x ∈ A, t = (x, x) := sorry
 theorem id_pr_prop : ∀ A, ∀ x, (x . (id_ A) . x) ↔ x ∈ A := sorry
 theorem in_id : ∀ A, ∀ x ∈ A, (x . (id_ A) . x) := sorry
 theorem id_in_l : ∀ A, ∀ x y, (x . (id_ A) . y) → (x ∈ A) := sorry
 theorem id_in_r : ∀ A, ∀ x y, (x . (id_ A) . y) → (y ∈ A) := sorry
 theorem id_then_eq : ∀ A, ∀ x y, (x . (id_ A) . y) → x = y := sorry
+
+theorem id_bin_rel : ∀ A, BinRel (id_ A) := sorry
+theorem id_bin_rel_on : ∀ A, (id_ A) BinRelOn A := sorry
+
+
+theorem id_emp : id_ ∅ = ∅ := sorry
+theorem id_nemp : ∀ A, (is_nempty A) ↔ (is_nempty (id_ A)) := sorry
+theorem id_subs : ∀ A B, (A ⊆ B) ↔ (id_ A) ⊆ (id_ B) := sorry
+theorem id_eq_arg : ∀ A B, (A = B) ↔ (id_ A) = (id_ B) := sorry
+theorem id_union2 : ∀ A B, (id_ (A ∪ B)) = (id_ A) ∪ (id_ B) := sorry
+theorem id_inter2 : ∀ A B, (id_ (A ∩ B)) = (id_ A) ∩ (id_ B) := sorry
+theorem id_differ : ∀ A B, (id_ (A \ B)) = (id_ A) \ (id_ B) := sorry
+theorem id_sym_differ : ∀ A B, (id_ (A △ B)) = (id_ A) △ (id_ B) := sorry
+theorem id_compl : ∀ A U, id_ (U \ A) ⊆ compl (id_ A) U U := sorry
+theorem id_pred_f : ∀ x y z, (y = id_ x) → (z = id_ x) → (y = z) := sorry
+theorem id_union : ∀ S, id_ (⋃ S) = ⋃ (ReplImg{dd | ∃ R ∈ S, dd = id_ R} of (id_pred_f)) := sorry
+theorem id_inter : ∀ S, id_ (⋂ S) = ⋂ (ReplImg{dd | ∃ R ∈ S, dd = id_ R} of (id_pred_f)) := sorry
+
+theorem id_dom : ∀ A, dom (id_ A) = A := sorry
+theorem id_rng : ∀ A, rng (id_ A) = A := sorry
+
+
+-- Reverse Binary Relation Definition And Properties
+noncomputable def inv (R : Set) : Set := {z ∈ (rng R) × (dom R) | ∃ x y, (z = (y, x) ∧ (x . R . y))}
+notation:max R:1024 "⁻¹"  => inv R
+
+theorem inv_prop :
+∀ R, (BinRel R) → ∀ t, (t ∈ R⁻¹) ↔ (∃ x y, t = (y, x) ∧ (x . R . y)) := sorry
+theorem inv_pr_prop: ∀ R, (BinRel R) → ∀ x y, (x . R . y) ↔ (y . (R⁻¹) . x) := sorry
+
+theorem inv_bin_rel : ∀ R, (BinRel R) → (BinRel (R⁻¹)) := sorry
+theorem inv_in_rel_btw : ∀ R A B, (R BinRelBtw A AND B) → (R⁻¹ BinRelBtw B AND A) := sorry
+
+theorem inv_emp : ∅⁻¹ = ∅ := sorry
+theorem inv_nemp : ∀ R, (is_nempty R) ↔ (is_nempty (R⁻¹)) := sorry
+theorem inv_subs : ∀ P Q, (BinRel P) → (BinRel Q) → ((P ⊆ Q) ↔ (P⁻¹ ⊆ Q⁻¹)) := sorry
+theorem inv_eq_args : ∀ P Q, (BinRel P) → (BinRel Q) → ((P = Q) ↔ (P⁻¹) = (Q⁻¹)) := sorry
+theorem inv_union2 : ∀ P Q, (BinRel P) → (BinRel Q) → ((P ∪ Q)⁻¹ = (P⁻¹) ∪ (Q⁻¹)) := sorry

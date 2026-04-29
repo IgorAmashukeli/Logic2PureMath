@@ -1,27 +1,30 @@
 {"synthetic": false,
  "schemaVersion": "2025-09-10",
  "outputs":
- {"o": ["c221e4be617c45f5.olean"],
-  "i": "db4fbf5283510e19.ilean",
-  "c": "4c539a0ce580e3bd.c"},
+ {"o": ["d59c0de799079eee.olean"],
+  "i": "62ac4c2a4a692e3f.ilean",
+  "c": "43e97ab8a39a0fc7.c"},
  "log":
  [{"message":
    ".> LEAN_PATH=/home/igor/ComputerScience/Props2Theories/.lake/build/lib/lean /home/igor/.elan/toolchains/leanprover--lean4---v4.29.1/bin/lean /home/igor/ComputerScience/Props2Theories/Props2Theories/B_Set/C_SetSumProduct/TupleSynt.lean -o /home/igor/ComputerScience/Props2Theories/.lake/build/lib/lean/Props2Theories/B_Set/C_SetSumProduct/TupleSynt.olean -i /home/igor/ComputerScience/Props2Theories/.lake/build/lib/lean/Props2Theories/B_Set/C_SetSumProduct/TupleSynt.ilean -c /home/igor/ComputerScience/Props2Theories/.lake/build/ir/Props2Theories/B_Set/C_SetSumProduct/TupleSynt.c --setup /home/igor/ComputerScience/Props2Theories/.lake/build/ir/Props2Theories/B_Set/C_SetSumProduct/TupleSynt.setup.json --json",
    "level": "trace"},
   {"message":
-   "Props2Theories/B_Set/C_SetSumProduct/TupleSynt.lean:29:0: (a, b) : Set",
+   "Props2Theories/B_Set/C_SetSumProduct/TupleSynt.lean:37:0: (a, b) : Set",
    "level": "info"},
   {"message":
-   "Props2Theories/B_Set/C_SetSumProduct/TupleSynt.lean:30:0: ((a, b), c) : Set",
+   "Props2Theories/B_Set/C_SetSumProduct/TupleSynt.lean:38:0: ((a, b), c) : Set",
    "level": "info"},
   {"message":
-   "Props2Theories/B_Set/C_SetSumProduct/TupleSynt.lean:31:0: (((a, b), c), d) : Set",
+   "Props2Theories/B_Set/C_SetSumProduct/TupleSynt.lean:39:0: (((a, b), c), d) : Set",
    "level": "info"},
   {"message":
-   "Props2Theories/B_Set/C_SetSumProduct/TupleSynt.lean:32:0: ((((a, b), c), d), e) : Set",
+   "Props2Theories/B_Set/C_SetSumProduct/TupleSynt.lean:40:0: ((((a, b), c), d), e) : Set",
    "level": "info"},
   {"message":
-   "Props2Theories/B_Set/C_SetSumProduct/TupleSynt.lean:33:0: (((((a, b), c), d), e), f) : Set",
+   "Props2Theories/B_Set/C_SetSumProduct/TupleSynt.lean:41:0: (((((a, b), c), d), e), f) : Set",
+   "level": "info"},
+  {"message":
+   "Props2Theories/B_Set/C_SetSumProduct/TupleSynt.lean:42:0: (((((((a, b), c), d), e), f), g), h) : Set",
    "level": "info"}],
  "inputs":
  [["Props2Theories.B_Set.C_SetSumProduct.TupleSynt:deps",
@@ -32,11 +35,11 @@
        [["Props2Theories.B_Set.A_Constructions.Task transitive imports (legacy)",
          "2fa0ec5d1df1e432"],
         ["Props2Theories.B_Set.A_Constructions.Task:importAllArts",
-         "1131419301876d0c"],
+         "add9189f2d40c04f"],
         ["Props2Theories.B_Set.C_SetSumProduct.Task transitive imports (legacy)",
-         "d604b53135b348c7"],
+         "e5deded8f2ca3c4e"],
         ["Props2Theories.B_Set.C_SetSumProduct.Task:importAllArts",
-         "e767cff346ceeeae"]]]]],
+         "59078db13898fc8d"]]]]],
     ["libs",
      [["import dynlibs", "00000000000006bb"],
       ["package external libraries", "00000000000006bb"],
@@ -45,11 +48,11 @@
   ["Lean 4.29.1, commit f72c35b3f637c8c6571d353742168ab66cc22c00",
    "fa77a35a41db35c0"],
   ["/home/igor/ComputerScience/Props2Theories/Props2Theories/B_Set/C_SetSumProduct/TupleSynt.lean",
-   "b8fd652c6160ab14"],
+   "c21539b52bd137bb"],
   ["options", "00000000000006bb"],
   ["isModule: false", "feefd2a0d3a1847e"],
   ["Module.name: Props2Theories.B_Set.C_SetSumProduct.TupleSynt",
    "3552334cf27ea171"],
   ["Package.id?: (some Props2Theories)", "bf69640ed8a43e05"],
   ["Module.leanArgs: #[]", "00000000000006bb"]],
- "depHash": "9d2b5d27ac79fab2"}
+ "depHash": "12ee5a3400c8f0c8"}

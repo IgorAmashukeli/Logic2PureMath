@@ -1,33 +1,42 @@
 import Props2Theories.B_Set.A_Constructions.Task
 import Props2Theories.B_Set.C_SetSumProduct.Task
 
+private def buildOrdTuple : List (Lean.TSyntax `term) → Lean.MacroM (Lean.TSyntax `term)
+  | []      => Lean.Macro.throwError "empty tuple"
+  | [a]     => return a
+  | [a, b]  => `(ord_pr_set $a $b)
+  | a :: b :: rest => do
+      let base ← `(ord_pr_set $a $b)
+      rest.foldlM (fun acc x => `(ord_pr_set $acc $x)) base
 
--- 1. ВВОД (Макрос для создания вложенных пар)
 syntax (priority := high) "(" term ", " term ", " term,+ ")" : term
 
 macro_rules
+  | `(($a, $b, $xs,*)) => buildOrdTuple ([a, b] ++ xs.getElems.toList)
 
-  | `(($a, $b, $c)) => `(ord_pr_set (ord_pr_set $a $b) $c)
-  | `(($a, $b, $c, $d)) => `(ord_pr_set (ord_pr_set (ord_pr_set $a $b) $c) $d)
-  | `(($a, $b, $c, $d, $e)) => `(ord_pr_set (ord_pr_set (ord_pr_set (ord_pr_set $a $b) $c) $d) $e)
+private partial def unbuildOrdTuple (t : Lean.Syntax) :
+    Lean.PrettyPrinter.UnexpandM (List (Lean.TSyntax `term)) := do
+  match t with
+  | `(ord_pr_set $l $r) => return (← unbuildOrdTuple l.raw) ++ [r]
+  | _ => return [⟨t⟩]
 
-  | `(($a, $b, $c, $d, $e, $f)) => `(ord_pr_set (ord_pr_set (ord_pr_set (ord_pr_set (ord_pr_set $a $b) $c) $d) $e) $f)
-
--- 2. ВЫВОД (Принтер для красивого отображения)
 @[app_unexpander ord_pr_set]
 def unexpandOrdPr : Lean.PrettyPrinter.Unexpander
-  | `($$f (ord_pr_set (ord_pr_set (ord_pr_set (ord_pr_set $a $b) $c) $d) $e) $f) => `(($a, $b, $c, $d, $e, $f))
-  | `($$f (ord_pr_set (ord_pr_set (ord_pr_set $a $b) $c) $d) $e) => `(($a, $b, $c, $d, $e))
-
-  | `($$f (ord_pr_set (ord_pr_set $a $b) $c) $d) => `(($a, $b, $c, $d))
-  | `($$f (ord_pr_set $a $b) $c) => `(($a, $b, $c))
-  | `($$f $a $b) => `(($a, $b))
+  | `($(_) $l $r) => do
+      let elems ← unbuildOrdTuple (← `(ord_pr_set $l $r))
+      match elems with
+      | [] | [_] | [_, _] => throw ()
+      | first :: second :: rest =>
+        let mut result ← `(($first, $second))
+        for x in rest do
+          result ← `(ord_pr_set $result $x)
+        return result
   | _ => throw ()
 
--- 3. ПРОВЕРКА
-variable (a b c d e f : Set)
+variable (a b c d e f g h : Set)
 #check (a, b)
 #check ((a, b, c) : Set)
 #check ((a, b, c, d) : Set)
 #check ((a, b, c, d, e) : Set)
 #check ((a, b, c, d, e, f) : Set)
+#check ((a, b, c, d, e, f, g, h) : Set)

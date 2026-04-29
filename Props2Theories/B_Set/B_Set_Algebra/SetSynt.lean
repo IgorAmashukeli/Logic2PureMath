@@ -1,43 +1,47 @@
 import Props2Theories.B_Set.A_Constructions.Task
 import Props2Theories.B_Set.B_Set_Algebra.Task
 
--- 1. ВВОД (Макросы для создания цепочки объединений)
+-- 1. ВВОД
+
+private def buildFinSet : List (Lean.TSyntax `term) → Lean.MacroM (Lean.TSyntax `term)
+  | []      => Lean.Macro.throwError "empty set"
+  | [a]     => `(singleton_set $a)
+  | [a, b]  => `(unord_pr_set $a $b)
+  | a :: b :: rest => do
+      let base ← `(unord_pr_set $a $b)
+      rest.foldlM (fun acc x => `(union2 $acc (singleton_set $x))) base
+
 syntax (priority := high) "{" term ", " term ", " term,+ "}" : term
 
 macro_rules
+  | `({ $a, $b, $xs,* }) => buildFinSet ([a, b] ++ xs.getElems.toList)
 
-  | `({ $a, $b, $c }) => `(union2 (unord_pr_set $a $b) (singleton_set $c))
-  | `({ $a, $b, $c, $d }) => `(union2 (union2 (unord_pr_set $a $b) (singleton_set $c)) (singleton_set $d))
-  | `({ $a, $b, $c, $d, $e }) => `(union2 (union2 (union2 (unord_pr_set $a $b) (singleton_set $c)) (singleton_set $d)) (singleton_set $e))
 
-  | `({ $a, $b, $c, $d, $e, $f }) => `(union2 (union2 (union2 (union2 (unord_pr_set $a $b) (singleton_set $c)) (singleton_set $d)) (singleton_set $e)) (singleton_set $f))
+private partial def unbuildFinSet (t : Lean.Syntax) :
+    Lean.PrettyPrinter.UnexpandM (List (Lean.TSyntax `term)) := do
+  match t with
+  | `(singleton_set $a)                => return [a]
+  | `(unord_pr_set $a $b)              => return [a, b]
+  | `(union2 $rest (singleton_set $x)) => return (← unbuildFinSet rest.raw) ++ [x]
+  | _                                  => throw ()
 
--- 2. ВЫВОД (Принтер для Infoview)
--- Чтобы избежать конфликта со структурами {}, мы используем встроенную категорию sepBy
 @[app_unexpander union2]
 def unexpandUnion2 : Lean.PrettyPrinter.Unexpander
-  | `($$f (union2 (union2 (union2 (unord_pr_set $a $b) (singleton_set $c)) (singleton_set $d)) (singleton_set $e)) (singleton_set $f)) => `({$a, $b, $c, $d, $e, $f})
-  | `($$f (union2 (union2 (unord_pr_set $a $b) (singleton_set $c)) (singleton_set $d)) (singleton_set $e)) => `({$a, $b, $c, $d, $e})
-
-  | `($$f (union2 (unord_pr_set $a $b) (singleton_set $c)) (singleton_set $d)) => `({$a, $b, $c, $d})
-  | `($$f (unord_pr_set $a $b) (singleton_set $c)) => `({$a, $b, $c})
+  | `($(_) $l $r) => do
+      let elems ← unbuildFinSet (← `(union2 $l $r))
+      match elems with
+      | [] | [_] | [_, _] => throw ()
+      | first :: second :: rest =>
+        let mut result ← `({$first, $second})
+        for x in rest do
+          result ← `(union2 $result (singleton_set $x))
+        return result
   | _ => throw ()
 
--- Базовые принтеры (обязательно БЕЗ пробелов внутри { }, чтобы Lean не путал со структурами)
-@[app_unexpander unord_pr_set]
-def unexpandUnordPrSet : Lean.PrettyPrinter.Unexpander
-
-  | `($(_) $a $b) => `({$a, $b})
-  | _ => throw ()
-
-@[app_unexpander singleton_set]
-def unexpandSingletonSet : Lean.PrettyPrinter.Unexpander
-
-  | `($(_) $a) => `({$a})
-  | _ => throw ()
-
--- 3. ПРОВЕРКА
-variable (a b c d e f : Set)
+variable (a b c d e f g h : Set)
+#check {a}
+#check {a, b}
 #check {a, b, c}
 #check {a, b, c, d}
 #check {a, b, c, d, e, f}
+#check {a, b, c, d, e, f, g, h}

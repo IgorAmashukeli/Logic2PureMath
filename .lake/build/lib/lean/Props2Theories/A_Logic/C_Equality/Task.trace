@@ -1,8 +1,8 @@
 {"synthetic": false,
  "schemaVersion": "2025-09-10",
  "outputs":
- {"o": ["03d6462c2a4c3aed.olean"],
-  "i": "f8d0edd29c959b92.ilean",
+ {"o": ["d6a024d4c0794a2a.olean"],
+  "i": "97016f410e656462.ilean",
   "c": "4c64815d6721d6e3.c"},
  "log":
  [{"message":
@@ -25,6 +25,9 @@
    "level": "warning"},
   {"message":
    "Props2Theories/A_Logic/C_Equality/Task.lean:10:8: declaration uses `sorry`",
+   "level": "warning"},
+  {"message":
+   "Props2Theories/A_Logic/C_Equality/Task.lean:13:8: declaration uses `sorry`",
    "level": "warning"},
   {"message":
    "Props2Theories/A_Logic/C_Equality/Task.lean:14:8: declaration uses `sorry`",
@@ -66,7 +69,7 @@
    "Props2Theories/A_Logic/C_Equality/Task.lean:26:8: declaration uses `sorry`",
    "level": "warning"},
   {"message":
-   "Props2Theories/A_Logic/C_Equality/Task.lean:27:8: declaration uses `sorry`",
+   "Props2Theories/A_Logic/C_Equality/Task.lean:29:8: declaration uses `sorry`",
    "level": "warning"},
   {"message":
    "Props2Theories/A_Logic/C_Equality/Task.lean:30:8: declaration uses `sorry`",
@@ -81,37 +84,34 @@
    "Props2Theories/A_Logic/C_Equality/Task.lean:33:8: declaration uses `sorry`",
    "level": "warning"},
   {"message":
-   "Props2Theories/A_Logic/C_Equality/Task.lean:34:8: declaration uses `sorry`",
+   "Props2Theories/A_Logic/C_Equality/Task.lean:36:8: declaration uses `sorry`",
    "level": "warning"},
   {"message":
-   "Props2Theories/A_Logic/C_Equality/Task.lean:38:8: declaration uses `sorry`",
+   "Props2Theories/A_Logic/C_Equality/Task.lean:37:8: declaration uses `sorry`",
    "level": "warning"},
   {"message":
-   "Props2Theories/A_Logic/C_Equality/Task.lean:39:8: declaration uses `sorry`",
+   "Props2Theories/A_Logic/C_Equality/Task.lean:40:8: declaration uses `sorry`",
    "level": "warning"},
   {"message":
-   "Props2Theories/A_Logic/C_Equality/Task.lean:42:8: declaration uses `sorry`",
+   "Props2Theories/A_Logic/C_Equality/Task.lean:41:8: declaration uses `sorry`",
    "level": "warning"},
   {"message":
    "Props2Theories/A_Logic/C_Equality/Task.lean:44:8: declaration uses `sorry`",
    "level": "warning"},
   {"message":
+   "Props2Theories/A_Logic/C_Equality/Task.lean:45:8: declaration uses `sorry`",
+   "level": "warning"},
+  {"message":
+   "Props2Theories/A_Logic/C_Equality/Task.lean:46:8: declaration uses `sorry`",
+   "level": "warning"},
+  {"message":
+   "Props2Theories/A_Logic/C_Equality/Task.lean:47:8: declaration uses `sorry`",
+   "level": "warning"},
+  {"message":
+   "Props2Theories/A_Logic/C_Equality/Task.lean:48:8: declaration uses `sorry`",
+   "level": "warning"},
+  {"message":
    "Props2Theories/A_Logic/C_Equality/Task.lean:49:8: declaration uses `sorry`",
-   "level": "warning"},
-  {"message":
-   "Props2Theories/A_Logic/C_Equality/Task.lean:50:8: declaration uses `sorry`",
-   "level": "warning"},
-  {"message":
-   "Props2Theories/A_Logic/C_Equality/Task.lean:51:8: declaration uses `sorry`",
-   "level": "warning"},
-  {"message":
-   "Props2Theories/A_Logic/C_Equality/Task.lean:52:8: declaration uses `sorry`",
-   "level": "warning"},
-  {"message":
-   "Props2Theories/A_Logic/C_Equality/Task.lean:54:8: declaration uses `sorry`",
-   "level": "warning"},
-  {"message":
-   "Props2Theories/A_Logic/C_Equality/Task.lean:55:8: declaration uses `sorry`",
    "level": "warning"}],
  "inputs":
  [["Props2Theories.A_Logic.C_Equality.Task:deps",
@@ -122,7 +122,7 @@
        [["Props2Theories.A_Logic.A_Props.Task transitive imports (legacy)",
          "ac5fde31153b2639"],
         ["Props2Theories.A_Logic.A_Props.Task:importAllArts",
-         "c03d20c154a3951b"],
+         "bf5ecfc0d0a4d2a9"],
         ["Props2Theories.TacticNames transitive imports (legacy)",
          "00000000000006bb"],
         ["Props2Theories.TacticNames:importAllArts", "f00e17ef7ded015f"]]]]],
@@ -134,10 +134,10 @@
   ["Lean 4.29.1, commit f72c35b3f637c8c6571d353742168ab66cc22c00",
    "fa77a35a41db35c0"],
   ["/home/igor/ComputerScience/Props2Theories/Props2Theories/A_Logic/C_Equality/Task.lean",
-   "890c8f3e22ccd213"],
+   "b9fb174749ecffa4"],
   ["options", "00000000000006bb"],
   ["isModule: false", "feefd2a0d3a1847e"],
   ["Module.name: Props2Theories.A_Logic.C_Equality.Task", "7e7bde035fcae227"],
   ["Package.id?: (some Props2Theories)", "bf69640ed8a43e05"],
   ["Module.leanArgs: #[]", "00000000000006bb"]],
- "depHash": "d15cfae490b48e4b"}
+ "depHash": "97559bee658f2111"}

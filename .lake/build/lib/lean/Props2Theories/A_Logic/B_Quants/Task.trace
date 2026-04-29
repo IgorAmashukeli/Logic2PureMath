@@ -1,8 +1,8 @@
 {"synthetic": false,
  "schemaVersion": "2025-09-10",
  "outputs":
- {"o": ["34c5e7aa89615aff.olean"],
-  "i": "7f83e258065b3f18.ilean",
+ {"o": ["13b27ab314b92b5b.olean"],
+  "i": "10a01ac3ffc9b423.ilean",
   "c": "c252d34544b00b35.c"},
  "log":
  [{"message":
@@ -21,16 +21,16 @@
    "Props2Theories/A_Logic/B_Quants/Task.lean:10:8: declaration uses `sorry`",
    "level": "warning"},
   {"message":
-   "Props2Theories/A_Logic/B_Quants/Task.lean:11:8: declaration uses `sorry`",
+   "Props2Theories/A_Logic/B_Quants/Task.lean:13:8: declaration uses `sorry`",
    "level": "warning"},
   {"message":
-   "Props2Theories/A_Logic/B_Quants/Task.lean:12:8: declaration uses `sorry`",
-   "level": "warning"},
-  {"message":
-   "Props2Theories/A_Logic/B_Quants/Task.lean:16:8: declaration uses `sorry`",
+   "Props2Theories/A_Logic/B_Quants/Task.lean:14:8: declaration uses `sorry`",
    "level": "warning"},
   {"message":
    "Props2Theories/A_Logic/B_Quants/Task.lean:17:8: declaration uses `sorry`",
+   "level": "warning"},
+  {"message":
+   "Props2Theories/A_Logic/B_Quants/Task.lean:18:8: declaration uses `sorry`",
    "level": "warning"},
   {"message":
    "Props2Theories/A_Logic/B_Quants/Task.lean:21:8: declaration uses `sorry`",
@@ -39,19 +39,31 @@
    "Props2Theories/A_Logic/B_Quants/Task.lean:22:8: declaration uses `sorry`",
    "level": "warning"},
   {"message":
-   "Props2Theories/A_Logic/B_Quants/Task.lean:26:8: declaration uses `sorry`",
+   "Props2Theories/A_Logic/B_Quants/Task.lean:25:8: declaration uses `sorry`",
    "level": "warning"},
   {"message":
-   "Props2Theories/A_Logic/B_Quants/Task.lean:30:8: declaration uses `sorry`",
+   "Props2Theories/A_Logic/B_Quants/Task.lean:28:8: declaration uses `sorry`",
    "level": "warning"},
   {"message":
-   "Props2Theories/A_Logic/B_Quants/Task.lean:31:8: declaration uses `sorry`",
+   "Props2Theories/A_Logic/B_Quants/Task.lean:29:8: declaration uses `sorry`",
    "level": "warning"},
   {"message":
-   "Props2Theories/A_Logic/B_Quants/Task.lean:35:8: declaration uses `sorry`",
+   "Props2Theories/A_Logic/B_Quants/Task.lean:32:8: declaration uses `sorry`",
+   "level": "warning"},
+  {"message":
+   "Props2Theories/A_Logic/B_Quants/Task.lean:33:8: declaration uses `sorry`",
    "level": "warning"},
   {"message":
    "Props2Theories/A_Logic/B_Quants/Task.lean:36:8: declaration uses `sorry`",
+   "level": "warning"},
+  {"message":
+   "Props2Theories/A_Logic/B_Quants/Task.lean:37:8: declaration uses `sorry`",
+   "level": "warning"},
+  {"message":
+   "Props2Theories/A_Logic/B_Quants/Task.lean:38:8: declaration uses `sorry`",
+   "level": "warning"},
+  {"message":
+   "Props2Theories/A_Logic/B_Quants/Task.lean:39:8: declaration uses `sorry`",
    "level": "warning"},
   {"message":
    "Props2Theories/A_Logic/B_Quants/Task.lean:40:8: declaration uses `sorry`",
@@ -66,22 +78,22 @@
    "Props2Theories/A_Logic/B_Quants/Task.lean:43:8: declaration uses `sorry`",
    "level": "warning"},
   {"message":
-   "Props2Theories/A_Logic/B_Quants/Task.lean:44:8: declaration uses `sorry`",
+   "Props2Theories/A_Logic/B_Quants/Task.lean:49:8: declaration uses `sorry`",
    "level": "warning"},
   {"message":
-   "Props2Theories/A_Logic/B_Quants/Task.lean:45:8: declaration uses `sorry`",
-   "level": "warning"},
-  {"message":
-   "Props2Theories/A_Logic/B_Quants/Task.lean:46:8: declaration uses `sorry`",
-   "level": "warning"},
-  {"message":
-   "Props2Theories/A_Logic/B_Quants/Task.lean:47:8: declaration uses `sorry`",
+   "Props2Theories/A_Logic/B_Quants/Task.lean:52:8: declaration uses `sorry`",
    "level": "warning"},
   {"message":
    "Props2Theories/A_Logic/B_Quants/Task.lean:55:8: declaration uses `sorry`",
    "level": "warning"},
   {"message":
+   "Props2Theories/A_Logic/B_Quants/Task.lean:56:8: declaration uses `sorry`",
+   "level": "warning"},
+  {"message":
    "Props2Theories/A_Logic/B_Quants/Task.lean:59:8: declaration uses `sorry`",
+   "level": "warning"},
+  {"message":
+   "Props2Theories/A_Logic/B_Quants/Task.lean:62:8: declaration uses `sorry`",
    "level": "warning"},
   {"message":
    "Props2Theories/A_Logic/B_Quants/Task.lean:63:8: declaration uses `sorry`",
@@ -90,19 +102,7 @@
    "Props2Theories/A_Logic/B_Quants/Task.lean:64:8: declaration uses `sorry`",
    "level": "warning"},
   {"message":
-   "Props2Theories/A_Logic/B_Quants/Task.lean:68:8: declaration uses `sorry`",
-   "level": "warning"},
-  {"message":
-   "Props2Theories/A_Logic/B_Quants/Task.lean:72:8: declaration uses `sorry`",
-   "level": "warning"},
-  {"message":
-   "Props2Theories/A_Logic/B_Quants/Task.lean:73:8: declaration uses `sorry`",
-   "level": "warning"},
-  {"message":
-   "Props2Theories/A_Logic/B_Quants/Task.lean:74:8: declaration uses `sorry`",
-   "level": "warning"},
-  {"message":
-   "Props2Theories/A_Logic/B_Quants/Task.lean:79:8: declaration uses `sorry`",
+   "Props2Theories/A_Logic/B_Quants/Task.lean:67:8: declaration uses `sorry`",
    "level": "warning"}],
  "inputs":
  [["Props2Theories.A_Logic.B_Quants.Task:deps",
@@ -116,7 +116,7 @@
         ["Props2Theories.A_Logic.A_Props.Task transitive imports (legacy)",
          "ac5fde31153b2639"],
         ["Props2Theories.A_Logic.A_Props.Task:importAllArts",
-         "c03d20c154a3951b"]]]]],
+         "bf5ecfc0d0a4d2a9"]]]]],
     ["libs",
      [["import dynlibs", "00000000000006bb"],
       ["package external libraries", "00000000000006bb"],
@@ -125,10 +125,10 @@
   ["Lean 4.29.1, commit f72c35b3f637c8c6571d353742168ab66cc22c00",
    "fa77a35a41db35c0"],
   ["/home/igor/ComputerScience/Props2Theories/Props2Theories/A_Logic/B_Quants/Task.lean",
-   "e4a10c68078fc648"],
+   "503b8999b7be6739"],
   ["options", "00000000000006bb"],
   ["isModule: false", "feefd2a0d3a1847e"],
   ["Module.name: Props2Theories.A_Logic.B_Quants.Task", "0a1a385cf99fd87d"],
   ["Package.id?: (some Props2Theories)", "bf69640ed8a43e05"],
   ["Module.leanArgs: #[]", "00000000000006bb"]],
- "depHash": "3a9262dcadd1bfa4"}
+ "depHash": "99ddafdf6874d439"}
