@@ -123,9 +123,9 @@ noncomputable def restriction R S:= R ∩ (S × S)
 notation:max R:1024 " ⨡ " S:1024 => restriction R S
 
 
-theorem l_rest_pr_prop : ∀ R S x y, (x . (R ⨡L S) . y) ↔ (x ∈ S ∧ (x . R . y)) := sorry
-theorem r_rest_pr_prop : ∀ R S x y, (x . (R ⨡R S) . y) ↔ (y ∈ S ∧ (x . R . y)) := sorry
-theorem rest_pr_prop : ∀ R S x y, (x . (R ⨡ S) . y) ↔ (x ∈ S ∧ y ∈ S ∧ (x . R . y)) := sorry
+theorem l_rest_pr_prop : ∀ R S, (BinRel R) → ∀ x y, ((x . (R ⨡L S) . y) ↔ (x ∈ S ∧ (x . R . y))) := sorry
+theorem r_rest_pr_prop : ∀ R S, (BinRel R) → ∀ x y, (x . (R ⨡R S) . y) ↔ (y ∈ S ∧ (x . R . y)) := sorry
+theorem rest_pr_prop : ∀ R S, (BinRel R) → ∀ x y, (x . (R ⨡ S) . y) ↔ (x ∈ S ∧ y ∈ S ∧ (x . R . y)) := sorry
 
 theorem l_rest_bin_rel : ∀ R S, (BinRel R) → BinRel (R ⨡L S) := sorry
 theorem r_rest_bin_rel : ∀ R S, (BinRel R) → BinRel (R ⨡R S) := sorry
@@ -133,7 +133,7 @@ theorem rest_bin_rel : ∀ R S, (BinRel R) → BinRel (R ⨡ S) := sorry
 
 theorem l_rest_bin_rel_btw : ∀ R A B S, (S ⊆ A) → (R BinRelBtw A AND B) → ((R ⨡L S) BinRelBtw S AND B) := sorry
 theorem r_rest_bin_rel_btw : ∀ R A B S, (S ⊆ B) → (R BinRelBtw A AND B) → ((R ⨡R S) BinRelBtw A AND S) := sorry
-theorem rest_bin_rel_btw : ∀ R A S, (S ⊆ A) → (R BinRelOn A) → ((R ⨡R S) BinRelOn S) := sorry
+theorem rest_bin_rel_btw : ∀ R A S, (S ⊆ A) → (R BinRelOn A) → ((R ⨡ S) BinRelOn S) := sorry
 
 theorem l_res_subs_main : ∀ R S, (R ⨡L S) ⊆ R := sorry
 theorem r_res_subs_main : ∀ R S, (R ⨡R S) ⊆ R := sorry
@@ -157,6 +157,54 @@ theorem res_subs_l : ∀ P Q S, (P ⊆ Q) → (P ⨡ S) ⊆ (Q ⨡ S) := sorry
 theorem l_res_subs_r : ∀ P S T, (S ⊆ T) → (P ⨡L S) ⊆ (P ⨡L T) := sorry
 theorem r_res_subs_r : ∀ P S T, (S ⊆ T) → (P ⨡R S) ⊆ (P ⨡R T) := sorry
 theorem res_subs_r : ∀ P S T, (S ⊆ T) → (P ⨡ S) ⊆ (P ⨡ T) := sorry
+
+theorem l_res_union2_l : ∀ P Q S, (BinRel P) → (BinRel Q) → (P ∪ Q) ⨡L S = (P ⨡L S) ∪ (Q ⨡L S) := sorry
+theorem r_res_union2_l : ∀ P Q S, (BinRel P) → (BinRel Q) → (P ∪ Q) ⨡R S = (P ⨡R S) ∪ (Q ⨡R S) := sorry
+theorem res_union2_l : ∀ P Q S, (P ∪ Q) ⨡ S = (P ⨡ S) ∪ (Q ⨡ S) := sorry
+
+theorem l_res_union2_r : ∀ R S T, R ⨡L (S ∪ T) = ((R ⨡L S) ∪ (R ⨡L T)) := sorry
+theorem r_res_union2_r : ∀ R S T, R ⨡R (S ∪ T) = (R ⨡R S) ∪ (R ⨡R T):= sorry
+theorem res_union2_r : ∀ R S T, (BinRel R) → R ⨡ (S ∪ T) = (R ⨡ S) ∪ (R ⨡ T) ∪ ((R ⨡L S) ⨡R T) ∪ ((R ⨡L T) ⨡R S) := sorry
+
+theorem l_res_inter2_l : ∀ P Q S, (BinRel P) → (BinRel Q) → (P ∩ Q) ⨡L S = (P ⨡L S) ∩ (Q ⨡L S) := sorry
+theorem r_res_inter2_l : ∀ P Q S, (BinRel P) → (BinRel Q) → (P ∩ Q) ⨡R S = (P ⨡R S) ∩ (Q ⨡R S) := sorry
+theorem res_inter2_l : ∀ P Q S, (BinRel P) → (BinRel Q) → (P ∩ Q) ⨡ S = (P ⨡ S) ∩ (Q ⨡ S) := sorry
+
+theorem l_res_inter2_r : ∀ R S T, (BinRel R) → (R ⨡L (S ∩ T)) = (R ⨡L S) ∩ (R ⨡L T) := sorry
+theorem r_res_inter2_r : ∀ R S T, (BinRel R) → (R ⨡L (S ∩ T)) = (R ⨡L S) ∩ (R ⨡L T) := sorry
+theorem res_inter2_r : ∀ R S T, (BinRel R) → (R ⨡L (S ∩ T)) = (R ⨡L S) ∩ (R ⨡L T) := sorry
+
+theorem l_res_differ_l : ∀ P Q S, (BinRel P) → (BinRel Q) → (P \ Q) ⨡L S = (P ⨡L S) \ (Q ⨡L S) := sorry
+theorem r_res_differ_l : ∀ P Q S, (BinRel P) → (BinRel Q) → (P \ Q) ⨡R S = (P ⨡R S) \ (Q ⨡R S) := sorry
+theorem res_differ_l : ∀ P Q S, (BinRel P) → (BinRel Q) → (P \ Q) ⨡ S = (P ⨡ S) \ (Q ⨡ S) := sorry
+
+theorem l_res_differ_r : ∀ R S T, (BinRel R) → R ⨡L (S \ T) = (R ⨡L S) \ (R ⨡L T) := sorry
+theorem r_res_differ_r : ∀ R S T, (BinRel R) → R ⨡R (S \ T) = (R ⨡R S) \ (R ⨡R T) := sorry
+theorem res_differ_r : ∀ R S T, (BinRel R) → R ⨡ (S \ T) = ((R ⨡ S) \ (R ⨡L T)) \ (R ⨡R T) := sorry
+
+theorem l_res_double_res : ∀ P S T, (BinRel P) → (P ⨡L S) ⨡L T = P ⨡L (S ∩ T) := sorry
+theorem r_res_double_res : ∀ P S T, (BinRel P) → (P ⨡R S) ⨡L T = P ⨡R (S ∩ T) := sorry
+theorem res_double_res : ∀ P S T, (BinRel P) → (P ⨡ S) ⨡ T = P ⨡ (S ∩ T) := sorry
+
+theorem l_res_double_comm : ∀ P S T, (BinRel P) → (P ⨡L S) ⨡L T = (P ⨡L T) ⨡L S := sorry
+theorem r_res_double_comm : ∀ P S T, (BinRel P) → (P ⨡R S) ⨡R T = (P ⨡R T) ⨡R S := sorry
+theorem res_double_comm : ∀ P S T, (BinRel P) → (P ⨡ S) ⨡ T = (P ⨡ T) ⨡ S := sorry
+
+theorem l_res_dom : ∀ R, (BinRel R) → R ⨡L (dom R) = R := sorry
+theorem r_res_rng : ∀ R, (BinRel R) → R ⨡R (rng R) = R := sorry
+theorem res_dom_rng : ∀ R, (BinRel R) → R ⨡ ((dom R) ∪ (rng R)) = R := sorry
+
+theorem dom_l_res_subs : ∀ R S, (BinRel R) → dom (R ⨡L S) ⊆ S := sorry
+theorem rng_r_res_subs : ∀ R S, (BinRel R) → rng (R ⨡R S) ⊆ S := sorry
+theorem dom_res_subs : ∀ R S, (BinRel R) → dom (R ⨡ S) ⊆ S := sorry
+theorem rng_res_subs : ∀ R S, (BinRel R) → rng (R ⨡ S) ⊆ S := sorry
+
+theorem dom_l_res_eq : ∀ R S, (BinRel R) → (S ⊆ dom R) → dom (R ⨡L S) = S := sorry
+theorem dom_r_res_rq : ∀ R S, (BinRel R) → (S ⊆ rng R) → rng (R ⨡R S) = S := sorry
+theorem dom_res_eq : ∀ R S, (BinRel R) → ((S × S) ⊆ R) → dom (R ⨡ S) = S := sorry
+theorem rng_res_eq : ∀ R S, (BinRel R) → ((S × S) ⊆ R) → rng (R ⨡ S) = S := sorry
+
+
 
 
 -- id Binary Relation Definition And Properties
