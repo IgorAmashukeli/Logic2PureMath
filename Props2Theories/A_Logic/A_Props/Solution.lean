@@ -890,6 +890,71 @@ theorem xor_absorb_cl (p q : Prop) : q ↔ ((p ⊕ q) ⊕ p) := by
       left; intro_and <;> assumption
 
 
+theorem xor_and_distr (p q r : Prop) : p ∧ (q ⊕ r) ↔ ((p ∧ q) ⊕ (p ∧ r)) := by
+  intro_iff
+  · intro h_pq
+    elim_and h_pq, h_p, h_qr; clear h_pq
+    elim_or h_qr, h, h <;> elim_and h, h_l, h_r <;> clear h
+    · left; intro_and
+      · intro_and <;> assumption
+      · intro_neg h_pr; elim_and h_pr, h_p₀, h_r₀; elim_neg_ h_r
+    · right; intro_and
+      · intro_and <;> assumption
+      · intro_neg h_pq; elim_and h_pq, h_p₀, h_q₀; elim_neg_ h_r
+  · intro h_pq
+    elim_or h_pq, h, h <;> elim_and h, h_l, h_r <;> elim_and h_l, h_left, h_right <;> clear h_l h
+    · intro_and
+      · assumption
+      · left; intro_and
+        · assumption
+        · intro_neg h_is_r; elim_neg h_r; intro_and <;> assumption
+    · intro_and
+      · assumption
+      · right; intro_and
+        · assumption
+        · intro_neg h_is_q; elim_neg h_r; intro_and <;> assumption
+
+
+theorem xor_congr_l (p q r : Prop) : (p ↔ q) → ((p ⊕ r) ↔ (q ⊕ r)) := by
+  intro h_pq
+  intro_iff
+  · intro h_pr; elim_or h_pr, h, h <;> elim_and h, h_left, h_right <;> clear h
+    · left; intro_and
+      · apply_l h_pq; assumption
+      · assumption
+    · right; intro_and
+      · assumption
+      · intro_neg h_q
+        _apply_r h_pq, h_q, h_p
+        elim_neg_ h_right
+  · intro h_qr; elim_or h_qr, h, h <;> elim_and h, h_left, h_right <;> clear h
+    · left; intro_and
+      · apply_r h_pq; assumption
+      · assumption
+    · right; intro_and
+      · assumption
+      · intro_neg h_q
+        _apply_l h_pq, h_q, h_p
+        elim_neg_ h_right
+
+
+
+theorem xor_congr_r (p q r : Prop) : (p ↔ q) → ((r ⊕ p) ↔ (r ⊕ q)) := by
+  intro h_pq
+  intro_iff
+  · intro h_pr
+    _apply_l (xor_commut _ _), h_pr, h_rp;
+    _apply_l (xor_congr_l p q r h_pq), h_rp, h_qr;
+    _apply_l (xor_commut _ _), h_qr, h_rq; assumption
+  · intro h_rq
+    _apply_l (xor_commut _ _), h_rq, h_qr;
+    _apply_r (xor_congr_l p q r h_pq), h_qr, h_pr;
+    _apply_l (xor_commut _ _), h_pr, h_rp; assumption
+
+
+
+
+
 theorem xor_introl (p q : Prop) : (p ∧ ¬q) → (p ⊕ q) := by
   intro h_p_nq
   left_

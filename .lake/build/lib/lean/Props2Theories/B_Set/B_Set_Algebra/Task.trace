@@ -1,8 +1,8 @@
 {"synthetic": false,
  "schemaVersion": "2025-09-10",
  "outputs":
- {"o": ["78b14ae4ffa0a5b9.olean"],
-  "i": "4c0145754c4fdfdb.ilean",
+ {"o": ["df5e0a6735f6b872.olean"],
+  "i": "77359b99dbc21b34.ilean",
   "c": "1587e0fc1e222f16.c"},
  "log":
  [{"message":
@@ -93,7 +93,7 @@
    "Props2Theories/B_Set/B_Set_Algebra/Task.lean:64:8: declaration uses `sorry`",
    "level": "warning"},
   {"message":
-   "Props2Theories/B_Set/B_Set_Algebra/Task.lean:67:8: declaration uses `sorry`",
+   "Props2Theories/B_Set/B_Set_Algebra/Task.lean:65:8: declaration uses `sorry`",
    "level": "warning"},
   {"message":
    "Props2Theories/B_Set/B_Set_Algebra/Task.lean:68:8: declaration uses `sorry`",
@@ -105,7 +105,7 @@
    "Props2Theories/B_Set/B_Set_Algebra/Task.lean:70:8: declaration uses `sorry`",
    "level": "warning"},
   {"message":
-   "Props2Theories/B_Set/B_Set_Algebra/Task.lean:73:8: declaration uses `sorry`",
+   "Props2Theories/B_Set/B_Set_Algebra/Task.lean:71:8: declaration uses `sorry`",
    "level": "warning"},
   {"message":
    "Props2Theories/B_Set/B_Set_Algebra/Task.lean:74:8: declaration uses `sorry`",
@@ -135,13 +135,13 @@
    "Props2Theories/B_Set/B_Set_Algebra/Task.lean:82:8: declaration uses `sorry`",
    "level": "warning"},
   {"message":
-   "Props2Theories/B_Set/B_Set_Algebra/Task.lean:85:8: declaration uses `sorry`",
+   "Props2Theories/B_Set/B_Set_Algebra/Task.lean:83:8: declaration uses `sorry`",
    "level": "warning"},
   {"message":
-   "Props2Theories/B_Set/B_Set_Algebra/Task.lean:88:8: declaration uses `sorry`",
+   "Props2Theories/B_Set/B_Set_Algebra/Task.lean:86:8: declaration uses `sorry`",
    "level": "warning"},
   {"message":
-   "Props2Theories/B_Set/B_Set_Algebra/Task.lean:91:8: declaration uses `sorry`",
+   "Props2Theories/B_Set/B_Set_Algebra/Task.lean:89:8: declaration uses `sorry`",
    "level": "warning"},
   {"message":
    "Props2Theories/B_Set/B_Set_Algebra/Task.lean:92:8: declaration uses `sorry`",
@@ -157,6 +157,9 @@
    "level": "warning"},
   {"message":
    "Props2Theories/B_Set/B_Set_Algebra/Task.lean:96:8: declaration uses `sorry`",
+   "level": "warning"},
+  {"message":
+   "Props2Theories/B_Set/B_Set_Algebra/Task.lean:97:8: declaration uses `sorry`",
    "level": "warning"}],
  "inputs":
  [["Props2Theories.B_Set.B_Set_Algebra.Task:deps",
@@ -167,7 +170,7 @@
        [["Props2Theories.A_Logic.A_Props.Task transitive imports (legacy)",
          "ac5fde31153b2639"],
         ["Props2Theories.A_Logic.A_Props.Task:importAllArts",
-         "bf5ecfc0d0a4d2a9"],
+         "00008a1068eee7a7"],
         ["Props2Theories.B_Set.A_Constructions.Task transitive imports (legacy)",
          "2fa0ec5d1df1e432"],
         ["Props2Theories.B_Set.A_Constructions.Task:importAllArts",
@@ -180,10 +183,10 @@
   ["Lean 4.29.1, commit f72c35b3f637c8c6571d353742168ab66cc22c00",
    "fa77a35a41db35c0"],
   ["/home/igor/ComputerScience/Props2Theories/Props2Theories/B_Set/B_Set_Algebra/Task.lean",
-   "6d87864f1370fd82"],
+   "2b6b3a1f5c23688e"],
   ["options", "00000000000006bb"],
   ["isModule: false", "feefd2a0d3a1847e"],
   ["Module.name: Props2Theories.B_Set.B_Set_Algebra.Task", "ee61b974b85c0122"],
   ["Package.id?: (some Props2Theories)", "bf69640ed8a43e05"],
   ["Module.leanArgs: #[]", "00000000000006bb"]],
- "depHash": "10902a2b4d971eda"}
+ "depHash": "60bf94369565e043"}

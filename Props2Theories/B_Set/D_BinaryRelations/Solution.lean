@@ -1122,6 +1122,29 @@ theorem r_res_nemp : ∀ R S, (BinRel R) → (S ⊆ (rng R)) → (((is_nempty R)
       · intro_exists y; assumption
 
 
+
+theorem res_as_L_and_R : ∀ R S, (BinRel R) → (R ⨡ S) = (R ⨡L S) ∩ (R ⨡R S) := by
+  intro R S h_R
+  apply bin_rel_pr_eq
+  · apply rest_bin_rel; assumption
+  · apply bin_rel_inter2; apply l_rest_bin_rel; assumption
+  intro x y; intro_iff <;> intro h_xy
+  · _apply_l (rest_pr_prop _ _ h_R _ _), h_xy, h_and;
+    elim_and h_and, h_xS, h_and₀; elim_and h_and₀, h_yS, h_xyR
+    clear h_xy h_and h_and₀
+    apply_r (inter2_prop _ _ _); intro_and
+    · apply_r (l_rest_pr_prop _ _ _ _ _); intro_and; all_goals assumption
+    · apply_r (r_rest_pr_prop _ _ _ _ _); intro_and; all_goals assumption
+  · _apply_l (inter2_prop _ _ _), h_xy, h_and; elim_and h_and, h_xyLS, h_xyRS; clear h_xy h_and
+    _apply_l (l_rest_pr_prop _ _ h_R _ _), h_xyLS, h_and; elim_and h_and, h_xS, h_xyR; clear h_and
+    _apply_l (r_rest_pr_prop _ _ h_R _ _), h_xyRS, h_and; elim_and h_and, h_yS, h_xyR₀; clear h_and
+    apply_r (rest_pr_prop _ _ h_R _ _); intro_and <;> try intro_and
+    all_goals assumption
+
+
+
+
+
 theorem l_res_subs_l : ∀ P Q S, (P ⊆ Q) → (P ⨡L S) ⊆ (Q ⨡L S) := by
   intros P Q S h_PQ
   calc
@@ -1566,6 +1589,70 @@ theorem res_double_res : ∀ P S T, (BinRel P) → (P ⨡ S) ⨡ T = P ⨡ (S �
       · apply inter2_subs_left S T y; assumption
       · assumption
 
+theorem l_res_double_comm : ∀ P S T, (BinRel P) → (P ⨡L S) ⨡L T = (P ⨡L T) ⨡L S := by
+  intros P S T h_P
+  rewrite [l_res_double_res P S T h_P, l_res_double_res P T S h_P]
+  rw [inter2_comm]
+
+
+theorem r_res_double_comm : ∀ P S T, (BinRel P) → (P ⨡R S) ⨡R T = (P ⨡R T) ⨡R S := by
+  intros P S T h_P
+  rewrite [r_res_double_res P S T h_P, r_res_double_res P T S h_P]
+  rw [inter2_comm]
+
+theorem res_double_comm : ∀ P S T, (BinRel P) → (P ⨡ S) ⨡ T = (P ⨡ T) ⨡ S := by
+  intros P S T h_P
+  rewrite [res_double_res P S T h_P, res_double_res P T S h_P]
+  rw [inter2_comm]
+
+theorem lr_is_inter : ∀ R S T, (BinRel R) → (R ⨡L S) ⨡R T = (R ⨡L S) ∩ (R ⨡R T) := by
+  intros R S T h_R
+  have h_S : BinRel (R ⨡L S) := by
+    apply l_rest_bin_rel; assumption
+  apply bin_rel_pr_eq
+  · apply r_rest_bin_rel; apply h_S
+  · apply bin_rel_inter2; assumption
+  · intro x y; intro_iff <;> intro h_xy
+    · _apply_l (r_rest_pr_prop _ _ h_S _ _), h_xy, h_and; elim_and h_and, h_yT, h_xyRS; clear h_and h_xy
+      _apply_l (l_rest_pr_prop _ _ h_R _ _), h_xyRS, h_and; elim_and h_and, h_xS, h_xyR; clear h_and h_xyRS
+      apply_r (inter2_prop _ _ _); intro_and
+      · apply_r (l_rest_pr_prop _ _ h_R _ _); intro_and <;> assumption
+      · apply_r (r_rest_pr_prop _ _ h_R _ _); intro_and <;> assumption
+    · _apply_l (inter2_prop _ _ _), h_xy, h_and; elim_and h_and, h_xyS, h_xyT; clear h_xy h_and
+      _apply_l (l_rest_pr_prop _ _ h_R _ _), h_xyS, h_and; elim_and h_and, h_xS, h_xyR; clear h_xyS h_and
+      _apply_l (r_rest_pr_prop _ _ h_R _ _), h_xyT, h_and; elim_and h_and, h_yT, h_xyR₀; clear h_xyT h_and
+      apply_r (r_rest_pr_prop _ _ h_S _ _); intro_and
+      · assumption
+      · apply_r (l_rest_pr_prop _ _ h_R _ _); intro_and <;> assumption
+
+
+
+
+
+theorem lr_res_comm : ∀ R S T, (BinRel R) → (R ⨡L S) ⨡R T = (R ⨡R T) ⨡L S := by
+  intros R S T h_R
+  have h_S : BinRel (R ⨡L S) := by
+    apply l_rest_bin_rel; assumption
+  have h_T : BinRel (R ⨡R T) := by
+    apply r_rest_bin_rel; assumption
+  apply bin_rel_pr_eq
+  · apply r_rest_bin_rel; apply l_rest_bin_rel; assumption
+  · apply l_rest_bin_rel; apply r_rest_bin_rel; assumption
+  intro x y; intro_iff <;> intro h_xy
+  · _apply_l (r_rest_pr_prop _ _ h_S _ _), h_xy, h_and; elim_and h_and, h_yT, h_xyRS; clear h_and h_xy
+    _apply_l (l_rest_pr_prop _ _ h_R _ _), h_xyRS, h_and; elim_and h_and, h_xS, h_xyR; clear h_and h_xyRS
+    apply_r (l_rest_pr_prop _ _ h_T _ _); intro_and
+    · assumption
+    · apply_r (r_rest_pr_prop _ _ h_R _ _); intro_and <;> assumption
+  · _apply_l (l_rest_pr_prop _ _ h_T _ _), h_xy, h_and; elim_and h_and, h_yT, h_xyRS; clear h_and h_xy
+    _apply_l (r_rest_pr_prop _ _ h_R _ _), h_xyRS, h_and; elim_and h_and, h_xS, h_xyR; clear h_and h_xyRS
+    apply_r (r_rest_pr_prop _ _ h_S _ _); intro_and
+    · assumption
+    · apply_r (l_rest_pr_prop _ _ h_R _ _); intro_and <;> assumption
+
+
+
+
 theorem l_res_differ_l : ∀ P Q S, (BinRel P) → (BinRel Q) → (P \ Q) ⨡L S = (P ⨡L S) \ (Q ⨡L S) := by
   intros P Q S h_P h_Q
   have h : BinRel (P \ Q) := by
@@ -1742,6 +1829,87 @@ theorem res_differ_r : ∀ R S T, (BinRel R) → R ⨡ (S \ T) = ((R ⨡ S) \ (R
       elim_neg h_nyT
       _apply_l (r_rest_pr_prop _ _ h_R _ _), h_inRT, h_and; elim_and_ h_and
   · intro h_xy
+    _apply_l (difference_prop _ _ _), h_xy, h_and; elim_and  h_and, h_xy_diff, h_nxy; clear h_xy h_and
+    _apply_l (difference_prop _ _ _), h_xy_diff, h_and; elim_and h_and, h_xyRS, h_xy_nRT; clear h_xy_diff h_and
+    _apply_l (rest_pr_prop _ _ h_R _ _), h_xyRS, h_and; elim_and h_and, h_xS, h_yS_xyR;
+    elim_and h_yS_xyR, h_yS, h_xyR₀; clear h_yS_xyR h_and h_xyRS
+    apply_r (rest_pr_prop _ _ _ _ _)
+    intro_and <;> try intro_and
+    all_goals (try assumption); all_goals (apply_r (difference_prop _ _ _); intro_and)
+    all_goals (try assumption);
+    · intro_neg h_xT
+      elim_neg h_xy_nRT
+      apply_r (l_rest_pr_prop _ _ _ _ _); intro_and
+      all_goals assumption
+    · intro_neg h_yT
+      elim_neg h_nxy
+      apply_r (r_rest_pr_prop _ _ _ _ _); intro_and
+      all_goals assumption
+
+
+
+
+theorem l_res_sym_differ_l : ∀ P Q S, (BinRel P) → (BinRel Q) → (P △ Q) ⨡L S = (P ⨡L S) △ (Q ⨡L S) := by
+  intros P Q S h_P h_Q
+  rewrite [symmetric_difference, symmetric_difference, l_res_union2_l, l_res_differ_l, l_res_differ_l]
+  all_goals (try apply bin_rel_diff); all_goals (try assumption);
+  rfl
+
+
+
+theorem r_res_sym_differ_l : ∀ P Q S, (BinRel P) → (BinRel Q) → (P △ Q) ⨡R S = (P ⨡R S) △ (Q ⨡R S) := by
+  intros P Q S h_P h_Q
+  rewrite [symmetric_difference, symmetric_difference, r_res_union2_l, r_res_differ_l, r_res_differ_l]
+  all_goals (try apply bin_rel_diff); all_goals (try assumption);
+  rfl
+
+
+theorem res_sym_differ_l : ∀ P Q S, (BinRel P) → (BinRel Q) → (P △ Q) ⨡ S = (P ⨡ S) △ (Q ⨡ S) := by
+  intros P Q S h_P h_Q
+  rewrite [symmetric_difference, symmetric_difference, res_union2_l, res_differ_l, res_differ_l]
+  all_goals (try apply bin_rel_diff); all_goals (try assumption);
+  rfl
+
+
+theorem l_res_sym_differ_r : ∀ R S T, (BinRel R) → R ⨡L (S △ T) = (R ⨡L S) △ (R ⨡L T) := by
+  intros R S T h_R
+  rewrite [symmetric_difference, symmetric_difference, l_res_union2_r, l_res_differ_r, l_res_differ_r]
+  all_goals (try apply bin_rel_diff); all_goals (try assumption);
+  rfl
+
+
+
+theorem r_res_sym_differ_r : ∀ R S T, (BinRel R) → R ⨡R (S △ T) = (R ⨡R S) △ (R ⨡R T) := by
+  intros R S T h_R
+  rewrite [symmetric_difference, symmetric_difference, r_res_union2_r, r_res_differ_r, r_res_differ_r]
+  all_goals (try apply bin_rel_diff); all_goals (try assumption);
+  rfl
+
+
+theorem res_sym_differ_r : ∀ R S T, (BinRel R) → (R ⨡ (S △ T)) = ((R ⨡ S) △ (R ⨡L T) ⨡R S) △ ((R ⨡L S) ⨡R T) △ R ⨡ T:= by
+  intro R S T h_R
+  conv =>
+    lhs
+    rewrite [res_as_L_and_R R (S △ T) h_R]
+    conv =>
+      lhs
+      rewrite [l_res_sym_differ_r R S T h_R]
+    conv =>
+      rhs
+      rewrite [r_res_sym_differ_r R S T h_R]
+  rewrite [inter_sym_diff_distrib]
+  conv =>
+    lhs; lhs; rewrite [inter2_comm]; rewrite [inter_sym_diff_distrib]
+    conv =>
+      lhs; rewrite [inter2_comm]; rewrite [← res_as_L_and_R R S h_R]
+    conv =>
+      rhs; rewrite [inter2_comm]; rewrite [← lr_is_inter R T S h_R]
+  conv =>
+    lhs; rhs; rewrite [inter2_comm]; rewrite [inter_sym_diff_distrib]
+    conv =>
+      rhs; rewrite [inter2_comm]; rewrite [← res_as_L_and_R R T h_R]
+    conv =>
+      lhs; rewrite [inter2_comm]; rewrite [← lr_is_inter R S T h_R]
 
 
 
@@ -1755,44 +1923,49 @@ theorem res_differ_r : ∀ R S T, (BinRel R) → R ⨡ (S \ T) = ((R ⨡ S) \ (R
 
 
 
-theorem l_res_double_comm : ∀ P S T, (BinRel P) → (P ⨡L S) ⨡L T = (P ⨡L T) ⨡L S := by
-  intros P S T h_P
-  rewrite [l_res_double_res P S T h_P, l_res_double_res P T S h_P]
-  rw [inter2_comm]
 
 
-theorem r_res_double_comm : ∀ P S T, (BinRel P) → (P ⨡R S) ⨡R T = (P ⨡R T) ⨡R S := by
-  intros P S T h_P
-  rewrite [r_res_double_res P S T h_P, r_res_double_res P T S h_P]
-  rw [inter2_comm]
-
-theorem res_double_comm : ∀ P S T, (BinRel P) → (P ⨡ S) ⨡ T = (P ⨡ T) ⨡ S := by
-  intros P S T h_P
-  rewrite [res_double_res P S T h_P, res_double_res P T S h_P]
-  rw [inter2_comm]
-
-
-theorem l_res_dom : ∀ P, (BinRel P) → P ⨡L (dom P) = P := by
-  intros P h_P
-  rewrite [l_restriction]
-  apply_l (subs_is_eq_inter2 _ _)
-  apply bin_rel_is_btw_dmrng; assumption
+theorem l_res_dom : ∀ R A, (BinRel R) → ((dom R) ⊆ A) → R ⨡L A = R:= by
+  intros R A h_R h_dR_A
+  apply bin_rel_pr_eq
+  · apply l_rest_bin_rel; assumption
+  · assumption
+  intro x y; intro_iff <;> intro h_xy
+  · _apply_l (l_rest_pr_prop _ _ h_R _ _), h_xy, h_and; elim_and h_and, h_xA, h_xyR; clear h_xy h_and
+    assumption
+  · apply_r (l_rest_pr_prop _ _ h_R _ _); intro_and <;> try assumption
+    apply h_dR_A;
+    apply_r (dom_prop _ _); intro_exists y; assumption
 
 
-theorem r_res_rng : ∀ P, (BinRel P) → P ⨡R (rng P) = P := by
-  intros P h_P
-  rewrite [r_restriction]
-  apply_l (subs_is_eq_inter2 _ _)
-  apply bin_rel_is_btw_dmrng; assumption
+theorem r_res_rng : ∀ R A, (BinRel R) → ((rng R) ⊆ A) → R ⨡R (A) = R := by
+  intros R A h_R h_rR_A
+  apply bin_rel_pr_eq
+  · apply r_rest_bin_rel; assumption
+  · assumption
+  intro x y; intro_iff <;> intro h_xy
+  · _apply_l (r_rest_pr_prop _ _ h_R _ _), h_xy, h_and; elim_and h_and, h_yA, h_xyR; clear h_xy h_and
+    assumption
+  · apply_r (r_rest_pr_prop _ _ h_R _ _); intro_and <;> try assumption
+    apply h_rR_A
+    apply_r (rng_prop _ _); intro_exists x; assumption
 
-theorem res_dom_rng : ∀ P, (BinRel P) → P ⨡ ((dom P) ∪ (rng P)) = P := by
-  intros P h_P
-  rewrite [restriction]
-  apply_l (subs_is_eq_inter2 _ _)
-  calc
-  _ ⊆ (dom P) × (rng P) := by apply bin_rel_is_btw_dmrng; assumption
-  _ ⊆ (dom P) × ((dom P) ∪ (rng P)) := by apply cart_prod_mon_r; apply right_union2_subs
-  _ ⊆ _ := by apply cart_prod_mon_l; apply left_union2_subs
+
+theorem res_dom_rng : ∀ R A, (BinRel R) → ((dom R) ⊆ A) → ((rng R) ⊆ A) → R ⨡ A = R := by
+  intros R A h_R h_dR_A h_rR_B
+  apply bin_rel_pr_eq
+  · apply rest_bin_rel; assumption
+  · assumption
+  intro x y; intro_iff <;> intro h_xy
+  · _apply_l (rest_pr_prop _ _ h_R _ _), h_xy, h_and;
+    elim_and h_and, h_xA, h_and₀; elim_and h_and₀, h_yA, h_xyR; clear h_and h_and₀
+    assumption
+  · apply_r (rest_pr_prop _ _ h_R _ _); intro_and <;> try intro_and <;> try assumption
+    · apply h_dR_A; apply_r (dom_prop _ _); intro_exists y; assumption
+    · apply h_rR_B; apply_r (rng_prop _ _); intro_exists x; assumption
+
+
+
 
 theorem dom_l_res_subs : ∀ R S, (BinRel R) → dom (R ⨡L S) ⊆ S := by
   intros R S h_R
@@ -2196,6 +2369,100 @@ theorem id_inter : ∀ S, id_ (⋂ S) = ⋂ (ReplImg{dd | ∃ R ∈ S, dd = id_ 
         · rfl
       specialize_in_ h_for, id_ R_0, h
       apply id_in_l R_0 x y; assumption
+
+
+theorem id_l_rest : ∀ A S, (S ⊆ A) → (id_ A) ⨡L S = (id_ S) := by
+  intros A S h_SA
+  have h : BinRel (id_ A) := by
+    apply id_bin_rel
+  apply bin_rel_pr_eq
+  · apply l_rest_bin_rel; apply id_bin_rel
+  · apply id_bin_rel
+  intro x y; intro_iff <;> intro h_xy
+  · _apply_l (l_rest_pr_prop _ _ h _ _), h_xy, h_and; elim_and h_and, h_xS, h_xy_id; clear h_and
+    have h₁ := id_in_l _ _ _ h_xy_id; have h₂ := id_in_r _ _ _ h_xy_id; have h₃ := id_then_eq _ _ _ h_xy_id
+    rewrite [← h₃]
+    apply_r (id_pr_prop _ _)
+    assumption
+  · have h₁ := id_in_l _ _ _ h_xy; have h₂ := id_in_r _ _ _ h_xy; have h₃ := id_then_eq _ _ _ h_xy
+    rewrite [← h₃]
+    apply_r (l_rest_pr_prop _ _ _ _ _); intro_and
+    · assumption
+    · apply_r (id_pr_prop _ _)
+      apply h_SA
+      assumption
+    apply id_bin_rel
+
+
+
+theorem id_r_rest : ∀ A S, (S ⊆ A) → (id_ A) ⨡R S = (id_ S) := by
+  intros A S h_SA
+  have h : BinRel (id_ A) := by
+    apply id_bin_rel
+  apply bin_rel_pr_eq
+  · apply r_rest_bin_rel; apply id_bin_rel
+  · apply id_bin_rel
+  intro x y; intro_iff <;> intro h_xy
+  · _apply_l (r_rest_pr_prop _ _ h _ _), h_xy, h_and; elim_and h_and, h_xS, h_xy_id; clear h_and
+    have h₁ := id_in_l _ _ _ h_xy_id; have h₂ := id_in_r _ _ _ h_xy_id; have h₃ := id_then_eq _ _ _ h_xy_id
+    rewrite [h₃]
+    apply_r (id_pr_prop _ _)
+    assumption
+  · have h₁ := id_in_l _ _ _ h_xy; have h₂ := id_in_r _ _ _ h_xy; have h₃ := id_then_eq _ _ _ h_xy
+    rewrite [← h₃]
+    apply_r (r_rest_pr_prop _ _ _ _ _); intro_and
+    · assumption
+    · apply_r (id_pr_prop _ _)
+      apply h_SA
+      assumption
+    apply id_bin_rel
+
+theorem id_rest : ∀ A S, (S ⊆ A) → (id_ A) ⨡ S = (id_ S) := by
+  intros A S h_SA
+  have h : BinRel (id_ A) := by
+    apply id_bin_rel
+  apply bin_rel_pr_eq
+  · apply rest_bin_rel; apply id_bin_rel
+  · apply id_bin_rel
+  intro x y; intro_iff <;> intro h_xy
+  · _apply_l (rest_pr_prop _ _ h _ _), h_xy, h_and; elim_and h_and, h_xS, h_xy_id; clear h_and
+    elim_and h_xy_id, h_yS, h_xy_idA; clear h_xy_id
+    have h₁ := id_in_l _ _ _ h_xy_idA; have h₂ := id_in_r _ _ _ h_xy_idA; have h₃ := id_then_eq _ _ _ h_xy_idA
+    rewrite [h₃]
+    apply_r (id_pr_prop _ _)
+    assumption
+  · have h₁ := id_in_l _ _ _ h_xy; have h₂ := id_in_r _ _ _ h_xy; have h₃ := id_then_eq _ _ _ h_xy
+    rewrite [← h₃]
+    apply_r (rest_pr_prop _ _ _ _ _); intro_and
+    · assumption
+    · intro_and
+      · assumption
+      · apply_r (id_pr_prop _ _)
+        apply h_SA
+        assumption
+    apply id_bin_rel
+
+theorem id_dom : ∀ A, dom (id_ A) = A := by
+  intros A
+  apply set_extensionality_ax; intro t; intro_iff <;> intro h_t
+  · _apply_l (dom_prop _ _), h_t, h_ex; elim_exists h_ex, y, h_y; clear h_ex h_t
+    have h₁ := id_in_l _ _ _ h_y; have h₂ := id_in_r _ _ _ h_y; have h₃ := id_then_eq _ _ _ h_y
+    assumption
+  · apply_r (dom_prop _ _)
+    intro_exists t
+    apply_r (id_pr_prop _ _)
+    assumption
+
+
+
+theorem id_rng : ∀ A, rng (id_ A) = A := by
+  intros A
+  apply set_extensionality_ax; intro t; intro_iff <;> intro h_t
+  · _apply_l (rng_prop _ _), h_t, h_ex; elim_exists h_ex, x, h_x; clear h_ex h_t
+    have h₁ := id_in_l _ _ _ h_x; have h₂ := id_in_r _ _ _ h_x; have h₃ := id_then_eq _ _ _ h_x
+    assumption
+  · apply_r (rng_prop _ _)
+    intro_exists t; apply_r (id_pr_prop _ _); assumption
 
 
 

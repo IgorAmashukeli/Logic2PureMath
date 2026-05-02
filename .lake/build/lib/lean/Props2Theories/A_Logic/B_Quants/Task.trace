@@ -116,7 +116,7 @@
         ["Props2Theories.A_Logic.A_Props.Task transitive imports (legacy)",
          "ac5fde31153b2639"],
         ["Props2Theories.A_Logic.A_Props.Task:importAllArts",
-         "bf5ecfc0d0a4d2a9"]]]]],
+         "00008a1068eee7a7"]]]]],
     ["libs",
      [["import dynlibs", "00000000000006bb"],
       ["package external libraries", "00000000000006bb"],
@@ -131,4 +131,4 @@
   ["Module.name: Props2Theories.A_Logic.B_Quants.Task", "0a1a385cf99fd87d"],
   ["Package.id?: (some Props2Theories)", "bf69640ed8a43e05"],
   ["Module.leanArgs: #[]", "00000000000006bb"]],
- "depHash": "99ddafdf6874d439"}
+ "depHash": "7b077dd804c37613"}

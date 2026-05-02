@@ -139,3 +139,6 @@ theorem xor_neg (p : Prop) : (p ⊕ ¬ p) := sorry
 theorem xor_commut (p q : Prop) : (p ⊕ q) ↔ (q ⊕ p) := sorry
 theorem xor_assoc_cl (p q r : Prop) : ((p ⊕ q) ⊕ r) ↔ (p ⊕ (q ⊕ r)) := sorry
 theorem xor_absorb_cl (p q : Prop) : q ↔ ((p ⊕ q) ⊕ p) := sorry
+theorem xor_and_distr (p q r : Prop) : p ∧ (q ⊕ r) ↔ ((p ∧ q) ⊕ (p ∧ r)) := sorry
+theorem xor_congr_l (p q r : Prop) : (p ↔ q) → ((p ⊕ r) ↔ (q ⊕ r)) := sorry
+theorem xor_congr_r (p q r : Prop) : (p ↔ q) → ((r ⊕ p) ↔ (r ⊕ q)) := sorry

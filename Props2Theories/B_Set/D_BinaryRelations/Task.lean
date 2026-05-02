@@ -150,6 +150,8 @@ theorem res_emp_r : ∀ R, R ⨡ ∅ = ∅ := sorry
 theorem l_res_nemp : ∀ R S, (S ⊆ (dom R)) → (BinRel R) → (((is_nempty R) ∧ (is_nempty S)) ↔ (is_nempty (R ⨡L S))) := sorry
 theorem r_res_nemp : ∀ R S, (S ⊆ (rng R)) → (BinRel R) → (((is_nempty R) ∧ (is_nempty S)) ↔ (is_nempty (R ⨡R S))) := sorry
 
+theorem res_as_L_and_R : ∀ R S, (BinRel R) → (R ⨡ S) = (R ⨡L S) ∩ (R ⨡R S) := sorry
+
 theorem l_res_subs_l : ∀ P Q S, (P ⊆ Q) → (P ⨡L S) ⊆ (Q ⨡L S) := sorry
 theorem r_res_subs_l : ∀ P Q S, (P ⊆ Q) → (P ⨡R S) ⊆ (Q ⨡R S) := sorry
 theorem res_subs_l : ∀ P Q S, (P ⊆ Q) → (P ⨡ S) ⊆ (Q ⨡ S) := sorry
@@ -174,6 +176,16 @@ theorem l_res_inter2_r : ∀ R S T, (BinRel R) → (R ⨡L (S ∩ T)) = (R ⨡L 
 theorem r_res_inter2_r : ∀ R S T, (BinRel R) → (R ⨡L (S ∩ T)) = (R ⨡L S) ∩ (R ⨡L T) := sorry
 theorem res_inter2_r : ∀ R S T, (BinRel R) → (R ⨡L (S ∩ T)) = (R ⨡L S) ∩ (R ⨡L T) := sorry
 
+theorem l_res_double_res : ∀ P S T, (BinRel P) → (P ⨡L S) ⨡L T = P ⨡L (S ∩ T) := sorry
+theorem r_res_double_res : ∀ P S T, (BinRel P) → (P ⨡R S) ⨡L T = P ⨡R (S ∩ T) := sorry
+theorem res_double_res : ∀ P S T, (BinRel P) → (P ⨡ S) ⨡ T = P ⨡ (S ∩ T) := sorry
+
+theorem l_res_double_comm : ∀ P S T, (BinRel P) → (P ⨡L S) ⨡L T = (P ⨡L T) ⨡L S := sorry
+theorem r_res_double_comm : ∀ P S T, (BinRel P) → (P ⨡R S) ⨡R T = (P ⨡R T) ⨡R S := sorry
+theorem res_double_comm : ∀ P S T, (BinRel P) → (P ⨡ S) ⨡ T = (P ⨡ T) ⨡ S := sorry
+theorem lr_is_inter : ∀ R S T, (BinRel R) → (R ⨡L S) ⨡R T = (R ⨡L S) ∩ (R ⨡R T) := sorry
+theorem lr_res_comm : ∀ R S T, (BinRel R) → (R ⨡L S) ⨡R T = (R ⨡R T) ⨡L S := sorry
+
 theorem l_res_differ_l : ∀ P Q S, (BinRel P) → (BinRel Q) → (P \ Q) ⨡L S = (P ⨡L S) \ (Q ⨡L S) := sorry
 theorem r_res_differ_l : ∀ P Q S, (BinRel P) → (BinRel Q) → (P \ Q) ⨡R S = (P ⨡R S) \ (Q ⨡R S) := sorry
 theorem res_differ_l : ∀ P Q S, (BinRel P) → (BinRel Q) → (P \ Q) ⨡ S = (P ⨡ S) \ (Q ⨡ S) := sorry
@@ -182,17 +194,19 @@ theorem l_res_differ_r : ∀ R S T, (BinRel R) → R ⨡L (S \ T) = (R ⨡L S) \
 theorem r_res_differ_r : ∀ R S T, (BinRel R) → R ⨡R (S \ T) = (R ⨡R S) \ (R ⨡R T) := sorry
 theorem res_differ_r : ∀ R S T, (BinRel R) → R ⨡ (S \ T) = ((R ⨡ S) \ (R ⨡L T)) \ (R ⨡R T) := sorry
 
-theorem l_res_double_res : ∀ P S T, (BinRel P) → (P ⨡L S) ⨡L T = P ⨡L (S ∩ T) := sorry
-theorem r_res_double_res : ∀ P S T, (BinRel P) → (P ⨡R S) ⨡L T = P ⨡R (S ∩ T) := sorry
-theorem res_double_res : ∀ P S T, (BinRel P) → (P ⨡ S) ⨡ T = P ⨡ (S ∩ T) := sorry
+theorem l_res_sym_differ_l : ∀ P Q S, (BinRel P) → (BinRel Q) → (P △ Q) ⨡L S = (P ⨡L S) △ (Q ⨡L S) := sorry
+theorem r_res_sym_differ_l : ∀ P Q S, (BinRel P) → (BinRel Q) → (P △ Q) ⨡R S = (P ⨡R S) △ (Q ⨡R S) := sorry
+theorem res_sym_differ_l : ∀ P Q S, (BinRel P) → (BinRel Q) → (P △ Q) ⨡ S = (P ⨡ S) △ (Q ⨡ S) := sorry
 
-theorem l_res_double_comm : ∀ P S T, (BinRel P) → (P ⨡L S) ⨡L T = (P ⨡L T) ⨡L S := sorry
-theorem r_res_double_comm : ∀ P S T, (BinRel P) → (P ⨡R S) ⨡R T = (P ⨡R T) ⨡R S := sorry
-theorem res_double_comm : ∀ P S T, (BinRel P) → (P ⨡ S) ⨡ T = (P ⨡ T) ⨡ S := sorry
+theorem l_res_sym_differ_r : ∀ R S T, (BinRel R) → R ⨡L (S △ T) = (R ⨡L S) △ (R ⨡L T) := sorry
+theorem r_res_sym_differ_r : ∀ R S T, (BinRel R) → R ⨡R (S △ T) = (R ⨡R S) △ (R ⨡R T) := sorry
+theorem res_sym_differ_r : ∀ R S T, (BinRel R) → (R ⨡ (S △ T)) = ((R ⨡ S) △ (R ⨡ T)) △ ((R ⨡L S) ⨡R T) △ ((R ⨡L T) ⨡R S) := sorry
 
-theorem l_res_dom : ∀ R, (BinRel R) → R ⨡L (dom R) = R := sorry
-theorem r_res_rng : ∀ R, (BinRel R) → R ⨡R (rng R) = R := sorry
-theorem res_dom_rng : ∀ R, (BinRel R) → R ⨡ ((dom R) ∪ (rng R)) = R := sorry
+
+
+theorem l_res_dom : ∀ R A, (BinRel R) → ((dom R) ⊆ A) → R ⨡L A = R:= sorry
+theorem r_res_rng : ∀ R A, (BinRel R) → ((rng R) ⊆ A) → R ⨡R (A) = R := sorry
+theorem res_dom_rng : ∀ R A, (BinRel R) → ((dom R) ⊆ A) → ((rng R) ⊆ A) → R ⨡ A = R := sorry
 
 theorem dom_l_res_subs : ∀ R S, (BinRel R) → dom (R ⨡L S) ⊆ S := sorry
 theorem rng_r_res_subs : ∀ R S, (BinRel R) → rng (R ⨡R S) ⊆ S := sorry
@@ -233,6 +247,10 @@ theorem id_compl : ∀ A U, id_ (U \ A) ⊆ compl (id_ A) U U := sorry
 theorem id_pred_f : ∀ x y z, (y = id_ x) → (z = id_ x) → (y = z) := sorry
 theorem id_union : ∀ S, id_ (⋃ S) = ⋃ (ReplImg{dd | ∃ R ∈ S, dd = id_ R} of (id_pred_f)) := sorry
 theorem id_inter : ∀ S, id_ (⋂ S) = ⋂ (ReplImg{dd | ∃ R ∈ S, dd = id_ R} of (id_pred_f)) := sorry
+
+theorem id_l_rest : ∀ A S, (S ⊆ A) → (id_ A) ⨡L S = (id_ S) := sorry
+theorem id_r_rest : ∀ A S, (S ⊆ A) → (id_ A) ⨡R S = (id_ S) := sorry
+theorem id_rest : ∀ A S, (S ⊆ A) → (id_ A) ⨡ S = (id_ S) := sorry
 
 theorem id_dom : ∀ A, dom (id_ A) = A := sorry
 theorem id_rng : ∀ A, rng (id_ A) = A := sorry

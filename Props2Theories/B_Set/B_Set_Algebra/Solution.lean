@@ -307,6 +307,29 @@ theorem union_inter_distrib : (∀ A B C, A ∪ (B ∩ C) = (A ∪ B) ∩ (A ∪
   _ ↔ _ := by apply iff_symm; apply inter2_prop
 
 
+theorem inter_sym_diff_distrib : ∀ A B C, A ∩ (B △ C) = (A ∩ B) △ (A ∩ C) := by
+  intros A B C
+  apply set_extensionality_ax; intro x
+  calc
+  _ ↔ (x ∈ A) ∧ (x ∈ (B △ C)) := by apply inter2_prop
+  _ ↔ (x ∈ A) ∧ ((x ∈ B) ⊕ (x ∈ C)) := by
+    apply conj_congr_l
+    apply sym_diff_prop
+  _ ↔ (((x ∈ A) ∧ (x ∈ B)) ⊕ ((x ∈ A) ∧ (x ∈ C))) := by apply xor_and_distr
+  _ ↔ ((x ∈ (A ∩ B)) ⊕ ((x ∈ A) ∧ (x ∈ C))) := by
+        apply xor_congr_l
+        apply iff_symm
+        apply inter2_prop
+  _ ↔ ((x ∈ A ∩ B) ⊕ (x ∈ A ∩ C)) := by
+        apply xor_congr_r
+        apply iff_symm
+        apply inter2_prop
+  _ ↔ _ := by apply iff_symm; apply sym_diff_prop
+
+
+
+
+
 theorem compl_compl_cl : ∀ U A, (A ⊆ U) → (U \ (U \ A)) = A := by
   intros U A h
   apply set_extensionality_ax; intro x

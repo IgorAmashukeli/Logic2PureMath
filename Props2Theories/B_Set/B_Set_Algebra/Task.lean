@@ -62,6 +62,7 @@ theorem symm_differ_absorb : ∀ A B, (A △ B) △ A = B := sorry
 -- Distributivity Properties
 theorem inter_union_distrib : (∀ A B C, A ∩ (B ∪ C) = (A ∩ B) ∪ (A ∩ C)) := sorry
 theorem union_inter_distrib : (∀ A B C, A ∪ (B ∩ C) = (A ∪ B) ∩ (A ∪ C)) := sorry
+theorem inter_sym_diff_distrib : ∀ A B C, A ∩ (B △ C) = (A ∩ B) △ (A ∩ C) := sorry
 
 -- Complement Properties
 theorem compl_compl_cl : ∀ U A, (A ⊆ U) → (U \ (U \ A)) = A := sorry

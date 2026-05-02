@@ -37,9 +37,9 @@
         ["Props2Theories.B_Set.A_Constructions.Task:importAllArts",
          "add9189f2d40c04f"],
         ["Props2Theories.B_Set.C_SetSumProduct.Task transitive imports (legacy)",
-         "e5deded8f2ca3c4e"],
+         "e51cdda07412b468"],
         ["Props2Theories.B_Set.C_SetSumProduct.Task:importAllArts",
-         "59078db13898fc8d"]]]]],
+         "8211b70a15cdf17b"]]]]],
     ["libs",
      [["import dynlibs", "00000000000006bb"],
       ["package external libraries", "00000000000006bb"],
@@ -55,4 +55,4 @@
    "3552334cf27ea171"],
   ["Package.id?: (some Props2Theories)", "bf69640ed8a43e05"],
   ["Module.leanArgs: #[]", "00000000000006bb"]],
- "depHash": "12ee5a3400c8f0c8"}
+ "depHash": "be33297bf70959db"}
